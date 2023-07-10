@@ -38,5 +38,36 @@ ThemeData darkTheme() {
       unselectedLabelColor: MainConfigColorsDarkTheme.background,
       labelColor: MainConfigColorsDarkTheme.background,
     ),
+    textTheme: const TextTheme(
+      displayLarge: TextStyle(
+        fontSize: 16,
+        color: MainConfigColorsDarkTheme.textPrimary,
+      ),
+      headlineLarge: TextStyle(
+        fontSize: 28,
+        color: MainConfigColorsDarkTheme.textPrimary,
+        fontWeight: FontWeight.bold,
+      ),
+       headlineMedium: TextStyle(
+        fontSize: 18,
+        color: MainConfigColorsDarkTheme.textPrimary,
+        fontWeight: FontWeight.bold,
+      ),
+       headlineSmall: TextStyle(
+        fontSize: 14,
+        color: MainConfigColorsDarkTheme.textPrimary,
+        fontWeight: FontWeight.bold,
+      ),
+      titleLarge: TextStyle(
+          fontSize: 14,
+          color: MainConfigColorsDarkTheme.textSecondary,
+          fontWeight: FontWeight.bold),
+           titleMedium: TextStyle(
+          fontSize: 14,
+          color: MainConfigColorsDarkTheme.textSecondary,
+          fontWeight: FontWeight.normal),
+       
+    ),
+    
   );
 }

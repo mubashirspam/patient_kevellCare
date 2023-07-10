@@ -16,7 +16,10 @@ class AppIcons {
   static const String notification = "assets/icons/othor/notification.svg";
 
   static const String edit = "assets/icons/othor/edit.svg";
-
+  static const String emergency = "assets/icons/othor/emergency.svg";
+  static const String fullCheckup = "assets/icons/othor/full_checkup.svg";
+  static const String speseficCheckup =
+      "assets/icons/othor/spesefic_checkup.svg";
   static const String bell = "assets/icons/profile/bell.svg";
   static const String info = "assets/icons/profile/info.svg";
   static const String moon = "assets/icons/profile/moon.svg";

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kevell_care/configure/color/maian_color.dart';
 
-import '../../configure/color/maian_color.dart';
+
 
 extension ExtendedTheme on BuildContext {
   CustomThemeExtension get theme {
@@ -12,6 +13,11 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
   final Color? primary;
   final Color? secondary;
   final Color? backround;
+  final Color? inputFiled;
+
+  final Color? textPrimary;
+  final Color? textSecondary;
+  final Color? textGrey;
 
   // button
 
@@ -27,6 +33,7 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
     this.primary,
     this.secondary,
     this.backround,
+    this.inputFiled,
 
     // button
     this.buttonBackroundEnable,
@@ -35,38 +42,55 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
     this.buttonForgroundEnable,
     this.buttonForgroundDisable,
     this.buttonForgroundPressed,
+
+    // text
+
+    this.textPrimary,
+    this.textGrey,
+    this.textSecondary,
   });
 
   static const lightMode = CustomThemeExtension(
     primary: MainConfigColorsLightTheme.primary,
     secondary: MainConfigColorsLightTheme.secondary,
     backround: MainConfigColorsLightTheme.background,
+    inputFiled: MainConfigColorsLightTheme.inputFiled,
+
+//text
+    textPrimary: MainConfigColorsLightTheme.textPrimary,
+    textGrey: MainConfigColorsLightTheme.textGrey,
+    textSecondary: MainConfigColorsLightTheme.textSecondary,
 
     // button
 
     buttonBackroundEnable: MainConfigColorsLightTheme.primary,
-    buttonBackroundDisable: MainConfigColorsLightTheme.primary,
-    buttonBackroundPressed: MainConfigColorsLightTheme.primary,
+    buttonBackroundDisable: MainConfigColorsLightTheme.secondary,
+    buttonBackroundPressed: MainConfigColorsLightTheme.secondary,
 
-    buttonForgroundEnable: MainConfigColorsLightTheme.primary,
-    buttonForgroundDisable: MainConfigColorsLightTheme.primary,
-    buttonForgroundPressed: MainConfigColorsLightTheme.primary,
+    buttonForgroundEnable: MainConfigColorsLightTheme.textWhite,
+    buttonForgroundDisable: MainConfigColorsLightTheme.textThemePrimary,
+    buttonForgroundPressed: MainConfigColorsLightTheme.textThemePrimary,
   );
 
   static const darkMode = CustomThemeExtension(
     primary: MainConfigColorsDarkTheme.primary,
     secondary: MainConfigColorsDarkTheme.secondary,
     backround: MainConfigColorsDarkTheme.background,
+    inputFiled: MainConfigColorsDarkTheme.inputFiled,
 
     // button
 
     buttonBackroundEnable: MainConfigColorsDarkTheme.primary,
-    buttonBackroundDisable: MainConfigColorsDarkTheme.primary,
-    buttonBackroundPressed: MainConfigColorsDarkTheme.primary,
+    buttonBackroundDisable: MainConfigColorsDarkTheme.secondary,
+    buttonBackroundPressed: MainConfigColorsDarkTheme.secondary,
 
-    buttonForgroundEnable: MainConfigColorsDarkTheme.primary,
-    buttonForgroundDisable: MainConfigColorsDarkTheme.primary,
-    buttonForgroundPressed: MainConfigColorsDarkTheme.primary,
+    buttonForgroundEnable: MainConfigColorsDarkTheme.textWhite,
+    buttonForgroundDisable: MainConfigColorsDarkTheme.textThemePrimary,
+    buttonForgroundPressed: MainConfigColorsDarkTheme.textThemePrimary,
+
+    textPrimary: MainConfigColorsDarkTheme.textPrimary,
+    textGrey: MainConfigColorsDarkTheme.textGrey,
+    textSecondary: MainConfigColorsDarkTheme.textSecondary,
   );
 
   @override
@@ -74,6 +98,13 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
     Color? primary,
     Color? secondary,
     Color? backround,
+    Color? inputFiled,
+
+    // text
+
+    Color? textPrimary,
+    Color? textSecondary,
+    Color? textGrey,
 
     // button
 
@@ -88,6 +119,13 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
       primary: primary ?? this.primary,
       secondary: secondary ?? this.secondary,
       backround: backround ?? this.backround,
+      inputFiled: inputFiled ?? this.inputFiled,
+
+      // text
+
+      textPrimary: textPrimary ?? this.textPrimary,
+      textSecondary: textSecondary ?? this.textSecondary,
+      textGrey: textGrey ?? this.textGrey,
 
       // button
 
@@ -115,6 +153,12 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
       primary: Color.lerp(primary, other.primary, t),
       secondary: Color.lerp(secondary, other.secondary, t),
       backround: Color.lerp(backround, other.backround, t),
+      inputFiled: Color.lerp(inputFiled, other.inputFiled, t),
+
+// text
+      textPrimary: Color.lerp(textPrimary, other.textPrimary, t),
+      textSecondary: Color.lerp(textSecondary, other.textSecondary, t),
+      textGrey: Color.lerp(textGrey, other.textGrey, t),
 
       // button
 

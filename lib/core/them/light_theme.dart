@@ -45,6 +45,41 @@ ThemeData lightTheme() {
         shadowColor: Colors.transparent,
       ),
     ),
+     textTheme: const TextTheme(
+      displayLarge: TextStyle(
+        fontSize: 16,
+        color: MainConfigColorsLightTheme.textPrimary,
+      ),
+      headlineLarge: TextStyle(
+        fontSize: 28,
+        color: MainConfigColorsLightTheme.textPrimary,
+        fontWeight: FontWeight.bold,
+      ),
+      
+      headlineMedium: TextStyle(
+        fontSize: 18,
+        color: MainConfigColorsLightTheme.textPrimary,
+        fontWeight: FontWeight.bold,
+      ),
+      headlineSmall: TextStyle(
+        fontSize: 14,
+        color: MainConfigColorsLightTheme.textPrimary,
+        fontWeight: FontWeight.bold,
+      ),
+      
+      titleLarge: TextStyle(
+          fontSize: 14,
+          color: MainConfigColorsLightTheme.textSecondary,
+          fontWeight: FontWeight.bold),
+      titleMedium: TextStyle(
+          fontSize: 14,
+          color: MainConfigColorsLightTheme.textSecondary,
+          fontWeight: FontWeight.normal),
+      titleSmall: TextStyle(
+          fontSize: 12,
+          color: MainConfigColorsLightTheme.textSecondary,
+          fontWeight: FontWeight.normal),
+    ),
   );
 }
 
