@@ -1,11 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-import 'package:kevell_care/pages/chat_screen/presenation/chat_screen.dart';
+import 'package:kevell_care/pages/chat_screen/presentation/chat_screen.dart';
+import 'package:kevell_care/pages/chat_screen/presentation/widgets/chat_appbar.dart';
 import '../../appoiment/presenation/appoinments_screen.dart';
 
 import '../../appoiment/presenation/widgets/appoiment_screen_appbar.dart';
-import '../../chat_screen/presenation/widgets/appbar_chat.dart';
+
 
 import '../../home_screen/presentation/home_screen.dart';
 import '../../home_screen/presentation/widgets/home_appbar.dart';
@@ -36,7 +37,7 @@ class _DashboardState extends State<Dashboard> {
       "flotingButton": null
     },
     {
-      "page": const ChatPage(),
+      "page": const ChatScreen(),
       "appbar": const ChatAppBar(),
       "flotingButton": null
     },
@@ -85,11 +86,11 @@ class _DashboardState extends State<Dashboard> {
                         tabs: const <Tab>[
                           Tab(
                             child: Text(
-                              "Online",
+                              "Upcoming",
                             ),
                           ),
                           Tab(
-                            child: Text("Offline"),
+                            child: Text("Past"),
                           )
                         ],
                       ),

@@ -21,24 +21,22 @@ class BottomWidget extends StatelessWidget {
               color: context.theme.backround,
               width: double.maxFinite,
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              height: 50,
-              child: Stack(
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(child: item(context, 0, "home", AppIcons.home)),
-                      Expanded(
-                          child: item(
-                              context, 1, "Appoinment", AppIcons.schedule)),
-                      Expanded(child: item(context, 2, "Chat", AppIcons.chat)),
-                      Expanded(
-                          child: item(context, 3, "History", AppIcons.history)),
-                      Expanded(
-                          child: item(context, 4, "Profile", AppIcons.profile)),
-                    ],
-                  ),
-                ],
+              height: 60,
+              child: Center(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(child: item(context, 0, "home", AppIcons.home)),
+                    Expanded(
+                        child:
+                            item(context, 1, "Appoinment", AppIcons.schedule)),
+                    Expanded(child: item(context, 2, "Chat", AppIcons.chat)),
+                    Expanded(
+                        child: item(context, 3, "History", AppIcons.history)),
+                    Expanded(
+                        child: item(context, 4, "Profile", AppIcons.profile)),
+                  ],
+                ),
               ),
             ),
           );
@@ -57,19 +55,22 @@ class BottomWidget extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 icon,
+                color: selectedIndexNorifier.value == index
+                    ? context.theme.primary
+                    : null,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5),
                 child: Text(
                     style: selectedIndexNorifier.value != index
                         ? TextStyle(
-                            fontSize: 11,
+                            fontSize: 10,
                             color: context.theme.textGrey,
                             fontWeight: FontWeight.bold)
-                        : const TextStyle(
+                        : TextStyle(
                             fontSize: 11,
-                            color: MainConfigColorsDarkTheme.textThemePrimary,
-                          ),
+                            color: context.theme.primary,
+                            fontWeight: FontWeight.bold),
                     name),
               )
             ],
