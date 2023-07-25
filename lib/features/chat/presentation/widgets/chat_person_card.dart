@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kevell_care/configure/color/maian_color.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/widgets/avatar/active_avatar.dart';
 
 class ChatPersonCard extends StatelessWidget {
   const ChatPersonCard({super.key});
@@ -17,31 +17,7 @@ class ChatPersonCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Stack(
-            children: [
-              const CircleAvatar(
-                maxRadius: 35,
-                minRadius: 35,
-                backgroundImage: NetworkImage(
-                    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"),
-              ),
-              Positioned(
-                right: 2,
-                top: 2,
-                child: Container(
-                  width: 15,
-                  height: 15,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: MainConfigColorsDarkTheme.success,
-                      border: Border.all(
-                        width: 2,
-                        color: context.theme.backround!,
-                      )),
-                ),
-              )
-            ],
-          ),
+          const ActiveAvatar(),
           const SizedBox(width: 15),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -58,7 +34,6 @@ class ChatPersonCard extends StatelessWidget {
               ),
             ],
           ),
-          const Spacer(),
         ],
       ),
     );
