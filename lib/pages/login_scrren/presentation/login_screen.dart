@@ -6,7 +6,7 @@ import 'package:kevell_care/pages/signup_screen/presentation/signup_screen.dart'
 import '../../../features/login/presentation/login_widget.dart';
 
 class LoginScreen extends StatelessWidget {
-    static const routeName = '/login-screen';
+  static const routeName = '/login-screen';
   const LoginScreen({super.key});
 
   @override
@@ -33,14 +33,13 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Welcome \nto Kevell Care 🙌 ",
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      Text("Welcome \nto Kevell Care 🙌 ",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge!
+                              .copyWith(
+                                color: context.theme.backround,
+                              )),
                       const SizedBox(height: 20),
                       Text(
                         "We're glad to have you back. Please enter your username to proceed.",
@@ -59,7 +58,8 @@ class LoginScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 20),
               child: GestureDetector(
-                onTap: () =>Navigator.pushNamed(context, SignupScreen.routeName),
+                onTap: () =>
+                    Navigator.pushNamed(context, SignupScreen.routeName),
                 child: RichText(
                   text: TextSpan(
                     style: const TextStyle(color: Colors.black, fontSize: 16),

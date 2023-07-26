@@ -35,6 +35,7 @@ class LoginWidget extends StatelessWidget {
           const SizedBox(height: 20),
           TextButtonWidget(
             bgColor: context.theme.backround,
+            fgColor: context.theme.primary,
             name: "Get Otp",
             onPressed: () {},
             isLoading: false,

@@ -52,8 +52,11 @@ class SignUpWidget extends StatelessWidget {
           const SizedBox(height: 20),
           TextButtonWidget(
             bgColor: context.theme.backround,
+            fgColor: context.theme.primary,
             name: "Get Otp",
-            onPressed: () {},
+            onPressed: () {
+              
+            },
             isLoading: false,
           ),
         ],

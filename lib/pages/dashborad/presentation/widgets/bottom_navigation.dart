@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
 import '../../../../configure/assets_manage/icons.dart';
-import '../../../../configure/color/maian_color.dart';
+
 
 ValueNotifier<int> selectedIndexNorifier = ValueNotifier<int>(0);
 

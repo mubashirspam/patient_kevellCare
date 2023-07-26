@@ -4,18 +4,24 @@ import 'package:kevell_care/core/them/custom_theme_extension.dart';
 class DropDownFiledWidet extends StatelessWidget {
   final void Function(dynamic)? onChanged;
   final List<DropdownMenuItem> items;
-  const DropDownFiledWidet(
-      {super.key, required this.items, required this.onChanged});
+  final String? hintText;
+  const DropDownFiledWidet({
+    super.key,
+    required this.items,
+    required this.onChanged,
+    this.hintText,
+  });
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
-      
       items: items,
       onChanged: onChanged,
       decoration: InputDecoration(
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        hintText: hintText,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 15,
+        ).copyWith(bottom: 10),
         filled: true,
         fillColor: context.theme.inputFiled,
         enabled: true,

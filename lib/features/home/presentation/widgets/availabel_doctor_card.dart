@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/widgets/avatar/active_avatar.dart';
 
+import '../../../../pages/appoiment/presenation/book_new_appoiment_screen.dart';
+
 class AvailableDoctorCard extends StatelessWidget {
   final String imageUrl;
   final bool isActive;
@@ -74,13 +76,17 @@ class AvailableDoctorCard extends StatelessWidget {
                         ),
                   ),
                 ),
-                Text(
-                  'Book Appointment',
-                  style: TextStyle(
-                    color: context.theme.primary,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w500,
-                    decoration: TextDecoration.underline,
+                InkWell(
+                  onTap: () => Navigator.of(context)
+                      .pushNamed(BookNewAppointmentScreen.routeName),
+                  child: Text(
+                    'Book Appointment',
+                    style: TextStyle(
+                      color: context.theme.primary,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w500,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ),
               ],

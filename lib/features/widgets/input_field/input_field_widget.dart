@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
 class TextFieldWidget extends StatelessWidget {
@@ -7,6 +8,7 @@ class TextFieldWidget extends StatelessWidget {
   final String? initialValue;
   final Widget? prefixIcon;
   final bool? obscureText;
+  final Color? fillColor;
   final TextEditingController? textEditingController;
   final Function(String value)? onChanged;
   final Function(dynamic value)? onSaved;
@@ -17,28 +19,32 @@ class TextFieldWidget extends StatelessWidget {
   final Widget? suffixIcon;
   final String? labelText;
   final int? maxLines;
+  final List<TextInputFormatter>? inputFormatters;
+
   // final void Function (String value) onSaved;
 
-  const TextFieldWidget(
-      {super.key,
-      this.onTap,
-      this.autoValidateMode,
-      this.prefixIcon,
-      required this.hintText,
-      required this.keyboardType,
-      this.textEditingController,
-      this.onChanged,
-      this.onSaved,
-      required this.validate,
-      this.labelText,
-      this.obscureText,
-      this.suffixIcon,
-      this.prefix,
-      this.initialValue,
-      this.maxLines
+  const TextFieldWidget({
+    super.key,
+    this.onTap,
+    this.autoValidateMode,
+    this.prefixIcon,
+    required this.hintText,
+    required this.keyboardType,
+    this.textEditingController,
+    this.onChanged,
+    this.onSaved,
+    required this.validate,
+    this.labelText,
+    this.obscureText,
+    this.suffixIcon,
+    this.prefix,
+    this.initialValue,
+    this.maxLines,
+    this.fillColor,
+    this.inputFormatters,
 
-      // required this.onSaved,
-      });
+    // required this.onSaved,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -47,9 +53,8 @@ class TextFieldWidget extends StatelessWidget {
         children: [
           Expanded(
             child: TextFormField(
-              
-              
-              // maxLines: maxLines,
+              inputFormatters: inputFormatters,
+              maxLines: maxLines,
               initialValue: initialValue,
 
               style: TextStyle(
@@ -78,7 +83,7 @@ class TextFieldWidget extends StatelessWidget {
 
                 suffixIcon: suffixIcon,
                 filled: true,
-                fillColor: context.theme.inputFiled,
+                fillColor: fillColor ?? context.theme.inputFiled,
                 enabled: true,
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),

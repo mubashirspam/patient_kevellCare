@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
       theme: lightTheme(),
       darkTheme: darkTheme(),
       themeMode: ThemeMode.light, // Set theme mode to follow system theme
-      initialRoute: "/dashboard",
+      // initialRoute: '/login-screen',
+      initialRoute: '/dashboard',
       routes: route,
     );
   }

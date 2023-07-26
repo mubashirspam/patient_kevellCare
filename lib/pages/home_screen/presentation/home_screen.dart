@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kevell_care/configure/assets_manage/images.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/home/presentation/book_appoiment_category_list.dart';
-
-
 import 'package:sliver_tools/sliver_tools.dart';
-
 import '../../../features/home/presentation/available_doctor_list.dart';
 import '../../../features/home/presentation/home_search.dart';
 import '../../../features/home/presentation/self_check_card.dart';
