@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kevell_care/core/them/dark_theme.dart';
 import 'package:kevell_care/core/them/light_theme.dart';
 
 import 'configure/route/routes.dart';
+import 'core/di/injectable.dart';
 
-void main() {
+Future<void> main()async {
+
+   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+  await configureInjeactable();
   runApp(const MyApp());
 }
 

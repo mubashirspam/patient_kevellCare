@@ -8,7 +8,8 @@ import '../../../configure/color/maian_color.dart';
 class ActiveAvatar extends StatelessWidget {
   final double? radius;
   final bool? isActive;
-  const ActiveAvatar({super.key, this.radius, this.isActive});
+  final String ? imageUrl;
+  const ActiveAvatar({super.key, this.radius, this.isActive , this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,8 @@ class ActiveAvatar extends StatelessWidget {
         CircleAvatar(
           maxRadius: radius ?? 35,
           minRadius: radius ?? 35,
-          backgroundImage: const NetworkImage(
-              "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"),
+          backgroundImage:  NetworkImage(
+            imageUrl??  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"),
         ),
         isActive ?? true
             ? Positioned(
