@@ -2,20 +2,21 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kevell_care/features/home/data/models/available_doctor_model.dart';
+
 
 import '../../../../configure/api/endpoints.dart';
 import '../../../../configure/value/constant.dart';
 import '../../../../configure/value/secure_storage.dart';
 import '../../../../core/failiar/failiur_model.dart';
 import '../../../../core/failiar/main_failures.dart';
-import '../../domain/repositories/get_home_waiting_patient_repository.dart';
+import '../../domain/repositories/get_appoinments_repository.dart';
+import '../models/appoiments_model.dart';
 
-@LazySingleton(as: GetAvailableDoctorRepository)
-class GetAvailableDoctorRepoImpliment implements GetAvailableDoctorRepository {
+@LazySingleton(as: GetAppoinmentsRepository)
+class GetAppoinmentsRepoImpliment implements GetAppoinmentsRepository {
   @override
-  Future<Either<MainFailure, HomeAvailableDoctorModel>>
-      getHomeAvailableDoctor() async {
+  Future<Either<MainFailure, AppoimentModel>>
+      getAppoinments() async {
     try {
       final token = await getTokenFromSS(secureStoreKey);
       final id = await getTokenFromSS(drIdsecureStoreKey);
@@ -34,7 +35,7 @@ class GetAvailableDoctorRepoImpliment implements GetAvailableDoctorRepository {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final result = HomeAvailableDoctorModel.fromJson(response.data);
+        final result = AppoimentModel.fromJson(response.data);
         log(result.toString());
 
         return Right(result);

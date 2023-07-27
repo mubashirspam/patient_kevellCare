@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/configure/assets_manage/images.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/home/presentation/book_appoiment_category_list.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import '../../../features/home/presentation/available_doctor_list.dart';
+import '../../../features/home/presentation/bloc/home_bloc.dart';
 import '../../../features/home/presentation/home_search.dart';
 import '../../../features/home/presentation/self_check_card.dart';
 import '../../../features/home/presentation/self_checkup_video_card.dart';
@@ -14,7 +16,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<HomeBloc>().add(const HomeEvent.getHomeAvailableDoctor());
+    });
     return SizedBox(
       width: double.maxFinite,
       height: double.maxFinite,
@@ -137,10 +141,8 @@ class HomeScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
             ),
-        
           ]),
-
-            const  AvailableDoctorList(),
+          const AvailableDoctorList(),
         ],
       ),
     );
