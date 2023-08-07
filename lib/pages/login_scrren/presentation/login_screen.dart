@@ -49,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                             color: context.theme.backround),
                       ),
                       const SizedBox(height: 40),
-                      const LoginWidget(),
+                       LoginWidget(),
                     ],
                   ),
                 ),

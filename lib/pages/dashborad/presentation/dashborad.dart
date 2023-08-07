@@ -7,13 +7,12 @@ import '../../appoiment/presenation/appoinments_screen.dart';
 
 import '../../appoiment/presenation/widgets/appoiment_screen_appbar.dart';
 
-
 import '../../home_screen/presentation/home_screen.dart';
 import '../../home_screen/presentation/widgets/home_appbar.dart';
 import '../../profile/presenation/profile_screen.dart';
 import '../../profile/presenation/widgets/profile_appbar.dart';
 
-import '../../report_screen/presentation/widget/history_screen.dart';
+import '../../history/presentation/history_screen.dart';
 import 'widgets/bottom_navigation.dart';
 
 class Dashboard extends StatefulWidget {
@@ -42,7 +41,11 @@ class _DashboardState extends State<Dashboard> {
       "appbar": const ChatAppBar(),
       "flotingButton": null
     },
-    {"page": const History(), "appbar": null, "flotingButton": null},
+    {
+      "page": const HistoryScreen(),
+      "appbar": null,
+      "flotingButton": null,
+    },
     {
       "page": const ProfileScreen(),
       "appbar": const ProfileAppBar(),

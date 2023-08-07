@@ -77,6 +77,7 @@ class AvailableDoctorList extends StatelessWidget {
         }
         return SliverList(
           delegate: SliverChildBuilderDelegate(
+            childCount: 4,
             (context, index) => AvailableDoctorCard(
               imageUrl: "",
               isActive: index.isEven ? true : false,

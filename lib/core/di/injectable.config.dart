@@ -17,12 +17,21 @@ import '../../features/appoiments/data/repositories/get_appoinments_repository_i
 import '../../features/appoiments/domain/repositories/get_appoinments_repository.dart'
     as _i3;
 import '../../features/appoiments/presentation/bloc/appoinmets_bloc.dart'
-    as _i8;
+    as _i12;
 import '../../features/home/data/repositories/get_home_waiting_patient_repository_impl.dart'
     as _i6;
 import '../../features/home/domain/repositories/get_home_waiting_patient_repository.dart'
     as _i5;
 import '../../features/home/presentation/bloc/home_bloc.dart' as _i7;
+import '../../features/login/data/repositories/login_repository_impl.dart'
+    as _i9;
+import '../../features/login/domain/repositories/login_repository.dart' as _i8;
+import '../../features/login/presentation/bloc/login_bloc.dart' as _i13;
+import '../../features/signup/bloc/signup_bloc.dart' as _i14;
+import '../../features/signup/data/repositories/signup_repository_impl.dart'
+    as _i11;
+import '../../features/signup/domain/repositories/signup_repository.dart'
+    as _i10;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -41,8 +50,13 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i6.GetAvailableDoctorRepoImpliment());
     gh.factory<_i7.HomeBloc>(
         () => _i7.HomeBloc(gh<_i5.GetAvailableDoctorRepository>()));
-    gh.factory<_i8.AppoinmetsBloc>(
-        () => _i8.AppoinmetsBloc(gh<_i3.GetAppoinmentsRepository>()));
+    gh.lazySingleton<_i8.LoginRepository>(() => _i9.LoginRepoImpliment());
+    gh.lazySingleton<_i10.SignupRepository>(() => _i11.SignupRepoImpliment());
+    gh.factory<_i12.AppoinmetsBloc>(
+        () => _i12.AppoinmetsBloc(gh<_i3.GetAppoinmentsRepository>()));
+    gh.factory<_i13.LoginBloc>(() => _i13.LoginBloc(gh<_i8.LoginRepository>()));
+    gh.factory<_i14.SignupBloc>(
+        () => _i14.SignupBloc(gh<_i10.SignupRepository>()));
     return this;
   }
 }

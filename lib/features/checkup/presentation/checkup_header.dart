@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/widgets/avatar/active_avatar.dart';
 
-import '../../../configure/color/maian_color.dart';
+
 
 class CheckupHeaderWidget extends StatelessWidget {
   const CheckupHeaderWidget({super.key});

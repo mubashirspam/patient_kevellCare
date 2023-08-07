@@ -3,10 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/dark_theme.dart';
 import 'package:kevell_care/core/them/light_theme.dart';
+import 'package:kevell_care/pages/initialize/bloc/initialize_bloc.dart';
+import 'package:kevell_care/pages/initialize/initialize.dart';
 
 import 'configure/route/routes.dart';
 import 'core/di/injectable.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
+import 'features/login/presentation/bloc/login_bloc.dart';
+import 'features/signup/bloc/signup_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,14 +28,18 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (ctx) => getIt<HomeBloc>()),
+        BlocProvider(create: (ctx) => getIt<SignupBloc>()),
+        BlocProvider(create: (ctx) => getIt<LoginBloc>()),
+        BlocProvider(create: (ctx) => InitializeBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: lightTheme(),
         darkTheme: darkTheme(),
-        themeMode: ThemeMode.light, // Set theme mode to follow system theme
+        themeMode: ThemeMode.light, 
         // initialRoute: '/login-screen',
-        initialRoute: '/dashboard',
+        // initialRoute: '/dashboard',
+        home: const Initialize(),
         routes: route,
       ),
     );

@@ -1,10 +1,45 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/pages/otp/otp_screen.dart';
 
+import '../../../configure/value/constant.dart';
+import '../../../configure/value/secure_storage.dart';
+import '../../../core/helper/toast.dart';
 import '../../widgets/buttons/text_button_widget.dart';
+import 'bloc/login_bloc.dart';
 
-class LoginWidget extends StatelessWidget {
+class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key});
+
+  @override
+  State<LoginWidget> createState() => _LoginWidgetState();
+}
+
+class _LoginWidgetState extends State<LoginWidget> {
+  TextEditingController controller = TextEditingController(text: "test");
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool isButtonDisabled = true;
+
+  void validateForm() {
+    if (_formKey.currentState!.validate()) {
+      // Form is valid
+      setState(() {
+        isButtonDisabled = false; // Enable the button
+
+        log(isButtonDisabled.toString());
+      });
+    } else {
+      // Form is invalid
+      setState(() {
+        isButtonDisabled = true; // Disable the button
+        log(isButtonDisabled.toString());
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +57,19 @@ class LoginWidget extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           const SizedBox(height: 10),
-          TextField(
+          TextFormField(
             style: TextStyle(color: context.theme.backround),
             cursorColor: context.theme.backround,
+            validator: (userame) {
+              if (userame == null || userame.isEmpty) {
+                return "Please enter an userame ";
+              }
+              return null; // Return null if validation succeeds
+            },
+            onChanged: (value) {
+              validateForm();
+            },
+            controller: controller,
             decoration: const InputDecoration(
               contentPadding: EdgeInsets.symmetric(
                 horizontal: 10,
@@ -33,12 +78,55 @@ class LoginWidget extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           const SizedBox(height: 20),
-          TextButtonWidget(
-            bgColor: context.theme.backround,
-            fgColor: context.theme.primary,
-            name: "Get Otp",
-            onPressed: () {},
-            isLoading: false,
+          BlocConsumer<LoginBloc, LoginState>(
+            listener: (context, state) {
+              if (!state.isLoading && state.isError) {
+                Toast.showToast(
+                  context: context,
+                  message: state.message,
+                );
+              }
+              if (!state.isLoading && state.hasValidationData) {
+                if (state.loginDetails!.data!.first.token != null &&
+                    state.loginDetails!.data!.first.mobile != null &&
+                    state.loginDetails!.data!.first.id != null) {
+                  addToSS(mailsecureStoreKey,
+                      state.loginDetails!.data!.first.mobile!);
+
+                  addToSS(drIdsecureStoreKey,
+                      state.loginDetails!.data!.first.id!.toString());
+
+                  addTokenToSS(
+                      secureStoreKey, state.loginDetails!.data!.first.token!);
+
+                  Toast.showToast(
+                    context: context,
+                    message: state.message,
+                  );
+                  Navigator.of(context).pushNamed(OtpScreen.routeName);
+                } else {
+                  Toast.showToast(
+                    context: context,
+                    message: state.message,
+                  );
+                }
+              }
+            },
+            builder: (context, state) {
+              return TextButtonWidget(
+                bgColor: context.theme.backround,
+                fgColor: context.theme.primary,
+                name: "Get Otp",
+                onPressed: () {
+                  context.read<LoginBloc>().add(
+                        LoginEvent.login(
+                          usernameOrMobile: "test",
+                        ),
+                      );
+                },
+                isLoading: state.isLoading,
+              );
+            },
           ),
         ],
       ),
