@@ -120,7 +120,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                 onPressed: () {
                   context.read<LoginBloc>().add(
                         LoginEvent.login(
-                          usernameOrMobile: "test",
+                          usernameOrMobile: controller.value.text,
                         ),
                       );
                 },

@@ -4,26 +4,38 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../configure/api/endpoints.dart';
+import '../../../../configure/value/constant.dart';
+import '../../../../configure/value/secure_storage.dart';
 import '../../../../core/failiar/failiur_model.dart';
 import '../../../../core/failiar/main_failures.dart';
 
-import '../../domain/repositories/login_repository.dart';
-import '../models/login_model.dart';
+import '../../domain/repositories/otp_repository.dart';
+import '../models/otp_model.dart';
 
-@LazySingleton(as: LoginRepository)
-class LoginRepoImpliment implements LoginRepository {
+@LazySingleton(as: OtpRepository)
+class OtpRepoImpliment implements OtpRepository {
   @override
-  Future<Either<MainFailure, LoginModel>> login({
-    required String usernameOrMobile,
+  Future<Either<MainFailure, OtpModel>> varifyOtp({
+    required String otp,
+    required String number,
   }) async {
+       log("message");
     try {
+   
+      final token = await getTokenFromSS(secureStoreKey);
+      final headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
+
       final response = await Dio(BaseOptions()).post(
-        ApiEndPoints.login,
-        data: {'cred': usernameOrMobile},
+        ApiEndPoints.otp,
+        options: Options(headers: headers),
+        data: {"otp": otp, "mobile": "1111111111"},
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final result = LoginModel.fromJson(response.data);
+        final result = OtpModel.fromJson(response.data);
         log(result.toString());
 
         return Right(result);

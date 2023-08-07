@@ -4,8 +4,9 @@ part of 'login_bloc.dart';
 class LoginState with _$LoginState {
   const factory LoginState({
     required bool isLoading,
-        required String message,
+    required String message,
     required bool isError,
+    required bool otpVarified,
     required bool hasValidationData,
     required LoginModel? loginDetails,
   }) = _LoginState;
@@ -14,9 +15,8 @@ class LoginState with _$LoginState {
         isLoading: false,
         isError: false,
         hasValidationData: false,
+        otpVarified: false,
         loginDetails: null,
         message: "",
       );
 }
-
-

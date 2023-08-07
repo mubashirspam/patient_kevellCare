@@ -2,7 +2,11 @@ import '../value/constant.dart';
 
 class ApiEndPoints {
   static const String login = "$baseUrl/register/api/patientLogin";
+
   static const String register = "$baseUrl/doctor/api/register";
+
+    static const String otp = "$baseUrl/register/api/VerifyPhoneOtp";
+
   static const String getprofile =
       "$baseUrl/doctor/api/getUserdetailsByIdAndEmail";
 

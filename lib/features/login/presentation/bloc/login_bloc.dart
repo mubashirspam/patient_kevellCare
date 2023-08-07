@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-
 import '../../data/models/login_model.dart';
 import '../../domain/repositories/login_repository.dart';
+import '../../domain/repositories/otp_repository.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -15,7 +15,9 @@ part 'login_bloc.freezed.dart';
 @injectable
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginRepository loginRepository;
-  LoginBloc(this.loginRepository) : super(LoginState.initial()) {
+  final OtpRepository otpRepository;
+  LoginBloc(this.loginRepository, this.otpRepository)
+      : super(LoginState.initial()) {
     on<_Login>(
       (event, emit) async {
         emit(state.copyWith(
@@ -25,8 +27,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         ));
 
         final response = await loginRepository.login(
-        usernameOrMobile: event.usernameOrMobile
-        );
+            usernameOrMobile: event.usernameOrMobile);
 
         response.fold(
             (failure) => {
@@ -77,5 +78,35 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         });
       },
     );
+
+    on<_VaryfiyOtp>((event, emit) async {
+
+        emit(
+          state.copyWith(
+            isLoading: true,
+            isError: false,
+            otpVarified: false,
+          ),
+        );
+        final response = await otpRepository.varifyOtp(
+          number: event.number,
+          otp: event.otp,
+        );
+
+        final result = response.fold(
+          (failure) => state.copyWith(
+            isLoading: false,
+            otpVarified: false,
+            isError: true,
+          ),
+          (success) => state.copyWith(
+              isError: false,
+              isLoading: false,
+              otpVarified: true,
+              message: success.result ?? ""),
+        );
+        emit(result);
+
+    });
   }
 }

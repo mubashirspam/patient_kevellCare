@@ -12,6 +12,6 @@ const nameKey = '@#KL778@username';
 const phoneKey = '@#KL778@phoneKey';
 // const baseUrl = "https://kevelldigital.com"; //production
 
-const baseUrl = "https://9dba-183-82-33-226.ngrok.io"; //development
+const baseUrl = "https://4022-183-82-33-226.ngrok.io"; //development
 const imgBaseUrl = "https://gurujisanjeevkrishna.com/"; //development
 
