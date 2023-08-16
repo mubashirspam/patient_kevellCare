@@ -19,9 +19,8 @@ class OtpRepoImpliment implements OtpRepository {
     required String otp,
     required String number,
   }) async {
-       log("message");
+    log("message");
     try {
-   
       final token = await getTokenFromSS(secureStoreKey);
       final headers = {
         'Authorization': 'Bearer $token',
@@ -31,7 +30,7 @@ class OtpRepoImpliment implements OtpRepository {
       final response = await Dio(BaseOptions()).post(
         ApiEndPoints.otp,
         options: Options(headers: headers),
-        data: {"otp": otp, "mobile": "1111111111"},
+        data: {"otp": otp, "mobile": number},
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {

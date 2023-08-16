@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
-
 import '../../../../configure/api/endpoints.dart';
 import '../../../../configure/value/constant.dart';
 import '../../../../configure/value/secure_storage.dart';
@@ -15,23 +14,24 @@ import '../models/appoiments_model.dart';
 @LazySingleton(as: GetAppoinmentsRepository)
 class GetAppoinmentsRepoImpliment implements GetAppoinmentsRepository {
   @override
-  Future<Either<MainFailure, AppoimentModel>>
-      getAppoinments() async {
+  Future<Either<MainFailure, AppoimentModel>> getAppoinments() async {
     try {
       final token = await getTokenFromSS(secureStoreKey);
       final id = await getTokenFromSS(drIdsecureStoreKey);
 
-      final headers = {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      };
+      log(id.toString());
 
-      final response = await Dio(BaseOptions()).get(
-        ApiEndPoints.homeWaitingPatient,
-        options: Options(
-          headers: headers,
-        ),
-        data: {'doctorId': int.parse(id.toString())},
+      // final headers = {
+      //   'Authorization': 'Bearer $token',
+      //   'Content-Type': 'application/json',
+      // };
+
+      final response = await Dio(BaseOptions()).post(
+        ApiEndPoints.fetchAppoinment,
+        // options: Options(
+        //   headers: headers,
+        // ),
+        data: {'patientId': int.parse(id.toString())},
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {

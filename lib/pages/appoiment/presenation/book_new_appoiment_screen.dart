@@ -3,8 +3,10 @@ import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import '../../../features/appoiments/presentation/book_appoinment_widget.dart';
 
 class BookNewAppointmentScreen extends StatelessWidget {
+
+  final int index;
   static const routeName = '/book-new-appoiment';
-  const BookNewAppointmentScreen({super.key});
+  const BookNewAppointmentScreen({super.key , required this.index,});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class BookNewAppointmentScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineLarge,
         ),
       ),
-      body:const BookNowWidget(),
+      body: BookNowWidget(index: index,),
     );
   }
 }

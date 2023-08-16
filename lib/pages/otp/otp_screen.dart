@@ -135,7 +135,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  "+91 98765 43210",
+                  number,
                   style: Theme.of(context)
                       .textTheme
                       .headlineLarge!

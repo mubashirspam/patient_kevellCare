@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 import '../../features/widgets/loading_widget.dart';
 import '../dashborad/presentation/dashborad.dart';
+import '../dashborad/presentation/widgets/bottom_navigation.dart';
 import '../login_scrren/presentation/login_screen.dart';
 import 'bloc/initialize_bloc.dart';
 
@@ -27,6 +27,7 @@ class Initialize extends StatelessWidget {
         } else if (state.isToken) {
           return const Dashboard();
         } else if (!state.isToken) {
+          selectedIndexNorifier.value == 0;
           return const LoginScreen();
         } else {
           return const Scaffold(body: Center(child: LoadingWIdget()));

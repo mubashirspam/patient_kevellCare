@@ -8,8 +8,10 @@ import 'package:kevell_care/pages/initialize/initialize.dart';
 
 import 'configure/route/routes.dart';
 import 'core/di/injectable.dart';
+import 'features/appoiments/presentation/bloc/appoinmets_bloc.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
 import 'features/login/presentation/bloc/login_bloc.dart';
+import 'features/profile/presentation/bloc/profile_bloc.dart';
 import 'features/signup/bloc/signup_bloc.dart';
 
 Future<void> main() async {
@@ -30,13 +32,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (ctx) => getIt<HomeBloc>()),
         BlocProvider(create: (ctx) => getIt<SignupBloc>()),
         BlocProvider(create: (ctx) => getIt<LoginBloc>()),
+        BlocProvider(create: (ctx) => getIt<AppoinmetsBloc>()),
         BlocProvider(create: (ctx) => InitializeBloc()),
+                BlocProvider(create: (ctx) => getIt<ProfileBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: lightTheme(),
         darkTheme: darkTheme(),
-        themeMode: ThemeMode.light, 
+        themeMode: ThemeMode.light,
         // initialRoute: '/login-screen',
         // initialRoute: '/dashboard',
         home: const Initialize(),

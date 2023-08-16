@@ -4,6 +4,8 @@ import 'package:kevell_care/configure/assets_manage/images.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/home/presentation/book_appoiment_category_list.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+import '../../../configure/value/constant.dart';
+import '../../../configure/value/secure_storage.dart';
 import '../../../features/home/presentation/available_doctor_list.dart';
 import '../../../features/home/presentation/bloc/home_bloc.dart';
 import '../../../features/home/presentation/home_search.dart';
@@ -17,7 +19,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // context.read<HomeBloc>().add(const HomeEvent.getHomeAvailableDoctor());
+      context.read<HomeBloc>().add(const HomeEvent.getHomeAvailableDoctor());
     });
     return SizedBox(
       width: double.maxFinite,
@@ -50,13 +52,19 @@ class HomeScreen extends StatelessWidget {
                                 .headlineLarge!
                                 .copyWith(color: Colors.white, fontSize: 20)),
                         const SizedBox(height: 4),
-                        Text(
-                          "How are you, Adrianne!",
-                          style:
-                              Theme.of(context).textTheme.titleLarge!.copyWith(
-                                    color: Colors.white,
-                                  ),
-                        ),
+                        FutureBuilder(
+                            future: getFromSS(mailsecureStoreKey),
+                            builder: (context, sn) {
+                              return Text(
+                                "How are you, ${sn.data.toString()}!",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge!
+                                    .copyWith(
+                                      color: Colors.white,
+                                    ),
+                              );
+                            }),
                       ],
                     ),
                   ],

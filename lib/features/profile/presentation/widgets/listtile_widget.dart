@@ -6,13 +6,12 @@ import 'package:kevell_care/core/them/custom_theme_extension.dart';
 class ListTileWidget extends StatelessWidget {
   final String iconName;
   final String titleName;
-  final VoidCallback ? onTap;
+  final VoidCallback? onTap;
   const ListTileWidget({
     super.key,
     required this.iconName,
     required this.titleName,
     this.onTap,
-    
   });
 
   @override
@@ -34,7 +33,7 @@ class ListTileWidget extends StatelessWidget {
             ),
           ),
           Divider(
-              color: context.theme.textGrey,
+            color: context.theme.textGrey,
           )
         ],
       ),

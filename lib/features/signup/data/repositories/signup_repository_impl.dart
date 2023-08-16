@@ -12,25 +12,14 @@ import '../models/signup_model.dart';
 
 @LazySingleton(as: SignupRepository)
 class SignupRepoImpliment implements SignupRepository {
- 
   @override
   Future<Either<MainFailure, SignupModel>> signup({
-
-    required String phone,
+    required int phone,
     required String userName,
-
   }) async {
-
     try {
-      final response = await Dio(BaseOptions()).post(
-        ApiEndPoints.register,
-        queryParameters: {
-          "username": userName,
-
-          "mobile": phone,
-      
-        },
-      );
+      final response = await Dio(BaseOptions()).post(ApiEndPoints.register,
+          data: {"Username": userName, "mobile": phone});
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final registerResult = SignupModel.fromJson(response.data);

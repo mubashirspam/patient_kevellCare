@@ -6,14 +6,20 @@ class AppoinmetsState with _$AppoinmetsState {
     required bool isLoading,
     required bool hasData,
     required bool isCreateLoading,
+      required bool createData,
     required bool isError,
     AppoimentModel? appoimentData,
+    
+
   }) = _AppoinmetsState;
 
-  factory AppoinmetsState.initial() => const AppoinmetsState(
-      isCreateLoading: false,
-      isLoading: false,
-      isError: false,
-      hasData: false,
-      appoimentData: null);
+  factory AppoinmetsState.initial() => const  AppoinmetsState(
+        isCreateLoading: false,
+        isLoading: false,
+        isError: false,
+        hasData: false,
+        createData: false,
+ 
+        appoimentData: null,
+      );
 }

@@ -24,7 +24,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         ));
 
         final response = await signupRepository.signup(
-          phone: event.phone,
+          phone: int.parse(event.phone),
           userName: event.userName,
         );
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../features/login/presentation/logout.dart';
 import '../../../features/profile/presentation/about.dart';
 import '../../../features/profile/presentation/darkmood.dart';
 import '../../../features/profile/presentation/faq.dart';
@@ -67,7 +68,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-          // const  Logout()
+            const Logout()
           ],
         ),
       ),

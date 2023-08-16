@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/widgets/avatar/active_avatar.dart';
 
+import '../../../../core/helper/date.dart';
 import '../../../../pages/appoiment/presenation/book_new_appoiment_screen.dart';
+import '../../data/models/available_doctor_model.dart';
 
 class AvailableDoctorCard extends StatelessWidget {
-  final String imageUrl;
-  final bool isActive;
-  final String name;
-  final String statusMessage;
+  final HomeAvailableDoctorModelDatum data;
+  final int index;
+
   const AvailableDoctorCard({
     super.key,
-    required this.imageUrl,
-    required this.isActive,
-    required this.name,
-    required this.statusMessage,
+    required this.data,
+    required this.index,
   });
 
   @override
@@ -37,7 +36,7 @@ class AvailableDoctorCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Dr. Antoni Shkraba',
+                    Text(data.username!,
                         style: Theme.of(context)
                             .textTheme
                             .headlineLarge!
@@ -50,7 +49,8 @@ class AvailableDoctorCard extends StatelessWidget {
                               .titleMedium!
                               .copyWith(fontSize: 14)),
                     ),
-                    Text('Availablity -  12.00 to 16.00',
+                    Text(
+                        'Availablity -  ${extractTime(data.data!.first.starttime!)} to ${extractTime(data.data!.first.endtime!)}',
                         style: Theme.of(context)
                             .textTheme
                             .headlineLarge!
@@ -68,7 +68,7 @@ class AvailableDoctorCard extends StatelessWidget {
                 Chip(
                   backgroundColor: context.theme.primary,
                   label: Text(
-                    'Waiting patient - 04',
+                    'Waiting patient - ${data.data!.length}',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           fontSize: 14,
@@ -77,8 +77,9 @@ class AvailableDoctorCard extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () => Navigator.of(context)
-                      .pushNamed(BookNewAppointmentScreen.routeName),
+                  onTap: () => Navigator.of(context).pushNamed(
+                      BookNewAppointmentScreen.routeName,
+                      arguments: index),
                   child: Text(
                     'Book Appointment',
                     style: TextStyle(

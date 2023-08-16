@@ -21,9 +21,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     this.getAvailableDoctorRepository,
   ) : super(HomeState.initial()) {
     on<_GetHomeAvailableDoctor>((event, emit) async {
-      if (state.hasAvailableDoctorData) {
-        return;
-      }
+      // if (state.hasAvailableDoctorData) {
+      //   return;
+      // }
 
       emit(
         state.copyWith(
@@ -87,5 +87,23 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         );
       });
     });
+
+       on<_PickDate>((event, emit) {
+      emit(state.copyWith(
+        date: event.date,
+      ));
+    });
+
+
+    on<_PickTime>((event, emit) {
+
+      emit(state.copyWith(
+        startTime: event.startTime,
+        endTime: event.endTime,
+   
+      ));
+    });
+
+    
   }
 }

@@ -13,11 +13,9 @@ class AllCheckupHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverList(
-          delegate: SliverChildBuilderDelegate(
-            childCount: 20,
-            (context, index) =>const ReportItem()
-          ),
-        );
+      delegate: SliverChildBuilderDelegate(
+          childCount: 1, (context, index) => const ReportItem()),
+    );
   }
 }
 

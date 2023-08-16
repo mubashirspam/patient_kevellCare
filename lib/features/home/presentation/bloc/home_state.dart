@@ -8,18 +8,23 @@ class HomeState with _$HomeState {
     required bool unauthorized,
     required bool hasData,
     required bool isError,
+    required DateTime date,
+    required DateTime? startTime,
+    required DateTime ?endTime,
     HomeAvailableDoctorModel? availableDoctors,
     required Option<Either<MainFailure, HomeAvailableDoctorModel>>
         failureOrSuccessOption,
   }) = _HomeState;
 
   factory HomeState.initial() => HomeState(
-        unauthorized: false,
-        isError: false,
-        hasData: false,
-        hasAvailableDoctorData: false,
-        isAvailableDoctorLoading: false,
-        availableDoctors: null,
-        failureOrSuccessOption: none(),
-      );
+      unauthorized: false,
+      isError: false,
+      hasData: false,
+      hasAvailableDoctorData: false,
+      isAvailableDoctorLoading: false,
+      availableDoctors: null,
+      failureOrSuccessOption: none(),
+      startTime: null,
+      endTime: null,
+      date: DateTime.now());
 }

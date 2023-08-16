@@ -1,134 +1,410 @@
-import 'package:flutter/material.dart';
-import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'dart:developer';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kevell_care/configure/value/secure_storage.dart';
+import 'package:kevell_care/core/helper/toast.dart';
+import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/appoiments/domain/entities/create_appoinments.dart';
+import 'package:kevell_care/features/appoiments/presentation/bloc/appoinmets_bloc.dart';
+
+import '../../../configure/value/constant.dart';
+import '../../../core/helper/date.dart';
 import '../../../core/helper/date_formater.dart';
 import '../../../core/helper/date_validater.dart';
+import '../../home/data/models/available_doctor_model.dart';
+import '../../home/presentation/bloc/home_bloc.dart';
 import '../../widgets/buttons/text_button_widget.dart';
 import '../../widgets/calender/calnder.dart';
 import '../../widgets/input_field/dropdown_field.dart';
 import '../../widgets/input_field/input_field_widget.dart';
 
-class BookNowWidget extends StatelessWidget {
+class BookNowWidget extends StatefulWidget {
+  final int index;
   const BookNowWidget({
+    required this.index,
     super.key,
   });
 
   @override
+  State<BookNowWidget> createState() => _BookNowWidgetState();
+}
+
+class _BookNowWidgetState extends State<BookNowWidget> {
+  TextEditingController remarkController = TextEditingController();
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: double.maxFinite,
-      width: double.maxFinite,
-      // padding: EdgeInsets.all(20),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Date and Time",
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge!
-                    .copyWith(color: context.theme.textPrimary),
-              ),
-              const SizedBox(height: 15),
-              TextFieldWidget(
-                hintText: "12/12/2023",
-                inputFormatters: [DateInputFormatter()],
-                keyboardType: TextInputType.datetime,
-                validate: DateValidator.validateDate,
-                suffixIcon: GestureDetector(
-                  onTap: () => showDialog(
-                    context: context,
-                    builder: (context) => CustomDatePickerDialog(
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime.now(),
-                      onDateTimeChanged: (onDateTimeChanged) {},
-                    ),
-                  ),
-                  child: Icon(
-                    Icons.calendar_month,
-                    color: context.theme.primary,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 15),
-              Row(
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, homeState) {
+        return SizedBox(
+          height: double.maxFinite,
+          width: double.maxFinite,
+          // padding: EdgeInsets.all(20),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: DropDownFiledWidet(
-                      hintText: "From",
-                      items: [],
-                      onChanged: (ww) {},
-                    ),
+                  Text(
+                    "Date and Time",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: context.theme.textPrimary),
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: DropDownFiledWidet(
-                      hintText: "To",
-                      items: [],
-                      onChanged: (ww) {},
-                    ),
+                  const SizedBox(height: 15),
+                  BlocBuilder<HomeBloc, HomeState>(
+                    builder: (context, state) {
+                      return TextFieldWidget(
+                        hintText: "12/12/2023",
+                        inputFormatters: [DateInputFormatter()],
+                        keyboardType: TextInputType.datetime,
+                        validate: DateValidator.validateDate,
+                        textEditingController: TextEditingController(
+                            text: dateFormatToddmmyyyy(state.date)),
+                        suffixIcon: GestureDetector(
+                          onTap: () => showDialog(
+                            context: context,
+                            builder: (context) =>
+                                BlocBuilder<HomeBloc, HomeState>(
+                              builder: (context, state) {
+                                return CustomDatePickerDialog(
+                                  initialDate: state
+                                          .availableDoctors!
+                                          .data![widget.index]
+                                          .data!
+                                          .first
+                                          .startdate ??
+                                      DateTime.now(),
+                                  firstDate: state
+                                          .availableDoctors!
+                                          .data![widget.index]
+                                          .data!
+                                          .first
+                                          .startdate ??
+                                      DateTime.now(),
+                                  lastDate: state
+                                          .availableDoctors!
+                                          .data![widget.index]
+                                          .data!
+                                          .first
+                                          .enddate ??
+                                      DateTime.now(),
+                                  onDateTimeChanged: (onDateTimeChanged) {
+                                    context.read<HomeBloc>().add(
+                                        HomeEvent.pickDate(
+                                            date: onDateTimeChanged));
+
+                                    Navigator.of(context).pop();
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.calendar_month,
+                            color: context.theme.primary,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                ],
-              ),
-              const SizedBox(height: 15),
-              Row(
-                children: [
-                  Expanded(
-                    child: DropDownFiledWidet(
-                      hintText: "Location",
-                      items: [],
-                      onChanged: (ww) {},
-                    ),
+                  const SizedBox(height: 15),
+                  BlocBuilder<HomeBloc, HomeState>(
+                    builder: (context, state) {
+                      if (state.hasAvailableDoctorData) {
+                        List<String> matchingItems = [];
+                        List<DatumDatum> filteredObjects = state
+                            .availableDoctors!.data![widget.index].data!
+                            .where((object) {
+                          return object.days == state.date;
+                        }).toList();
+
+                        List<DropdownMenuItem<String>> timeSlotItems = [];
+
+                        if (filteredObjects.isNotEmpty) {
+                          List<String> formattedList = [];
+
+                          List<Bookedtime> timeSlots =
+                              filteredObjects.first.bookedtime ?? [];
+
+                          if (timeSlots.isNotEmpty) {
+                            for (var slot in timeSlots) {
+                              DateTime startTime = slot.starttime!;
+                              DateTime endTime = slot.endtime!;
+                              String formattedSlot =
+                                  "${extractTime(endTime)} to ${extractTime(startTime)}";
+                              formattedList.add(formattedSlot);
+                            }
+                            // log("formattedList ====== $formattedList");
+                          }
+
+                          /////////////******************///////////////// */
+
+                          int timePerPatient =
+                              filteredObjects.first.timeperPatient ?? 0;
+
+                          // Convert start and end times to DateTime objects for easier manipulation
+                          DateTime startTimeDt =
+                              filteredObjects.first.starttime!;
+
+                          DateTime endTimeDt = filteredObjects.first.endtime!;
+
+                          log(filteredObjects.first.endtime!.toIso8601String());
+
+                          while (startTimeDt
+                              .add(Duration(minutes: timePerPatient))
+                              .isBefore(endTimeDt
+                                  .add(Duration(minutes: timePerPatient)))) {
+                            DateTime endTimeSlotDt = startTimeDt
+                                .add(Duration(minutes: timePerPatient));
+
+                            String valueTimeSlot =
+                                "$startTimeDt,$endTimeSlotDt";
+
+                            String currentTimeSlot =
+                                "${extractTime(startTimeDt)} to ${extractTime(endTimeSlotDt)}";
+                            // Format this as needed
+
+                            timeSlotItems.add(
+                              DropdownMenuItem<String>(
+                                value: valueTimeSlot,
+                                child: Text(
+                                  currentTimeSlot,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyMedium!
+                                      .copyWith(
+                                        color: context.theme.textPrimary,
+                                      ),
+                                ),
+                              ),
+                            );
+
+                            startTimeDt = endTimeSlotDt;
+                          }
+
+                          // log("timeSlotItems == ${timeSlotItems.first.value}");
+
+                          if (formattedList.isNotEmpty &&
+                              timeSlotItems.isNotEmpty) {
+                            List<int> matchingIndices = [];
+
+                            for (var formattedItem in formattedList) {
+                              for (var index = 0;
+                                  index < timeSlotItems.length;
+                                  index++) {
+                                if (timeSlotItems[index].value ==
+                                    formattedItem) {
+                                  matchingIndices.add(index);
+                                  matchingItems.add(formattedItem);
+                                  break;
+                                }
+                              }
+                            }
+                            log("matched ======= $matchingIndices");
+                            log("matched ======= $matchingItems");
+                          }
+                        }
+
+                        return Row(
+                          children: [
+                            Expanded(
+                              child: DropDownFiledWidet(
+                                hintText: "Time slot",
+                                items: timeSlotItems,
+                                onChanged: (ww) {
+                                  List<String> timestamps = ww.split(',');
+
+                                 
+
+                                  if (matchingItems.isNotEmpty) {
+                                    for (var matching in matchingItems) {
+                                      log(ww);
+                                      if (matching == ww) {
+                                        Toast.showToast(
+                                            context: context,
+                                            message:
+                                                "Please select athor date");
+                                      } else {
+                                        context.read<HomeBloc>().add(
+                                              HomeEvent.pickTime(
+                                                endTime: DateTime.parse(
+                                                    timestamps[0]),
+                                                startTime: DateTime.parse(
+                                                    timestamps[1]),
+                                              ),
+                                            );
+                                      }
+                                    }
+                                  } else {
+                                    context.read<HomeBloc>().add(
+                                          HomeEvent.pickTime(
+                                            endTime:
+                                                DateTime.parse(timestamps[0]),
+                                            startTime:
+                                                DateTime.parse(timestamps[1]),
+                                          ),
+                                        );
+                                  }
+                                },
+                              ),
+                            ),
+                            // const SizedBox(width: 12),
+                            // Expanded(
+                            //   child: DropDownFiledWidet(
+                            //     hintText: "To",
+                            //     items: [],
+                            //     onChanged: (ww) {},
+                            //   ),
+                            // ),
+                          ],
+                        );
+                      }
+                      return Row(
+                        children: [
+                          Expanded(
+                            child: DropDownFiledWidet(
+                              hintText: "Time slot",
+                              items: [],
+                              onChanged: (ww) {},
+                            ),
+                          ),
+                          // const SizedBox(width: 12),
+                          // Expanded(
+                          //   child: DropDownFiledWidet(
+                          //     hintText: "To",
+                          //     items: [],
+                          //     onChanged: (ww) {},
+                          //   ),
+                          // ),
+                        ],
+                      );
+                    },
                   ),
-                ],
-              ),
-              const SizedBox(height: 15),
-              Text(
-                "Description",
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge!
-                    .copyWith(color: context.theme.textPrimary),
-              ),
-              const SizedBox(height: 15),
-              TextFieldWidget(
-                hintText: "Remark",
-                keyboardType: TextInputType.name,
-                maxLines: 9,
-                validate: (j) {},
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextButtonWidget(
-                      isLoading: false,
-                      fgColor: context.theme.primary,
-                      bgColor: context.theme.secondary,
-                      onPressed: () {},
-                      name: "Cancel",
-                    ),
+                  const SizedBox(height: 15),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: DropDownFiledWidet(
+                          hintText: "Location",
+                          items: [],
+                          onChanged: (ww) {},
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 15),
-                  Expanded(
-                    child: TextButtonWidget(
-                      isLoading: false,
-                      onPressed: () {},
-                      name: "Submit",
-                    ),
+                  const SizedBox(height: 15),
+                  Text(
+                    "Description",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: context.theme.textPrimary),
+                  ),
+                  const SizedBox(height: 15),
+                  TextFieldWidget(
+                    hintText: "Remark",
+                    keyboardType: TextInputType.name,
+                    textEditingController: remarkController,
+                    maxLines: 9,
+                    validate: (j) {
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextButtonWidget(
+                          isLoading: false,
+                          fgColor: context.theme.primary,
+                          bgColor: context.theme.secondary,
+                          onPressed: () {},
+                          name: "Cancel",
+                        ),
+                      ),
+                      const SizedBox(width: 15),
+                      Expanded(
+                        child: BlocConsumer<AppoinmetsBloc, AppoinmetsState>(
+                          listener: (context, appointmentState) {
+                            if (appointmentState.createData) {
+                              Toast.showToast(
+                                  context: context,
+                                  message:
+                                      "Sucsessfully booked the appoinemnt");
+
+                              Navigator.of(context).pop();
+                            }
+                            if (appointmentState.isError) {
+                              Toast.showToast(
+                                  context: context,
+                                  message: "Choose another time slot");
+                            }
+                          },
+                          builder: (context, appointmentState) {
+                            return TextButtonWidget(
+                              isLoading: appointmentState.isCreateLoading,
+                              onPressed: () async {
+                                if (homeState.endTime != null) {
+                                  await getFromSS(drIdsecureStoreKey)
+                                      .then((value) {
+                                    if (value != null) {
+                                      context.read<AppoinmetsBloc>().add(
+                                            AppoinmetsEvent.createAppoinments(
+                                              appoinmentsPayload:
+                                                  AppoinmentsPayload(
+                                                patientId: int.parse(value),
+                                                appointmentdate: homeState.date,
+                                                appointmentendtime: homeState
+                                                    .startTime!
+                                                    .toIso8601String(),
+                                                appointmentlocation: "",
+                                                appointmentstarttime: homeState
+                                                    .endTime!
+                                                    .toIso8601String(),
+                                                doctorname: homeState
+                                                    .availableDoctors!
+                                                    .data![widget.index]
+                                                    .username,
+                                                doctornameid: homeState
+                                                    .availableDoctors!
+                                                    .data![widget.index]
+                                                    .id,
+                                                reasonformeetingdoctor:
+                                                    remarkController.value.text,
+                                              ),
+                                            ),
+                                          );
+                                    }
+                                  });
+                                }
+                              },
+                              name: "Submit",
+                            );
+                          },
+                        ),
+                      )
+                    ],
                   )
                 ],
-              )
-            ],
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
 
+class TimeSlotValue {
+  final DateTime startTime;
+  final DateTime endTime;
+
+  TimeSlotValue({
+    required this.startTime,
+    required this.endTime,
+  });
+}

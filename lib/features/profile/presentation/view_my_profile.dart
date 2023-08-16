@@ -1,8 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
+
+import '../../../core/helper/date.dart';
+import '../../widgets/buttons/text_button_widget.dart';
+import '../../widgets/error_widget.dart';
+import '../../widgets/loading_widget.dart';
+import 'bloc/profile_bloc.dart';
+import 'edit_profile.dart';
+import 'widgets/profile_name_card.dart';
 
 class ViewMyProfile extends StatelessWidget {
   const ViewMyProfile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
+    });
+    return BlocConsumer<ProfileBloc, ProfileState>(
+      listener: (context, state) {
+        if (state.unauthorized) {}
+      },
+      // buildWhen: (previous, current) {
+      //   return current != previous;
+      // },
+      builder: (context, state) {
+        if (state.isLoading) {
+          return const Center(child: LoadingWIdget());
+        } else if (state.hasData) {
+          return ViewMyProfileBlocBody(
+            address: state.result!.data!.first.address ?? "No Adress",
+            dob: state.result!.data!.first.dob.toString(),
+            imgUrl: state.result!.data!.first.address ?? "",
+            mobile: state.result!.data!.first.mobile ?? "No mobile",
+            name: state.result!.data!.first.username ?? "",
+          );
+        } else if (state.isError) {
+          return const Center(child: AppErrorWidget());
+        }
+        return const Center(child: AppErrorWidget());
+      },
+    );
+  }
+}
+
+class ViewMyProfileBlocBody extends StatelessWidget {
+  final String name;
+
+  final String imgUrl;
+  final String mobile;
+  final String dob;
+  final String address;
+
+  const ViewMyProfileBlocBody({
+    required this.address,
+    required this.dob,
+    required this.imgUrl,
+    required this.mobile,
+    required this.name,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +69,15 @@ class ViewMyProfile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          ProfileNameCard(
+            email: mobile,
+            imageUrl:
+                "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2960&q=80",
+            name: name,
+          ),
+          const SizedBox(
+            height: 30,
+          ),
           Text("Basic Detail",
               style: Theme.of(context)
                   .textTheme
@@ -22,7 +89,7 @@ class ViewMyProfile extends StatelessWidget {
           Text("Mobile", style: Theme.of(context).textTheme.headlineMedium),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Text("9562229979",
+            child: Text(mobile,
                 style: Theme.of(context)
                     .textTheme
                     .headlineMedium!
@@ -33,7 +100,7 @@ class ViewMyProfile extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineMedium),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Text("24 Jan 1988",
+            child: Text(dob,
                 style: Theme.of(context)
                     .textTheme
                     .headlineMedium!
@@ -43,13 +110,31 @@ class ViewMyProfile extends StatelessWidget {
           Text("Adress", style: Theme.of(context).textTheme.headlineMedium),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Text("24, Maruthu Pandiyar Street, Madurai - 20",
+            child: Text(address,
                 style: Theme.of(context)
                     .textTheme
                     .headlineMedium!
                     .copyWith(fontWeight: FontWeight.normal)),
           ),
-          const SizedBox(),
+          const Spacer(),
+          TextButtonWidget(
+            onPressed: () {
+              showModalBottomSheet(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                isScrollControlled: true,
+                context: context,
+                builder: (context) => EditMyProfile(
+                  adress: address,
+                  name: name,
+                  mobile: mobile,
+                  dob: dob,
+                ),
+              );
+            },
+            name: "Edit Profile",
+            isLoading: false,
+          ),
         ],
       ),
     );

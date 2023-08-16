@@ -3,14 +3,14 @@ import '../value/constant.dart';
 class ApiEndPoints {
   static const String login = "$baseUrl/register/api/patientLogin";
 
-  static const String register = "$baseUrl/doctor/api/register";
+  static const String register = "$baseUrl/register/api/patientRegister";
 
     static const String otp = "$baseUrl/register/api/VerifyPhoneOtp";
 
   static const String getprofile =
-      "$baseUrl/doctor/api/getUserdetailsByIdAndEmail";
+      "$baseUrl/register/api/GetPatientinfoBy";
 
-  static const String updateProfile = "$baseUrl/doctor/api/register";
+  static const String updateProfile = "$baseUrl/register/api/patientprofileUpdate";
 
   static const String homeStatus = "$baseUrl/register/api/doctorcountlist";
 
@@ -28,4 +28,19 @@ class ApiEndPoints {
 
   static const String getPrescriptionSettings =
       "$baseUrl/users/api/getdprescriptiontable";
+
+
+  static const String getHomeAvailableDoctor =
+      "$baseUrl/doctor/api/getalldoctorSchedule";
+
+  static const String createAppoinments =
+      "$baseUrl/appointment/api/BookAppointment";
+
+
+  static const String  fetchAppoinment =
+      "$baseUrl/appointment/api/upcomingpasthistorypatient";
+
+     
+
+      
 }

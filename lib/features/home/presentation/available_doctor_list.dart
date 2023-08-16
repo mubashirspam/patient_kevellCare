@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/features/home/presentation/widgets/availabel_doctor_card.dart';
+import 'package:kevell_care/features/widgets/error_widget.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../../configure/value/constant.dart';
 import '../../../configure/value/secure_storage.dart';
 import '../../../core/helper/toast.dart';
-import '../../widgets/error_widget.dart';
 import '../../widgets/loading_widget.dart';
 import 'bloc/home_bloc.dart';
 
@@ -46,7 +46,7 @@ class AvailableDoctorList extends StatelessWidget {
         }
 
         if (state.hasAvailableDoctorData) {
-          if (state.availableDoctors!.data!.waitingPatients!.isEmpty) {
+          if (state.availableDoctors!.data!.isEmpty) {
             return MultiSliver(
               children: [
                 Container(
@@ -65,26 +65,18 @@ class AvailableDoctorList extends StatelessWidget {
           } else {
             return SliverList(
               delegate: SliverChildBuilderDelegate(
+                childCount: state.availableDoctors!.data!.length,
                 (context, index) => AvailableDoctorCard(
-                  imageUrl: "",
-                  isActive: index.isEven ? true : false,
-                  name: "Johnny Greig",
-                  statusMessage: "General Checkup",
+                  data: state.availableDoctors!.data![index],
+                  index: index,
+            
                 ),
               ),
             );
           }
         }
-        return SliverList(
-          delegate: SliverChildBuilderDelegate(
-            childCount: 4,
-            (context, index) => AvailableDoctorCard(
-              imageUrl: "",
-              isActive: index.isEven ? true : false,
-              name: "Johnny Greig",
-              statusMessage: "General Checkup",
-            ),
-          ),
+        return MultiSliver(
+          children: const [AppErrorWidget()],
         );
       },
     );

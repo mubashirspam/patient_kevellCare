@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:kevell_care/configure/color/maian_color.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
+import '../../../../core/helper/date.dart';
+import '../../data/models/appoiments_model.dart';
+
 class AppoimentCard extends StatelessWidget {
   final bool isPast;
+  final Past data;
 
   const AppoimentCard({
     super.key,
     required this.isPast,
+    required this.data,
   });
 
   @override
@@ -47,14 +52,14 @@ class AppoimentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Dr. Arun Kumar",
-                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    data.doctorname!,
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           color: context.theme.textPrimary,
                         ),
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    "13.00-15.00",
+                    "${extractTime(data.appointmentstarttime!)} to ${extractTime(data.appointmentendtime!)}  ",
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           color: context.theme.textPrimary,
                         ),
