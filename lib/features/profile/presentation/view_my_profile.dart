@@ -31,10 +31,14 @@ class ViewMyProfile extends StatelessWidget {
         } else if (state.hasData) {
           return ViewMyProfileBlocBody(
             address: state.result!.data!.first.address ?? "No Adress",
-            dob: state.result!.data!.first.dob.toString(),
+            dob: state.result!.data!.first.dob == null
+                ? DateTime.now().toIso8601String()
+                : state.result!.data!.first.dob!.toIso8601String(),
             imgUrl: state.result!.data!.first.address ?? "",
             mobile: state.result!.data!.first.mobile ?? "No mobile",
-            name: state.result!.data!.first.username ?? "",
+            name: state.result!.data!.first.name ??
+                state.result!.data!.first.username ??
+                "No Name",
           );
         } else if (state.isError) {
           return const Center(child: AppErrorWidget());
@@ -100,7 +104,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineMedium),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Text(dob,
+            child: Text(dateFormatToDDmonthYYYY(dob),
                 style: Theme.of(context)
                     .textTheme
                     .headlineMedium!

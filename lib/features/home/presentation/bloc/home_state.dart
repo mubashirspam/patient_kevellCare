@@ -10,7 +10,7 @@ class HomeState with _$HomeState {
     required bool isError,
     required DateTime date,
     required DateTime? startTime,
-    required DateTime ?endTime,
+    required DateTime? endTime,
     HomeAvailableDoctorModel? availableDoctors,
     required Option<Either<MainFailure, HomeAvailableDoctorModel>>
         failureOrSuccessOption,

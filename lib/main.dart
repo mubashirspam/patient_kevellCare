@@ -12,6 +12,7 @@ import 'features/appoiments/presentation/bloc/appoinmets_bloc.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
 import 'features/login/presentation/bloc/login_bloc.dart';
 import 'features/profile/presentation/bloc/profile_bloc.dart';
+import 'features/report/presentation/bloc/report_bloc.dart';
 import 'features/signup/bloc/signup_bloc.dart';
 
 Future<void> main() async {
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (ctx) => getIt<LoginBloc>()),
         BlocProvider(create: (ctx) => getIt<AppoinmetsBloc>()),
         BlocProvider(create: (ctx) => InitializeBloc()),
-                BlocProvider(create: (ctx) => getIt<ProfileBloc>()),
+        BlocProvider(create: (ctx) => getIt<ReportBloc>()),
+        BlocProvider(create: (ctx) => getIt<ProfileBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

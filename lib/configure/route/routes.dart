@@ -3,6 +3,8 @@ import 'package:kevell_care/pages/appoiment/presenation/book_new_appoiment_scree
 import 'package:kevell_care/pages/dashborad/presentation/dashborad.dart';
 import 'package:kevell_care/pages/otp/otp_screen.dart';
 import 'package:kevell_care/pages/patien_checkup/presentation/patient_checkup_screen.dart';
+import 'package:kevell_care/features/report/data/model/report_model.dart'
+    as report;
 
 import '../../pages/chat_screen/presentation/chating_screen.dart';
 import '../../pages/login_scrren/presentation/login_screen.dart';
@@ -15,9 +17,12 @@ final Map<String, Widget Function(BuildContext)> route = {
   SignupScreen.routeName: (ctx) => const SignupScreen(),
   Dashboard.routeName: (ctx) => const Dashboard(),
   MyProfileScreen.routeName: (ctx) => const MyProfileScreen(),
-  BookNewAppointmentScreen.routeName: (ctx) =>  BookNewAppointmentScreen(index: ModalRoute.of(ctx)!.settings.arguments as int),
+  BookNewAppointmentScreen.routeName: (ctx) => BookNewAppointmentScreen(
+      index: ModalRoute.of(ctx)!.settings.arguments as int),
   ChatingScreen.routeName: (ctx) => const ChatingScreen(),
   PatientCheckupScreen.routeName: (ctx) => const PatientCheckupScreen(),
-  ReportScreen.routeName: (ctx) => const ReportScreen(),
+  ReportScreen.routeName: (ctx) => ReportScreen(
+        data: ModalRoute.of(ctx)!.settings.arguments as report.Datum,
+      ),
   OtpScreen.routeName: (ctx) => const OtpScreen(),
 };

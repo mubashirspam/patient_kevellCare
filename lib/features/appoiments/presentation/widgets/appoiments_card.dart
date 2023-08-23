@@ -36,7 +36,7 @@ class AppoimentCard extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                "04\nApr",
+                formatDateForSchedule(data.appointmentdate!),
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge!

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/features/appoiments/presentation/bloc/appoinmets_bloc.dart';
-import 'package:kevell_care/features/appoiments/presentation/widgets/joinint_card.dart';
+// import 'package:kevell_care/features/appoiments/presentation/widgets/joinint_card.dart';
 import 'package:kevell_care/features/widgets/error_widget.dart';
 import 'package:kevell_care/features/widgets/loading_widget.dart';
 import 'package:kevell_care/pages/patien_checkup/presentation/patient_checkup_screen.dart';
@@ -16,10 +16,10 @@ class UpcomingAppoimentList extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          JiningCard(
-            onpress: () =>
-                Navigator.of(context).pushNamed(PatientCheckupScreen.routeName),
-          ),
+          // JiningCard(
+          //   onpress: () =>
+          //       Navigator.of(context).pushNamed(PatientCheckupScreen.routeName),
+          // ),
           BlocBuilder<AppoinmetsBloc, AppoinmetsState>(
             builder: (context, state) {
               if (state.isLoading) {
@@ -31,10 +31,20 @@ class UpcomingAppoimentList extends StatelessWidget {
                     child: Column(
                       children: List.generate(
                         state.appoimentData!.message!.upcomingdata!.length,
-                        (index) => AppoimentCard(
-                          data: state
-                              .appoimentData!.message!.upcomingdata![index],
-                          isPast: false,
+                        (index) => InkWell(
+                          onTap: () {
+                            if (state.appoimentData!.message!
+                                .upcomingdata![index].appointmentstarttime!
+                                .isBefore(DateTime.now())) {
+                              Navigator.of(context)
+                                  .pushNamed(PatientCheckupScreen.routeName);
+                            }
+                          },
+                          child: AppoimentCard(
+                            data: state
+                                .appoimentData!.message!.upcomingdata![index],
+                            isPast: false,
+                          ),
                         ),
                       ),
                     ),

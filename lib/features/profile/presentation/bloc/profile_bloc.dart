@@ -44,6 +44,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       emit(result);
     });
 
+             on<_PickDate>((event, emit) {
+      emit(state.copyWith(
+        date: event.date,
+      ));
+    });
+
     on<_UpdateProfile>((event, emit) async {
       emit(
         state.copyWith(

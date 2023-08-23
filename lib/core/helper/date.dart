@@ -27,3 +27,6 @@ String formatTime(DateTime dateTime) {
 
 
 
+String dateFormatToYYYYMMddWithDay(DateTime inputDate) {
+  return DateFormat("dd/MM/yyyy, EEEE").format(inputDate);
+}

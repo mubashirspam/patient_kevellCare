@@ -42,6 +42,7 @@ class Datum {
     String? mobile;
     String? address;
     DateTime? dob;
+    String? name;
 
     Datum({
         this.id,
@@ -49,6 +50,7 @@ class Datum {
         this.mobile,
         this.address,
         this.dob,
+        this.name,
     });
 
     factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -57,6 +59,7 @@ class Datum {
         mobile: json["mobile"],
         address: json["Address"],
         dob: json["dob"] == null ? null : DateTime.parse(json["dob"]),
+        name: json["name"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -65,5 +68,6 @@ class Datum {
         "mobile": mobile,
         "Address": address,
         "dob": dob?.toIso8601String(),
+        "name": name,
     };
 }

@@ -9,4 +9,8 @@ class ProfileEvent with _$ProfileEvent {
     required String address,
     required String mobileNumber,
   }) = _UpdateProfile;
+
+      const factory ProfileEvent.pickDate({
+    required DateTime date,
+  }) = _PickDate;
 }

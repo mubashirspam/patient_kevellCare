@@ -5,12 +5,12 @@ class ApiEndPoints {
 
   static const String register = "$baseUrl/register/api/patientRegister";
 
-    static const String otp = "$baseUrl/register/api/VerifyPhoneOtp";
+  static const String otp = "$baseUrl/register/api/VerifyPhoneOtp";
 
-  static const String getprofile =
-      "$baseUrl/register/api/GetPatientinfoBy";
+  static const String getprofile = "$baseUrl/register/api/GetPatientinfoBy";
 
-  static const String updateProfile = "$baseUrl/register/api/patientprofileUpdate";
+  static const String updateProfile =
+      "$baseUrl/register/api/patientprofileUpdate";
 
   static const String homeStatus = "$baseUrl/register/api/doctorcountlist";
 
@@ -29,18 +29,20 @@ class ApiEndPoints {
   static const String getPrescriptionSettings =
       "$baseUrl/users/api/getdprescriptiontable";
 
-
   static const String getHomeAvailableDoctor =
       "$baseUrl/doctor/api/getalldoctorSchedule";
 
   static const String createAppoinments =
       "$baseUrl/appointment/api/BookAppointment";
 
-
-  static const String  fetchAppoinment =
+  static const String fetchAppoinment =
       "$baseUrl/appointment/api/upcomingpasthistorypatient";
 
-     
+  static const String patientreportgeneralinfo =
+      "$baseUrl/doctor/api/patientreportgeneralinfo";
 
-      
+  static const String patientreport =
+      "$baseUrl/doctor/api/ViewPatientReport_new";
+
+        // static const String endAppoinment = "$baseUrl/doctor/api/Finishtheappoinment";
 }

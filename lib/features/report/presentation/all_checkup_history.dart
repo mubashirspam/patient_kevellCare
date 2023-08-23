@@ -1,20 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/report/data/model/report_model.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../../configure/assets_manage/icons.dart';
+import '../../../core/helper/date.dart';
 import '../../../pages/report/presentation/report_scree.dart';
 import '../../widgets/calender/calnder.dart';
+import '../../widgets/error_widget.dart';
 import '../../widgets/input_field/input_field_widget.dart';
+import '../../widgets/loading_widget.dart';
+import 'bloc/report_bloc.dart';
 
 class AllCheckupHistory extends StatelessWidget {
   const AllCheckupHistory({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-          childCount: 1, (context, index) => const ReportItem()),
+    return BlocBuilder<ReportBloc, ReportState>(
+      builder: (context, state) {
+        if (state.isReportDataLoading) {
+          return MultiSliver(children: const [
+            Center(
+              child: LoadingWIdget(),
+            ),
+          ]);
+        }
+
+        if (state.hasReportData) {
+          if (state.reportData!.data!.isEmpty) {
+            return MultiSliver(
+              children: [
+                Container(
+                  height: 200,
+                  width: 200,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(
+                              "https://static.vecteezy.com/system/resources/thumbnails/005/006/031/small/no-result-data-document-or-file-not-found-concept-illustration-flat-design-eps10-modern-graphic-element-for-landing-page-empty-state-ui-infographic-icon-etc-vector.jpg"))),
+                  child: const Text(
+                    "No Appoiment Found",
+                  ),
+                )
+              ],
+            );
+          } else {
+            return SliverList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: state.reportData!.data!.length,
+                (context, index) => ReportItem(
+                  data: state.reportData!.data![index],
+                ),
+              ),
+            );
+          }
+        }
+
+        return MultiSliver(children: const [Center(child: AppErrorWidget())]);
+      },
     );
   }
 }
@@ -131,7 +176,11 @@ class AllCheckupReportHeader extends StatelessWidget {
 }
 
 class ReportItem extends StatelessWidget {
-  const ReportItem({super.key});
+  final Datum data;
+  const ReportItem({
+    super.key,
+    required this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -140,20 +189,24 @@ class ReportItem extends StatelessWidget {
       elevation: 3,
       color: context.theme.secondary,
       child: ListTile(
-        onTap: () => Navigator.of(context).pushNamed(ReportScreen.routeName),
+        onTap: () => Navigator.of(context).pushNamed(
+          ReportScreen.routeName,
+          arguments: data,
+        ),
         contentPadding:
             const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         title: Text.rich(
           TextSpan(
             children: [
               TextSpan(
-                text: "02/04/2022, Sartuday",
+                text: dateFormatToYYYYMMddWithDay(data.appointmentdate!),
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: context.theme.textPrimary,
                     ),
               ),
               TextSpan(
-                text: "  02:00 pm - 04:00pm",
+                text:
+                    "   ${extractTime(data.appointmentstarttime!)} - ${extractTime(data.appointmentendtime!)}",
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ],

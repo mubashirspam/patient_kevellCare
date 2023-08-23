@@ -10,7 +10,6 @@ ThemeData lightTheme() {
     colorScheme: const ColorScheme.light(
       background: MainConfigColorsLightTheme.background,
     ),
-
     scaffoldBackgroundColor: MainConfigColorsLightTheme.background,
     extensions: [CustomThemeExtension.lightMode],
     appBarTheme: const AppBarTheme(
@@ -45,7 +44,7 @@ ThemeData lightTheme() {
         shadowColor: Colors.transparent,
       ),
     ),
-     textTheme: const TextTheme(
+    textTheme: const TextTheme(
       displayLarge: TextStyle(
         fontSize: 16,
         color: MainConfigColorsLightTheme.textPrimary,
@@ -55,7 +54,6 @@ ThemeData lightTheme() {
         color: MainConfigColorsLightTheme.textPrimary,
         fontWeight: FontWeight.bold,
       ),
-      
       headlineMedium: TextStyle(
         fontSize: 18,
         color: MainConfigColorsLightTheme.textPrimary,
@@ -66,7 +64,6 @@ ThemeData lightTheme() {
         color: MainConfigColorsLightTheme.textPrimary,
         fontWeight: FontWeight.bold,
       ),
-      
       titleLarge: TextStyle(
           fontSize: 14,
           color: MainConfigColorsLightTheme.textSecondary,
@@ -80,8 +77,47 @@ ThemeData lightTheme() {
           color: MainConfigColorsLightTheme.textSecondary,
           fontWeight: FontWeight.normal),
     ),
+    datePickerTheme: DatePickerThemeData(
+      backgroundColor: MainConfigColorsLightTheme.secondary,
+      dayForegroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+        // If the button is pressed, return green, otherwise blue
+        if (states.contains(MaterialState.selected)) {
+          return Colors.white;
+        }
+        if (states.contains(MaterialState.disabled)) {
+          return MainConfigColorsLightTheme.textGrey.withOpacity(0.3);
+        }
+        return MainConfigColorsLightTheme.textPrimary;
+      }),
+      dayBackgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
+        if (states.contains(MaterialState.selected)) {
+          return MainConfigColorsLightTheme.primary;
+        }
+        return Colors.white;
+      }),
+      surfaceTintColor: Colors.red,
+      weekdayStyle: const TextStyle(
+        fontSize: 14,
+        color: Colors.black,
+      ),
+      todayForegroundColor: const MaterialStatePropertyAll<Color>(
+          MainConfigColorsLightTheme.primary),
+      todayBackgroundColor: const MaterialStatePropertyAll<Color>(Colors.white),
+      todayBorder: const BorderSide(color: MainConfigColorsLightTheme.primary),
+      dayStyle: const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+      ),
+      headerForegroundColor: Colors.black,
+      yearStyle: const TextStyle(
+          fontWeight: FontWeight.normal,
+          color: MainConfigColorsLightTheme.textPrimary),
+      headerHelpStyle: const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+      ),
+      headerHeadlineStyle: const TextStyle(
+          color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+    ),
   );
 }
-
-
-
