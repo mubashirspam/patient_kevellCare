@@ -2,31 +2,29 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kevell_care/core/failiar/failiur_model.dart';
 
 import '../../../../configure/api/endpoints.dart';
-import '../../../../configure/value/constant.dart';
-import '../../../../configure/value/secure_storage.dart';
-import '../../../../core/failiar/failiur_model.dart';
 import '../../../../core/failiar/main_failures.dart';
-import '../../domain/repositories/get_appoinments_repository.dart';
-import '../models/appoiments_model.dart';
+import '../../domain/repositories/delete_appoinments_repository.dart';
+import '../models/delete_appoinments_model.dart';
 
-@LazySingleton(as: GetAppoinmentsRepository)
-class GetAppoinmentsRepoImpliment implements GetAppoinmentsRepository {
+@LazySingleton(as: DeleteAppoinmentsRepository)
+class DeleteAppoinmentsRepoImpliment implements DeleteAppoinmentsRepository {
   @override
-  Future<Either<MainFailure, AppoimentModel>> getAppoinments() async {
+  Future<Either<MainFailure, DeleteAppoinmentsModel>> deleteAppoinments({
+    required String id,
+  }) async {
     try {
-      final id = await getTokenFromSS(drIdsecureStoreKey);
-
-      final response = await Dio(BaseOptions()).post(
-        ApiEndPoints.fetchAppoinment,
-        data: {'patientId': int.parse(id.toString())},
+      final response = await Dio(BaseOptions()).delete(
+        ApiEndPoints.deleteAppoinments,
+        data: {"id": id},
       );
 
       switch (response.statusCode) {
         case 200:
         case 201:
-          final result = AppoimentModel.fromJson(response.data);
+          final result = DeleteAppoinmentsModel.fromJson(response.data);
           log(result.toString());
           return Right(result);
         case 400:
@@ -51,7 +49,7 @@ class GetAppoinmentsRepoImpliment implements GetAppoinmentsRepository {
           );
         }
       }
-       return const Left(MainFailure.clientFailure(message: "Client failure"));
+      return const Left(MainFailure.clientFailure(message: "Client failure"));
     }
   }
 }

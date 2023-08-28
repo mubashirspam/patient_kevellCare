@@ -33,29 +33,36 @@ class OtpRepoImpliment implements OtpRepository {
         data: {"otp": otp, "mobile": number},
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final result = OtpModel.fromJson(response.data);
-        log(result.toString());
-
-        return Right(result);
-      } else if (response.statusCode == 400 || response.statusCode == 401) {
-        final result = FailuerModel.fromJson(response.data);
-        return Left(
-            MainFailure.unauthorized(message: result.message ?? "Error"));
-      } else {
-        return const Left(MainFailure.serverFailure());
+      switch (response.statusCode) {
+        case 200:
+        case 201:
+          final result = OtpModel.fromJson(response.data);
+          log(result.toString());
+          return Right(result);
+        case 400:
+        case 401:
+          final result = FailureModel.fromJson(response.data);
+          return Left(
+            MainFailure.unauthorized(message: result.message ?? "Unauthorized"),
+          );
+        default:
+          final result = FailureModel.fromJson(response.data);
+          return Left(
+            MainFailure.unknown(message: result.message ?? "Unknown error"),
+          );
       }
     } catch (e) {
       if (e is DioException) {
         log(e.toString());
         if (e.response?.statusCode == 400 || e.response?.statusCode == 401) {
           log(e.toString());
-          final result = FailuerModel.fromJson(e.response!.data);
+          final result = FailureModel.fromJson(e.response!.data);
           return Left(
-              MainFailure.unauthorized(message: result.message ?? "Error"));
+            MainFailure.unauthorized(message: result.message ?? "Unauthorized"),
+          );
         }
       }
-      return const Left(MainFailure.clientFailure());
+      return const Left(MainFailure.clientFailure(message: "Client failure"));
     }
   }
 }

@@ -31,7 +31,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
         response.fold(
             (failure) => {
                   failure.maybeWhen(
-                    clientFailure: () {
+                    clientFailure: (s) {
                       log('clientFailure');
                       return emit(state.copyWith(
                         isLoading: false,
@@ -47,7 +47,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
                         isError: true,
                       ));
                     },
-                    serverFailure: () {
+                    serverFailure: (s) {
                       log('emit serverFailure');
                       return emit(state.copyWith(
                         isLoading: false,

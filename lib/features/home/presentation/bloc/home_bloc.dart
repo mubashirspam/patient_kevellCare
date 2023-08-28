@@ -40,7 +40,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       response.fold(
           (failure) => {
                 failure.maybeWhen(
-                  clientFailure: () {
+                  clientFailure: (s) {
                     log('clientFailure');
                     return emit(state.copyWith(
                       unauthorized: false,
@@ -58,7 +58,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                       failureOrSuccessOption: some(Left(failure)),
                     ));
                   },
-                  serverFailure: () {
+                  serverFailure: (s) {
                     log('emit serverFailure');
                     return emit(state.copyWith(
                       isAvailableDoctorLoading: false,

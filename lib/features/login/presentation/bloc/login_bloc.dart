@@ -32,7 +32,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         response.fold(
             (failure) => {
                   failure.maybeWhen(
-                    clientFailure: () {
+                    clientFailure: (s) {
                       log('clientFailure');
                       return emit(state.copyWith(
                         isLoading: false,
@@ -48,7 +48,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
                         isError: true,
                       ));
                     },
-                    serverFailure: () {
+                    serverFailure: (s) {
                       log('emit serverFailure');
                       return emit(state.copyWith(
                         isLoading: false,

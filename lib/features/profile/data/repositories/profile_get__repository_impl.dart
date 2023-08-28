@@ -15,52 +15,45 @@ import '../models/profile_model.dart';
 
 @LazySingleton(as: GetProfileRepository)
 class GetProfileRepoImpliment implements GetProfileRepository {
-  // final NetworkInfo networkInfo;
-
-  // GetProfileRepoImpliment({
-  //   required this.networkInfo,
-  // });
   @override
   Future<Either<MainFailure, ProfileModel>> getProfile() async {
-    // if (await networkInfo.isConnected) {
-
     try {
-      // final token = await getTokenFromSS(secureStoreKey);
+      final token = await getTokenFromSS(secureStoreKey);
       final mail = await getTokenFromSS(mailsecureStoreKey);
 
-      // final headers = {
-      //   'Authorization': 'Bearer $token',
-      //   'Content-Type': 'application/json',
-
-        
-      // };
+      final headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
 
       log(mail.toString());
 
       final response = await Dio(BaseOptions()).get(
         ApiEndPoints.getprofile,
-        // options: Options(headers: headers),
+        options: Options(headers: headers),
         data: {'Username': mail},
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final result = ProfileModel.fromJson(response.data);
-        log(result.toString());
-
-        return Right(result);
-      } else if (response.statusCode == 400 || response.statusCode == 401) {
-        final result = FailuerModel.fromJson(response.data);
-        return Left(
-            MainFailure.unauthorized(message: result.message ?? "Error"));
-      } else {
-        return const Left(MainFailure.serverFailure());
+      switch (response.statusCode) {
+        case 200:
+        case 201:
+          final result = ProfileModel.fromJson(response.data);
+          log(result.toString());
+          return Right(result);
+        case 400:
+        case 401:
+          final result = FailureModel.fromJson(response.data);
+          return Left(
+            MainFailure.unauthorized(message: result.message ?? "Unauthorized"),
+          );
+        default:
+          final result = FailureModel.fromJson(response.data);
+          return Left(
+            MainFailure.unknown(message: result.message ?? "Unknown error"),
+          );
       }
     } catch (e) {
-      return const Left(MainFailure.clientFailure());
+      return const Left(MainFailure.clientFailure(message: "Client failure"));
     }
-
-    // } else {
-    //   return const Left(MainFailure.clientFailure());
-    // }
   }
 }

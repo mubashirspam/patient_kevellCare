@@ -13,11 +13,6 @@ import '../models/profile_model.dart';
 
 @LazySingleton(as: UpdateProfileRepository)
 class UpdateProfileRepoImpliment implements UpdateProfileRepository {
-  // final NetworkInfo networkInfo;
-
-  // UpdateProfileRepoImpliment({
-  //   required this.networkInfo,
-  // });
   @override
   Future<Either<MainFailure, ProfileModel>> updateProfile({
     required String name,
@@ -25,19 +20,18 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
     required String address,
     required String mobileNumber,
   }) async {
-    // if (await networkInfo.isConnected) {
     try {
-      // final token = await getTokenFromSS(secureStoreKey);
+      final token = await getTokenFromSS(secureStoreKey);
       final id = await getTokenFromSS(drIdsecureStoreKey);
 
-      // final headers = {
-      //   'Authorization': 'Bearer $token',
-      //   'Content-Type': 'application/json',
-      // };
+      final headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
 
       final response = await Dio(BaseOptions()).put(
         ApiEndPoints.updateProfile,
-        // options: Options(headers: headers),
+        options: Options(headers: headers),
         data: {
           "_id": int.parse("$id"),
           "name": name,
@@ -47,32 +41,36 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
         },
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final result = ProfileModel.fromJson(response.data);
-        log(result.toString());
-
-        return Right(result);
-      } else if (response.statusCode == 400 || response.statusCode == 401) {
-        final result = FailuerModel.fromJson(response.data);
-        return Left(
-            MainFailure.unauthorized(message: result.message ?? "Error"));
-      } else {
-        return const Left(MainFailure.serverFailure());
+      switch (response.statusCode) {
+        case 200:
+        case 201:
+          final result = ProfileModel.fromJson(response.data);
+          log(result.toString());
+          return Right(result);
+        case 400:
+        case 401:
+          final result = FailureModel.fromJson(response.data);
+          return Left(
+            MainFailure.unauthorized(message: result.message ?? "Unauthorized"),
+          );
+        default:
+          final result = FailureModel.fromJson(response.data);
+          return Left(
+            MainFailure.unknown(message: result.message ?? "Unknown error"),
+          );
       }
     } catch (e) {
       if (e is DioException) {
         log(e.toString());
         if (e.response?.statusCode == 400) {
           log(e.toString());
-          final result = FailuerModel.fromJson(e.response!.data);
+          final result = FailureModel.fromJson(e.response!.data);
           return Left(
-              MainFailure.unauthorized(message: result.message ?? "Error"));
+            MainFailure.unauthorized(message: result.message ?? "Unauthorized"),
+          );
         }
       }
-      return const Left(MainFailure.clientFailure());
+      return const Left(MainFailure.clientFailure(message: "Client failure"));
     }
-    // } else {
-    //   return const Left(MainFailure.clientFailure());
-    // }
   }
 }

@@ -32,11 +32,22 @@ class ApiEndPoints {
   static const String getHomeAvailableDoctor =
       "$baseUrl/doctor/api/getalldoctorSchedule";
 
+// appoinment...
+
   static const String createAppoinments =
       "$baseUrl/appointment/api/BookAppointment";
 
   static const String fetchAppoinment =
       "$baseUrl/appointment/api/upcomingpasthistorypatient";
+
+
+     static const String updateAppoinment =
+      "$baseUrl/appointment/api/BookAppointment";
+
+      static const String deleteAppoinments =
+      "$baseUrl/appointment/api/BookAppointment";
+
+      
 
   static const String patientreportgeneralinfo =
       "$baseUrl/doctor/api/patientreportgeneralinfo";

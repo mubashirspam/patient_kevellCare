@@ -1,42 +1,42 @@
 import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+
 import 'package:kevell_care/configure/api/endpoints.dart';
+import 'package:kevell_care/core/failiar/main_failures.dart';
 
 import '../../../../core/failiar/failiur_model.dart';
-import '../../../../core/failiar/main_failures.dart';
-import '../../domain/entities/fetch_report_payload.dart';
-import '../../domain/repositories/fetch_report_repository.dart';
-import '../model/report_model.dart';
+import '../../domain/entities/update_appoinments.dart';
+import '../../domain/repositories/update_appoinments_repository.dart';
+import '../models/update_appoinments_model.dart';
 
-@LazySingleton(as: FetchReportRepository)
-class FetchReportRepoImpliment implements FetchReportRepository {
+@LazySingleton(as: UpdateAppoinmentsRepository)
+class UpdateAppoinmentRepoImpliment implements UpdateAppoinmentsRepository {
   @override
-  Future<Either<MainFailure, ReportModel>> fetchReport({
-    required FetchReportPayload fetchReportPayload,
+  Future<Either<MainFailure, UpdateAppoinmentsModel>> updateAppoinment({
+    required UpdateAppoinmentsPayload appoinmentsPayload,
   }) async {
     try {
-      final response = await Dio(BaseOptions()).post(
-        ApiEndPoints.patientreport,
-        data: fetchReportPayload.toJson(),
+      final response = await Dio(BaseOptions()).put(
+        ApiEndPoints.updateAppoinment,
+        data: appoinmentsPayload.toJson(),
       );
 
       switch (response.statusCode) {
         case 200:
         case 201:
-          final result = ReportModel.fromJson(response.data);
+          final result = UpdateAppoinmentsModel.fromJson(response.data);
           log(result.toString());
           return Right(result);
         case 400:
         case 401:
-          final result = FailureModel.fromJson(response.data);
+          final result = UpdateAppoinmentsModel.fromJson(response.data);
           return Left(
-            MainFailure.unauthorized(message: result.message ?? "Error"),
+            MainFailure.unauthorized(message: result.message ?? "Unauthorized"),
           );
         default:
-          final result = FailureModel.fromJson(response.data);
+          final result = UpdateAppoinmentsModel.fromJson(response.data);
           return Left(
             MainFailure.unknown(message: result.message ?? "Unknown error"),
           );
@@ -44,7 +44,7 @@ class FetchReportRepoImpliment implements FetchReportRepository {
     } catch (e) {
       if (e is DioException) {
         log(e.toString());
-        if (e.response?.statusCode == 400 || e.response?.statusCode == 401) {
+        if (e.response?.statusCode == 400) {
           log(e.toString());
           final result = FailureModel.fromJson(e.response!.data);
           return Left(
