@@ -1,9 +1,15 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/configure/color/maian_color.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
+import '../../../../core/helper/alert.dart';
 import '../../../../core/helper/date.dart';
+import '../../../../pages/appoiment/presenation/book_new_appoiment_screen.dart';
 import '../../data/models/appoiments_model.dart';
+import '../bloc/appoinmets_bloc.dart';
 
 class AppoimentCard extends StatelessWidget {
   final bool isPast;
@@ -68,11 +74,54 @@ class AppoimentCard extends StatelessWidget {
               ),
             ),
           ),
-          isPast
-              ? const SizedBox()
-              : Icon(Icons.edit_square, color: context.theme.primary),
-          const SizedBox(width: 15),
-          const Icon(Icons.delete, color: MainConfigColorsDarkTheme.danger),
+          // isPast
+          //     ? const SizedBox()
+          //     : InkWell(
+                
+              
+          //          onTap: () => Navigator.of(context).pushNamed(
+          //             BookNewAppointmentScreen.routeName,
+          //             arguments: index),
+                
+          //       child: Icon(Icons.edit_square, color: context.theme.primary)),
+          // const SizedBox(width: 15),
+          InkWell(
+              onTap: () {
+                log(data.id.toString());
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return BlocBuilder<AppoinmetsBloc, AppoinmetsState>(
+                      builder: (context, state) {
+                        log(state.isDeleted.toString());
+                        return MyCustomAlertDialog(
+                          successMessage:
+                              "Successfully deleted your appoinment.",
+                          questionMesage:
+                              'Are you sure you want to delete the appoinment?',
+                          okPressed: () {
+                            context.read<AppoinmetsBloc>().add(
+                                  const AppoinmetsEvent.getAppoinments(),
+                                );
+                            Navigator.of(context).pop();
+                          },
+                          onPress: () {
+                            context.read<AppoinmetsBloc>().add(
+                                  AppoinmetsEvent.deleteAppoinments(
+                                    id: data.id!,
+                                  ),
+                                );
+                          },
+                          isLoading: state.isDeleteLoading,
+                          isCompleted: state.isDeleted,
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+              child: const Icon(Icons.delete,
+                  color: MainConfigColorsDarkTheme.danger)),
         ],
       ),
     );

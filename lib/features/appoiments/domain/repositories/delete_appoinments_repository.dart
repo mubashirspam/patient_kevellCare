@@ -5,6 +5,6 @@ import '../../data/models/delete_appoinments_model.dart';
 
 abstract class DeleteAppoinmentsRepository {
   Future<Either<MainFailure, DeleteAppoinmentsModel>> deleteAppoinments({
-    required String id,
+    required int id,
   });
 }

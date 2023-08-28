@@ -13,12 +13,12 @@ import '../models/delete_appoinments_model.dart';
 class DeleteAppoinmentsRepoImpliment implements DeleteAppoinmentsRepository {
   @override
   Future<Either<MainFailure, DeleteAppoinmentsModel>> deleteAppoinments({
-    required String id,
+    required int id,
   }) async {
     try {
       final response = await Dio(BaseOptions()).delete(
         ApiEndPoints.deleteAppoinments,
-        data: {"id": id},
+        data: {"_id": id},
       );
 
       switch (response.statusCode) {

@@ -42,10 +42,10 @@ class ApiEndPoints {
 
 
      static const String updateAppoinment =
-      "$baseUrl/appointment/api/BookAppointment";
+      "$baseUrl/appointment/api/updateAppoinment";
 
       static const String deleteAppoinments =
-      "$baseUrl/appointment/api/BookAppointment";
+      "$baseUrl/appointment/api/deleteAppoinment";
 
       
 

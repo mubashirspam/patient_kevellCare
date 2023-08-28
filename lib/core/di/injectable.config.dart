@@ -14,11 +14,11 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import '../../features/appoiments/data/repositories/create_appoinments_repsitory_impl.dart'
     as _i4;
-import '../../features/appoiments/data/repositories/delete_schedule_repository_impl.dart'
+import '../../features/appoiments/data/repositories/delete_appoiment_repository_impl.dart'
     as _i6;
 import '../../features/appoiments/data/repositories/get_appoinments_repository_impl.dart'
     as _i12;
-import '../../features/appoiments/data/repositories/update_schedule_repository_impl.dart'
+import '../../features/appoiments/data/repositories/update_appoiment_repository_impl.dart'
     as _i26;
 import '../../features/appoiments/domain/repositories/create_appoinments_repository.dart'
     as _i3;
@@ -107,6 +107,8 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i29.AppoinmetsBloc>(() => _i29.AppoinmetsBloc(
           gh<_i11.GetAppoinmentsRepository>(),
           gh<_i3.CreateAppoinmentsRepository>(),
+          gh<_i5.DeleteAppoinmentsRepository>(),
+          gh<_i25.UpdateAppoinmentsRepository>(),
         ));
     gh.factory<_i30.LoginBloc>(() => _i30.LoginBloc(
           gh<_i18.LoginRepository>(),

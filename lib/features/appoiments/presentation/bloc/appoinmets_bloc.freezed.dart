@@ -21,18 +21,27 @@ mixin _$AppoinmetsEvent {
     required TResult Function() getAppoinments,
     required TResult Function(AppoinmentsPayload appoinmentsPayload)
         createAppoinments,
+    required TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)
+        updateAppoinments,
+    required TResult Function(int id) deleteAppoinments,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAppoinments,
     TResult? Function(AppoinmentsPayload appoinmentsPayload)? createAppoinments,
+    TResult? Function(UpdateAppoinmentsPayload appoinmetsPayload)?
+        updateAppoinments,
+    TResult? Function(int id)? deleteAppoinments,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAppoinments,
     TResult Function(AppoinmentsPayload appoinmentsPayload)? createAppoinments,
+    TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)?
+        updateAppoinments,
+    TResult Function(int id)? deleteAppoinments,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,18 +49,24 @@ mixin _$AppoinmetsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAppoinments value) getAppoinments,
     required TResult Function(_CreateAppoinments value) createAppoinments,
+    required TResult Function(_UpdateAppoinmets value) updateAppoinments,
+    required TResult Function(_DeleteAppoinmets value) deleteAppoinments,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAppoinments value)? getAppoinments,
     TResult? Function(_CreateAppoinments value)? createAppoinments,
+    TResult? Function(_UpdateAppoinmets value)? updateAppoinments,
+    TResult? Function(_DeleteAppoinmets value)? deleteAppoinments,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAppoinments value)? getAppoinments,
     TResult Function(_CreateAppoinments value)? createAppoinments,
+    TResult Function(_UpdateAppoinmets value)? updateAppoinments,
+    TResult Function(_DeleteAppoinmets value)? deleteAppoinments,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,6 +131,9 @@ class _$_GetAppoinments implements _GetAppoinments {
     required TResult Function() getAppoinments,
     required TResult Function(AppoinmentsPayload appoinmentsPayload)
         createAppoinments,
+    required TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)
+        updateAppoinments,
+    required TResult Function(int id) deleteAppoinments,
   }) {
     return getAppoinments();
   }
@@ -125,6 +143,9 @@ class _$_GetAppoinments implements _GetAppoinments {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAppoinments,
     TResult? Function(AppoinmentsPayload appoinmentsPayload)? createAppoinments,
+    TResult? Function(UpdateAppoinmentsPayload appoinmetsPayload)?
+        updateAppoinments,
+    TResult? Function(int id)? deleteAppoinments,
   }) {
     return getAppoinments?.call();
   }
@@ -134,6 +155,9 @@ class _$_GetAppoinments implements _GetAppoinments {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAppoinments,
     TResult Function(AppoinmentsPayload appoinmentsPayload)? createAppoinments,
+    TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)?
+        updateAppoinments,
+    TResult Function(int id)? deleteAppoinments,
     required TResult orElse(),
   }) {
     if (getAppoinments != null) {
@@ -147,6 +171,8 @@ class _$_GetAppoinments implements _GetAppoinments {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAppoinments value) getAppoinments,
     required TResult Function(_CreateAppoinments value) createAppoinments,
+    required TResult Function(_UpdateAppoinmets value) updateAppoinments,
+    required TResult Function(_DeleteAppoinmets value) deleteAppoinments,
   }) {
     return getAppoinments(this);
   }
@@ -156,6 +182,8 @@ class _$_GetAppoinments implements _GetAppoinments {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAppoinments value)? getAppoinments,
     TResult? Function(_CreateAppoinments value)? createAppoinments,
+    TResult? Function(_UpdateAppoinmets value)? updateAppoinments,
+    TResult? Function(_DeleteAppoinmets value)? deleteAppoinments,
   }) {
     return getAppoinments?.call(this);
   }
@@ -165,6 +193,8 @@ class _$_GetAppoinments implements _GetAppoinments {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAppoinments value)? getAppoinments,
     TResult Function(_CreateAppoinments value)? createAppoinments,
+    TResult Function(_UpdateAppoinmets value)? updateAppoinments,
+    TResult Function(_DeleteAppoinmets value)? deleteAppoinments,
     required TResult orElse(),
   }) {
     if (getAppoinments != null) {
@@ -247,6 +277,9 @@ class _$_CreateAppoinments implements _CreateAppoinments {
     required TResult Function() getAppoinments,
     required TResult Function(AppoinmentsPayload appoinmentsPayload)
         createAppoinments,
+    required TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)
+        updateAppoinments,
+    required TResult Function(int id) deleteAppoinments,
   }) {
     return createAppoinments(appoinmentsPayload);
   }
@@ -256,6 +289,9 @@ class _$_CreateAppoinments implements _CreateAppoinments {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getAppoinments,
     TResult? Function(AppoinmentsPayload appoinmentsPayload)? createAppoinments,
+    TResult? Function(UpdateAppoinmentsPayload appoinmetsPayload)?
+        updateAppoinments,
+    TResult? Function(int id)? deleteAppoinments,
   }) {
     return createAppoinments?.call(appoinmentsPayload);
   }
@@ -265,6 +301,9 @@ class _$_CreateAppoinments implements _CreateAppoinments {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getAppoinments,
     TResult Function(AppoinmentsPayload appoinmentsPayload)? createAppoinments,
+    TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)?
+        updateAppoinments,
+    TResult Function(int id)? deleteAppoinments,
     required TResult orElse(),
   }) {
     if (createAppoinments != null) {
@@ -278,6 +317,8 @@ class _$_CreateAppoinments implements _CreateAppoinments {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetAppoinments value) getAppoinments,
     required TResult Function(_CreateAppoinments value) createAppoinments,
+    required TResult Function(_UpdateAppoinmets value) updateAppoinments,
+    required TResult Function(_DeleteAppoinmets value) deleteAppoinments,
   }) {
     return createAppoinments(this);
   }
@@ -287,6 +328,8 @@ class _$_CreateAppoinments implements _CreateAppoinments {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetAppoinments value)? getAppoinments,
     TResult? Function(_CreateAppoinments value)? createAppoinments,
+    TResult? Function(_UpdateAppoinmets value)? updateAppoinments,
+    TResult? Function(_DeleteAppoinmets value)? deleteAppoinments,
   }) {
     return createAppoinments?.call(this);
   }
@@ -296,6 +339,8 @@ class _$_CreateAppoinments implements _CreateAppoinments {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetAppoinments value)? getAppoinments,
     TResult Function(_CreateAppoinments value)? createAppoinments,
+    TResult Function(_UpdateAppoinmets value)? updateAppoinments,
+    TResult Function(_DeleteAppoinmets value)? deleteAppoinments,
     required TResult orElse(),
   }) {
     if (createAppoinments != null) {
@@ -317,6 +362,308 @@ abstract class _CreateAppoinments implements AppoinmetsEvent {
 }
 
 /// @nodoc
+abstract class _$$_UpdateAppoinmetsCopyWith<$Res> {
+  factory _$$_UpdateAppoinmetsCopyWith(
+          _$_UpdateAppoinmets value, $Res Function(_$_UpdateAppoinmets) then) =
+      __$$_UpdateAppoinmetsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({UpdateAppoinmentsPayload appoinmetsPayload});
+}
+
+/// @nodoc
+class __$$_UpdateAppoinmetsCopyWithImpl<$Res>
+    extends _$AppoinmetsEventCopyWithImpl<$Res, _$_UpdateAppoinmets>
+    implements _$$_UpdateAppoinmetsCopyWith<$Res> {
+  __$$_UpdateAppoinmetsCopyWithImpl(
+      _$_UpdateAppoinmets _value, $Res Function(_$_UpdateAppoinmets) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? appoinmetsPayload = null,
+  }) {
+    return _then(_$_UpdateAppoinmets(
+      appoinmetsPayload: null == appoinmetsPayload
+          ? _value.appoinmetsPayload
+          : appoinmetsPayload // ignore: cast_nullable_to_non_nullable
+              as UpdateAppoinmentsPayload,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateAppoinmets implements _UpdateAppoinmets {
+  const _$_UpdateAppoinmets({required this.appoinmetsPayload});
+
+  @override
+  final UpdateAppoinmentsPayload appoinmetsPayload;
+
+  @override
+  String toString() {
+    return 'AppoinmetsEvent.updateAppoinments(appoinmetsPayload: $appoinmetsPayload)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UpdateAppoinmets &&
+            (identical(other.appoinmetsPayload, appoinmetsPayload) ||
+                other.appoinmetsPayload == appoinmetsPayload));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, appoinmetsPayload);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UpdateAppoinmetsCopyWith<_$_UpdateAppoinmets> get copyWith =>
+      __$$_UpdateAppoinmetsCopyWithImpl<_$_UpdateAppoinmets>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAppoinments,
+    required TResult Function(AppoinmentsPayload appoinmentsPayload)
+        createAppoinments,
+    required TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)
+        updateAppoinments,
+    required TResult Function(int id) deleteAppoinments,
+  }) {
+    return updateAppoinments(appoinmetsPayload);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAppoinments,
+    TResult? Function(AppoinmentsPayload appoinmentsPayload)? createAppoinments,
+    TResult? Function(UpdateAppoinmentsPayload appoinmetsPayload)?
+        updateAppoinments,
+    TResult? Function(int id)? deleteAppoinments,
+  }) {
+    return updateAppoinments?.call(appoinmetsPayload);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAppoinments,
+    TResult Function(AppoinmentsPayload appoinmentsPayload)? createAppoinments,
+    TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)?
+        updateAppoinments,
+    TResult Function(int id)? deleteAppoinments,
+    required TResult orElse(),
+  }) {
+    if (updateAppoinments != null) {
+      return updateAppoinments(appoinmetsPayload);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAppoinments value) getAppoinments,
+    required TResult Function(_CreateAppoinments value) createAppoinments,
+    required TResult Function(_UpdateAppoinmets value) updateAppoinments,
+    required TResult Function(_DeleteAppoinmets value) deleteAppoinments,
+  }) {
+    return updateAppoinments(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAppoinments value)? getAppoinments,
+    TResult? Function(_CreateAppoinments value)? createAppoinments,
+    TResult? Function(_UpdateAppoinmets value)? updateAppoinments,
+    TResult? Function(_DeleteAppoinmets value)? deleteAppoinments,
+  }) {
+    return updateAppoinments?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAppoinments value)? getAppoinments,
+    TResult Function(_CreateAppoinments value)? createAppoinments,
+    TResult Function(_UpdateAppoinmets value)? updateAppoinments,
+    TResult Function(_DeleteAppoinmets value)? deleteAppoinments,
+    required TResult orElse(),
+  }) {
+    if (updateAppoinments != null) {
+      return updateAppoinments(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateAppoinmets implements AppoinmetsEvent {
+  const factory _UpdateAppoinmets(
+          {required final UpdateAppoinmentsPayload appoinmetsPayload}) =
+      _$_UpdateAppoinmets;
+
+  UpdateAppoinmentsPayload get appoinmetsPayload;
+  @JsonKey(ignore: true)
+  _$$_UpdateAppoinmetsCopyWith<_$_UpdateAppoinmets> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_DeleteAppoinmetsCopyWith<$Res> {
+  factory _$$_DeleteAppoinmetsCopyWith(
+          _$_DeleteAppoinmets value, $Res Function(_$_DeleteAppoinmets) then) =
+      __$$_DeleteAppoinmetsCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int id});
+}
+
+/// @nodoc
+class __$$_DeleteAppoinmetsCopyWithImpl<$Res>
+    extends _$AppoinmetsEventCopyWithImpl<$Res, _$_DeleteAppoinmets>
+    implements _$$_DeleteAppoinmetsCopyWith<$Res> {
+  __$$_DeleteAppoinmetsCopyWithImpl(
+      _$_DeleteAppoinmets _value, $Res Function(_$_DeleteAppoinmets) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$_DeleteAppoinmets(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DeleteAppoinmets implements _DeleteAppoinmets {
+  const _$_DeleteAppoinmets({required this.id});
+
+  @override
+  final int id;
+
+  @override
+  String toString() {
+    return 'AppoinmetsEvent.deleteAppoinments(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_DeleteAppoinmets &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_DeleteAppoinmetsCopyWith<_$_DeleteAppoinmets> get copyWith =>
+      __$$_DeleteAppoinmetsCopyWithImpl<_$_DeleteAppoinmets>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAppoinments,
+    required TResult Function(AppoinmentsPayload appoinmentsPayload)
+        createAppoinments,
+    required TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)
+        updateAppoinments,
+    required TResult Function(int id) deleteAppoinments,
+  }) {
+    return deleteAppoinments(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAppoinments,
+    TResult? Function(AppoinmentsPayload appoinmentsPayload)? createAppoinments,
+    TResult? Function(UpdateAppoinmentsPayload appoinmetsPayload)?
+        updateAppoinments,
+    TResult? Function(int id)? deleteAppoinments,
+  }) {
+    return deleteAppoinments?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAppoinments,
+    TResult Function(AppoinmentsPayload appoinmentsPayload)? createAppoinments,
+    TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)?
+        updateAppoinments,
+    TResult Function(int id)? deleteAppoinments,
+    required TResult orElse(),
+  }) {
+    if (deleteAppoinments != null) {
+      return deleteAppoinments(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAppoinments value) getAppoinments,
+    required TResult Function(_CreateAppoinments value) createAppoinments,
+    required TResult Function(_UpdateAppoinmets value) updateAppoinments,
+    required TResult Function(_DeleteAppoinmets value) deleteAppoinments,
+  }) {
+    return deleteAppoinments(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAppoinments value)? getAppoinments,
+    TResult? Function(_CreateAppoinments value)? createAppoinments,
+    TResult? Function(_UpdateAppoinmets value)? updateAppoinments,
+    TResult? Function(_DeleteAppoinmets value)? deleteAppoinments,
+  }) {
+    return deleteAppoinments?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAppoinments value)? getAppoinments,
+    TResult Function(_CreateAppoinments value)? createAppoinments,
+    TResult Function(_UpdateAppoinmets value)? updateAppoinments,
+    TResult Function(_DeleteAppoinmets value)? deleteAppoinments,
+    required TResult orElse(),
+  }) {
+    if (deleteAppoinments != null) {
+      return deleteAppoinments(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DeleteAppoinmets implements AppoinmetsEvent {
+  const factory _DeleteAppoinmets({required final int id}) =
+      _$_DeleteAppoinmets;
+
+  int get id;
+  @JsonKey(ignore: true)
+  _$$_DeleteAppoinmetsCopyWith<_$_DeleteAppoinmets> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$AppoinmetsState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get hasData => throw _privateConstructorUsedError;
@@ -324,6 +671,14 @@ mixin _$AppoinmetsState {
   bool get createData => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   AppoimentModel? get appoimentData => throw _privateConstructorUsedError;
+  bool get isUpdateLoading => throw _privateConstructorUsedError;
+  bool get isDeleteLoading => throw _privateConstructorUsedError;
+  bool get isDeleted => throw _privateConstructorUsedError;
+  bool get isUpdated => throw _privateConstructorUsedError;
+  DeleteAppoinmentsModel? get deleteResponse =>
+      throw _privateConstructorUsedError;
+  UpdateAppoinmentsModel? get updateResponse =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppoinmetsStateCopyWith<AppoinmetsState> get copyWith =>
@@ -342,7 +697,13 @@ abstract class $AppoinmetsStateCopyWith<$Res> {
       bool isCreateLoading,
       bool createData,
       bool isError,
-      AppoimentModel? appoimentData});
+      AppoimentModel? appoimentData,
+      bool isUpdateLoading,
+      bool isDeleteLoading,
+      bool isDeleted,
+      bool isUpdated,
+      DeleteAppoinmentsModel? deleteResponse,
+      UpdateAppoinmentsModel? updateResponse});
 }
 
 /// @nodoc
@@ -364,6 +725,12 @@ class _$AppoinmetsStateCopyWithImpl<$Res, $Val extends AppoinmetsState>
     Object? createData = null,
     Object? isError = null,
     Object? appoimentData = freezed,
+    Object? isUpdateLoading = null,
+    Object? isDeleteLoading = null,
+    Object? isDeleted = null,
+    Object? isUpdated = null,
+    Object? deleteResponse = freezed,
+    Object? updateResponse = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -390,6 +757,30 @@ class _$AppoinmetsStateCopyWithImpl<$Res, $Val extends AppoinmetsState>
           ? _value.appoimentData
           : appoimentData // ignore: cast_nullable_to_non_nullable
               as AppoimentModel?,
+      isUpdateLoading: null == isUpdateLoading
+          ? _value.isUpdateLoading
+          : isUpdateLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDeleteLoading: null == isDeleteLoading
+          ? _value.isDeleteLoading
+          : isDeleteLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isUpdated: null == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deleteResponse: freezed == deleteResponse
+          ? _value.deleteResponse
+          : deleteResponse // ignore: cast_nullable_to_non_nullable
+              as DeleteAppoinmentsModel?,
+      updateResponse: freezed == updateResponse
+          ? _value.updateResponse
+          : updateResponse // ignore: cast_nullable_to_non_nullable
+              as UpdateAppoinmentsModel?,
     ) as $Val);
   }
 }
@@ -408,7 +799,13 @@ abstract class _$$_AppoinmetsStateCopyWith<$Res>
       bool isCreateLoading,
       bool createData,
       bool isError,
-      AppoimentModel? appoimentData});
+      AppoimentModel? appoimentData,
+      bool isUpdateLoading,
+      bool isDeleteLoading,
+      bool isDeleted,
+      bool isUpdated,
+      DeleteAppoinmentsModel? deleteResponse,
+      UpdateAppoinmentsModel? updateResponse});
 }
 
 /// @nodoc
@@ -428,6 +825,12 @@ class __$$_AppoinmetsStateCopyWithImpl<$Res>
     Object? createData = null,
     Object? isError = null,
     Object? appoimentData = freezed,
+    Object? isUpdateLoading = null,
+    Object? isDeleteLoading = null,
+    Object? isDeleted = null,
+    Object? isUpdated = null,
+    Object? deleteResponse = freezed,
+    Object? updateResponse = freezed,
   }) {
     return _then(_$_AppoinmetsState(
       isLoading: null == isLoading
@@ -454,6 +857,30 @@ class __$$_AppoinmetsStateCopyWithImpl<$Res>
           ? _value.appoimentData
           : appoimentData // ignore: cast_nullable_to_non_nullable
               as AppoimentModel?,
+      isUpdateLoading: null == isUpdateLoading
+          ? _value.isUpdateLoading
+          : isUpdateLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDeleteLoading: null == isDeleteLoading
+          ? _value.isDeleteLoading
+          : isDeleteLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isUpdated: null == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deleteResponse: freezed == deleteResponse
+          ? _value.deleteResponse
+          : deleteResponse // ignore: cast_nullable_to_non_nullable
+              as DeleteAppoinmentsModel?,
+      updateResponse: freezed == updateResponse
+          ? _value.updateResponse
+          : updateResponse // ignore: cast_nullable_to_non_nullable
+              as UpdateAppoinmentsModel?,
     ));
   }
 }
@@ -467,7 +894,13 @@ class _$_AppoinmetsState implements _AppoinmetsState {
       required this.isCreateLoading,
       required this.createData,
       required this.isError,
-      this.appoimentData});
+      this.appoimentData,
+      required this.isUpdateLoading,
+      required this.isDeleteLoading,
+      required this.isDeleted,
+      required this.isUpdated,
+      required this.deleteResponse,
+      required this.updateResponse});
 
   @override
   final bool isLoading;
@@ -481,10 +914,22 @@ class _$_AppoinmetsState implements _AppoinmetsState {
   final bool isError;
   @override
   final AppoimentModel? appoimentData;
+  @override
+  final bool isUpdateLoading;
+  @override
+  final bool isDeleteLoading;
+  @override
+  final bool isDeleted;
+  @override
+  final bool isUpdated;
+  @override
+  final DeleteAppoinmentsModel? deleteResponse;
+  @override
+  final UpdateAppoinmentsModel? updateResponse;
 
   @override
   String toString() {
-    return 'AppoinmetsState(isLoading: $isLoading, hasData: $hasData, isCreateLoading: $isCreateLoading, createData: $createData, isError: $isError, appoimentData: $appoimentData)';
+    return 'AppoinmetsState(isLoading: $isLoading, hasData: $hasData, isCreateLoading: $isCreateLoading, createData: $createData, isError: $isError, appoimentData: $appoimentData, isUpdateLoading: $isUpdateLoading, isDeleteLoading: $isDeleteLoading, isDeleted: $isDeleted, isUpdated: $isUpdated, deleteResponse: $deleteResponse, updateResponse: $updateResponse)';
   }
 
   @override
@@ -501,12 +946,36 @@ class _$_AppoinmetsState implements _AppoinmetsState {
                 other.createData == createData) &&
             (identical(other.isError, isError) || other.isError == isError) &&
             (identical(other.appoimentData, appoimentData) ||
-                other.appoimentData == appoimentData));
+                other.appoimentData == appoimentData) &&
+            (identical(other.isUpdateLoading, isUpdateLoading) ||
+                other.isUpdateLoading == isUpdateLoading) &&
+            (identical(other.isDeleteLoading, isDeleteLoading) ||
+                other.isDeleteLoading == isDeleteLoading) &&
+            (identical(other.isDeleted, isDeleted) ||
+                other.isDeleted == isDeleted) &&
+            (identical(other.isUpdated, isUpdated) ||
+                other.isUpdated == isUpdated) &&
+            (identical(other.deleteResponse, deleteResponse) ||
+                other.deleteResponse == deleteResponse) &&
+            (identical(other.updateResponse, updateResponse) ||
+                other.updateResponse == updateResponse));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, hasData,
-      isCreateLoading, createData, isError, appoimentData);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      hasData,
+      isCreateLoading,
+      createData,
+      isError,
+      appoimentData,
+      isUpdateLoading,
+      isDeleteLoading,
+      isDeleted,
+      isUpdated,
+      deleteResponse,
+      updateResponse);
 
   @JsonKey(ignore: true)
   @override
@@ -517,12 +986,19 @@ class _$_AppoinmetsState implements _AppoinmetsState {
 
 abstract class _AppoinmetsState implements AppoinmetsState {
   const factory _AppoinmetsState(
-      {required final bool isLoading,
-      required final bool hasData,
-      required final bool isCreateLoading,
-      required final bool createData,
-      required final bool isError,
-      final AppoimentModel? appoimentData}) = _$_AppoinmetsState;
+          {required final bool isLoading,
+          required final bool hasData,
+          required final bool isCreateLoading,
+          required final bool createData,
+          required final bool isError,
+          final AppoimentModel? appoimentData,
+          required final bool isUpdateLoading,
+          required final bool isDeleteLoading,
+          required final bool isDeleted,
+          required final bool isUpdated,
+          required final DeleteAppoinmentsModel? deleteResponse,
+          required final UpdateAppoinmentsModel? updateResponse}) =
+      _$_AppoinmetsState;
 
   @override
   bool get isLoading;
@@ -536,6 +1012,18 @@ abstract class _AppoinmetsState implements AppoinmetsState {
   bool get isError;
   @override
   AppoimentModel? get appoimentData;
+  @override
+  bool get isUpdateLoading;
+  @override
+  bool get isDeleteLoading;
+  @override
+  bool get isDeleted;
+  @override
+  bool get isUpdated;
+  @override
+  DeleteAppoinmentsModel? get deleteResponse;
+  @override
+  UpdateAppoinmentsModel? get updateResponse;
   @override
   @JsonKey(ignore: true)
   _$$_AppoinmetsStateCopyWith<_$_AppoinmetsState> get copyWith =>
