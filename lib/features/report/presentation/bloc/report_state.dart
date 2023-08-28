@@ -11,6 +11,13 @@ class ReportState with _$ReportState {
     required bool isError,
     ReportGeneraInfoModel? reportGeneraInfo,
     ReportModel? reportData,
+
+     required bool isPdfLoading,
+        required bool pdfCreated,
+    required pw.Document? pdf,
+    required bool pdfError,
+    required String pdfErrorMessage,
+    String? pdfPath,
   }) = _ReportState;
 
   factory ReportState.initial() => const ReportState(
@@ -22,5 +29,11 @@ class ReportState with _$ReportState {
         hasGenaralInfoData: false,
         reportData: null,
         reportGeneraInfo: null,
+         isPdfLoading: false,
+        pdf: null,
+        pdfCreated:false,
+        pdfError: false,
+        pdfErrorMessage: "",
+        pdfPath: "",
       );
 }

@@ -6,10 +6,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/checkup/presentation/temparature_widgtet.dart';
+import 'package:kevell_care/pages/initialize/initialize.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
+import '../../../core/helper/alert.dart';
 import '../../../core/helper/toast.dart';
+import '../../../features/checkup/presentation/blood_pressure_widget.dart';
 import '../../../features/checkup/presentation/ecg_widget.dart';
 import '../../../features/checkup/presentation/gsr_widget.dart';
 import '../../../features/checkup/presentation/postion_widget.dart';
@@ -23,7 +26,11 @@ import '../../../features/checkup/presentation/widgets/ecg_graph.dart';
 
 class PatientCheckupScreen extends StatefulWidget {
   static const routeName = '/patient-checup-screen';
-  const PatientCheckupScreen({super.key});
+  final Map<String, dynamic> checkupDetalis;
+  const PatientCheckupScreen({
+    super.key,
+    required this.checkupDetalis,
+  });
 
   @override
   State<PatientCheckupScreen> createState() => _PatientCheckupScreenState();
@@ -42,12 +49,16 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
   bool ecgReading = false;
   bool gsrReading = false;
   bool postionReading = false;
+  bool bpReading = false;
+
   Map<String, dynamic> dataMap = {};
 
   String temparature = "0.00";
   String sop2 = "0.00";
   String heartBeat = "0";
   String position = "";
+  Map<String, String> bp = {"bpsys": "0", "bpdia": "0", "bpplus": "0"};
+
   int ecgIndex = 0;
 
   List<ECGData> ecgData = [];
@@ -137,7 +148,9 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
         if (dataMap['state'] == "unlock") {
           isUnloacking = false;
           isUnloacked = true;
-        } else if (dataMap['number'] == "2" && dataMap['state'] == "device") {
+        } else if (dataMap['number'] == "2" &&
+            dataMap['state'] == "device" &&
+            dataMap["appointmentID"] == "$appointmentID") {
           isUnloacked = true;
 
           if (dataMap['data']['content'] != null &&
@@ -151,7 +164,31 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
           }
 
           log(temparature);
-        } else if (dataMap['number'] == "4" && dataMap['state'] == "device") {
+        } else if (dataMap['command'] == "alert" &&
+            dataMap['value'] == "end_ok") {
+          log("Analysis Ended");
+          showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (context) => SuccessDialog(
+                    message:
+                        "Your appoinment successfully completed, thank you ",
+                    onpress: () {
+                      unSubscribe("KC_EC94CB6F61DC/app");
+                      _client!.disconnect();
+
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (context) => const Initialize(),
+                          ),
+                          (route) => false);
+                    },
+                  ));
+
+          log("Analysis Ended");
+        } else if (dataMap['number'] == "4" &&
+            dataMap['state'] == "device" &&
+            dataMap["appointmentID"] == "$appointmentID") {
           isUnloacked = true;
 
           if (dataMap['data']['content'] != null &&
@@ -177,7 +214,9 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
           }
 
           log(position);
-        } else if (dataMap['number'] == "3" && dataMap['state'] == "device") {
+        } else if (dataMap['number'] == "3" &&
+            dataMap['state'] == "device" &&
+            dataMap["appointmentID"] == "$appointmentID") {
           isUnloacked = true;
 
           if (dataMap['data']['content'] != null &&
@@ -193,7 +232,33 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
           }
 
           log(sop2);
-        } else if (dataMap['number'] == "6" && dataMap['state'] == "device") {
+        } else if (dataMap['number'] == "5" &&
+            dataMap['state'] == "device" &&
+            dataMap["appointmentID"] == "$appointmentID") {
+          isUnloacked = true;
+
+          if (dataMap['data']['type'] == "reading") {
+            bp["bpsys"] = dataMap['data']['BpsysValue'].toString();
+            bp["bpdia"] = dataMap['data']['BpDiaValue'].toString();
+            bp["bpplus"] = dataMap['data']['BpPulseValue'].toString();
+
+            bpReading = true;
+          }
+          if (dataMap['data']['type'] == "result") {
+            bp["bpsys"] = dataMap['data']['BpsysValue'].toString();
+            bp["bpdia"] = dataMap['data']['BpDiaValue'].toString();
+            bp["bpplus"] = dataMap['data']['BpPulseValue'].toString();
+            bpReading = false;
+          }
+
+          log(bp.toString());
+
+// ********************************** ecg **********************************//
+// ********************************** ecg **********************************//
+
+        } else if (dataMap['number'] == "6" &&
+            dataMap['state'] == "device" &&
+            dataMap["appointmentID"] == "$appointmentID") {
           isUnloacked = true;
 
           if (dataMap['data']['content'] != null &&
@@ -223,7 +288,9 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
               dataMap['data']['type'] == "result") {
             ecgReading = false;
           }
-        } else if (dataMap['number'] == "8" && dataMap['state'] == "device") {
+        } else if (dataMap['number'] == "8" &&
+            dataMap['state'] == "device" &&
+            dataMap["appointmentID"] == "$appointmentID") {
           isUnloacked = true;
 
           if (dataMap['data']['content'] != null &&
@@ -298,10 +365,22 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
     );
   }
 
+  int patientID = 0;
+  int doctorID = 0;
+  int appointmentID = 0;
+
   @override
   void dispose() {
     _timer?.cancel();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    patientID = widget.checkupDetalis['patientID'];
+    doctorID = widget.checkupDetalis['doctorID'];
+    appointmentID = widget.checkupDetalis['appointmentID'];
+    super.initState();
   }
 
   @override
@@ -349,9 +428,9 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
                   ? () {
                       publishMy({
                         "id": "KC_EC94CB6F61DC",
-                        "patientID": "P8308",
-                        "doctorID": "D1204",
-                        "appointmentID": "AP123456",
+                        "patientID": patientID,
+                        "doctorID": doctorID,
+                        "appointmentID": appointmentID,
                         "type": "Doctor",
                         "command": "device",
                         "number": 2,
@@ -370,9 +449,9 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
                   ? () {
                       publishMy({
                         "id": "KC_EC94CB6F61DC",
-                        "patientID": "P8308",
-                        "doctorID": "D1204",
-                        "appointmentID": "AP123456",
+                        "patientID": patientID,
+                        "doctorID": doctorID,
+                        "appointmentID": appointmentID,
                         "type": "Doctor",
                         "command": "device",
                         "number": 3,
@@ -382,6 +461,26 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
                   : () => Toast.showToast(
                       context: context, message: "Please Unlock"),
             ),
+            BloodPressureWidget(
+                onpress: isUnloacked
+                    ? () {
+                        publishMy({
+                          "id": "KC_EC94CB6F61DC",
+                          "patientID": patientID,
+                          "doctorID": doctorID,
+                          "appointmentID": appointmentID,
+                          "type": "Doctor",
+                          "command": "device",
+                          "number": 5,
+                          "date": DateTime.now().millisecondsSinceEpoch
+                        }, "KC_EC94CB6F61DC/device");
+                      }
+                    : () => Toast.showToast(
+                        context: context, message: "Please Unlock"),
+                bp: bp["bpsys"]!,
+                isReading: bpReading,
+                bpdia: bp["bpdia"]!,
+                bpplus: bp["bpplus"]!),
             EcgWidget(
               data: ecgData,
               isReading: ecgReading,
@@ -389,9 +488,9 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
                   ? () {
                       publishMy({
                         "id": "KC_EC94CB6F61DC",
-                        "patientID": "P8308",
-                        "doctorID": "D1204",
-                        "appointmentID": "AP123456",
+                        "patientID": patientID,
+                        "doctorID": doctorID,
+                        "appointmentID": appointmentID,
                         "type": "Doctor",
                         "command": "device",
                         "number": 6,
@@ -409,9 +508,9 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
                   ? () {
                       publishMy({
                         "id": "KC_EC94CB6F61DC",
-                        "patientID": "P8308",
-                        "doctorID": "D1204",
-                        "appointmentID": "AP123456",
+                        "patientID": patientID,
+                        "doctorID": doctorID,
+                        "appointmentID": appointmentID,
                         "type": "Doctor",
                         "command": "device",
                         "number": 8,
@@ -428,12 +527,12 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
                   ? () {
                       publishMy({
                         "id": "KC_EC94CB6F61DC",
-                        "patientID": "P8308",
-                        "doctorID": "D1204",
-                        "appointmentID": "AP123456",
+                        "patientID": patientID,
+                        "doctorID": doctorID,
+                        "appointmentID": appointmentID,
                         "type": "Doctor",
                         "command": "device",
-                        "number": 2,
+                        "number": 4,
                         "date": DateTime.now().millisecondsSinceEpoch
                       }, "KC_EC94CB6F61DC/device");
                     }

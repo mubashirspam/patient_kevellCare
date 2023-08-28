@@ -21,18 +21,21 @@ mixin _$ReportEvent {
     required TResult Function(int id) fetchReportGeneralinfo,
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
+    required TResult Function(List<Prescription> data) genaratePdf,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
+    TResult? Function(List<Prescription> data)? genaratePdf,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
+    TResult Function(List<Prescription> data)? genaratePdf,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -41,18 +44,21 @@ mixin _$ReportEvent {
     required TResult Function(_FetchReportGeneralinfo value)
         fetchReportGeneralinfo,
     required TResult Function(_FetchReport value) fetchReport,
+    required TResult Function(_GeneratePdf value) genaratePdf,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult? Function(_FetchReport value)? fetchReport,
+    TResult? Function(_GeneratePdf value)? genaratePdf,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult Function(_FetchReport value)? fetchReport,
+    TResult Function(_GeneratePdf value)? genaratePdf,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -144,6 +150,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
     required TResult Function(int id) fetchReportGeneralinfo,
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
+    required TResult Function(List<Prescription> data) genaratePdf,
   }) {
     return fetchReportGeneralinfo(id);
   }
@@ -153,6 +160,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
+    TResult? Function(List<Prescription> data)? genaratePdf,
   }) {
     return fetchReportGeneralinfo?.call(id);
   }
@@ -162,6 +170,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
+    TResult Function(List<Prescription> data)? genaratePdf,
     required TResult orElse(),
   }) {
     if (fetchReportGeneralinfo != null) {
@@ -176,6 +185,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
     required TResult Function(_FetchReportGeneralinfo value)
         fetchReportGeneralinfo,
     required TResult Function(_FetchReport value) fetchReport,
+    required TResult Function(_GeneratePdf value) genaratePdf,
   }) {
     return fetchReportGeneralinfo(this);
   }
@@ -185,6 +195,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult? Function(_FetchReport value)? fetchReport,
+    TResult? Function(_GeneratePdf value)? genaratePdf,
   }) {
     return fetchReportGeneralinfo?.call(this);
   }
@@ -194,6 +205,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult Function(_FetchReport value)? fetchReport,
+    TResult Function(_GeneratePdf value)? genaratePdf,
     required TResult orElse(),
   }) {
     if (fetchReportGeneralinfo != null) {
@@ -281,6 +293,7 @@ class _$_FetchReport implements _FetchReport {
     required TResult Function(int id) fetchReportGeneralinfo,
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
+    required TResult Function(List<Prescription> data) genaratePdf,
   }) {
     return fetchReport(fetchReportPayload);
   }
@@ -290,6 +303,7 @@ class _$_FetchReport implements _FetchReport {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
+    TResult? Function(List<Prescription> data)? genaratePdf,
   }) {
     return fetchReport?.call(fetchReportPayload);
   }
@@ -299,6 +313,7 @@ class _$_FetchReport implements _FetchReport {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
+    TResult Function(List<Prescription> data)? genaratePdf,
     required TResult orElse(),
   }) {
     if (fetchReport != null) {
@@ -313,6 +328,7 @@ class _$_FetchReport implements _FetchReport {
     required TResult Function(_FetchReportGeneralinfo value)
         fetchReportGeneralinfo,
     required TResult Function(_FetchReport value) fetchReport,
+    required TResult Function(_GeneratePdf value) genaratePdf,
   }) {
     return fetchReport(this);
   }
@@ -322,6 +338,7 @@ class _$_FetchReport implements _FetchReport {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult? Function(_FetchReport value)? fetchReport,
+    TResult? Function(_GeneratePdf value)? genaratePdf,
   }) {
     return fetchReport?.call(this);
   }
@@ -331,6 +348,7 @@ class _$_FetchReport implements _FetchReport {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult Function(_FetchReport value)? fetchReport,
+    TResult Function(_GeneratePdf value)? genaratePdf,
     required TResult orElse(),
   }) {
     if (fetchReport != null) {
@@ -351,6 +369,154 @@ abstract class _FetchReport implements ReportEvent {
 }
 
 /// @nodoc
+abstract class _$$_GeneratePdfCopyWith<$Res> {
+  factory _$$_GeneratePdfCopyWith(
+          _$_GeneratePdf value, $Res Function(_$_GeneratePdf) then) =
+      __$$_GeneratePdfCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Prescription> data});
+}
+
+/// @nodoc
+class __$$_GeneratePdfCopyWithImpl<$Res>
+    extends _$ReportEventCopyWithImpl<$Res, _$_GeneratePdf>
+    implements _$$_GeneratePdfCopyWith<$Res> {
+  __$$_GeneratePdfCopyWithImpl(
+      _$_GeneratePdf _value, $Res Function(_$_GeneratePdf) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$_GeneratePdf(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<Prescription>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_GeneratePdf implements _GeneratePdf {
+  const _$_GeneratePdf({required final List<Prescription> data}) : _data = data;
+
+  final List<Prescription> _data;
+  @override
+  List<Prescription> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
+
+  @override
+  String toString() {
+    return 'ReportEvent.genaratePdf(data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_GeneratePdf &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GeneratePdfCopyWith<_$_GeneratePdf> get copyWith =>
+      __$$_GeneratePdfCopyWithImpl<_$_GeneratePdf>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int id) fetchReportGeneralinfo,
+    required TResult Function(FetchReportPayload fetchReportPayload)
+        fetchReport,
+    required TResult Function(List<Prescription> data) genaratePdf,
+  }) {
+    return genaratePdf(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int id)? fetchReportGeneralinfo,
+    TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
+    TResult? Function(List<Prescription> data)? genaratePdf,
+  }) {
+    return genaratePdf?.call(data);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int id)? fetchReportGeneralinfo,
+    TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
+    TResult Function(List<Prescription> data)? genaratePdf,
+    required TResult orElse(),
+  }) {
+    if (genaratePdf != null) {
+      return genaratePdf(data);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchReportGeneralinfo value)
+        fetchReportGeneralinfo,
+    required TResult Function(_FetchReport value) fetchReport,
+    required TResult Function(_GeneratePdf value) genaratePdf,
+  }) {
+    return genaratePdf(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
+    TResult? Function(_FetchReport value)? fetchReport,
+    TResult? Function(_GeneratePdf value)? genaratePdf,
+  }) {
+    return genaratePdf?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
+    TResult Function(_FetchReport value)? fetchReport,
+    TResult Function(_GeneratePdf value)? genaratePdf,
+    required TResult orElse(),
+  }) {
+    if (genaratePdf != null) {
+      return genaratePdf(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GeneratePdf implements ReportEvent {
+  const factory _GeneratePdf({required final List<Prescription> data}) =
+      _$_GeneratePdf;
+
+  List<Prescription> get data;
+  @JsonKey(ignore: true)
+  _$$_GeneratePdfCopyWith<_$_GeneratePdf> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ReportState {
   bool get isGenaralInfoLoading => throw _privateConstructorUsedError;
   bool get isReportDataLoading => throw _privateConstructorUsedError;
@@ -361,6 +527,12 @@ mixin _$ReportState {
   ReportGeneraInfoModel? get reportGeneraInfo =>
       throw _privateConstructorUsedError;
   ReportModel? get reportData => throw _privateConstructorUsedError;
+  bool get isPdfLoading => throw _privateConstructorUsedError;
+  bool get pdfCreated => throw _privateConstructorUsedError;
+  pw.Document? get pdf => throw _privateConstructorUsedError;
+  bool get pdfError => throw _privateConstructorUsedError;
+  String get pdfErrorMessage => throw _privateConstructorUsedError;
+  String? get pdfPath => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReportStateCopyWith<ReportState> get copyWith =>
@@ -381,7 +553,13 @@ abstract class $ReportStateCopyWith<$Res> {
       bool unauthorized,
       bool isError,
       ReportGeneraInfoModel? reportGeneraInfo,
-      ReportModel? reportData});
+      ReportModel? reportData,
+      bool isPdfLoading,
+      bool pdfCreated,
+      pw.Document? pdf,
+      bool pdfError,
+      String pdfErrorMessage,
+      String? pdfPath});
 }
 
 /// @nodoc
@@ -405,6 +583,12 @@ class _$ReportStateCopyWithImpl<$Res, $Val extends ReportState>
     Object? isError = null,
     Object? reportGeneraInfo = freezed,
     Object? reportData = freezed,
+    Object? isPdfLoading = null,
+    Object? pdfCreated = null,
+    Object? pdf = freezed,
+    Object? pdfError = null,
+    Object? pdfErrorMessage = null,
+    Object? pdfPath = freezed,
   }) {
     return _then(_value.copyWith(
       isGenaralInfoLoading: null == isGenaralInfoLoading
@@ -439,6 +623,30 @@ class _$ReportStateCopyWithImpl<$Res, $Val extends ReportState>
           ? _value.reportData
           : reportData // ignore: cast_nullable_to_non_nullable
               as ReportModel?,
+      isPdfLoading: null == isPdfLoading
+          ? _value.isPdfLoading
+          : isPdfLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      pdfCreated: null == pdfCreated
+          ? _value.pdfCreated
+          : pdfCreated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      pdf: freezed == pdf
+          ? _value.pdf
+          : pdf // ignore: cast_nullable_to_non_nullable
+              as pw.Document?,
+      pdfError: null == pdfError
+          ? _value.pdfError
+          : pdfError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      pdfErrorMessage: null == pdfErrorMessage
+          ? _value.pdfErrorMessage
+          : pdfErrorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+      pdfPath: freezed == pdfPath
+          ? _value.pdfPath
+          : pdfPath // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -459,7 +667,13 @@ abstract class _$$_ReportStateCopyWith<$Res>
       bool unauthorized,
       bool isError,
       ReportGeneraInfoModel? reportGeneraInfo,
-      ReportModel? reportData});
+      ReportModel? reportData,
+      bool isPdfLoading,
+      bool pdfCreated,
+      pw.Document? pdf,
+      bool pdfError,
+      String pdfErrorMessage,
+      String? pdfPath});
 }
 
 /// @nodoc
@@ -481,6 +695,12 @@ class __$$_ReportStateCopyWithImpl<$Res>
     Object? isError = null,
     Object? reportGeneraInfo = freezed,
     Object? reportData = freezed,
+    Object? isPdfLoading = null,
+    Object? pdfCreated = null,
+    Object? pdf = freezed,
+    Object? pdfError = null,
+    Object? pdfErrorMessage = null,
+    Object? pdfPath = freezed,
   }) {
     return _then(_$_ReportState(
       isGenaralInfoLoading: null == isGenaralInfoLoading
@@ -515,6 +735,30 @@ class __$$_ReportStateCopyWithImpl<$Res>
           ? _value.reportData
           : reportData // ignore: cast_nullable_to_non_nullable
               as ReportModel?,
+      isPdfLoading: null == isPdfLoading
+          ? _value.isPdfLoading
+          : isPdfLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      pdfCreated: null == pdfCreated
+          ? _value.pdfCreated
+          : pdfCreated // ignore: cast_nullable_to_non_nullable
+              as bool,
+      pdf: freezed == pdf
+          ? _value.pdf
+          : pdf // ignore: cast_nullable_to_non_nullable
+              as pw.Document?,
+      pdfError: null == pdfError
+          ? _value.pdfError
+          : pdfError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      pdfErrorMessage: null == pdfErrorMessage
+          ? _value.pdfErrorMessage
+          : pdfErrorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+      pdfPath: freezed == pdfPath
+          ? _value.pdfPath
+          : pdfPath // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -530,7 +774,13 @@ class _$_ReportState implements _ReportState {
       required this.unauthorized,
       required this.isError,
       this.reportGeneraInfo,
-      this.reportData});
+      this.reportData,
+      required this.isPdfLoading,
+      required this.pdfCreated,
+      required this.pdf,
+      required this.pdfError,
+      required this.pdfErrorMessage,
+      this.pdfPath});
 
   @override
   final bool isGenaralInfoLoading;
@@ -548,10 +798,22 @@ class _$_ReportState implements _ReportState {
   final ReportGeneraInfoModel? reportGeneraInfo;
   @override
   final ReportModel? reportData;
+  @override
+  final bool isPdfLoading;
+  @override
+  final bool pdfCreated;
+  @override
+  final pw.Document? pdf;
+  @override
+  final bool pdfError;
+  @override
+  final String pdfErrorMessage;
+  @override
+  final String? pdfPath;
 
   @override
   String toString() {
-    return 'ReportState(isGenaralInfoLoading: $isGenaralInfoLoading, isReportDataLoading: $isReportDataLoading, hasGenaralInfoData: $hasGenaralInfoData, hasReportData: $hasReportData, unauthorized: $unauthorized, isError: $isError, reportGeneraInfo: $reportGeneraInfo, reportData: $reportData)';
+    return 'ReportState(isGenaralInfoLoading: $isGenaralInfoLoading, isReportDataLoading: $isReportDataLoading, hasGenaralInfoData: $hasGenaralInfoData, hasReportData: $hasReportData, unauthorized: $unauthorized, isError: $isError, reportGeneraInfo: $reportGeneraInfo, reportData: $reportData, isPdfLoading: $isPdfLoading, pdfCreated: $pdfCreated, pdf: $pdf, pdfError: $pdfError, pdfErrorMessage: $pdfErrorMessage, pdfPath: $pdfPath)';
   }
 
   @override
@@ -573,7 +835,17 @@ class _$_ReportState implements _ReportState {
             (identical(other.reportGeneraInfo, reportGeneraInfo) ||
                 other.reportGeneraInfo == reportGeneraInfo) &&
             (identical(other.reportData, reportData) ||
-                other.reportData == reportData));
+                other.reportData == reportData) &&
+            (identical(other.isPdfLoading, isPdfLoading) ||
+                other.isPdfLoading == isPdfLoading) &&
+            (identical(other.pdfCreated, pdfCreated) ||
+                other.pdfCreated == pdfCreated) &&
+            (identical(other.pdf, pdf) || other.pdf == pdf) &&
+            (identical(other.pdfError, pdfError) ||
+                other.pdfError == pdfError) &&
+            (identical(other.pdfErrorMessage, pdfErrorMessage) ||
+                other.pdfErrorMessage == pdfErrorMessage) &&
+            (identical(other.pdfPath, pdfPath) || other.pdfPath == pdfPath));
   }
 
   @override
@@ -586,7 +858,13 @@ class _$_ReportState implements _ReportState {
       unauthorized,
       isError,
       reportGeneraInfo,
-      reportData);
+      reportData,
+      isPdfLoading,
+      pdfCreated,
+      pdf,
+      pdfError,
+      pdfErrorMessage,
+      pdfPath);
 
   @JsonKey(ignore: true)
   @override
@@ -604,7 +882,13 @@ abstract class _ReportState implements ReportState {
       required final bool unauthorized,
       required final bool isError,
       final ReportGeneraInfoModel? reportGeneraInfo,
-      final ReportModel? reportData}) = _$_ReportState;
+      final ReportModel? reportData,
+      required final bool isPdfLoading,
+      required final bool pdfCreated,
+      required final pw.Document? pdf,
+      required final bool pdfError,
+      required final String pdfErrorMessage,
+      final String? pdfPath}) = _$_ReportState;
 
   @override
   bool get isGenaralInfoLoading;
@@ -622,6 +906,18 @@ abstract class _ReportState implements ReportState {
   ReportGeneraInfoModel? get reportGeneraInfo;
   @override
   ReportModel? get reportData;
+  @override
+  bool get isPdfLoading;
+  @override
+  bool get pdfCreated;
+  @override
+  pw.Document? get pdf;
+  @override
+  bool get pdfError;
+  @override
+  String get pdfErrorMessage;
+  @override
+  String? get pdfPath;
   @override
   @JsonKey(ignore: true)
   _$$_ReportStateCopyWith<_$_ReportState> get copyWith =>

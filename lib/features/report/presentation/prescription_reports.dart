@@ -1,11 +1,16 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/report/presentation/bloc/report_bloc.dart';
 
-
+import '../data/model/report_model.dart';
 
 class PrescriptionReportsCard extends StatelessWidget {
-  const PrescriptionReportsCard({super.key});
+  final List<Prescription> data;
+  const PrescriptionReportsCard({
+    super.key,
+    required this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +48,11 @@ class PrescriptionReportsCard extends StatelessWidget {
                     child: Row(
                       children: [
                         TextButton(
-                          onPressed: (){},
+                          onPressed: () {
+                            context.read<ReportBloc>().add(
+                                  ReportEvent.genaratePdf(data: data),
+                                );
+                          },
                           // onPressed: () => Navigator.of(context)
                           //     .pushNamed(PrescriptionScreen.routeName),
                           style: TextButton.styleFrom(
@@ -54,7 +63,11 @@ class PrescriptionReportsCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 15),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.read<ReportBloc>().add(
+                                    ReportEvent.genaratePdf(data: data),
+                                  );
+                            },
                             style: TextButton.styleFrom(
                               backgroundColor: context.theme.backround,
                               foregroundColor: context.theme.primary,

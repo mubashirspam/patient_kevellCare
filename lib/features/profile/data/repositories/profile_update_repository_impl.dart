@@ -35,7 +35,7 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
       //   'Content-Type': 'application/json',
       // };
 
-      final response = await Dio(BaseOptions()).post(
+      final response = await Dio(BaseOptions()).put(
         ApiEndPoints.updateProfile,
         // options: Options(headers: headers),
         data: {

@@ -16,7 +16,7 @@ class GetAppoinmentsRepoImpliment implements GetAppoinmentsRepository {
   @override
   Future<Either<MainFailure, AppoimentModel>> getAppoinments() async {
     try {
-      final token = await getTokenFromSS(secureStoreKey);
+      // final token = await getTokenFromSS(secureStoreKey);
       final id = await getTokenFromSS(drIdsecureStoreKey);
 
       log(id.toString());

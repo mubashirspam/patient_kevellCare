@@ -36,8 +36,17 @@ class UpcomingAppoimentList extends StatelessWidget {
                             if (state.appoimentData!.message!
                                 .upcomingdata![index].appointmentstarttime!
                                 .isBefore(DateTime.now())) {
-                              Navigator.of(context)
-                                  .pushNamed(PatientCheckupScreen.routeName);
+                              Navigator.of(context).pushNamed(
+                                PatientCheckupScreen.routeName,
+                                arguments: {
+                                  'patientID': state.appoimentData!.message!
+                                      .upcomingdata![index].patientId,
+                                  'doctorID': state.appoimentData!.message!
+                                      .upcomingdata![index].doctornameid,
+                                  'appointmentID': state.appoimentData!.message!
+                                      .upcomingdata![index].id,
+                                },
+                              );
                             }
                           },
                           child: AppoimentCard(

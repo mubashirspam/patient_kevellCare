@@ -20,7 +20,10 @@ final Map<String, Widget Function(BuildContext)> route = {
   BookNewAppointmentScreen.routeName: (ctx) => BookNewAppointmentScreen(
       index: ModalRoute.of(ctx)!.settings.arguments as int),
   ChatingScreen.routeName: (ctx) => const ChatingScreen(),
-  PatientCheckupScreen.routeName: (ctx) => const PatientCheckupScreen(),
+ PatientCheckupScreen.routeName: (ctx) => PatientCheckupScreen(
+        checkupDetalis:
+            ModalRoute.of(ctx)!.settings.arguments as Map<String, dynamic>,
+      ),
   ReportScreen.routeName: (ctx) => ReportScreen(
         data: ModalRoute.of(ctx)!.settings.arguments as report.Datum,
       ),

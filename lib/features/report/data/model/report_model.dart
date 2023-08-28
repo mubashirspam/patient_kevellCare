@@ -59,7 +59,7 @@ class Datum {
     String? patientpdflink;
     String? isvisiteddate;
     Temperatureinfo? temperatureinfo;
-    Bodyfatinfo? bpinfo;
+    Bpinfo? bpinfo;
     Bodyfatinfo? hwinfo;
     SpO2Info? spO2Info;
     Bodyfatinfo? bodyfatinfo;
@@ -152,7 +152,7 @@ class Datum {
         patientpdflink: json["patientpdflink"],
         isvisiteddate: json["isvisiteddate"],
         temperatureinfo: json["temperatureinfo"] == null ? null : Temperatureinfo.fromJson(json["temperatureinfo"]),
-        bpinfo: json["bpinfo"] == null ? null : Bodyfatinfo.fromJson(json["bpinfo"]),
+        bpinfo: json["bpinfo"] == null ? null : Bpinfo.fromJson(json["bpinfo"]),
         hwinfo: json["hwinfo"] == null ? null : Bodyfatinfo.fromJson(json["hwinfo"]),
         spO2Info: json["spO2info"] == null ? null : SpO2Info.fromJson(json["spO2info"]),
         bodyfatinfo: json["bodyfatinfo"] == null ? null : Bodyfatinfo.fromJson(json["bodyfatinfo"]),
@@ -447,5 +447,80 @@ class TemperatureinfoData {
     Map<String, dynamic> toJson() => {
         "type": type,
         "content": content,
+    };
+}
+class Bpinfo {
+    String? id;
+    String? patientId;
+    String? appointmentId;
+    String? doctorId;
+    String? type;
+    String? state;
+    DateTime? date;
+    String? number;
+    BpinfoData? data;
+
+    Bpinfo({
+        this.id,
+        this.patientId,
+        this.appointmentId,
+        this.doctorId,
+        this.type,
+        this.state,
+        this.date,
+        this.number,
+        this.data,
+    });
+
+    factory Bpinfo.fromJson(Map<String, dynamic> json) => Bpinfo(
+        id: json["id"],
+        patientId: json["patientID"],
+        appointmentId: json["appointmentID"],
+        doctorId: json["doctorID"],
+        type: json["type"],
+        state: json["state"],
+        date: json["date"] == null ? null : DateTime.parse(json["date"]),
+        number: json["number"],
+        data: json["data"] == null ? null : BpinfoData.fromJson(json["data"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "patientID": patientId,
+        "appointmentID": appointmentId,
+        "doctorID": doctorId,
+        "type": type,
+        "state": state,
+        "date": date?.toIso8601String(),
+        "number": number,
+        "data": data?.toJson(),
+    };
+}
+
+class BpinfoData {
+    String? type;
+    String? bpsysValue;
+    String? bpDiaValue;
+    String? bpPulseValue;
+
+    BpinfoData({
+        this.type,
+        this.bpsysValue,
+        this.bpDiaValue,
+        this.bpPulseValue,
+    });
+
+    factory BpinfoData.fromJson(Map<String, dynamic> json) => BpinfoData(
+        type: json["type"],
+        bpsysValue: json["BpsysValue"],
+        bpDiaValue: json["BpDiaValue"],
+        bpPulseValue: json["BpPulseValue"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "type": type,
+        "BpsysValue": bpsysValue,
+        "BpDiaValue": bpDiaValue,
+        "BpPulseValue": bpPulseValue,
     };
 }
