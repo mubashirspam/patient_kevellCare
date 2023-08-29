@@ -9,32 +9,26 @@ class SelfCheckupVideoCard extends StatefulWidget {
 }
 
 class _SelfCheckupVideoCardState extends State<SelfCheckupVideoCard> {
-  late VideoPlayerController _controller;
-  late Future<void> _initializeVideoPlayerFuture;
+  late VideoPlayerController _videoController;
 
   @override
   void initState() {
     super.initState();
 
-    // Create and store the VideoPlayerController. The VideoPlayerController
-    // offers several different constructors to play videos from assets, files,
-    // or the internet.
-    _controller = VideoPlayerController.networkUrl(
-      Uri.parse(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
-      ),
-    );
+    _videoController = VideoPlayerController.network(
 
-    _initializeVideoPlayerFuture = _controller.initialize();
+      "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
+    )..initialize().then((_) {
+      setState(() {}); // Initialize the video player
+    });
   }
 
   @override
   void dispose() {
-    // Ensure disposing of the VideoPlayerController to free up resources.
-    _controller.dispose();
-
+    _videoController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
