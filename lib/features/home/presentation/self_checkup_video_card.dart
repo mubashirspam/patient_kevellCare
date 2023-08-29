@@ -1,8 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 
-class SelfCheckupVideoCard extends StatelessWidget {
-  const SelfCheckupVideoCard({super.key});
+class SelfCheckupVideoCard extends StatefulWidget {
+  const SelfCheckupVideoCard({Key? key}) : super(key: key);
 
+  @override
+  _SelfCheckupVideoCardState createState() => _SelfCheckupVideoCardState();
+}
+
+class _SelfCheckupVideoCardState extends State<SelfCheckupVideoCard> {
+  late VideoPlayerController _controller;
+  late Future<void> _initializeVideoPlayerFuture;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Create and store the VideoPlayerController. The VideoPlayerController
+    // offers several different constructors to play videos from assets, files,
+    // or the internet.
+    _controller = VideoPlayerController.networkUrl(
+      Uri.parse(
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+      ),
+    );
+
+    _initializeVideoPlayerFuture = _controller.initialize();
+  }
+
+  @override
+  void dispose() {
+    // Ensure disposing of the VideoPlayerController to free up resources.
+    _controller.dispose();
+
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,74 +43,85 @@ class SelfCheckupVideoCard extends StatelessWidget {
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        image: const DecorationImage(
-          fit: BoxFit.cover,
-          image: NetworkImage(
-              "https://images.unsplash.com/photo-1638202993928-7267aad84c31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"),
-        ),
+
       ),
-      child: DefaultTextStyle(
-        style: Theme.of(context)
-            .textTheme
-            .titleLarge!
-            .copyWith(color: Colors.white),
-        child: Container(
+      child: GestureDetector(
+        onTap: () {
+          if (_videoController.value.isInitialized) {
+            _videoController.play(); // Play the video when tapped
+          }
+        },
+        child: Stack(
           alignment: Alignment.bottomCenter,
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.black.withOpacity(0),
-                Colors.black.withOpacity(0.2),
-                Colors.black.withOpacity(0.7),
-              ],
-            ),
-          ),
-          child: const SizedBox(
-            height: 70,
-            child: Row(
-              children: [
-                Expanded(
-                    flex: 3,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Self check up',
-                          style: TextStyle(fontSize: 18),
+          children: [
+            _buildVideoPlayer(),
+            DefaultTextStyle(
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6!
+                  .copyWith(color: Colors.white),
+              child: Container(
+                padding: const EdgeInsets.all(20),
+
+                child: SizedBox(
+                  height: 70,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Self check up',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              'How to make your self check up',
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          height: 5,
+                      ),
+                      Icon(
+                        Icons.play_circle,
+                        color: Colors.white,
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          'Watch tutorial',
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                            color: Colors.white,
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
-                        Text(
-                          'How to make your self check up',
-                        ),
-                      ],
-                    )),
-                Icon(
-                  Icons.play_circle,
-                  color: Colors.white,
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Text(
-                    'Watch tutorial',
-                    textAlign: TextAlign.end,
-                    style: TextStyle(
-                      color: Colors.white,
-                      decoration: TextDecoration.underline,
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
   }
+
+  Widget _buildVideoPlayer() {
+    if (_videoController.value.isInitialized) {
+      return AspectRatio(
+        aspectRatio: _videoController.value.aspectRatio,
+
+        child: VideoPlayer(_videoController),
+      );
+    } else {
+      return CircularProgressIndicator();
+    }
+  }
 }
+
