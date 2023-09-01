@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kevell_care/configure/value/constant.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
 import '../../../features/login/presentation/logout.dart';
@@ -18,6 +19,9 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
+    });
     List<Widget> list = const [
       MyProfile(),
       Settings(),
@@ -45,16 +49,16 @@ class ProfileScreen extends StatelessWidget {
                 if (state.hasData) {
                   return ProfileNameCard(
                     email: state.result!.data!.first.name ?? "",
-                    imageUrl:
-                        "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2960&q=80",
+                    imageUrl:state.result!.data!.first.profileImagelink!
+                        ,
                     name: state.result!.data!.first.username ?? "",
                   );
                 }
 
                 return const ProfileNameCard(
                   email: "johndoe@gmail.com",
-                  imageUrl:
-                      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2960&q=80",
+                  imageUrl:imageUrlForDummy
+                     ,
                   name: "Johndoe",
                 );
               },

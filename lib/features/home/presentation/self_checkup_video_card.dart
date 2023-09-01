@@ -57,7 +57,7 @@ class _SelfCheckupVideoCardState extends State<SelfCheckupVideoCard> {
               child: Container(
                 padding: const EdgeInsets.all(20),
 
-                child: SizedBox(
+                child:const SizedBox(
                   height: 70,
                   child: Row(
                     children: [
