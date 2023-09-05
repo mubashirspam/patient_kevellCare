@@ -22,6 +22,7 @@ mixin _$ReportEvent {
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
     required TResult Function(List<Prescription> data) genaratePdf,
+    required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,6 +30,7 @@ mixin _$ReportEvent {
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
     TResult? Function(List<Prescription> data)? genaratePdf,
+    TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +38,7 @@ mixin _$ReportEvent {
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
     TResult Function(List<Prescription> data)? genaratePdf,
+    TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -45,6 +48,7 @@ mixin _$ReportEvent {
         fetchReportGeneralinfo,
     required TResult Function(_FetchReport value) fetchReport,
     required TResult Function(_GeneratePdf value) genaratePdf,
+    required TResult Function(_PickDate value) pickDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -52,6 +56,7 @@ mixin _$ReportEvent {
     TResult? Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult? Function(_FetchReport value)? fetchReport,
     TResult? Function(_GeneratePdf value)? genaratePdf,
+    TResult? Function(_PickDate value)? pickDate,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,6 +64,7 @@ mixin _$ReportEvent {
     TResult Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult Function(_FetchReport value)? fetchReport,
     TResult Function(_GeneratePdf value)? genaratePdf,
+    TResult Function(_PickDate value)? pickDate,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -151,6 +157,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
     required TResult Function(List<Prescription> data) genaratePdf,
+    required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) {
     return fetchReportGeneralinfo(id);
   }
@@ -161,6 +168,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
     TResult? Function(List<Prescription> data)? genaratePdf,
+    TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) {
     return fetchReportGeneralinfo?.call(id);
   }
@@ -171,6 +179,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
     TResult Function(List<Prescription> data)? genaratePdf,
+    TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) {
     if (fetchReportGeneralinfo != null) {
@@ -186,6 +195,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
         fetchReportGeneralinfo,
     required TResult Function(_FetchReport value) fetchReport,
     required TResult Function(_GeneratePdf value) genaratePdf,
+    required TResult Function(_PickDate value) pickDate,
   }) {
     return fetchReportGeneralinfo(this);
   }
@@ -196,6 +206,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
     TResult? Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult? Function(_FetchReport value)? fetchReport,
     TResult? Function(_GeneratePdf value)? genaratePdf,
+    TResult? Function(_PickDate value)? pickDate,
   }) {
     return fetchReportGeneralinfo?.call(this);
   }
@@ -206,6 +217,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
     TResult Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult Function(_FetchReport value)? fetchReport,
     TResult Function(_GeneratePdf value)? genaratePdf,
+    TResult Function(_PickDate value)? pickDate,
     required TResult orElse(),
   }) {
     if (fetchReportGeneralinfo != null) {
@@ -294,6 +306,7 @@ class _$_FetchReport implements _FetchReport {
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
     required TResult Function(List<Prescription> data) genaratePdf,
+    required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) {
     return fetchReport(fetchReportPayload);
   }
@@ -304,6 +317,7 @@ class _$_FetchReport implements _FetchReport {
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
     TResult? Function(List<Prescription> data)? genaratePdf,
+    TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) {
     return fetchReport?.call(fetchReportPayload);
   }
@@ -314,6 +328,7 @@ class _$_FetchReport implements _FetchReport {
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
     TResult Function(List<Prescription> data)? genaratePdf,
+    TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) {
     if (fetchReport != null) {
@@ -329,6 +344,7 @@ class _$_FetchReport implements _FetchReport {
         fetchReportGeneralinfo,
     required TResult Function(_FetchReport value) fetchReport,
     required TResult Function(_GeneratePdf value) genaratePdf,
+    required TResult Function(_PickDate value) pickDate,
   }) {
     return fetchReport(this);
   }
@@ -339,6 +355,7 @@ class _$_FetchReport implements _FetchReport {
     TResult? Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult? Function(_FetchReport value)? fetchReport,
     TResult? Function(_GeneratePdf value)? genaratePdf,
+    TResult? Function(_PickDate value)? pickDate,
   }) {
     return fetchReport?.call(this);
   }
@@ -349,6 +366,7 @@ class _$_FetchReport implements _FetchReport {
     TResult Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult Function(_FetchReport value)? fetchReport,
     TResult Function(_GeneratePdf value)? genaratePdf,
+    TResult Function(_PickDate value)? pickDate,
     required TResult orElse(),
   }) {
     if (fetchReport != null) {
@@ -442,6 +460,7 @@ class _$_GeneratePdf implements _GeneratePdf {
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
     required TResult Function(List<Prescription> data) genaratePdf,
+    required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) {
     return genaratePdf(data);
   }
@@ -452,6 +471,7 @@ class _$_GeneratePdf implements _GeneratePdf {
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
     TResult? Function(List<Prescription> data)? genaratePdf,
+    TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) {
     return genaratePdf?.call(data);
   }
@@ -462,6 +482,7 @@ class _$_GeneratePdf implements _GeneratePdf {
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
     TResult Function(List<Prescription> data)? genaratePdf,
+    TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) {
     if (genaratePdf != null) {
@@ -477,6 +498,7 @@ class _$_GeneratePdf implements _GeneratePdf {
         fetchReportGeneralinfo,
     required TResult Function(_FetchReport value) fetchReport,
     required TResult Function(_GeneratePdf value) genaratePdf,
+    required TResult Function(_PickDate value) pickDate,
   }) {
     return genaratePdf(this);
   }
@@ -487,6 +509,7 @@ class _$_GeneratePdf implements _GeneratePdf {
     TResult? Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult? Function(_FetchReport value)? fetchReport,
     TResult? Function(_GeneratePdf value)? genaratePdf,
+    TResult? Function(_PickDate value)? pickDate,
   }) {
     return genaratePdf?.call(this);
   }
@@ -497,6 +520,7 @@ class _$_GeneratePdf implements _GeneratePdf {
     TResult Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
     TResult Function(_FetchReport value)? fetchReport,
     TResult Function(_GeneratePdf value)? genaratePdf,
+    TResult Function(_PickDate value)? pickDate,
     required TResult orElse(),
   }) {
     if (genaratePdf != null) {
@@ -517,6 +541,165 @@ abstract class _GeneratePdf implements ReportEvent {
 }
 
 /// @nodoc
+abstract class _$$_PickDateCopyWith<$Res> {
+  factory _$$_PickDateCopyWith(
+          _$_PickDate value, $Res Function(_$_PickDate) then) =
+      __$$_PickDateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime startDate, DateTime endDate});
+}
+
+/// @nodoc
+class __$$_PickDateCopyWithImpl<$Res>
+    extends _$ReportEventCopyWithImpl<$Res, _$_PickDate>
+    implements _$$_PickDateCopyWith<$Res> {
+  __$$_PickDateCopyWithImpl(
+      _$_PickDate _value, $Res Function(_$_PickDate) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? startDate = null,
+    Object? endDate = null,
+  }) {
+    return _then(_$_PickDate(
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PickDate implements _PickDate {
+  const _$_PickDate({required this.startDate, required this.endDate});
+
+  @override
+  final DateTime startDate;
+  @override
+  final DateTime endDate;
+
+  @override
+  String toString() {
+    return 'ReportEvent.pickDate(startDate: $startDate, endDate: $endDate)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PickDate &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, startDate, endDate);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PickDateCopyWith<_$_PickDate> get copyWith =>
+      __$$_PickDateCopyWithImpl<_$_PickDate>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int id) fetchReportGeneralinfo,
+    required TResult Function(FetchReportPayload fetchReportPayload)
+        fetchReport,
+    required TResult Function(List<Prescription> data) genaratePdf,
+    required TResult Function(DateTime startDate, DateTime endDate) pickDate,
+  }) {
+    return pickDate(startDate, endDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int id)? fetchReportGeneralinfo,
+    TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
+    TResult? Function(List<Prescription> data)? genaratePdf,
+    TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
+  }) {
+    return pickDate?.call(startDate, endDate);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int id)? fetchReportGeneralinfo,
+    TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
+    TResult Function(List<Prescription> data)? genaratePdf,
+    TResult Function(DateTime startDate, DateTime endDate)? pickDate,
+    required TResult orElse(),
+  }) {
+    if (pickDate != null) {
+      return pickDate(startDate, endDate);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchReportGeneralinfo value)
+        fetchReportGeneralinfo,
+    required TResult Function(_FetchReport value) fetchReport,
+    required TResult Function(_GeneratePdf value) genaratePdf,
+    required TResult Function(_PickDate value) pickDate,
+  }) {
+    return pickDate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
+    TResult? Function(_FetchReport value)? fetchReport,
+    TResult? Function(_GeneratePdf value)? genaratePdf,
+    TResult? Function(_PickDate value)? pickDate,
+  }) {
+    return pickDate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchReportGeneralinfo value)? fetchReportGeneralinfo,
+    TResult Function(_FetchReport value)? fetchReport,
+    TResult Function(_GeneratePdf value)? genaratePdf,
+    TResult Function(_PickDate value)? pickDate,
+    required TResult orElse(),
+  }) {
+    if (pickDate != null) {
+      return pickDate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PickDate implements ReportEvent {
+  const factory _PickDate(
+      {required final DateTime startDate,
+      required final DateTime endDate}) = _$_PickDate;
+
+  DateTime get startDate;
+  DateTime get endDate;
+  @JsonKey(ignore: true)
+  _$$_PickDateCopyWith<_$_PickDate> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ReportState {
   bool get isGenaralInfoLoading => throw _privateConstructorUsedError;
   bool get isReportDataLoading => throw _privateConstructorUsedError;
@@ -533,6 +716,8 @@ mixin _$ReportState {
   bool get pdfError => throw _privateConstructorUsedError;
   String get pdfErrorMessage => throw _privateConstructorUsedError;
   String? get pdfPath => throw _privateConstructorUsedError;
+  DateTime get startDate => throw _privateConstructorUsedError;
+  DateTime get endDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReportStateCopyWith<ReportState> get copyWith =>
@@ -559,7 +744,9 @@ abstract class $ReportStateCopyWith<$Res> {
       pw.Document? pdf,
       bool pdfError,
       String pdfErrorMessage,
-      String? pdfPath});
+      String? pdfPath,
+      DateTime startDate,
+      DateTime endDate});
 }
 
 /// @nodoc
@@ -589,6 +776,8 @@ class _$ReportStateCopyWithImpl<$Res, $Val extends ReportState>
     Object? pdfError = null,
     Object? pdfErrorMessage = null,
     Object? pdfPath = freezed,
+    Object? startDate = null,
+    Object? endDate = null,
   }) {
     return _then(_value.copyWith(
       isGenaralInfoLoading: null == isGenaralInfoLoading
@@ -647,6 +836,14 @@ class _$ReportStateCopyWithImpl<$Res, $Val extends ReportState>
           ? _value.pdfPath
           : pdfPath // ignore: cast_nullable_to_non_nullable
               as String?,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -673,7 +870,9 @@ abstract class _$$_ReportStateCopyWith<$Res>
       pw.Document? pdf,
       bool pdfError,
       String pdfErrorMessage,
-      String? pdfPath});
+      String? pdfPath,
+      DateTime startDate,
+      DateTime endDate});
 }
 
 /// @nodoc
@@ -701,6 +900,8 @@ class __$$_ReportStateCopyWithImpl<$Res>
     Object? pdfError = null,
     Object? pdfErrorMessage = null,
     Object? pdfPath = freezed,
+    Object? startDate = null,
+    Object? endDate = null,
   }) {
     return _then(_$_ReportState(
       isGenaralInfoLoading: null == isGenaralInfoLoading
@@ -759,6 +960,14 @@ class __$$_ReportStateCopyWithImpl<$Res>
           ? _value.pdfPath
           : pdfPath // ignore: cast_nullable_to_non_nullable
               as String?,
+      startDate: null == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endDate: null == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -780,7 +989,9 @@ class _$_ReportState implements _ReportState {
       required this.pdf,
       required this.pdfError,
       required this.pdfErrorMessage,
-      this.pdfPath});
+      this.pdfPath,
+      required this.startDate,
+      required this.endDate});
 
   @override
   final bool isGenaralInfoLoading;
@@ -810,10 +1021,14 @@ class _$_ReportState implements _ReportState {
   final String pdfErrorMessage;
   @override
   final String? pdfPath;
+  @override
+  final DateTime startDate;
+  @override
+  final DateTime endDate;
 
   @override
   String toString() {
-    return 'ReportState(isGenaralInfoLoading: $isGenaralInfoLoading, isReportDataLoading: $isReportDataLoading, hasGenaralInfoData: $hasGenaralInfoData, hasReportData: $hasReportData, unauthorized: $unauthorized, isError: $isError, reportGeneraInfo: $reportGeneraInfo, reportData: $reportData, isPdfLoading: $isPdfLoading, pdfCreated: $pdfCreated, pdf: $pdf, pdfError: $pdfError, pdfErrorMessage: $pdfErrorMessage, pdfPath: $pdfPath)';
+    return 'ReportState(isGenaralInfoLoading: $isGenaralInfoLoading, isReportDataLoading: $isReportDataLoading, hasGenaralInfoData: $hasGenaralInfoData, hasReportData: $hasReportData, unauthorized: $unauthorized, isError: $isError, reportGeneraInfo: $reportGeneraInfo, reportData: $reportData, isPdfLoading: $isPdfLoading, pdfCreated: $pdfCreated, pdf: $pdf, pdfError: $pdfError, pdfErrorMessage: $pdfErrorMessage, pdfPath: $pdfPath, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -845,7 +1060,10 @@ class _$_ReportState implements _ReportState {
                 other.pdfError == pdfError) &&
             (identical(other.pdfErrorMessage, pdfErrorMessage) ||
                 other.pdfErrorMessage == pdfErrorMessage) &&
-            (identical(other.pdfPath, pdfPath) || other.pdfPath == pdfPath));
+            (identical(other.pdfPath, pdfPath) || other.pdfPath == pdfPath) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate));
   }
 
   @override
@@ -864,7 +1082,9 @@ class _$_ReportState implements _ReportState {
       pdf,
       pdfError,
       pdfErrorMessage,
-      pdfPath);
+      pdfPath,
+      startDate,
+      endDate);
 
   @JsonKey(ignore: true)
   @override
@@ -888,7 +1108,9 @@ abstract class _ReportState implements ReportState {
       required final pw.Document? pdf,
       required final bool pdfError,
       required final String pdfErrorMessage,
-      final String? pdfPath}) = _$_ReportState;
+      final String? pdfPath,
+      required final DateTime startDate,
+      required final DateTime endDate}) = _$_ReportState;
 
   @override
   bool get isGenaralInfoLoading;
@@ -918,6 +1140,10 @@ abstract class _ReportState implements ReportState {
   String get pdfErrorMessage;
   @override
   String? get pdfPath;
+  @override
+  DateTime get startDate;
+  @override
+  DateTime get endDate;
   @override
   @JsonKey(ignore: true)
   _$$_ReportStateCopyWith<_$_ReportState> get copyWith =>

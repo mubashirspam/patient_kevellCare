@@ -255,7 +255,6 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
 
 // ********************************** ecg **********************************//
 // ********************************** ecg **********************************//
-
         } else if (dataMap['number'] == "6" &&
             dataMap['state'] == "device" &&
             dataMap["appointmentID"] == "$appointmentID") {
@@ -380,6 +379,8 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
     patientID = widget.checkupDetalis['patientID'];
     doctorID = widget.checkupDetalis['doctorID'];
     appointmentID = widget.checkupDetalis['appointmentID'];
+    initializeMQTTClient();
+    connect().then((value) => subScribeTo("KC_EC94CB6F61DC/app"));
     super.initState();
   }
 

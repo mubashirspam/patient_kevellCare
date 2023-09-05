@@ -11,16 +11,17 @@ class ReportState with _$ReportState {
     required bool isError,
     ReportGeneraInfoModel? reportGeneraInfo,
     ReportModel? reportData,
-
-     required bool isPdfLoading,
-        required bool pdfCreated,
+    required bool isPdfLoading,
+    required bool pdfCreated,
     required pw.Document? pdf,
     required bool pdfError,
     required String pdfErrorMessage,
     String? pdfPath,
+    required DateTime startDate,
+    required DateTime endDate,
   }) = _ReportState;
 
-  factory ReportState.initial() => const ReportState(
+  factory ReportState.initial() =>  ReportState(
         isGenaralInfoLoading: false,
         unauthorized: false,
         isError: false,
@@ -29,11 +30,13 @@ class ReportState with _$ReportState {
         hasGenaralInfoData: false,
         reportData: null,
         reportGeneraInfo: null,
-         isPdfLoading: false,
+        isPdfLoading: false,
         pdf: null,
-        pdfCreated:false,
+        pdfCreated: false,
         pdfError: false,
         pdfErrorMessage: "",
         pdfPath: "",
+        startDate: DateTime.now(),
+        endDate: DateTime.now(),
       );
 }

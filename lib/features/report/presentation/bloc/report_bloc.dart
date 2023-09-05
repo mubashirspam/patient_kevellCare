@@ -1,10 +1,10 @@
-
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kevell_care/core/helper/date.dart';
 
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
@@ -87,8 +87,16 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
       emit(result);
     });
 
+    on<_PickDate>((event, emit) {
+      emit(state.copyWith(
+        startDate: event.startDate,
+        endDate: event.endDate,
+        reportData: filterDataByDateRange(
+            state.reportData!, event.startDate, event.endDate),
+      ));
+    });
 
-      on<_GeneratePdf>(
+    on<_GeneratePdf>(
       (event, emit) async {
         emit(
           state.copyWith(
@@ -140,7 +148,20 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
 
     return pdf;
   }
+}
+ReportModel filterDataByDateRange(
+    ReportModel reportData, DateTime startDateTime, DateTime endDateTime) {
+  List<Datum> filteredData = reportData.data!.where((datum) {
+    DateTime appointmentDate = datum.appointmentdate!;
+    return appointmentDate.isAfterOrEquals(startDateTime) &&
+        appointmentDate.isBeforeOrEquals(endDateTime);
+  }).toList();
 
-    
-  
+  return ReportModel(
+    responseCode: reportData.responseCode,
+    status: reportData.status,
+    message: reportData.message,
+    startdate: reportData.startdate,
+    data: filteredData,
+  );
 }

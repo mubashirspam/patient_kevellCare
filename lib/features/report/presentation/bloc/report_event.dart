@@ -10,7 +10,11 @@ class ReportEvent with _$ReportEvent {
     required FetchReportPayload fetchReportPayload,
   }) = _FetchReport;
 
-     const factory ReportEvent.genaratePdf({
+  const factory ReportEvent.genaratePdf({
     required List<Prescription> data,
   }) = _GeneratePdf;
+  const factory ReportEvent.pickDate({
+    required DateTime startDate,
+    required DateTime endDate,
+  }) = _PickDate;
 }

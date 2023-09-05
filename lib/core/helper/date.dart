@@ -26,8 +26,16 @@ String formatTime(DateTime dateTime) {
   return "${dateTime.hour.toString().padLeft(2, '0')}.${dateTime.minute.toString().padLeft(2, '0')}";
 }
 
-
-
 String dateFormatToYYYYMMddWithDay(DateTime inputDate) {
   return DateFormat("dd/MM/yyyy, EEEE").format(inputDate);
+}
+
+extension DateTimeExtension on DateTime {
+  bool isAfterOrEquals(DateTime other) {
+    return isAfter(other) || isAtSameMomentAs(other);
+  }
+
+  bool isBeforeOrEquals(DateTime other) {
+    return isBefore(other) || isAtSameMomentAs(other);
+  }
 }

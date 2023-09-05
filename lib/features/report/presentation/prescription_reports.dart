@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/report/presentation/bloc/report_bloc.dart';
+import 'package:kevell_care/features/report/presentation/prescription.dart';
 
 import '../data/model/report_model.dart';
 
@@ -48,13 +49,11 @@ class PrescriptionReportsCard extends StatelessWidget {
                     child: Row(
                       children: [
                         TextButton(
-                          onPressed: () {
-                            context.read<ReportBloc>().add(
-                                  ReportEvent.genaratePdf(data: data),
-                                );
-                          },
-                          // onPressed: () => Navigator.of(context)
-                          //     .pushNamed(PrescriptionScreen.routeName),
+                          onPressed: () =>
+                              Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                PrescriptionScreen(prescriptions: data),
+                          )),
                           style: TextButton.styleFrom(
                             backgroundColor: context.theme.backround,
                             foregroundColor: context.theme.primary,
