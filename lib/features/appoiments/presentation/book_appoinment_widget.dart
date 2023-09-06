@@ -285,18 +285,18 @@ class _BookNowWidgetState extends State<BookNowWidget> {
                     },
                   ),
                   const SizedBox(height: 15),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: DropDownFiledWidet(
-                          hintText: "Location",
-                          items: [],
-                          onChanged: (ww) {},
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 15),
+                  // Row(
+                  //   children: [
+                  //     Expanded(
+                  //       child: DropDownFiledWidet(
+                  //         hintText: "Location",
+                  //         items: [],
+                  //         onChanged: (ww) {},
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // const SizedBox(height: 15),
                   Text(
                     "Description",
                     style: Theme.of(context)

@@ -18,13 +18,15 @@ class DropDownFiledWidet extends StatelessWidget {
       borderRadius: BorderRadius.circular(12),
       elevation: 2,
       items: items,
-
       onChanged: onChanged,
       decoration: InputDecoration(
         constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width - 40,
             minWidth: MediaQuery.of(context).size.width - 40),
         hintText: hintText,
+        hintStyle: TextStyle(
+          color: context.theme.textPrimary,
+        ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 15,
         ).copyWith(bottom: 10),

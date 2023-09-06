@@ -1,6 +1,9 @@
 import '../value/constant.dart';
 
-class ApiEndPoints {
+class ApiEndPoints { 
+
+
+  
   static const String login = "$baseUrl/register/api/patientLogin";
 
   static const String register = "$baseUrl/register/api/patientRegister";

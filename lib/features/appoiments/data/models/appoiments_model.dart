@@ -62,16 +62,12 @@ class Past {
     int? doctornameid;
     String? doctorname;
     DateTime? appointmentdate;
-    List<dynamic>? preexistingdisease;
     bool? isvisited;
-    String? date;
+    bool? isTimeup;
     int? userdoctorrating;
     String? userdoctorcommand;
-    DateTime? createdAt;
-    DateTime? updatedAt;
     int? sno;
-    int? v;
-    String? reasonformeetingdoctor;
+    Doctordata? doctordata;
 
     Past({
         this.id,
@@ -83,16 +79,12 @@ class Past {
         this.doctornameid,
         this.doctorname,
         this.appointmentdate,
-        this.preexistingdisease,
         this.isvisited,
-        this.date,
+        this.isTimeup,
         this.userdoctorrating,
         this.userdoctorcommand,
-        this.createdAt,
-        this.updatedAt,
         this.sno,
-        this.v,
-        this.reasonformeetingdoctor,
+        this.doctordata,
     });
 
     factory Past.fromJson(Map<String, dynamic> json) => Past(
@@ -105,16 +97,12 @@ class Past {
         doctornameid: json["doctornameid"],
         doctorname: json["doctorname"],
         appointmentdate: json["appointmentdate"] == null ? null : DateTime.parse(json["appointmentdate"]),
-        preexistingdisease: json["preexistingdisease"] == null ? [] : List<dynamic>.from(json["preexistingdisease"]!.map((x) => x)),
         isvisited: json["isvisited"],
-        date: json["date"],
+        isTimeup: json["is_timeup"],
         userdoctorrating: json["userdoctorrating"],
         userdoctorcommand: json["userdoctorcommand"],
-        createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
         sno: json["sno"],
-        v: json["__v"],
-        reasonformeetingdoctor: json["Reasonformeetingdoctor"],
+        doctordata: json["doctordata"] == null ? null : Doctordata.fromJson(json["doctordata"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -127,15 +115,43 @@ class Past {
         "doctornameid": doctornameid,
         "doctorname": doctorname,
         "appointmentdate": "${appointmentdate!.year.toString().padLeft(4, '0')}-${appointmentdate!.month.toString().padLeft(2, '0')}-${appointmentdate!.day.toString().padLeft(2, '0')}",
-        "preexistingdisease": preexistingdisease == null ? [] : List<dynamic>.from(preexistingdisease!.map((x) => x)),
         "isvisited": isvisited,
-        "date": date,
+        "is_timeup": isTimeup,
         "userdoctorrating": userdoctorrating,
         "userdoctorcommand": userdoctorcommand,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
         "sno": sno,
-        "__v": v,
-        "Reasonformeetingdoctor": reasonformeetingdoctor,
+        "doctordata": doctordata?.toJson(),
+    };
+}
+
+class Doctordata {
+    int? doctorId;
+    int? dailylimitcount;
+    DateTime? starttime;
+    DateTime? endtime;
+    int? timeperPatient;
+
+    Doctordata({
+        this.doctorId,
+        this.dailylimitcount,
+        this.starttime,
+        this.endtime,
+        this.timeperPatient,
+    });
+
+    factory Doctordata.fromJson(Map<String, dynamic> json) => Doctordata(
+        doctorId: json["doctor_id"],
+        dailylimitcount: json["dailylimitcount"],
+        starttime: json["starttime"] == null ? null : DateTime.parse(json["starttime"]),
+        endtime: json["endtime"] == null ? null : DateTime.parse(json["endtime"]),
+        timeperPatient: json["timeperPatient"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "doctor_id": doctorId,
+        "dailylimitcount": dailylimitcount,
+        "starttime": starttime?.toIso8601String(),
+        "endtime": endtime?.toIso8601String(),
+        "timeperPatient": timeperPatient,
     };
 }

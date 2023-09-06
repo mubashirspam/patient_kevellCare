@@ -8,6 +8,7 @@ import '../../../../core/helper/alert.dart';
 import '../../../../core/helper/date.dart';
 import '../../data/models/appoiments_model.dart';
 import '../bloc/appoinmets_bloc.dart';
+import 'edit_appoinment.dart';
 
 class AppoimentCard extends StatelessWidget {
   final bool isPast;
@@ -72,17 +73,20 @@ class AppoimentCard extends StatelessWidget {
               ),
             ),
           ),
-          // isPast
-          //     ? const SizedBox()
-          //     : InkWell(
-                
-              
-          //          onTap: () => Navigator.of(context).pushNamed(
-          //             BookNewAppointmentScreen.routeName,
-          //             arguments: index),
-                
-          //       child: Icon(Icons.edit_square, color: context.theme.primary)),
-          // const SizedBox(width: 15),
+          isPast
+              ? const SizedBox()
+              : InkWell(
+                  onTap: () {  showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        elevation: 0,
+                        isScrollControlled: true,
+                        context: context,
+                        builder: (context) => EditAppoinmentWidget(
+                         data: data,
+                        ),
+                      );},
+                  child: Icon(Icons.edit_square, color: context.theme.primary)),
+          const SizedBox(width: 15),
           InkWell(
               onTap: () {
                 log(data.id.toString());

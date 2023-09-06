@@ -24,6 +24,7 @@ mixin _$AppoinmetsEvent {
     required TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)
         updateAppoinments,
     required TResult Function(int id) deleteAppoinments,
+    required TResult Function(DateTime startTime, DateTime endTime) pickTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,6 +34,7 @@ mixin _$AppoinmetsEvent {
     TResult? Function(UpdateAppoinmentsPayload appoinmetsPayload)?
         updateAppoinments,
     TResult? Function(int id)? deleteAppoinments,
+    TResult? Function(DateTime startTime, DateTime endTime)? pickTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +44,7 @@ mixin _$AppoinmetsEvent {
     TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)?
         updateAppoinments,
     TResult Function(int id)? deleteAppoinments,
+    TResult Function(DateTime startTime, DateTime endTime)? pickTime,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +54,7 @@ mixin _$AppoinmetsEvent {
     required TResult Function(_CreateAppoinments value) createAppoinments,
     required TResult Function(_UpdateAppoinmets value) updateAppoinments,
     required TResult Function(_DeleteAppoinmets value) deleteAppoinments,
+    required TResult Function(_PickTime value) pickTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,6 +63,7 @@ mixin _$AppoinmetsEvent {
     TResult? Function(_CreateAppoinments value)? createAppoinments,
     TResult? Function(_UpdateAppoinmets value)? updateAppoinments,
     TResult? Function(_DeleteAppoinmets value)? deleteAppoinments,
+    TResult? Function(_PickTime value)? pickTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,6 +72,7 @@ mixin _$AppoinmetsEvent {
     TResult Function(_CreateAppoinments value)? createAppoinments,
     TResult Function(_UpdateAppoinmets value)? updateAppoinments,
     TResult Function(_DeleteAppoinmets value)? deleteAppoinments,
+    TResult Function(_PickTime value)? pickTime,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +140,7 @@ class _$_GetAppoinments implements _GetAppoinments {
     required TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)
         updateAppoinments,
     required TResult Function(int id) deleteAppoinments,
+    required TResult Function(DateTime startTime, DateTime endTime) pickTime,
   }) {
     return getAppoinments();
   }
@@ -146,6 +153,7 @@ class _$_GetAppoinments implements _GetAppoinments {
     TResult? Function(UpdateAppoinmentsPayload appoinmetsPayload)?
         updateAppoinments,
     TResult? Function(int id)? deleteAppoinments,
+    TResult? Function(DateTime startTime, DateTime endTime)? pickTime,
   }) {
     return getAppoinments?.call();
   }
@@ -158,6 +166,7 @@ class _$_GetAppoinments implements _GetAppoinments {
     TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)?
         updateAppoinments,
     TResult Function(int id)? deleteAppoinments,
+    TResult Function(DateTime startTime, DateTime endTime)? pickTime,
     required TResult orElse(),
   }) {
     if (getAppoinments != null) {
@@ -173,6 +182,7 @@ class _$_GetAppoinments implements _GetAppoinments {
     required TResult Function(_CreateAppoinments value) createAppoinments,
     required TResult Function(_UpdateAppoinmets value) updateAppoinments,
     required TResult Function(_DeleteAppoinmets value) deleteAppoinments,
+    required TResult Function(_PickTime value) pickTime,
   }) {
     return getAppoinments(this);
   }
@@ -184,6 +194,7 @@ class _$_GetAppoinments implements _GetAppoinments {
     TResult? Function(_CreateAppoinments value)? createAppoinments,
     TResult? Function(_UpdateAppoinmets value)? updateAppoinments,
     TResult? Function(_DeleteAppoinmets value)? deleteAppoinments,
+    TResult? Function(_PickTime value)? pickTime,
   }) {
     return getAppoinments?.call(this);
   }
@@ -195,6 +206,7 @@ class _$_GetAppoinments implements _GetAppoinments {
     TResult Function(_CreateAppoinments value)? createAppoinments,
     TResult Function(_UpdateAppoinmets value)? updateAppoinments,
     TResult Function(_DeleteAppoinmets value)? deleteAppoinments,
+    TResult Function(_PickTime value)? pickTime,
     required TResult orElse(),
   }) {
     if (getAppoinments != null) {
@@ -280,6 +292,7 @@ class _$_CreateAppoinments implements _CreateAppoinments {
     required TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)
         updateAppoinments,
     required TResult Function(int id) deleteAppoinments,
+    required TResult Function(DateTime startTime, DateTime endTime) pickTime,
   }) {
     return createAppoinments(appoinmentsPayload);
   }
@@ -292,6 +305,7 @@ class _$_CreateAppoinments implements _CreateAppoinments {
     TResult? Function(UpdateAppoinmentsPayload appoinmetsPayload)?
         updateAppoinments,
     TResult? Function(int id)? deleteAppoinments,
+    TResult? Function(DateTime startTime, DateTime endTime)? pickTime,
   }) {
     return createAppoinments?.call(appoinmentsPayload);
   }
@@ -304,6 +318,7 @@ class _$_CreateAppoinments implements _CreateAppoinments {
     TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)?
         updateAppoinments,
     TResult Function(int id)? deleteAppoinments,
+    TResult Function(DateTime startTime, DateTime endTime)? pickTime,
     required TResult orElse(),
   }) {
     if (createAppoinments != null) {
@@ -319,6 +334,7 @@ class _$_CreateAppoinments implements _CreateAppoinments {
     required TResult Function(_CreateAppoinments value) createAppoinments,
     required TResult Function(_UpdateAppoinmets value) updateAppoinments,
     required TResult Function(_DeleteAppoinmets value) deleteAppoinments,
+    required TResult Function(_PickTime value) pickTime,
   }) {
     return createAppoinments(this);
   }
@@ -330,6 +346,7 @@ class _$_CreateAppoinments implements _CreateAppoinments {
     TResult? Function(_CreateAppoinments value)? createAppoinments,
     TResult? Function(_UpdateAppoinmets value)? updateAppoinments,
     TResult? Function(_DeleteAppoinmets value)? deleteAppoinments,
+    TResult? Function(_PickTime value)? pickTime,
   }) {
     return createAppoinments?.call(this);
   }
@@ -341,6 +358,7 @@ class _$_CreateAppoinments implements _CreateAppoinments {
     TResult Function(_CreateAppoinments value)? createAppoinments,
     TResult Function(_UpdateAppoinmets value)? updateAppoinments,
     TResult Function(_DeleteAppoinmets value)? deleteAppoinments,
+    TResult Function(_PickTime value)? pickTime,
     required TResult orElse(),
   }) {
     if (createAppoinments != null) {
@@ -432,6 +450,7 @@ class _$_UpdateAppoinmets implements _UpdateAppoinmets {
     required TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)
         updateAppoinments,
     required TResult Function(int id) deleteAppoinments,
+    required TResult Function(DateTime startTime, DateTime endTime) pickTime,
   }) {
     return updateAppoinments(appoinmetsPayload);
   }
@@ -444,6 +463,7 @@ class _$_UpdateAppoinmets implements _UpdateAppoinmets {
     TResult? Function(UpdateAppoinmentsPayload appoinmetsPayload)?
         updateAppoinments,
     TResult? Function(int id)? deleteAppoinments,
+    TResult? Function(DateTime startTime, DateTime endTime)? pickTime,
   }) {
     return updateAppoinments?.call(appoinmetsPayload);
   }
@@ -456,6 +476,7 @@ class _$_UpdateAppoinmets implements _UpdateAppoinmets {
     TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)?
         updateAppoinments,
     TResult Function(int id)? deleteAppoinments,
+    TResult Function(DateTime startTime, DateTime endTime)? pickTime,
     required TResult orElse(),
   }) {
     if (updateAppoinments != null) {
@@ -471,6 +492,7 @@ class _$_UpdateAppoinmets implements _UpdateAppoinmets {
     required TResult Function(_CreateAppoinments value) createAppoinments,
     required TResult Function(_UpdateAppoinmets value) updateAppoinments,
     required TResult Function(_DeleteAppoinmets value) deleteAppoinments,
+    required TResult Function(_PickTime value) pickTime,
   }) {
     return updateAppoinments(this);
   }
@@ -482,6 +504,7 @@ class _$_UpdateAppoinmets implements _UpdateAppoinmets {
     TResult? Function(_CreateAppoinments value)? createAppoinments,
     TResult? Function(_UpdateAppoinmets value)? updateAppoinments,
     TResult? Function(_DeleteAppoinmets value)? deleteAppoinments,
+    TResult? Function(_PickTime value)? pickTime,
   }) {
     return updateAppoinments?.call(this);
   }
@@ -493,6 +516,7 @@ class _$_UpdateAppoinmets implements _UpdateAppoinmets {
     TResult Function(_CreateAppoinments value)? createAppoinments,
     TResult Function(_UpdateAppoinmets value)? updateAppoinments,
     TResult Function(_DeleteAppoinmets value)? deleteAppoinments,
+    TResult Function(_PickTime value)? pickTime,
     required TResult orElse(),
   }) {
     if (updateAppoinments != null) {
@@ -583,6 +607,7 @@ class _$_DeleteAppoinmets implements _DeleteAppoinmets {
     required TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)
         updateAppoinments,
     required TResult Function(int id) deleteAppoinments,
+    required TResult Function(DateTime startTime, DateTime endTime) pickTime,
   }) {
     return deleteAppoinments(id);
   }
@@ -595,6 +620,7 @@ class _$_DeleteAppoinmets implements _DeleteAppoinmets {
     TResult? Function(UpdateAppoinmentsPayload appoinmetsPayload)?
         updateAppoinments,
     TResult? Function(int id)? deleteAppoinments,
+    TResult? Function(DateTime startTime, DateTime endTime)? pickTime,
   }) {
     return deleteAppoinments?.call(id);
   }
@@ -607,6 +633,7 @@ class _$_DeleteAppoinmets implements _DeleteAppoinmets {
     TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)?
         updateAppoinments,
     TResult Function(int id)? deleteAppoinments,
+    TResult Function(DateTime startTime, DateTime endTime)? pickTime,
     required TResult orElse(),
   }) {
     if (deleteAppoinments != null) {
@@ -622,6 +649,7 @@ class _$_DeleteAppoinmets implements _DeleteAppoinmets {
     required TResult Function(_CreateAppoinments value) createAppoinments,
     required TResult Function(_UpdateAppoinmets value) updateAppoinments,
     required TResult Function(_DeleteAppoinmets value) deleteAppoinments,
+    required TResult Function(_PickTime value) pickTime,
   }) {
     return deleteAppoinments(this);
   }
@@ -633,6 +661,7 @@ class _$_DeleteAppoinmets implements _DeleteAppoinmets {
     TResult? Function(_CreateAppoinments value)? createAppoinments,
     TResult? Function(_UpdateAppoinmets value)? updateAppoinments,
     TResult? Function(_DeleteAppoinmets value)? deleteAppoinments,
+    TResult? Function(_PickTime value)? pickTime,
   }) {
     return deleteAppoinments?.call(this);
   }
@@ -644,6 +673,7 @@ class _$_DeleteAppoinmets implements _DeleteAppoinmets {
     TResult Function(_CreateAppoinments value)? createAppoinments,
     TResult Function(_UpdateAppoinmets value)? updateAppoinments,
     TResult Function(_DeleteAppoinmets value)? deleteAppoinments,
+    TResult Function(_PickTime value)? pickTime,
     required TResult orElse(),
   }) {
     if (deleteAppoinments != null) {
@@ -664,6 +694,173 @@ abstract class _DeleteAppoinmets implements AppoinmetsEvent {
 }
 
 /// @nodoc
+abstract class _$$_PickTimeCopyWith<$Res> {
+  factory _$$_PickTimeCopyWith(
+          _$_PickTime value, $Res Function(_$_PickTime) then) =
+      __$$_PickTimeCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DateTime startTime, DateTime endTime});
+}
+
+/// @nodoc
+class __$$_PickTimeCopyWithImpl<$Res>
+    extends _$AppoinmetsEventCopyWithImpl<$Res, _$_PickTime>
+    implements _$$_PickTimeCopyWith<$Res> {
+  __$$_PickTimeCopyWithImpl(
+      _$_PickTime _value, $Res Function(_$_PickTime) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? startTime = null,
+    Object? endTime = null,
+  }) {
+    return _then(_$_PickTime(
+      startTime: null == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      endTime: null == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PickTime implements _PickTime {
+  const _$_PickTime({required this.startTime, required this.endTime});
+
+  @override
+  final DateTime startTime;
+  @override
+  final DateTime endTime;
+
+  @override
+  String toString() {
+    return 'AppoinmetsEvent.pickTime(startTime: $startTime, endTime: $endTime)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_PickTime &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.endTime, endTime) || other.endTime == endTime));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, startTime, endTime);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_PickTimeCopyWith<_$_PickTime> get copyWith =>
+      __$$_PickTimeCopyWithImpl<_$_PickTime>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getAppoinments,
+    required TResult Function(AppoinmentsPayload appoinmentsPayload)
+        createAppoinments,
+    required TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)
+        updateAppoinments,
+    required TResult Function(int id) deleteAppoinments,
+    required TResult Function(DateTime startTime, DateTime endTime) pickTime,
+  }) {
+    return pickTime(startTime, endTime);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getAppoinments,
+    TResult? Function(AppoinmentsPayload appoinmentsPayload)? createAppoinments,
+    TResult? Function(UpdateAppoinmentsPayload appoinmetsPayload)?
+        updateAppoinments,
+    TResult? Function(int id)? deleteAppoinments,
+    TResult? Function(DateTime startTime, DateTime endTime)? pickTime,
+  }) {
+    return pickTime?.call(startTime, endTime);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getAppoinments,
+    TResult Function(AppoinmentsPayload appoinmentsPayload)? createAppoinments,
+    TResult Function(UpdateAppoinmentsPayload appoinmetsPayload)?
+        updateAppoinments,
+    TResult Function(int id)? deleteAppoinments,
+    TResult Function(DateTime startTime, DateTime endTime)? pickTime,
+    required TResult orElse(),
+  }) {
+    if (pickTime != null) {
+      return pickTime(startTime, endTime);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetAppoinments value) getAppoinments,
+    required TResult Function(_CreateAppoinments value) createAppoinments,
+    required TResult Function(_UpdateAppoinmets value) updateAppoinments,
+    required TResult Function(_DeleteAppoinmets value) deleteAppoinments,
+    required TResult Function(_PickTime value) pickTime,
+  }) {
+    return pickTime(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetAppoinments value)? getAppoinments,
+    TResult? Function(_CreateAppoinments value)? createAppoinments,
+    TResult? Function(_UpdateAppoinmets value)? updateAppoinments,
+    TResult? Function(_DeleteAppoinmets value)? deleteAppoinments,
+    TResult? Function(_PickTime value)? pickTime,
+  }) {
+    return pickTime?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetAppoinments value)? getAppoinments,
+    TResult Function(_CreateAppoinments value)? createAppoinments,
+    TResult Function(_UpdateAppoinmets value)? updateAppoinments,
+    TResult Function(_DeleteAppoinmets value)? deleteAppoinments,
+    TResult Function(_PickTime value)? pickTime,
+    required TResult orElse(),
+  }) {
+    if (pickTime != null) {
+      return pickTime(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PickTime implements AppoinmetsEvent {
+  const factory _PickTime(
+      {required final DateTime startTime,
+      required final DateTime endTime}) = _$_PickTime;
+
+  DateTime get startTime;
+  DateTime get endTime;
+  @JsonKey(ignore: true)
+  _$$_PickTimeCopyWith<_$_PickTime> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$AppoinmetsState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get hasData => throw _privateConstructorUsedError;
@@ -675,6 +872,8 @@ mixin _$AppoinmetsState {
   bool get isDeleteLoading => throw _privateConstructorUsedError;
   bool get isDeleted => throw _privateConstructorUsedError;
   bool get isUpdated => throw _privateConstructorUsedError;
+  DateTime? get startTime => throw _privateConstructorUsedError;
+  DateTime? get endTime => throw _privateConstructorUsedError;
   DeleteAppoinmentsModel? get deleteResponse =>
       throw _privateConstructorUsedError;
   UpdateAppoinmentsModel? get updateResponse =>
@@ -702,6 +901,8 @@ abstract class $AppoinmetsStateCopyWith<$Res> {
       bool isDeleteLoading,
       bool isDeleted,
       bool isUpdated,
+      DateTime? startTime,
+      DateTime? endTime,
       DeleteAppoinmentsModel? deleteResponse,
       UpdateAppoinmentsModel? updateResponse});
 }
@@ -729,6 +930,8 @@ class _$AppoinmetsStateCopyWithImpl<$Res, $Val extends AppoinmetsState>
     Object? isDeleteLoading = null,
     Object? isDeleted = null,
     Object? isUpdated = null,
+    Object? startTime = freezed,
+    Object? endTime = freezed,
     Object? deleteResponse = freezed,
     Object? updateResponse = freezed,
   }) {
@@ -773,6 +976,14 @@ class _$AppoinmetsStateCopyWithImpl<$Res, $Val extends AppoinmetsState>
           ? _value.isUpdated
           : isUpdated // ignore: cast_nullable_to_non_nullable
               as bool,
+      startTime: freezed == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endTime: freezed == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       deleteResponse: freezed == deleteResponse
           ? _value.deleteResponse
           : deleteResponse // ignore: cast_nullable_to_non_nullable
@@ -804,6 +1015,8 @@ abstract class _$$_AppoinmetsStateCopyWith<$Res>
       bool isDeleteLoading,
       bool isDeleted,
       bool isUpdated,
+      DateTime? startTime,
+      DateTime? endTime,
       DeleteAppoinmentsModel? deleteResponse,
       UpdateAppoinmentsModel? updateResponse});
 }
@@ -829,6 +1042,8 @@ class __$$_AppoinmetsStateCopyWithImpl<$Res>
     Object? isDeleteLoading = null,
     Object? isDeleted = null,
     Object? isUpdated = null,
+    Object? startTime = freezed,
+    Object? endTime = freezed,
     Object? deleteResponse = freezed,
     Object? updateResponse = freezed,
   }) {
@@ -873,6 +1088,14 @@ class __$$_AppoinmetsStateCopyWithImpl<$Res>
           ? _value.isUpdated
           : isUpdated // ignore: cast_nullable_to_non_nullable
               as bool,
+      startTime: freezed == startTime
+          ? _value.startTime
+          : startTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endTime: freezed == endTime
+          ? _value.endTime
+          : endTime // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       deleteResponse: freezed == deleteResponse
           ? _value.deleteResponse
           : deleteResponse // ignore: cast_nullable_to_non_nullable
@@ -899,6 +1122,8 @@ class _$_AppoinmetsState implements _AppoinmetsState {
       required this.isDeleteLoading,
       required this.isDeleted,
       required this.isUpdated,
+      required this.startTime,
+      required this.endTime,
       required this.deleteResponse,
       required this.updateResponse});
 
@@ -923,13 +1148,17 @@ class _$_AppoinmetsState implements _AppoinmetsState {
   @override
   final bool isUpdated;
   @override
+  final DateTime? startTime;
+  @override
+  final DateTime? endTime;
+  @override
   final DeleteAppoinmentsModel? deleteResponse;
   @override
   final UpdateAppoinmentsModel? updateResponse;
 
   @override
   String toString() {
-    return 'AppoinmetsState(isLoading: $isLoading, hasData: $hasData, isCreateLoading: $isCreateLoading, createData: $createData, isError: $isError, appoimentData: $appoimentData, isUpdateLoading: $isUpdateLoading, isDeleteLoading: $isDeleteLoading, isDeleted: $isDeleted, isUpdated: $isUpdated, deleteResponse: $deleteResponse, updateResponse: $updateResponse)';
+    return 'AppoinmetsState(isLoading: $isLoading, hasData: $hasData, isCreateLoading: $isCreateLoading, createData: $createData, isError: $isError, appoimentData: $appoimentData, isUpdateLoading: $isUpdateLoading, isDeleteLoading: $isDeleteLoading, isDeleted: $isDeleted, isUpdated: $isUpdated, startTime: $startTime, endTime: $endTime, deleteResponse: $deleteResponse, updateResponse: $updateResponse)';
   }
 
   @override
@@ -955,6 +1184,9 @@ class _$_AppoinmetsState implements _AppoinmetsState {
                 other.isDeleted == isDeleted) &&
             (identical(other.isUpdated, isUpdated) ||
                 other.isUpdated == isUpdated) &&
+            (identical(other.startTime, startTime) ||
+                other.startTime == startTime) &&
+            (identical(other.endTime, endTime) || other.endTime == endTime) &&
             (identical(other.deleteResponse, deleteResponse) ||
                 other.deleteResponse == deleteResponse) &&
             (identical(other.updateResponse, updateResponse) ||
@@ -974,6 +1206,8 @@ class _$_AppoinmetsState implements _AppoinmetsState {
       isDeleteLoading,
       isDeleted,
       isUpdated,
+      startTime,
+      endTime,
       deleteResponse,
       updateResponse);
 
@@ -996,6 +1230,8 @@ abstract class _AppoinmetsState implements AppoinmetsState {
           required final bool isDeleteLoading,
           required final bool isDeleted,
           required final bool isUpdated,
+          required final DateTime? startTime,
+          required final DateTime? endTime,
           required final DeleteAppoinmentsModel? deleteResponse,
           required final UpdateAppoinmentsModel? updateResponse}) =
       _$_AppoinmetsState;
@@ -1020,6 +1256,10 @@ abstract class _AppoinmetsState implements AppoinmetsState {
   bool get isDeleted;
   @override
   bool get isUpdated;
+  @override
+  DateTime? get startTime;
+  @override
+  DateTime? get endTime;
   @override
   DeleteAppoinmentsModel? get deleteResponse;
   @override

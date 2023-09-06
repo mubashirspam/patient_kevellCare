@@ -13,6 +13,8 @@ class AppoinmetsState with _$AppoinmetsState {
     required bool isDeleteLoading,
     required bool isDeleted,
     required bool isUpdated,
+    required DateTime? startTime,
+    required DateTime? endTime,
     required DeleteAppoinmentsModel? deleteResponse,
     required UpdateAppoinmentsModel? updateResponse,
   }) = _AppoinmetsState;
@@ -30,5 +32,7 @@ class AppoinmetsState with _$AppoinmetsState {
         isUpdated: false,
         deleteResponse: null,
         updateResponse: null,
+        endTime: null,
+        startTime: null,
       );
 }

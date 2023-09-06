@@ -8,10 +8,10 @@ import 'package:sliver_tools/sliver_tools.dart';
 import '../../../configure/assets_manage/icons.dart';
 import '../../../core/helper/date.dart';
 import '../../../pages/report/presentation/report_scree.dart';
-import '../../widgets/calender/calnder.dart';
+
 import '../../widgets/error_widget.dart';
 import '../../widgets/input_field/date_filed.dart';
-import '../../widgets/input_field/input_field_widget.dart';
+
 import '../../widgets/loading_widget.dart';
 import 'bloc/report_bloc.dart';
 
@@ -178,7 +178,7 @@ class ReportItem extends StatelessWidget {
       child: ListTile(
         onTap: () => Navigator.of(context).pushNamed(
           ReportScreen.routeName,
-          arguments: data,
+          arguments: data.id,
         ),
         contentPadding:
             const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

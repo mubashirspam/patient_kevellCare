@@ -168,8 +168,6 @@ class _EditMyProfileState extends State<EditMyProfile> {
                                   dobController = TextEditingController(
                                       text: dateFormatToddmmyyyy(
                                           onDateTimeChanged));
-
-                                  // Navigator.of(context).pop();
                                 },
                               );
                             },

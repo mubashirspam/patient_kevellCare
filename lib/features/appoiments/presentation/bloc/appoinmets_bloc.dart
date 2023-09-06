@@ -148,5 +148,11 @@ class AppoinmetsBloc extends Bloc<AppoinmetsEvent, AppoinmetsState> {
       );
       emit(result);
     });
+    on<_PickTime>((event, emit) {
+      emit(state.copyWith(
+        startTime: event.startTime,
+        endTime: event.endTime,
+      ));
+    });
   }
 }

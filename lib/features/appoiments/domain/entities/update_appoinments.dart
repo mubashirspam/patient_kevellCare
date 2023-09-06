@@ -8,25 +8,26 @@ String updateAppoinmentsPayloadToJson(UpdateAppoinmentsPayload data) =>
     json.encode(data.toJson());
 
 class UpdateAppoinmentsPayload {
-  String? id;
-  DateTime? starttime;
-  DateTime? endtime;
-  String? dailylimitcount;
-  String? timeperPatient;
+  int? id;
+  DateTime? appointmentdate;
+  String? endtime;
+  String? starttime;
+  String? remark;
 
   UpdateAppoinmentsPayload({
     this.id,
-    this.starttime,
+    this.appointmentdate,
     this.endtime,
-    this.dailylimitcount,
-    this.timeperPatient,
+    this.starttime,
+    this.remark,
   });
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "starttime": starttime?.toIso8601String(),
-        "endtime": endtime?.toIso8601String(),
-        "dailylimitcount": dailylimitcount,
-        "timeperPatient": timeperPatient,
+        "_id": id,
+        "appointmentdate":
+            "${appointmentdate!.year.toString().padLeft(4, '0')}-${appointmentdate!.month.toString().padLeft(2, '0')}-${appointmentdate!.day.toString().padLeft(2, '0')}",
+        "appointmentendtime": endtime,
+        "appointmentstarttime": starttime,
+        "Reasonformeetingdoctor": remark,
       };
 }

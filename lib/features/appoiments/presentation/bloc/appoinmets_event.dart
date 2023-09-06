@@ -11,5 +11,8 @@ class AppoinmetsEvent with _$AppoinmetsEvent {
       _UpdateAppoinmets;
 
   const factory AppoinmetsEvent.deleteAppoinments({required int id}) =
-      _DeleteAppoinmets;
+      _DeleteAppoinmets; const factory AppoinmetsEvent.pickTime({
+    required DateTime startTime,
+    required DateTime endTime,
+  }) = _PickTime;
 }
