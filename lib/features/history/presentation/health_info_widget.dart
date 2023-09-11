@@ -113,7 +113,7 @@ class HealthInfoWidget extends StatelessWidget {
                 items: List.generate(
                   5,
                   (index) => DropdownMenuItem(
-                    value: Text("'Body Temperature'"),
+                    value: const Text("'Body Temperature'"),
                     child: Text(
                       'Body Temperature',
                       style: Theme.of(context).textTheme.titleLarge,

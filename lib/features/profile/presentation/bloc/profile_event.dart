@@ -10,7 +10,10 @@ class ProfileEvent with _$ProfileEvent {
     required String mobileNumber,
   }) = _UpdateProfile;
 
-      const factory ProfileEvent.pickDate({
+  const factory ProfileEvent.pickDate({
     required DateTime date,
   }) = _PickDate;
+  const factory ProfileEvent.uplaodImage({
+    required File image,
+  }) = _UplaodImage;
 }

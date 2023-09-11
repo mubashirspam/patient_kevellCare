@@ -167,19 +167,19 @@ class GeneratePrescriptionPdfRepoImpliment {
     return pdf;
   }
 
-  pw.Widget _buildTable(Prescription entry, pw.Context context) {
-    final tableData = [
-      ['Name', entry.name],
-      ['Type', entry.type],
-      ['Duration', entry.duration],
-      // Add more rows as needed
-    ];
+  // pw.Widget buildTable(Prescription entry, pw.Context context) {
+  //   final tableData = [
+  //     ['Name', entry.name],
+  //     ['Type', entry.type],
+  //     ['Duration', entry.duration],
+  //     // Add more rows as needed
+  //   ];
 
-    return pw.TableHelper.fromTextArray(
-      context: context,
-      data: tableData,
-      tableWidth: pw.TableWidth.min,
-      border: null,
-    );
-  }
+  //   return pw.TableHelper.fromTextArray(
+  //     context: context,
+  //     data: tableData,
+  //     tableWidth: pw.TableWidth.min,
+  //     border: null,
+  //   );
+  // }
 }

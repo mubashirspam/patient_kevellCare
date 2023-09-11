@@ -13,8 +13,7 @@ class ApiEndPoints {
   static const String getprofile = "$baseUrl/register/api/GetPatientinfoBy";
 
   static const String updateProfile =
-      "$baseUrl/register/api/patientprofileUpdate";
-
+      "$baseUrl/register/api/patientprofileUpdate"; 
   static const String homeStatus = "$baseUrl/register/api/doctorcountlist";
 
   static const String homeWaitingPatient =
@@ -59,4 +58,9 @@ class ApiEndPoints {
       "$baseUrl/doctor/api/ViewPatientReport_new";
 
         // static const String endAppoinment = "$baseUrl/doctor/api/Finishtheappoinment";
+
+
+
+  static const websocketUrl =
+      "https://513f-2409-4072-6e19-17b8-195d-91e2-3293-a235.ngrok-free.app";
 }

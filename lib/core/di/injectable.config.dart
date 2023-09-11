@@ -29,7 +29,7 @@ import '../../features/appoiments/domain/repositories/get_appoinments_repository
 import '../../features/appoiments/domain/repositories/update_appoinments_repository.dart'
     as _i25;
 import '../../features/appoiments/presentation/bloc/appoinmets_bloc.dart'
-    as _i29;
+    as _i31;
 import '../../features/home/data/repositories/get_home_waiting_patient_repository_impl.dart'
     as _i14;
 import '../../features/home/domain/repositories/get_home_waiting_patient_repository.dart'
@@ -41,16 +41,20 @@ import '../../features/login/data/repositories/otp_repository_impl.dart'
     as _i21;
 import '../../features/login/domain/repositories/login_repository.dart' as _i18;
 import '../../features/login/domain/repositories/otp_repository.dart' as _i20;
-import '../../features/login/presentation/bloc/login_bloc.dart' as _i30;
+import '../../features/login/presentation/bloc/login_bloc.dart' as _i32;
 import '../../features/profile/data/repositories/profile_get__repository_impl.dart'
     as _i16;
 import '../../features/profile/data/repositories/profile_update_repository_impl.dart'
     as _i28;
+import '../../features/profile/data/repositories/upload_image_repository_impl.dart'
+    as _i30;
 import '../../features/profile/domain/repositories/get_profile_repository.dart'
     as _i15;
 import '../../features/profile/domain/repositories/update_profile_repository.dart'
     as _i27;
-import '../../features/profile/presentation/bloc/profile_bloc.dart' as _i31;
+import '../../features/profile/domain/repositories/upload_image_repository.dart'
+    as _i29;
+import '../../features/profile/presentation/bloc/profile_bloc.dart' as _i33;
 import '../../features/report/data/repository/fetch_report_general_impliment.dart'
     as _i8;
 import '../../features/report/data/repository/fetch_report_impliment.dart'
@@ -60,7 +64,7 @@ import '../../features/report/domain/repositories/fetch_report_general_repositor
 import '../../features/report/domain/repositories/fetch_report_repository.dart'
     as _i9;
 import '../../features/report/presentation/bloc/report_bloc.dart' as _i22;
-import '../../features/signup/bloc/signup_bloc.dart' as _i32;
+import '../../features/signup/bloc/signup_bloc.dart' as _i34;
 import '../../features/signup/data/repositories/signup_repository_impl.dart'
     as _i24;
 import '../../features/signup/domain/repositories/signup_repository.dart'
@@ -104,22 +108,25 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i26.UpdateAppoinmentRepoImpliment());
     gh.lazySingleton<_i27.UpdateProfileRepository>(
         () => _i28.UpdateProfileRepoImpliment());
-    gh.factory<_i29.AppoinmetsBloc>(() => _i29.AppoinmetsBloc(
+    gh.lazySingleton<_i29.UploadImageRepository>(
+        () => _i30.UploadImageRepoImpliment());
+    gh.factory<_i31.AppoinmetsBloc>(() => _i31.AppoinmetsBloc(
           gh<_i11.GetAppoinmentsRepository>(),
           gh<_i3.CreateAppoinmentsRepository>(),
           gh<_i5.DeleteAppoinmentsRepository>(),
           gh<_i25.UpdateAppoinmentsRepository>(),
         ));
-    gh.factory<_i30.LoginBloc>(() => _i30.LoginBloc(
+    gh.factory<_i32.LoginBloc>(() => _i32.LoginBloc(
           gh<_i18.LoginRepository>(),
           gh<_i20.OtpRepository>(),
         ));
-    gh.factory<_i31.ProfileBloc>(() => _i31.ProfileBloc(
+    gh.factory<_i33.ProfileBloc>(() => _i33.ProfileBloc(
           gh<_i15.GetProfileRepository>(),
           gh<_i27.UpdateProfileRepository>(),
+          gh<_i29.UploadImageRepository>(),
         ));
-    gh.factory<_i32.SignupBloc>(
-        () => _i32.SignupBloc(gh<_i23.SignupRepository>()));
+    gh.factory<_i34.SignupBloc>(
+        () => _i34.SignupBloc(gh<_i23.SignupRepository>()));
     return this;
   }
 }

@@ -1,12 +1,116 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-import 'package:kevell_care/features/widgets/avatar/active_avatar.dart';
 
 
+import '../../video_call/presentation/call_screen.dart';
+import '../../video_call/presentation/join_screen.dart';
+import '../../video_call/service/signaling_service.dart';
 
-class CheckupHeaderWidget extends StatelessWidget {
-  const CheckupHeaderWidget({super.key});
+class CheckupHeaderWidget extends StatefulWidget {
+  final String selfCallerId;
+  final String paitentCallerId;
+  const CheckupHeaderWidget({
+    super.key,
+    required this.paitentCallerId,
+    required this.selfCallerId,
+  });
+
+  @override
+  State<CheckupHeaderWidget> createState() => _CheckupHeaderWidgetState();
+}
+
+class _CheckupHeaderWidgetState extends State<CheckupHeaderWidget> {
+  dynamic incomingSDPOffer;
+
+  bool isVidecallStarted = false;
+
+  String? callerId;
+  String? calleeId;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // listen for incoming video call
+    SignallingService.instance.socket!.on("newCall", (data) {
+      log("newCall");
+      if (mounted) {
+        // set SDP Offer of incoming call
+        setState(() => incomingSDPOffer = data);
+      }
+    });
+  }
+
+  // join Call
+  makeCall({
+    required String jcallerId,
+    required String jcalleeId,
+    dynamic offer,
+  }) {
+    setState(() {
+      isVidecallStarted = true;
+      incomingSDPOffer = null;
+      callerId = jcallerId;
+      calleeId = jcalleeId;
+    });
+  }
+
+  void answerCall() {
+    setState(() {
+      isVidecallStarted = true;
+
+      callerId = null;
+      calleeId = null;
+    });
+  }
+
+  void cutCall() {
+    setState(() {
+      isVidecallStarted = false;
+      incomingSDPOffer = null;
+      callerId = null;
+      calleeId = null;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+ return isVidecallStarted
+        ? CallingWidget(
+          cutCall: cutCall,
+            callerId: callerId ?? incomingSDPOffer["callerId"]!,
+            calleeId: calleeId ?? widget.selfCallerId,
+            offer: incomingSDPOffer==null? null : incomingSDPOffer["sdpOffer"],
+          )
+        : HeaderWidget(
+            answerCall: answerCall,
+            makeCall:()=> makeCall(
+                jcalleeId: widget.paitentCallerId,
+                jcallerId: widget.selfCallerId),
+            cutCall: cutCall,
+            joinCall: () {},
+            incomingSDPOffer: incomingSDPOffer,
+
+          );
+  }
+}
+
+class HeaderWidget extends StatelessWidget {
+  final dynamic incomingSDPOffer;
+  final VoidCallback joinCall;
+  final VoidCallback answerCall;
+  final VoidCallback makeCall;
+  final VoidCallback cutCall;
+  const HeaderWidget(
+      {super.key,
+      required this.answerCall,
+      this.incomingSDPOffer,
+      required this.joinCall,
+      required this.makeCall,
+      required this.cutCall});
 
   @override
   Widget build(BuildContext context) {
@@ -21,52 +125,13 @@ class CheckupHeaderWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const ActiveAvatar(),
-              const Spacer(),
-              Container(
-                padding: const EdgeInsets.all(20),
-                margin: const EdgeInsets.only(right: 15),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          blurRadius: 15,
-                          offset: const Offset(0, 5))
-                    ],
-                    color: context.theme.secondary),
-                child: Center(
-                  child: Icon(
-                    Icons.message,
-                    color: context.theme.primary,
-                  ),
-                ),
-              ),
-              InkWell(
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          blurRadius: 15,
-                          offset: const Offset(0, 5))
-                    ],
-                    borderRadius: BorderRadius.circular(100),
-                    color: context.theme.secondary,
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.video_call,
-                      color: context.theme.primary,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          const SizedBox(height: 15),
+        JoinOrCallWidget(
+              answerCall: answerCall,
+              joinCall: joinCall,
+              incomingSDPOffer:incomingSDPOffer ,
+              makeCall: makeCall,
+              cutCall: cutCall),
           const SizedBox(height: 15),
         ],
       ),

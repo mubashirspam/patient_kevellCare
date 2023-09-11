@@ -4,12 +4,13 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/checkup/presentation/temparature_widgtet.dart';
 import 'package:kevell_care/pages/initialize/initialize.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
+import 'package:sliver_tools/sliver_tools.dart';
 
+import '../../../configure/api/endpoints.dart';
 import '../../../core/helper/alert.dart';
 import '../../../core/helper/toast.dart';
 import '../../../features/checkup/presentation/blood_pressure_widget.dart';
@@ -23,6 +24,7 @@ import '../../../features/checkup/presentation/checkup_header.dart';
 import 'dart:math' as m;
 
 import '../../../features/checkup/presentation/widgets/ecg_graph.dart';
+import '../../../features/video_call/service/signaling_service.dart';
 
 class PatientCheckupScreen extends StatefulWidget {
   static const routeName = '/patient-checup-screen';
@@ -368,11 +370,14 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
   int doctorID = 0;
   int appointmentID = 0;
 
+
+
   @override
   void dispose() {
     _timer?.cancel();
     super.dispose();
   }
+
 
   @override
   void initState() {
@@ -381,50 +386,97 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
     appointmentID = widget.checkupDetalis['appointmentID'];
     initializeMQTTClient();
     connect().then((value) => subScribeTo("KC_EC94CB6F61DC/app"));
+
+    SignallingService.instance.init(
+      websocketUrl: ApiEndPoints.websocketUrl,
+      selfCallerID: patientID.toString(),
+    );
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: InkWell(
-          onTap: () => Navigator.pop(context),
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: context.theme.secondary),
-            child: Center(
-              child: Icon(
-                Icons.chevron_left,
-                color: context.theme.primary,
-              ),
+      // appBar: AppBar(
+      //   leading: InkWell(
+      //     onTap: () => Navigator.pop(context),
+      //     child: Container(
+      //       margin: const EdgeInsets.all(10),
+      //       decoration: BoxDecoration(
+      //           borderRadius: BorderRadius.circular(10),
+      //           color: context.theme.secondary),
+      //       child: Center(
+      //         child: Icon(
+      //           Icons.chevron_left,
+      //           color: context.theme.primary,
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      //   backgroundColor: context.theme.primary,
+      //   centerTitle: false,
+      // ),
+      body: CustomScrollView(
+        slivers: [
+  SliverPinnedHeader(
+            child: CheckupHeaderWidget(
+              paitentCallerId: patientID.toString(),
+              selfCallerId: doctorID.toString(),
             ),
           ),
-        ),
-        backgroundColor: context.theme.primary,
-        centerTitle: false,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const CheckupHeaderWidget(),
-            UnloackWidget(
-              isDoctorDriven: true,
-              isConnected: isConnected,
-              isUnloacking: isUnloacking,
-              isLoading: isLoading,
-              isUnloacked: isUnloacked,
-              onpressed: () async {
-                initializeMQTTClient();
-                await connect()
-                    .then((value) => subScribeTo("KC_EC94CB6F61DC/app"));
-              },
-              onChanged: (_) {},
-            ),
-            TepamratureWidget(
-              isReading: tReading,
+         MultiSliver(children: [ UnloackWidget(
+            isDoctorDriven: true,
+            isConnected: isConnected,
+            isUnloacking: isUnloacking,
+            isLoading: isLoading,
+            isUnloacked: isUnloacked,
+            onpressed: () async {
+              initializeMQTTClient();
+              await connect()
+                  .then((value) => subScribeTo("KC_EC94CB6F61DC/app"));
+            },
+            onChanged: (_) {},
+          ),
+          TepamratureWidget(
+            isReading: tReading,
+            onpress: isUnloacked
+                ? () {
+                    publishMy({
+                      "id": "KC_EC94CB6F61DC",
+                      "patientID": patientID,
+                      "doctorID": doctorID,
+                      "appointmentID": appointmentID,
+                      "type": "Doctor",
+                      "command": "device",
+                      "number": 2,
+                      "date": DateTime.now().millisecondsSinceEpoch
+                    }, "KC_EC94CB6F61DC/device");
+                  }
+                : () => Toast.showToast(
+                    context: context, message: "Please Unlock"),
+            temparature: temparature,
+          ),
+          Spo2Widget(
+            isReading: sp02Reading,
+            heartBeat: heartBeat,
+            spo2: sop2,
+            onpress: isUnloacked
+                ? () {
+                    publishMy({
+                      "id": "KC_EC94CB6F61DC",
+                      "patientID": patientID,
+                      "doctorID": doctorID,
+                      "appointmentID": appointmentID,
+                      "type": "Doctor",
+                      "command": "device",
+                      "number": 3,
+                      "date": DateTime.now().millisecondsSinceEpoch
+                    }, "KC_EC94CB6F61DC/device");
+                  }
+                : () => Toast.showToast(
+                    context: context, message: "Please Unlock"),
+          ),
+          BloodPressureWidget(
               onpress: isUnloacked
                   ? () {
                       publishMy({
@@ -434,115 +486,76 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
                         "appointmentID": appointmentID,
                         "type": "Doctor",
                         "command": "device",
-                        "number": 2,
+                        "number": 5,
                         "date": DateTime.now().millisecondsSinceEpoch
                       }, "KC_EC94CB6F61DC/device");
                     }
                   : () => Toast.showToast(
                       context: context, message: "Please Unlock"),
-              temparature: temparature,
-            ),
-            Spo2Widget(
-              isReading: sp02Reading,
-              heartBeat: heartBeat,
-              spo2: sop2,
-              onpress: isUnloacked
-                  ? () {
-                      publishMy({
-                        "id": "KC_EC94CB6F61DC",
-                        "patientID": patientID,
-                        "doctorID": doctorID,
-                        "appointmentID": appointmentID,
-                        "type": "Doctor",
-                        "command": "device",
-                        "number": 3,
-                        "date": DateTime.now().millisecondsSinceEpoch
-                      }, "KC_EC94CB6F61DC/device");
-                    }
-                  : () => Toast.showToast(
-                      context: context, message: "Please Unlock"),
-            ),
-            BloodPressureWidget(
-                onpress: isUnloacked
-                    ? () {
-                        publishMy({
-                          "id": "KC_EC94CB6F61DC",
-                          "patientID": patientID,
-                          "doctorID": doctorID,
-                          "appointmentID": appointmentID,
-                          "type": "Doctor",
-                          "command": "device",
-                          "number": 5,
-                          "date": DateTime.now().millisecondsSinceEpoch
-                        }, "KC_EC94CB6F61DC/device");
-                      }
-                    : () => Toast.showToast(
-                        context: context, message: "Please Unlock"),
-                bp: bp["bpsys"]!,
-                isReading: bpReading,
-                bpdia: bp["bpdia"]!,
-                bpplus: bp["bpplus"]!),
-            EcgWidget(
-              data: ecgData,
-              isReading: ecgReading,
-              onpress: isUnloacked
-                  ? () {
-                      publishMy({
-                        "id": "KC_EC94CB6F61DC",
-                        "patientID": patientID,
-                        "doctorID": doctorID,
-                        "appointmentID": appointmentID,
-                        "type": "Doctor",
-                        "command": "device",
-                        "number": 6,
-                        "date": DateTime.now().millisecondsSinceEpoch
-                      }, "KC_EC94CB6F61DC/device");
-                    }
-                  : () => Toast.showToast(
-                      context: context, message: "Please Unlock"),
-              ecg: "",
-            ),
-            GSRgWidget(
-              isReading: gsrReading,
-              data: gsrData,
-              onpress: isUnloacked
-                  ? () {
-                      publishMy({
-                        "id": "KC_EC94CB6F61DC",
-                        "patientID": patientID,
-                        "doctorID": doctorID,
-                        "appointmentID": appointmentID,
-                        "type": "Doctor",
-                        "command": "device",
-                        "number": 8,
-                        "date": DateTime.now().millisecondsSinceEpoch
-                      }, "KC_EC94CB6F61DC/device");
-                    }
-                  : () => Toast.showToast(
-                      context: context, message: "Please Unlock"),
-              gsr: temparature,
-            ),
-            PositionWidget(
-              isReading: tReading,
-              onpress: isUnloacked
-                  ? () {
-                      publishMy({
-                        "id": "KC_EC94CB6F61DC",
-                        "patientID": patientID,
-                        "doctorID": doctorID,
-                        "appointmentID": appointmentID,
-                        "type": "Doctor",
-                        "command": "device",
-                        "number": 4,
-                        "date": DateTime.now().millisecondsSinceEpoch
-                      }, "KC_EC94CB6F61DC/device");
-                    }
-                  : () => Toast.showToast(
-                      context: context, message: "Please Unlock"),
-              position: position,
-            ),
-          ],
-        ),
+              bp: bp["bpsys"]!,
+              isReading: bpReading,
+              bpdia: bp["bpdia"]!,
+              bpplus: bp["bpplus"]!),
+          EcgWidget(
+            data: ecgData,
+            isReading: ecgReading,
+            onpress: isUnloacked
+                ? () {
+                    publishMy({
+                      "id": "KC_EC94CB6F61DC",
+                      "patientID": patientID,
+                      "doctorID": doctorID,
+                      "appointmentID": appointmentID,
+                      "type": "Doctor",
+                      "command": "device",
+                      "number": 6,
+                      "date": DateTime.now().millisecondsSinceEpoch
+                    }, "KC_EC94CB6F61DC/device");
+                  }
+                : () => Toast.showToast(
+                    context: context, message: "Please Unlock"),
+            ecg: "",
+          ),
+          GSRgWidget(
+            isReading: gsrReading,
+            data: gsrData,
+            onpress: isUnloacked
+                ? () {
+                    publishMy({
+                      "id": "KC_EC94CB6F61DC",
+                      "patientID": patientID,
+                      "doctorID": doctorID,
+                      "appointmentID": appointmentID,
+                      "type": "Doctor",
+                      "command": "device",
+                      "number": 8,
+                      "date": DateTime.now().millisecondsSinceEpoch
+                    }, "KC_EC94CB6F61DC/device");
+                  }
+                : () => Toast.showToast(
+                    context: context, message: "Please Unlock"),
+            gsr: temparature,
+          ),
+          PositionWidget(
+            isReading: tReading,
+            onpress: isUnloacked
+                ? () {
+                    publishMy({
+                      "id": "KC_EC94CB6F61DC",
+                      "patientID": patientID,
+                      "doctorID": doctorID,
+                      "appointmentID": appointmentID,
+                      "type": "Doctor",
+                      "command": "device",
+                      "number": 4,
+                      "date": DateTime.now().millisecondsSinceEpoch
+                    }, "KC_EC94CB6F61DC/device");
+                  }
+                : () => Toast.showToast(
+                    context: context, message: "Please Unlock"),
+            position: position,
+          ),])
+        ],
       ),
     );
   }

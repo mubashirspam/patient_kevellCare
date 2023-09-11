@@ -101,8 +101,8 @@ class _EditAppoinmentWidgetState extends State<EditAppoinmentWidget> {
                           List<String> timestamps = ww.split(',');
                           context.read<AppoinmetsBloc>().add(
                                 AppoinmetsEvent.pickTime(
-                                  endTime: DateTime.parse(timestamps[0]),
-                                  startTime: DateTime.parse(timestamps[1]),
+                                  endTime: DateTime.parse(timestamps[1]),
+                                  startTime: DateTime.parse(timestamps[0]),
                                 ),
                               );
                         },

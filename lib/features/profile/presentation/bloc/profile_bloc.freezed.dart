@@ -23,6 +23,7 @@ mixin _$ProfileEvent {
             String name, String dob, String address, String mobileNumber)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
+    required TResult Function(File image) uplaodImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$ProfileEvent {
             String name, String dob, String address, String mobileNumber)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
+    TResult? Function(File image)? uplaodImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$ProfileEvent {
             String name, String dob, String address, String mobileNumber)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,
+    TResult Function(File image)? uplaodImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +52,7 @@ mixin _$ProfileEvent {
     required TResult Function(_GetProfile value) getProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_PickDate value) pickDate,
+    required TResult Function(_UplaodImage value) uplaodImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +60,7 @@ mixin _$ProfileEvent {
     TResult? Function(_GetProfile value)? getProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
     TResult? Function(_PickDate value)? pickDate,
+    TResult? Function(_UplaodImage value)? uplaodImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$ProfileEvent {
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_PickDate value)? pickDate,
+    TResult Function(_UplaodImage value)? uplaodImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -129,6 +135,7 @@ class _$_GetProfile implements _GetProfile {
             String name, String dob, String address, String mobileNumber)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
+    required TResult Function(File image) uplaodImage,
   }) {
     return getProfile();
   }
@@ -141,6 +148,7 @@ class _$_GetProfile implements _GetProfile {
             String name, String dob, String address, String mobileNumber)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
+    TResult? Function(File image)? uplaodImage,
   }) {
     return getProfile?.call();
   }
@@ -153,6 +161,7 @@ class _$_GetProfile implements _GetProfile {
             String name, String dob, String address, String mobileNumber)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,
+    TResult Function(File image)? uplaodImage,
     required TResult orElse(),
   }) {
     if (getProfile != null) {
@@ -167,6 +176,7 @@ class _$_GetProfile implements _GetProfile {
     required TResult Function(_GetProfile value) getProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_PickDate value) pickDate,
+    required TResult Function(_UplaodImage value) uplaodImage,
   }) {
     return getProfile(this);
   }
@@ -177,6 +187,7 @@ class _$_GetProfile implements _GetProfile {
     TResult? Function(_GetProfile value)? getProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
     TResult? Function(_PickDate value)? pickDate,
+    TResult? Function(_UplaodImage value)? uplaodImage,
   }) {
     return getProfile?.call(this);
   }
@@ -187,6 +198,7 @@ class _$_GetProfile implements _GetProfile {
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_PickDate value)? pickDate,
+    TResult Function(_UplaodImage value)? uplaodImage,
     required TResult orElse(),
   }) {
     if (getProfile != null) {
@@ -299,6 +311,7 @@ class _$_UpdateProfile implements _UpdateProfile {
             String name, String dob, String address, String mobileNumber)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
+    required TResult Function(File image) uplaodImage,
   }) {
     return updateProfile(name, dob, address, mobileNumber);
   }
@@ -311,6 +324,7 @@ class _$_UpdateProfile implements _UpdateProfile {
             String name, String dob, String address, String mobileNumber)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
+    TResult? Function(File image)? uplaodImage,
   }) {
     return updateProfile?.call(name, dob, address, mobileNumber);
   }
@@ -323,6 +337,7 @@ class _$_UpdateProfile implements _UpdateProfile {
             String name, String dob, String address, String mobileNumber)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,
+    TResult Function(File image)? uplaodImage,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -337,6 +352,7 @@ class _$_UpdateProfile implements _UpdateProfile {
     required TResult Function(_GetProfile value) getProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_PickDate value) pickDate,
+    required TResult Function(_UplaodImage value) uplaodImage,
   }) {
     return updateProfile(this);
   }
@@ -347,6 +363,7 @@ class _$_UpdateProfile implements _UpdateProfile {
     TResult? Function(_GetProfile value)? getProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
     TResult? Function(_PickDate value)? pickDate,
+    TResult? Function(_UplaodImage value)? uplaodImage,
   }) {
     return updateProfile?.call(this);
   }
@@ -357,6 +374,7 @@ class _$_UpdateProfile implements _UpdateProfile {
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_PickDate value)? pickDate,
+    TResult Function(_UplaodImage value)? uplaodImage,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
@@ -451,6 +469,7 @@ class _$_PickDate implements _PickDate {
             String name, String dob, String address, String mobileNumber)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
+    required TResult Function(File image) uplaodImage,
   }) {
     return pickDate(date);
   }
@@ -463,6 +482,7 @@ class _$_PickDate implements _PickDate {
             String name, String dob, String address, String mobileNumber)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
+    TResult? Function(File image)? uplaodImage,
   }) {
     return pickDate?.call(date);
   }
@@ -475,6 +495,7 @@ class _$_PickDate implements _PickDate {
             String name, String dob, String address, String mobileNumber)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,
+    TResult Function(File image)? uplaodImage,
     required TResult orElse(),
   }) {
     if (pickDate != null) {
@@ -489,6 +510,7 @@ class _$_PickDate implements _PickDate {
     required TResult Function(_GetProfile value) getProfile,
     required TResult Function(_UpdateProfile value) updateProfile,
     required TResult Function(_PickDate value) pickDate,
+    required TResult Function(_UplaodImage value) uplaodImage,
   }) {
     return pickDate(this);
   }
@@ -499,6 +521,7 @@ class _$_PickDate implements _PickDate {
     TResult? Function(_GetProfile value)? getProfile,
     TResult? Function(_UpdateProfile value)? updateProfile,
     TResult? Function(_PickDate value)? pickDate,
+    TResult? Function(_UplaodImage value)? uplaodImage,
   }) {
     return pickDate?.call(this);
   }
@@ -509,6 +532,7 @@ class _$_PickDate implements _PickDate {
     TResult Function(_GetProfile value)? getProfile,
     TResult Function(_UpdateProfile value)? updateProfile,
     TResult Function(_PickDate value)? pickDate,
+    TResult Function(_UplaodImage value)? uplaodImage,
     required TResult orElse(),
   }) {
     if (pickDate != null) {
@@ -524,6 +548,157 @@ abstract class _PickDate implements ProfileEvent {
   DateTime get date;
   @JsonKey(ignore: true)
   _$$_PickDateCopyWith<_$_PickDate> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UplaodImageCopyWith<$Res> {
+  factory _$$_UplaodImageCopyWith(
+          _$_UplaodImage value, $Res Function(_$_UplaodImage) then) =
+      __$$_UplaodImageCopyWithImpl<$Res>;
+  @useResult
+  $Res call({File image});
+}
+
+/// @nodoc
+class __$$_UplaodImageCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$_UplaodImage>
+    implements _$$_UplaodImageCopyWith<$Res> {
+  __$$_UplaodImageCopyWithImpl(
+      _$_UplaodImage _value, $Res Function(_$_UplaodImage) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? image = null,
+  }) {
+    return _then(_$_UplaodImage(
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as File,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UplaodImage implements _UplaodImage {
+  const _$_UplaodImage({required this.image});
+
+  @override
+  final File image;
+
+  @override
+  String toString() {
+    return 'ProfileEvent.uplaodImage(image: $image)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UplaodImage &&
+            (identical(other.image, image) || other.image == image));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, image);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UplaodImageCopyWith<_$_UplaodImage> get copyWith =>
+      __$$_UplaodImageCopyWithImpl<_$_UplaodImage>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getProfile,
+    required TResult Function(
+            String name, String dob, String address, String mobileNumber)
+        updateProfile,
+    required TResult Function(DateTime date) pickDate,
+    required TResult Function(File image) uplaodImage,
+  }) {
+    return uplaodImage(image);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getProfile,
+    TResult? Function(
+            String name, String dob, String address, String mobileNumber)?
+        updateProfile,
+    TResult? Function(DateTime date)? pickDate,
+    TResult? Function(File image)? uplaodImage,
+  }) {
+    return uplaodImage?.call(image);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getProfile,
+    TResult Function(
+            String name, String dob, String address, String mobileNumber)?
+        updateProfile,
+    TResult Function(DateTime date)? pickDate,
+    TResult Function(File image)? uplaodImage,
+    required TResult orElse(),
+  }) {
+    if (uplaodImage != null) {
+      return uplaodImage(image);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetProfile value) getProfile,
+    required TResult Function(_UpdateProfile value) updateProfile,
+    required TResult Function(_PickDate value) pickDate,
+    required TResult Function(_UplaodImage value) uplaodImage,
+  }) {
+    return uplaodImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetProfile value)? getProfile,
+    TResult? Function(_UpdateProfile value)? updateProfile,
+    TResult? Function(_PickDate value)? pickDate,
+    TResult? Function(_UplaodImage value)? uplaodImage,
+  }) {
+    return uplaodImage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetProfile value)? getProfile,
+    TResult Function(_UpdateProfile value)? updateProfile,
+    TResult Function(_PickDate value)? pickDate,
+    TResult Function(_UplaodImage value)? uplaodImage,
+    required TResult orElse(),
+  }) {
+    if (uplaodImage != null) {
+      return uplaodImage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UplaodImage implements ProfileEvent {
+  const factory _UplaodImage({required final File image}) = _$_UplaodImage;
+
+  File get image;
+  @JsonKey(ignore: true)
+  _$$_UplaodImageCopyWith<_$_UplaodImage> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
