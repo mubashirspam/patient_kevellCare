@@ -1,9 +1,6 @@
 import '../value/constant.dart';
 
-class ApiEndPoints { 
-
-
-  
+class ApiEndPoints {
   static const String login = "$baseUrl/register/api/patientLogin";
 
   static const String register = "$baseUrl/register/api/patientRegister";
@@ -13,7 +10,7 @@ class ApiEndPoints {
   static const String getprofile = "$baseUrl/register/api/GetPatientinfoBy";
 
   static const String updateProfile =
-      "$baseUrl/register/api/patientprofileUpdate"; 
+      "$baseUrl/register/api/patientprofileUpdate";
   static const String homeStatus = "$baseUrl/register/api/doctorcountlist";
 
   static const String homeWaitingPatient =
@@ -42,14 +39,11 @@ class ApiEndPoints {
   static const String fetchAppoinment =
       "$baseUrl/appointment/api/upcomingpasthistorypatient";
 
-
-     static const String updateAppoinment =
+  static const String updateAppoinment =
       "$baseUrl/appointment/api/updateAppoinment";
 
-      static const String deleteAppoinments =
+  static const String deleteAppoinments =
       "$baseUrl/appointment/api/deleteAppoinment";
-
-      
 
   static const String patientreportgeneralinfo =
       "$baseUrl/doctor/api/patientreportgeneralinfo";
@@ -57,10 +51,7 @@ class ApiEndPoints {
   static const String patientreport =
       "$baseUrl/doctor/api/ViewPatientReport_new";
 
-        // static const String endAppoinment = "$baseUrl/doctor/api/Finishtheappoinment";
+  // static const String endAppoinment = "$baseUrl/doctor/api/Finishtheappoinment";
 
-
-
-  static const websocketUrl =
-      "https://513f-2409-4072-6e19-17b8-195d-91e2-3293-a235.ngrok-free.app";
+  static const websocketUrl = "kevelldigital.com/videomeet";
 }

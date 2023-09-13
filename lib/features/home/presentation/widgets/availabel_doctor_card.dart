@@ -50,7 +50,7 @@ class AvailableDoctorCard extends StatelessWidget {
                               .copyWith(fontSize: 14)),
                     ),
                     Text(
-                        'Availablity -  ${extractTime(data.data!.first.starttime!)} to ${extractTime(data.data!.first.endtime!)}',
+                        'Availability -  ${extractTime(data.data!.first.starttime!)} to ${extractTime(data.data!.first.endtime!)}',
                         style: Theme.of(context)
                             .textTheme
                             .headlineLarge!

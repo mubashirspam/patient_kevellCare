@@ -115,7 +115,6 @@ class _BookNowWidgetState extends State<BookNowWidget> {
                   BlocBuilder<HomeBloc, HomeState>(
                     builder: (context, state) {
                       if (state.hasAvailableDoctorData) {
-                        List<String> matchingItems = [];
                         List<DatumDatum> filteredObjects = state
                             .availableDoctors!.data![widget.index].data!
                             .where((object) {
@@ -135,18 +134,14 @@ class _BookNowWidgetState extends State<BookNowWidget> {
                               DateTime startTime = slot.starttime!;
                               DateTime endTime = slot.endtime!;
                               String formattedSlot =
-                                  "${extractTime(endTime)} to ${extractTime(startTime)}";
+                                  "${extractTime(startTime)} to ${extractTime(endTime)}";
                               formattedList.add(formattedSlot);
                             }
-                            // log("formattedList ====== $formattedList");
                           }
-
-                          /////////////******************///////////////// */
 
                           int timePerPatient =
                               filteredObjects.first.timeperPatient ?? 0;
 
-                          // Convert start and end times to DateTime objects for easier manipulation
                           DateTime startTimeDt =
                               filteredObjects.first.starttime!;
 
@@ -166,46 +161,33 @@ class _BookNowWidgetState extends State<BookNowWidget> {
 
                             String currentTimeSlot =
                                 "${extractTime(startTimeDt)} to ${extractTime(endTimeSlotDt)}";
-                            // Format this as needed
-
-                            timeSlotItems.add(
-                              DropdownMenuItem<String>(
-                                value: valueTimeSlot,
-                                child: Text(
-                                  currentTimeSlot,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                        color: context.theme.textPrimary,
-                                      ),
-                                ),
-                              ),
-                            );
-
-                            startTimeDt = endTimeSlotDt;
-                          }
-
-                          // log("timeSlotItems == ${timeSlotItems.first.value}");
-
-                          if (formattedList.isNotEmpty &&
-                              timeSlotItems.isNotEmpty) {
-                            List<int> matchingIndices = [];
-
-                            for (var formattedItem in formattedList) {
-                              for (var index = 0;
-                                  index < timeSlotItems.length;
-                                  index++) {
-                                if (timeSlotItems[index].value ==
-                                    formattedItem) {
-                                  matchingIndices.add(index);
-                                  matchingItems.add(formattedItem);
+                            bool foundMatch = false;
+                            if (formattedList.isNotEmpty) {
+                              for (String item in formattedList) {
+                                if (item == currentTimeSlot) {
+                                  foundMatch = true;
                                   break;
                                 }
                               }
                             }
-                            log("matched ======= $matchingIndices");
-                            log("matched ======= $matchingItems");
+                            if (!foundMatch) {
+                              timeSlotItems.add(
+                                DropdownMenuItem<String>(
+                                  value: valueTimeSlot,
+                                  child: Text(
+                                    currentTimeSlot,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          color: context.theme.textPrimary,
+                                        ),
+                                  ),
+                                ),
+                              );
+                            }
+
+                            startTimeDt = endTimeSlotDt;
                           }
                         }
 
@@ -218,48 +200,17 @@ class _BookNowWidgetState extends State<BookNowWidget> {
                                 onChanged: (ww) {
                                   List<String> timestamps = ww.split(',');
 
-                                 
-
-                                  if (matchingItems.isNotEmpty) {
-                                    for (var matching in matchingItems) {
-                                      log(ww);
-                                      if (matching == ww) {
-                                        Toast.showToast(
-                                            context: context,
-                                            message:
-                                                "Please select athor date");
-                                      } else {
-                                        context.read<HomeBloc>().add(
-                                              HomeEvent.pickTime(
-                                                endTime: DateTime.parse(
-                                                    timestamps[0]),
-                                                startTime: DateTime.parse(
-                                                    timestamps[1]),
-                                              ),
-                                            );
-                                      }
-                                    }
-                                  } else {
-                                    context.read<HomeBloc>().add(
-                                          HomeEvent.pickTime(
-                                            endTime:
-                                                DateTime.parse(timestamps[0]),
-                                            startTime:
-                                                DateTime.parse(timestamps[1]),
-                                          ),
-                                        );
-                                  }
+                                  context.read<HomeBloc>().add(
+                                        HomeEvent.pickTime(
+                                          endTime:
+                                              DateTime.parse(timestamps[0]),
+                                          startTime:
+                                              DateTime.parse(timestamps[1]),
+                                        ),
+                                      );
                                 },
                               ),
                             ),
-                            // const SizedBox(width: 12),
-                            // Expanded(
-                            //   child: DropDownFiledWidet(
-                            //     hintText: "To",
-                            //     items: [],
-                            //     onChanged: (ww) {},
-                            //   ),
-                            // ),
                           ],
                         );
                       }
@@ -272,31 +223,11 @@ class _BookNowWidgetState extends State<BookNowWidget> {
                               onChanged: (ww) {},
                             ),
                           ),
-                          // const SizedBox(width: 12),
-                          // Expanded(
-                          //   child: DropDownFiledWidet(
-                          //     hintText: "To",
-                          //     items: [],
-                          //     onChanged: (ww) {},
-                          //   ),
-                          // ),
                         ],
                       );
                     },
                   ),
                   const SizedBox(height: 15),
-                  // Row(
-                  //   children: [
-                  //     Expanded(
-                  //       child: DropDownFiledWidet(
-                  //         hintText: "Location",
-                  //         items: [],
-                  //         onChanged: (ww) {},
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  // const SizedBox(height: 15),
                   Text(
                     "Description",
                     style: Theme.of(context)
