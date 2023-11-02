@@ -6,6 +6,8 @@ import 'package:injectable/injectable.dart';
 import 'package:kevell_care/configure/api/endpoints.dart';
 import 'package:kevell_care/core/failiar/main_failures.dart';
 
+import '../../../../configure/value/constant.dart';
+import '../../../../configure/value/secure_storage.dart';
 import '../../../../core/failiar/failiur_model.dart';
 import '../../domain/entities/update_appoinments.dart';
 import '../../domain/repositories/update_appoinments_repository.dart';
@@ -18,8 +20,15 @@ class UpdateAppoinmentRepoImpliment implements UpdateAppoinmentsRepository {
     required UpdateAppoinmentsPayload appoinmentsPayload,
   }) async {
     try {
+       final token = await getTokenFromSS(secureStoreKey);
+
+      final headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
       final response = await Dio(BaseOptions()).put(
         ApiEndPoints.updateAppoinment,
+                options: Options(headers: headers),
         data: appoinmentsPayload.toJson(),
       );
 

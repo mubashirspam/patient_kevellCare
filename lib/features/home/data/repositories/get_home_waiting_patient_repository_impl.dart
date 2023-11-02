@@ -2,11 +2,12 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kevell_care/configure/value/secure_storage.dart';
 import 'package:kevell_care/features/home/data/models/available_doctor_model.dart';
 
 import '../../../../configure/api/endpoints.dart';
-// import '../../../../configure/value/constant.dart';
-// import '../../../../configure/value/secure_storage.dart';
+
+import '../../../../configure/value/constant.dart';
 import '../../../../core/failiar/failiur_model.dart';
 import '../../../../core/failiar/main_failures.dart';
 import '../../domain/repositories/get_home_waiting_patient_repository.dart';
@@ -17,8 +18,17 @@ class GetAvailableDoctorRepoImpliment implements GetAvailableDoctorRepository {
   Future<Either<MainFailure, HomeAvailableDoctorModel>>
       getHomeAvailableDoctor() async {
     try {
+        final token = await getTokenFromSS(secureStoreKey);
+
+
+      final headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
+      
       final response = await Dio(BaseOptions()).get(
         ApiEndPoints.getHomeAvailableDoctor,
+          options: Options(headers: headers),
       );
 
       switch (response.statusCode) {

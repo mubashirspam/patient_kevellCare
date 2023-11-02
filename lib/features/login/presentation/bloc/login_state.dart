@@ -9,6 +9,7 @@ class LoginState with _$LoginState {
     required bool otpVarified,
     required bool hasValidationData,
     required LoginModel? loginDetails,
+    required OtpModel ? otpDetails,
   }) = _LoginState;
 
   factory LoginState.initial() => const LoginState(
@@ -17,6 +18,7 @@ class LoginState with _$LoginState {
         hasValidationData: false,
         otpVarified: false,
         loginDetails: null,
+        otpDetails: null,
         message: "",
       );
 }

@@ -74,6 +74,17 @@ class HomeScreen extends StatelessWidget {
           ),
           const SliverPinnedHeader(child: HomeSearchWidget()),
           MultiSliver(children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20)
+                  .copyWith(bottom: 20),
+              child: Text(
+                "Today Doctor Availabilty",
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ),
+          ]),
+          const AvailableDoctorList(),
+          MultiSliver(children: [
             Card(
               elevation: 0,
               shape: RoundedRectangleBorder(
@@ -142,15 +153,7 @@ class HomeScreen extends StatelessWidget {
             const BookAppimentCategoryList(),
             const SelfCheckupVideoCard(),
             const SelfCheckCard(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                "Today Doctor Availabilty",
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ),
           ]),
-          const AvailableDoctorList(),
         ],
       ),
     );

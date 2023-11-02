@@ -19,7 +19,7 @@ class AvailableDoctorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(20).copyWith(bottom: 0),
+      margin: const EdgeInsets.all(20).copyWith(top: 0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: context.theme.secondary,

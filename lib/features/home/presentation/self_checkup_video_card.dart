@@ -52,7 +52,7 @@ class _SelfCheckupVideoCardState extends State<SelfCheckupVideoCard> {
             DefaultTextStyle(
               style: Theme.of(context)
                   .textTheme
-                  .headline6!
+                  .titleLarge!
                   .copyWith(color: Colors.white),
               child: Container(
                 padding: const EdgeInsets.all(20),
@@ -114,7 +114,7 @@ class _SelfCheckupVideoCardState extends State<SelfCheckupVideoCard> {
         child: VideoPlayer(_videoController),
       );
     } else {
-      return CircularProgressIndicator();
+      return const CircularProgressIndicator();
     }
   }
 }

@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-import 'package:kevell_care/features/widgets/avatar/active_avatar.dart';
+
+
+import '../../../../configure/color/maian_color.dart';
+import '../../data/model/chat_person_model.dart';
 
 class ChatPersonCard extends StatelessWidget {
-  const ChatPersonCard({super.key});
+  final Result result;
+  final int? count;
+  const ChatPersonCard({
+    super.key,
+    required this.result,
+    this.count,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,27 +22,71 @@ class ChatPersonCard extends StatelessWidget {
       width: double.maxFinite,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: context.theme.secondary,
+        color: const Color(0xffBDE5FF),
       ),
       child: Row(
         children: [
-          const ActiveAvatar(),
+          Stack(
+            children: [
+              CircleAvatar(
+                maxRadius: 25,
+                minRadius: 25,
+                backgroundImage: NetworkImage(result.profileImagelink ?? ""),
+              ),
+              Positioned(
+                right: 2,
+                top: 2,
+                child: Container(
+                  width: 15,
+                  height: 15,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: MainConfigColorsDarkTheme.success,
+                      border: Border.all(
+                        width: 2,
+                        color: context.theme.backround!,
+                      )),
+                ),
+              )
+            ],
+          ),
           const SizedBox(width: 15),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Johnny Greig",
+                result.username ?? "",
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 5),
               Text(
                 "General Checkup",
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ],
           ),
+          const Spacer(),
+          count == null
+              ? const SizedBox()
+              : Container(
+                  padding: const EdgeInsets.all(1),
+                  height: 22,
+                  width: 22,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: context.theme.primary,
+                  ),
+                  child: Center(
+                    child: Text(
+                      count! > 9 ? "9+" : '$count',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(fontSize: 10, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                )
         ],
       ),
     );

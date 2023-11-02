@@ -2,10 +2,12 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:kevell_care/configure/value/secure_storage.dart';
 import 'package:kevell_care/features/report/data/model/report_general_info_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kevell_care/configure/api/endpoints.dart';
 
+import '../../../../configure/value/constant.dart';
 import '../../../../core/failiar/failiur_model.dart';
 import '../../../../core/failiar/main_failures.dart';
 import '../../domain/repositories/fetch_report_general_repository.dart';
@@ -18,8 +20,16 @@ class FetchReportGeneraInfoRepoImpliment
     required int id,
   }) async {
     try {
+        final token = await getTokenFromSS(secureStoreKey);
+
+
+      final headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
       final response = await Dio(BaseOptions()).post(
         ApiEndPoints.patientreportgeneralinfo,
+           options: Options(headers: headers),
         data: {'patientId': id},
       );
 

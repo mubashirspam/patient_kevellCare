@@ -17,6 +17,7 @@ class AppoinmetsState with _$AppoinmetsState {
     required DateTime? endTime,
     required DeleteAppoinmentsModel? deleteResponse,
     required UpdateAppoinmentsModel? updateResponse,
+    MainFailure? failure,
   }) = _AppoinmetsState;
 
   factory AppoinmetsState.initial() => const AppoinmetsState(
@@ -34,5 +35,6 @@ class AppoinmetsState with _$AppoinmetsState {
         updateResponse: null,
         endTime: null,
         startTime: null,
+        failure: null,
       );
 }

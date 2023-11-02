@@ -4,6 +4,8 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../configure/api/endpoints.dart';
+import '../../../../configure/value/constant.dart';
+import '../../../../configure/value/secure_storage.dart';
 import '../../../../core/failiar/failiur_model.dart';
 import '../../../../core/failiar/main_failures.dart';
 
@@ -17,16 +19,28 @@ class LoginRepoImpliment implements LoginRepository {
     required String usernameOrMobile,
   }) async {
     try {
+      final fcm = await getTokenFromSS(fcmStoreKey);
+      final token = await getTokenFromSS(secureStoreKey);
+
+      final headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
       final response = await Dio(BaseOptions()).post(
         ApiEndPoints.login,
-        data: {'cred': usernameOrMobile},
+        options: Options(headers: headers),
+        data: {
+          'cred': usernameOrMobile,
+          "device_token": fcm,
+          "device_type": "Android"
+        },
       );
 
       switch (response.statusCode) {
         case 200:
         case 201:
           final result = LoginModel.fromJson(response.data);
-          log(result.toString());
+          log(result.toJson().toString());
           return Right(result);
         case 400:
         case 401:

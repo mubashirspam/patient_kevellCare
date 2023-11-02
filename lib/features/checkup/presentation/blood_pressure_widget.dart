@@ -1,8 +1,5 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-
 
 import 'package:lottie/lottie.dart';
 
@@ -12,7 +9,7 @@ import 'widgets/checkup_card.dart';
 class BloodPressureWidget extends StatelessWidget {
   final String bp;
   final String bpdia;
-    final String bpplus;
+  final String bpplus;
   final VoidCallback onpress;
   final bool isReading;
 
@@ -22,7 +19,7 @@ class BloodPressureWidget extends StatelessWidget {
     required this.onpress,
     required this.isReading,
     required this.bpdia,
-    required this.bpplus
+    required this.bpplus,
   });
 
   @override
@@ -36,9 +33,9 @@ class BloodPressureWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Bpsys : $bp/150",
+              "Systolic : $bp (<120)",
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    fontSize: 18,
+                    fontSize: 14,
                     color: isReading ? context.theme.textPrimary : Colors.red,
                   ),
             ),
@@ -49,24 +46,28 @@ class BloodPressureWidget extends StatelessWidget {
           ],
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              "BpDia : $bpdia/150",
+              "Diastolic : $bpdia (<80)",
               style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  fontSize: 18,
-                    color: isReading ? context.theme.textPrimary : Colors.red,
-                  ),
-            ),
-            Text(
-              "BpPulse : $bpplus/130",
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  fontSize: 18,
+                    fontSize: 14,
                     color: isReading ? context.theme.textPrimary : Colors.red,
                   ),
             ),
           ],
-        )
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            Text(
+              "Pulse : $bpplus (60 ~100)",
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    fontSize: 14,
+                    color: isReading ? context.theme.textPrimary : Colors.red,
+                  ),
+            ),
+          ],
+        ),
       ],
     );
   }

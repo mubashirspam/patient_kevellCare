@@ -1,13 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/dark_theme.dart';
 import 'package:kevell_care/core/them/light_theme.dart';
+import 'package:kevell_care/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:kevell_care/firebase_options.dart';
 import 'package:kevell_care/pages/initialize/bloc/initialize_bloc.dart';
 import 'package:kevell_care/pages/initialize/initialize.dart';
-
 import 'configure/route/routes.dart';
 import 'core/di/injectable.dart';
+import 'core/notifications/push_notification.dart';
 import 'features/appoiments/presentation/bloc/appoinmets_bloc.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
 import 'features/login/presentation/bloc/login_bloc.dart';
@@ -18,7 +21,10 @@ import 'features/signup/bloc/signup_bloc.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await PushNotification().initNoticatin();
   await configureInjeactable();
+  // await deleteFromSS(secureStoreKey);
   runApp(const MyApp());
 }
 
@@ -37,15 +43,15 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (ctx) => InitializeBloc()),
         BlocProvider(create: (ctx) => getIt<ReportBloc>()),
         BlocProvider(create: (ctx) => getIt<ProfileBloc>()),
+        BlocProvider(create: (ctx) => getIt<ChatBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: lightTheme(),
         darkTheme: darkTheme(),
         themeMode: ThemeMode.light,
-        // initialRoute: '/login-screen',
-        // initialRoute: '/dashboard',
         home: const Initialize(),
+        navigatorKey: navigatorKey,
         routes: route,
       ),
     );

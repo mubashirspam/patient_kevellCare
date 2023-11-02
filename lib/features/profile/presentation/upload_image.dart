@@ -1,13 +1,10 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
@@ -100,7 +97,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         log('suscessssssss to upload image ; ${response.statusCode}');
-        log('suscessssssss ; ${response}');
+        log('suscessssssss ; $response');
       } else {
         log('Failed to upload image ; ${response.statusCode}');
       }

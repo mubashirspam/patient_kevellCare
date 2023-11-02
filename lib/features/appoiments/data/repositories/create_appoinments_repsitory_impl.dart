@@ -5,6 +5,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../configure/api/endpoints.dart';
 
+import '../../../../configure/value/constant.dart';
+import '../../../../configure/value/secure_storage.dart';
 import '../../../../core/failiar/failiur_model.dart';
 import '../../../../core/failiar/main_failures.dart';
 import '../../domain/entities/create_appoinments.dart';
@@ -18,9 +20,17 @@ class CreateAppoinmentsRepoImpliment implements CreateAppoinmentsRepository {
     required AppoinmentsPayload appoinmentsPayload,
   }) async {
     try {
+      final token = await getTokenFromSS(secureStoreKey);
+
+      final headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
+
       final response = await Dio(BaseOptions()).post(
         ApiEndPoints.createAppoinments,
         data: appoinmentsPayload.toJson(),
+        options: Options(headers: headers),
       );
 
       switch (response.statusCode) {

@@ -219,7 +219,7 @@ class _BookNowWidgetState extends State<BookNowWidget> {
                           Expanded(
                             child: DropDownFiledWidet(
                               hintText: "Time slot",
-                              items: [],
+                              items: const [],
                               onChanged: (ww) {},
                             ),
                           ),

@@ -18,9 +18,9 @@ class GetProfileRepoImpliment implements GetProfileRepository {
   @override
   Future<Either<MainFailure, ProfileModel>> getProfile() async {
     try {
-      final token = await getTokenFromSS(secureStoreKey);
+     
       final mail = await getTokenFromSS(mailsecureStoreKey);
-
+ final token = await getTokenFromSS(secureStoreKey);
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',

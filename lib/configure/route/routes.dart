@@ -8,7 +8,7 @@ import '../../pages/login_scrren/presentation/login_screen.dart';
 import '../../pages/profile/presenation/my_profile_screen.dart';
 import '../../pages/report/presentation/report_scree.dart';
 import '../../pages/signup_screen/presentation/signup_screen.dart';
-
+final navigatorKey = GlobalKey<NavigatorState>();
 final Map<String, Widget Function(BuildContext)> route = {
   LoginScreen.routeName: (ctx) => const LoginScreen(),
   SignupScreen.routeName: (ctx) => const SignupScreen(),
@@ -16,7 +16,8 @@ final Map<String, Widget Function(BuildContext)> route = {
   MyProfileScreen.routeName: (ctx) => const MyProfileScreen(),
   BookNewAppointmentScreen.routeName: (ctx) => BookNewAppointmentScreen(
       index: ModalRoute.of(ctx)!.settings.arguments as int),
-  ChatingScreen.routeName: (ctx) => const ChatingScreen(),
+ ChatingScreen.routeName: (ctx) => ChatingScreen(
+      chatParameter: ModalRoute.of(ctx)!.settings.arguments as Map),
   PatientCheckupScreen.routeName: (ctx) => PatientCheckupScreen(
         checkupDetalis:
             ModalRoute.of(ctx)!.settings.arguments as Map<String, dynamic>,

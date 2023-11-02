@@ -128,11 +128,15 @@ class ViewMyProfileBlocBody extends StatelessWidget {
                 elevation: 0,
                 isScrollControlled: true,
                 context: context,
-                builder: (context) => EditMyProfile(
-                  adress: address,
-                  name: name,
-                  mobile: mobile,
-                  dob: dob,
+                builder: (context) => Padding(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: EditMyProfile(
+                    adress: address,
+                    name: name,
+                    mobile: mobile,
+                    dob: dob,
+                  ),
                 ),
               );
             },

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kevell_care/features/login/data/models/otp_model.dart';
 
 import '../../data/models/login_model.dart';
 import '../../domain/repositories/login_repository.dart';
@@ -80,33 +81,33 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     );
 
     on<_VaryfiyOtp>((event, emit) async {
+      emit(
+        state.copyWith(
+          isLoading: true,
+          hasValidationData: false,
+          isError: false,
+          otpVarified: false,
+        ),
+      );
+      final response = await otpRepository.varifyOtp(
+        number: event.number,
+        otp: event.otp,
+      );
 
-        emit(
-          state.copyWith(
-            isLoading: true,
+      final result = response.fold(
+        (failure) => state.copyWith(
+          isLoading: false,
+          otpVarified: false,
+          isError: true,
+        ),
+        (success) => state.copyWith(
             isError: false,
-            otpVarified: false,
-          ),
-        );
-        final response = await otpRepository.varifyOtp(
-          number: event.number,
-          otp: event.otp,
-        );
-
-        final result = response.fold(
-          (failure) => state.copyWith(
             isLoading: false,
-            otpVarified: false,
-            isError: true,
-          ),
-          (success) => state.copyWith(
-              isError: false,
-              isLoading: false,
-              otpVarified: true,
-              message: success.result ?? ""),
-        );
-        emit(result);
-
+            otpVarified: true,
+            otpDetails: success,
+            message: success.result ?? ""),
+      );
+      emit(result);
     });
   }
 }

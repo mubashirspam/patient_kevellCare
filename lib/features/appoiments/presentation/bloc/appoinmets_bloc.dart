@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kevell_care/core/failiar/main_failures.dart';
 import 'package:kevell_care/features/appoiments/data/models/appoiments_model.dart';
 import 'package:kevell_care/features/appoiments/domain/entities/create_appoinments.dart';
 import 'package:kevell_care/features/appoiments/domain/repositories/create_appoinments_repository.dart';
@@ -51,6 +52,7 @@ class AppoinmetsBloc extends Bloc<AppoinmetsEvent, AppoinmetsState> {
           isLoading: false,
           hasData: false,
           isError: true,
+          failure: failure,
         ),
         (success) => state.copyWith(
             isError: false,

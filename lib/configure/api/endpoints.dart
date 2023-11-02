@@ -1,57 +1,41 @@
 import '../value/constant.dart';
 
 class ApiEndPoints {
-  static const String login = "$baseUrl/register/api/patientLogin";
+  static const login = "$baseUrl/register/api/patientLogin";
 
-  static const String register = "$baseUrl/register/api/patientRegister";
+  static const register = "$baseUrl/register/api/patientRegister";
 
-  static const String otp = "$baseUrl/register/api/VerifyPhoneOtp";
+  static const otp = "$baseUrl/register/api/VerifyPhoneOtp";
 
-  static const String getprofile = "$baseUrl/register/api/GetPatientinfoBy";
+  static const getprofile = "$baseUrl/register/api/GetPatientinfoBy";
 
-  static const String updateProfile =
-      "$baseUrl/register/api/patientprofileUpdate";
-  static const String homeStatus = "$baseUrl/register/api/doctorcountlist";
+  static const updateProfile = "$baseUrl/register/api/patientprofileUpdate";
 
-  static const String homeWaitingPatient =
-      "$baseUrl/register/api/todayWaitingHallPatientsdetails";
-
-  static const String patientHistoryList =
-      "$baseUrl/appointment/api/VisitedPatientReportdata";
-
-  static const String getPrescription = "$baseUrl/users/api/medicinedata";
-  static const String createPrescription =
-      "$baseUrl/users/api/saveAndupdatemedicinedata";
-  static const String updatePrescription =
-      "$baseUrl/users/api/saveAndupdatemedicinedata";
-
-  static const String getPrescriptionSettings =
-      "$baseUrl/users/api/getdprescriptiontable";
-
-  static const String getHomeAvailableDoctor =
+  static const getHomeAvailableDoctor =
       "$baseUrl/doctor/api/getalldoctorSchedule";
 
 // appoinment...
 
-  static const String createAppoinments =
-      "$baseUrl/appointment/api/BookAppointment";
+  static const createAppoinments = "$baseUrl/appointment/api/BookAppointment";
 
-  static const String fetchAppoinment =
+  static const fetchAppoinment =
       "$baseUrl/appointment/api/upcomingpasthistorypatient";
 
-  static const String updateAppoinment =
-      "$baseUrl/appointment/api/updateAppoinment";
+  static const updateAppoinment = "$baseUrl/appointment/api/updateAppoinment";
 
-  static const String deleteAppoinments =
-      "$baseUrl/appointment/api/deleteAppoinment";
+  static const deleteAppoinments = "$baseUrl/appointment/api/deleteAppoinment";
 
-  static const String patientreportgeneralinfo =
-      "$baseUrl/doctor/api/patientreportgeneralinfo";
+  static const patientreportgeneralinfo =
+      "$baseUrl/patient/api/patientreportgeneralinfo";
 
-  static const String patientreport =
-      "$baseUrl/doctor/api/ViewPatientReport_new";
+  static const patientreport = "$baseUrl/patient/api/ViewPatientReport_new";
 
-  // static const String endAppoinment = "$baseUrl/doctor/api/Finishtheappoinment";
+  // static const  endAppoinment = "$baseUrl/doctor/api/Finishtheappoinment";
+  static const fetchChatProfile =
+      "https://4001-2409-4072-2e85-c3c8-e82c-a7b3-ec5d-1f7a.ngrok-free.app/chat/api/getallusers";
 
-  static const websocketUrl = "kevelldigital.com/videomeet";
+  static const websocketUrl = "https://kevelldigital.com/videocall";
+
+  static const chatWebsocketUrl =
+      "https://4001-2409-4072-2e85-c3c8-e82c-a7b3-ec5d-1f7a.ngrok-free.app/chat/api";
 }

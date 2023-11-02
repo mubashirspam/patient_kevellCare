@@ -5,8 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/pages/otp/otp_screen.dart';
 
-import '../../../configure/value/constant.dart';
-import '../../../configure/value/secure_storage.dart';
 import '../../../core/helper/toast.dart';
 import '../../widgets/buttons/text_button_widget.dart';
 import 'bloc/login_bloc.dart';
@@ -20,6 +18,7 @@ class LoginWidget extends StatefulWidget {
 
 class _LoginWidgetState extends State<LoginWidget> {
   TextEditingController controller = TextEditingController();
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool isButtonDisabled = true;
@@ -89,21 +88,11 @@ class _LoginWidgetState extends State<LoginWidget> {
                   );
                 }
                 if (!state.isLoading && state.hasValidationData) {
-                  if (state.loginDetails!.data!.first.token != null &&
-                      state.loginDetails!.data!.first.username != null &&
+                  if (state.loginDetails!.data!.first.username != null &&
                       state.loginDetails!.data!.first.id != null) {
-                    addToSS(mailsecureStoreKey,
-                        state.loginDetails!.data!.first.username!);
-      
-                    addToSS(drIdsecureStoreKey,
-                        state.loginDetails!.data!.first.id!.toString());
-      
-                    addTokenToSS(
-                        secureStoreKey, state.loginDetails!.data!.first.token!);
-      
                     Toast.showToast(
                       context: context,
-                      message: state.message,
+                      message: "Otp Generted successfully",
                     );
                     Navigator.of(context).pushNamed(OtpScreen.routeName);
                   } else {

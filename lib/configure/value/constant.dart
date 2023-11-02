@@ -6,6 +6,8 @@ const mailsecureStoreKey = 'mail@key';
 
 const drIdsecureStoreKey = 'drId@key';
 
+const fcmStoreKey = 'fcmStoreKey@key';
+
 const nameKey = '@#KL778@username';
 const phoneKey = '@#KL778@phoneKey';
 const baseUrl = "https://kevelldigital.com"; //production

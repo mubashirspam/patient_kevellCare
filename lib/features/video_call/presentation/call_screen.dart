@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
@@ -7,13 +6,14 @@ import '../service/signaling_service.dart';
 
 class CallingWidget extends StatefulWidget {
   final String callerId, calleeId;
-  final dynamic offer; final VoidCallback cutCall;
-  const CallingWidget({
-    super.key,
-    this.offer,
-    required this.callerId,
-    required this.calleeId,required this.cutCall
-  });
+  final dynamic offer;
+  final VoidCallback cutCall;
+  const CallingWidget(
+      {super.key,
+      this.offer,
+      required this.callerId,
+      required this.calleeId,
+      required this.cutCall});
 
   @override
   State<CallingWidget> createState() => _CallingWidgetState();
@@ -173,8 +173,6 @@ class _CallingWidgetState extends State<CallingWidget> {
       });
     }
   }
-
-
 
   _toggleMic() {
     // change status

@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/login/presentation/otp_widget.dart';
 import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
 
 import '../../configure/value/constant.dart';
@@ -20,63 +22,93 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  bool isButtonDisabled = true;
+  int _secondsRemaining = 60;
+  bool _timerActive = false;
 
-  void validateForm() {
-    if (_formKey.currentState!.validate()) {
-      // Form is valid
-      setState(() {
-        isButtonDisabled = false; // Enable the button
+  String otps = '';
 
-        log(isButtonDisabled.toString());
-      });
-    } else {
-      // Form is invalid
-      setState(() {
-        isButtonDisabled = true; // Disable the button
-        log(isButtonDisabled.toString());
-      });
+  Timer? timer;
+
+  void startTimer() {
+    setState(() {
+      _timerActive = true;
+      _secondsRemaining = 60;
+    });
+
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_secondsRemaining == 0) {
+        timer.cancel();
+        setState(() {
+          _timerActive = false;
+        });
+      } else {
+        setState(() {
+          _secondsRemaining--;
+        });
+      }
+    });
+  }
+
+  void sendOTP() {
+    // Replace this with your OTP sending logic
+    // You can call this method when you want to send OTP
+    // Make sure to check if the timer is not active before sending OTP
+    if (!_timerActive) {
+      // Send OTP logic here
+      // After sending OTP, start the timer
+      startTimer();
     }
   }
 
-  List<String> otp = List.filled(4, '');
-  final List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
-  final List<TextEditingController> otpControllers =
-      List.generate(4, (index) => TextEditingController());
-  int currentField = 0;
+  // List<String> otp = List.filled(4, '');
+  // final List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
+  // final List<TextEditingController> otpControllers =
+  //     List.generate(4, (index) => TextEditingController());
+  // int currentField = 0;
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   focusNodes[0].requestFocus();
+  // }
+
+  // @override
+  // void dispose() {
+  //   for (var focusNode in focusNodes) {
+  //     focusNode.dispose();
+  //   }
+  //   for (var controller in otpControllers) {
+  //     controller.dispose();
+  //   }
+  //   super.dispose();
+  // }
+
+  // void _onOtpChange(String value) {
+  //   if (value.length == 1 && currentField < 3) {
+  //     setState(() {
+  //       currentField++;
+  //       focusNodes[currentField].requestFocus();
+  //     });
+  //   } else if (value.isEmpty && currentField > 0) {
+  //     setState(() {
+  //       currentField--;
+  //       focusNodes[currentField].requestFocus();
+  //     });
+  //   }
+  //   otp[currentField] = value;
+  // }
   @override
   void initState() {
+    sendOTP();
     super.initState();
-    focusNodes[0].requestFocus();
   }
 
   @override
   void dispose() {
-    for (var focusNode in focusNodes) {
-      focusNode.dispose();
-    }
-    for (var controller in otpControllers) {
-      controller.dispose();
-    }
+    timer!.cancel();
     super.dispose();
-  }
-
-  void _onOtpChange(String value) {
-    if (value.length == 1 && currentField < 3) {
-      setState(() {
-        currentField++;
-        focusNodes[currentField].requestFocus();
-      });
-    } else if (value.isEmpty && currentField > 0) {
-      setState(() {
-        currentField--;
-        focusNodes[currentField].requestFocus();
-      });
-    }
-    otp[currentField] = value;
   }
 
   @override
@@ -89,17 +121,28 @@ class _OtpScreenState extends State<OtpScreen> {
           listener: (context, state) {
             if (!state.isLoading && state.isError && !state.otpVarified) {
               Toast.showToast(
+                color: Colors.red,
                 context: context,
-                message: state.message,
+                message: "Incorrect otp",
               );
 
               deleteFromSS(secureStoreKey);
             }
 
             if (!state.isLoading && state.otpVarified) {
+              addToSS(
+                  mailsecureStoreKey, state.otpDetails!.data!.first.username!);
+
+              addToSS(drIdsecureStoreKey,
+                  state.otpDetails!.data!.first.id!.toString());
+
+              addTokenToSS(
+                  secureStoreKey, state.otpDetails!.data!.first.token!);
+
+              log("Token : ${state.otpDetails!.data!.first.token}");
               Toast.showToast(
                 context: context,
-                message: state.message,
+                message: 'You are successfully Logined 🥳',
               );
 
               Navigator.of(context).pushAndRemoveUntil(
@@ -109,13 +152,21 @@ class _OtpScreenState extends State<OtpScreen> {
                 (route) => false,
               );
             }
+
+            if (!state.isLoading && state.isError && !state.otpVarified) {
+              Toast.showToast(
+                color: Colors.red,
+                context: context,
+                message: "Incorrect otp",
+              );
+            }
           },
           builder: (context, state) {
             final number = state.loginDetails!.data!.first.mobile!;
-            final otp = state.loginDetails!.data!.first.otp!;
+            final otp = state.loginDetails!.data!.first.otp ?? "000000";
 
-            log(number);
-            log(otp);
+            log("number : $number");
+            log("OTP : $otp");
 
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -142,58 +193,46 @@ class _OtpScreenState extends State<OtpScreen> {
                       .copyWith(fontSize: 24),
                 ),
                 const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    for (int i = 0; i < 4; i++)
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 8),
-                        width: 60,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: currentField == i
-                                ? context.theme.primary!
-                                : context.theme.textPrimary!,
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Center(
-                          child: TextFormField(
-                            autofocus: i == 0,
-                            // focusNode: focusNodes[i],
-                            controller: otpControllers[i],
-                            textAlign: TextAlign.center,
-                            keyboardType: TextInputType.number,
-                            maxLength: 1,
-                            onChanged: _onOtpChange,
-                            style: const TextStyle(fontSize: 24),
-                            decoration: const InputDecoration(
-                              counterText: '',
-                              border: InputBorder.none,
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
+                OtpFiled(onOtpEntered: (p0) => setState(() => otps = p0)),
                 const SizedBox(height: 20),
-                Text(
-                  "Didn’t receive the OTP? Retry in 00:23",
-                  style: Theme.of(context).textTheme.titleMedium,
+                const SizedBox(height: 20),
+                InkWell(
+                  onTap: () => !_timerActive ? sendOTP : null,
+                  child: Text(
+                    _timerActive
+                        ? "Didn’t receive the OTP? Retry in 00:$_secondsRemaining"
+                        : 'Didn’t receive the OTP? Send otp again',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
                 const SizedBox(height: 20),
                 TextButtonWidget(
-                  name: isButtonDisabled ? "Enter OTP" : "Verify otp",
-                  onPressed: () {
-                    context.read<LoginBloc>().add(
-                          LoginEvent.varyfiyOtp(
-                            number: number,
-                            otp: otp,
-                          ),
-                        );
-                  },
+                  name: "Verify otp",
+                  onPressed: _timerActive && otps.length == 4
+                      ? () {
+                          context.read<LoginBloc>().add(
+                                LoginEvent.varyfiyOtp(
+                                  number: number,
+                                  otp: otp,
+                                ),
+                              );
+                          // if (otps.length == 4) {
+                          //   Navigator.of(context).pushAndRemoveUntil(
+                          //     MaterialPageRoute(
+                          //       builder: (context) => const Initialize(),
+                          //     ),
+                          //     (route) => false,
+                          //   );
+                          // } else {
+                          //   // deleteFromSS(secureStoreKey);
+                          //   Toast.showToast(
+                          //     color: Colors.red,
+                          //     context: context,
+                          //     message: "Incorrect otp",
+                          //   );
+                          // }
+                        }
+                      : null,
                   isLoading: state.isLoading,
                 )
               ],

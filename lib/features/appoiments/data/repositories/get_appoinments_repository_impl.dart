@@ -16,10 +16,17 @@ class GetAppoinmentsRepoImpliment implements GetAppoinmentsRepository {
   @override
   Future<Either<MainFailure, AppoimentModel>> getAppoinments() async {
     try {
+
+       final token = await getTokenFromSS(secureStoreKey);
+
+      final headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
       final id = await getTokenFromSS(drIdsecureStoreKey);
 
       final response = await Dio(BaseOptions()).post(
-        ApiEndPoints.fetchAppoinment,
+        ApiEndPoints.fetchAppoinment,        options: Options(headers: headers),
         data: {'patientId': int.parse(id.toString())},
       );
 
@@ -34,6 +41,11 @@ class GetAppoinmentsRepoImpliment implements GetAppoinmentsRepository {
           final result = FailureModel.fromJson(response.data);
           return Left(
             MainFailure.unauthorized(message: result.message ?? "Unauthorized"),
+          );
+        case 502:
+          final result = FailureModel.fromJson(response.data);
+          return Left(
+            MainFailure.unauthorized(message: result.message ?? "Server Error"),
           );
         default:
           final result = FailureModel.fromJson(response.data);
@@ -51,7 +63,7 @@ class GetAppoinmentsRepoImpliment implements GetAppoinmentsRepository {
           );
         }
       }
-       return const Left(MainFailure.clientFailure(message: "Client failure"));
+      return const Left(MainFailure.clientFailure(message: "Client failure"));
     }
   }
 }

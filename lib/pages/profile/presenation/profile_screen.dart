@@ -49,7 +49,7 @@ class ProfileScreen extends StatelessWidget {
                 if (state.hasData) {
                   return ProfileNameCard(
                     email: state.result!.data!.first.name ?? "",
-                    imageUrl:state.result!.data!.first.profileImagelink!
+                    imageUrl:state.result!.data!.first.profileImagelink??""
                         ,
                     name: state.result!.data!.first.username ?? "",
                   );

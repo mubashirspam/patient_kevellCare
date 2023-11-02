@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
-
 import '../../video_call/presentation/call_screen.dart';
 import '../../video_call/presentation/join_screen.dart';
 import '../../video_call/service/signaling_service.dart';
@@ -33,7 +32,8 @@ class _CheckupHeaderWidgetState extends State<CheckupHeaderWidget> {
   @override
   void initState() {
     super.initState();
-
+    log(widget.paitentCallerId);
+    log(widget.selfCallerId);
     // listen for incoming video call
     SignallingService.instance.socket!.on("newCall", (data) {
       log("newCall");
@@ -78,22 +78,22 @@ class _CheckupHeaderWidgetState extends State<CheckupHeaderWidget> {
 
   @override
   Widget build(BuildContext context) {
- return isVidecallStarted
+    return isVidecallStarted
         ? CallingWidget(
-          cutCall: cutCall,
+            cutCall: cutCall,
             callerId: callerId ?? incomingSDPOffer["callerId"]!,
             calleeId: calleeId ?? widget.selfCallerId,
-            offer: incomingSDPOffer==null? null : incomingSDPOffer["sdpOffer"],
+            offer:
+                incomingSDPOffer == null ? null : incomingSDPOffer["sdpOffer"],
           )
         : HeaderWidget(
             answerCall: answerCall,
-            makeCall:()=> makeCall(
+            makeCall: () => makeCall(
                 jcalleeId: widget.paitentCallerId,
                 jcallerId: widget.selfCallerId),
             cutCall: cutCall,
             joinCall: () {},
             incomingSDPOffer: incomingSDPOffer,
-
           );
   }
 }
@@ -126,10 +126,10 @@ class HeaderWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 15),
-        JoinOrCallWidget(
+          JoinOrCallWidget(
               answerCall: answerCall,
               joinCall: joinCall,
-              incomingSDPOffer:incomingSDPOffer ,
+              incomingSDPOffer: incomingSDPOffer,
               makeCall: makeCall,
               cutCall: cutCall),
           const SizedBox(height: 15),

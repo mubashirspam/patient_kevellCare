@@ -40,6 +40,9 @@ class TextButtonWidget extends StatelessWidget {
           if (states.contains(MaterialState.pressed)) {
             return bgInColor ?? context.theme.buttonBackroundPressed!;
           }
+          if (states.contains(MaterialState.disabled)) {
+            return bgInColor ?? context.theme.buttonBackroundDisable!;
+          }
           return bgColor ?? context.theme.buttonBackroundEnable!;
         }),
         foregroundColor: MaterialStateProperty.resolveWith<Color>(

@@ -878,6 +878,7 @@ mixin _$AppoinmetsState {
       throw _privateConstructorUsedError;
   UpdateAppoinmentsModel? get updateResponse =>
       throw _privateConstructorUsedError;
+  MainFailure? get failure => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppoinmetsStateCopyWith<AppoinmetsState> get copyWith =>
@@ -904,7 +905,10 @@ abstract class $AppoinmetsStateCopyWith<$Res> {
       DateTime? startTime,
       DateTime? endTime,
       DeleteAppoinmentsModel? deleteResponse,
-      UpdateAppoinmentsModel? updateResponse});
+      UpdateAppoinmentsModel? updateResponse,
+      MainFailure? failure});
+
+  $MainFailureCopyWith<$Res>? get failure;
 }
 
 /// @nodoc
@@ -934,6 +938,7 @@ class _$AppoinmetsStateCopyWithImpl<$Res, $Val extends AppoinmetsState>
     Object? endTime = freezed,
     Object? deleteResponse = freezed,
     Object? updateResponse = freezed,
+    Object? failure = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -992,7 +997,23 @@ class _$AppoinmetsStateCopyWithImpl<$Res, $Val extends AppoinmetsState>
           ? _value.updateResponse
           : updateResponse // ignore: cast_nullable_to_non_nullable
               as UpdateAppoinmentsModel?,
+      failure: freezed == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as MainFailure?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MainFailureCopyWith<$Res>? get failure {
+    if (_value.failure == null) {
+      return null;
+    }
+
+    return $MainFailureCopyWith<$Res>(_value.failure!, (value) {
+      return _then(_value.copyWith(failure: value) as $Val);
+    });
   }
 }
 
@@ -1018,7 +1039,11 @@ abstract class _$$_AppoinmetsStateCopyWith<$Res>
       DateTime? startTime,
       DateTime? endTime,
       DeleteAppoinmentsModel? deleteResponse,
-      UpdateAppoinmentsModel? updateResponse});
+      UpdateAppoinmentsModel? updateResponse,
+      MainFailure? failure});
+
+  @override
+  $MainFailureCopyWith<$Res>? get failure;
 }
 
 /// @nodoc
@@ -1046,6 +1071,7 @@ class __$$_AppoinmetsStateCopyWithImpl<$Res>
     Object? endTime = freezed,
     Object? deleteResponse = freezed,
     Object? updateResponse = freezed,
+    Object? failure = freezed,
   }) {
     return _then(_$_AppoinmetsState(
       isLoading: null == isLoading
@@ -1104,6 +1130,10 @@ class __$$_AppoinmetsStateCopyWithImpl<$Res>
           ? _value.updateResponse
           : updateResponse // ignore: cast_nullable_to_non_nullable
               as UpdateAppoinmentsModel?,
+      failure: freezed == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as MainFailure?,
     ));
   }
 }
@@ -1125,7 +1155,8 @@ class _$_AppoinmetsState implements _AppoinmetsState {
       required this.startTime,
       required this.endTime,
       required this.deleteResponse,
-      required this.updateResponse});
+      required this.updateResponse,
+      this.failure});
 
   @override
   final bool isLoading;
@@ -1155,10 +1186,12 @@ class _$_AppoinmetsState implements _AppoinmetsState {
   final DeleteAppoinmentsModel? deleteResponse;
   @override
   final UpdateAppoinmentsModel? updateResponse;
+  @override
+  final MainFailure? failure;
 
   @override
   String toString() {
-    return 'AppoinmetsState(isLoading: $isLoading, hasData: $hasData, isCreateLoading: $isCreateLoading, createData: $createData, isError: $isError, appoimentData: $appoimentData, isUpdateLoading: $isUpdateLoading, isDeleteLoading: $isDeleteLoading, isDeleted: $isDeleted, isUpdated: $isUpdated, startTime: $startTime, endTime: $endTime, deleteResponse: $deleteResponse, updateResponse: $updateResponse)';
+    return 'AppoinmetsState(isLoading: $isLoading, hasData: $hasData, isCreateLoading: $isCreateLoading, createData: $createData, isError: $isError, appoimentData: $appoimentData, isUpdateLoading: $isUpdateLoading, isDeleteLoading: $isDeleteLoading, isDeleted: $isDeleted, isUpdated: $isUpdated, startTime: $startTime, endTime: $endTime, deleteResponse: $deleteResponse, updateResponse: $updateResponse, failure: $failure)';
   }
 
   @override
@@ -1190,7 +1223,8 @@ class _$_AppoinmetsState implements _AppoinmetsState {
             (identical(other.deleteResponse, deleteResponse) ||
                 other.deleteResponse == deleteResponse) &&
             (identical(other.updateResponse, updateResponse) ||
-                other.updateResponse == updateResponse));
+                other.updateResponse == updateResponse) &&
+            (identical(other.failure, failure) || other.failure == failure));
   }
 
   @override
@@ -1209,7 +1243,8 @@ class _$_AppoinmetsState implements _AppoinmetsState {
       startTime,
       endTime,
       deleteResponse,
-      updateResponse);
+      updateResponse,
+      failure);
 
   @JsonKey(ignore: true)
   @override
@@ -1220,21 +1255,21 @@ class _$_AppoinmetsState implements _AppoinmetsState {
 
 abstract class _AppoinmetsState implements AppoinmetsState {
   const factory _AppoinmetsState(
-          {required final bool isLoading,
-          required final bool hasData,
-          required final bool isCreateLoading,
-          required final bool createData,
-          required final bool isError,
-          final AppoimentModel? appoimentData,
-          required final bool isUpdateLoading,
-          required final bool isDeleteLoading,
-          required final bool isDeleted,
-          required final bool isUpdated,
-          required final DateTime? startTime,
-          required final DateTime? endTime,
-          required final DeleteAppoinmentsModel? deleteResponse,
-          required final UpdateAppoinmentsModel? updateResponse}) =
-      _$_AppoinmetsState;
+      {required final bool isLoading,
+      required final bool hasData,
+      required final bool isCreateLoading,
+      required final bool createData,
+      required final bool isError,
+      final AppoimentModel? appoimentData,
+      required final bool isUpdateLoading,
+      required final bool isDeleteLoading,
+      required final bool isDeleted,
+      required final bool isUpdated,
+      required final DateTime? startTime,
+      required final DateTime? endTime,
+      required final DeleteAppoinmentsModel? deleteResponse,
+      required final UpdateAppoinmentsModel? updateResponse,
+      final MainFailure? failure}) = _$_AppoinmetsState;
 
   @override
   bool get isLoading;
@@ -1264,6 +1299,8 @@ abstract class _AppoinmetsState implements AppoinmetsState {
   DeleteAppoinmentsModel? get deleteResponse;
   @override
   UpdateAppoinmentsModel? get updateResponse;
+  @override
+  MainFailure? get failure;
   @override
   @JsonKey(ignore: true)
   _$$_AppoinmetsStateCopyWith<_$_AppoinmetsState> get copyWith =>

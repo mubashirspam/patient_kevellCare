@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kevell_care/configure/api/endpoints.dart';
 
+import '../../../../configure/value/constant.dart';
+import '../../../../configure/value/secure_storage.dart';
 import '../../../../core/failiar/failiur_model.dart';
 import '../../../../core/failiar/main_failures.dart';
 import '../../domain/entities/fetch_report_payload.dart';
@@ -17,9 +19,16 @@ class FetchReportRepoImpliment implements FetchReportRepository {
   Future<Either<MainFailure, ReportModel>> fetchReport({
     required FetchReportPayload fetchReportPayload,
   }) async {
+    final token = await getTokenFromSS(secureStoreKey);
+
+    final headers = {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    };
     try {
       final response = await Dio(BaseOptions()).post(
         ApiEndPoints.patientreport,
+        options: Options(headers: headers),
         data: fetchReportPayload.toJson(),
       );
 

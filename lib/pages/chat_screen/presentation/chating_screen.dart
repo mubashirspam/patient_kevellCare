@@ -6,8 +6,11 @@ import '../../../features/widgets/avatar/active_avatar.dart';
 
 
 class ChatingScreen extends StatelessWidget {
+
+  final Map  chatParameter;
   static const routeName = '/chating-screen';
-  const ChatingScreen({super.key});
+
+  const ChatingScreen({super.key,required this.chatParameter});
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +36,14 @@ class ChatingScreen extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 10),
           child: Row(
             children: [
-              const ActiveAvatar(radius: 25),
+              const ActiveAvatar(
+                radius: 25,
+                imageUrl:
+                    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+              ),
               const SizedBox(width: 10),
               Text(
-                "Dr.Eleanor Pena",
+                "Eleanor Pena",
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge!
@@ -55,7 +62,7 @@ class ChatingScreen extends StatelessWidget {
           )
         ],
       ),
-      body: const ChatingListWidget(),
+      body:  ChatingListWidget(chatParameter: chatParameter),
     );
   }
 }

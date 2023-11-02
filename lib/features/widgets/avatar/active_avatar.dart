@@ -15,7 +15,7 @@ class ActiveAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Uint8List imageBytes = base64Decode(imageUrl ?? imageUrlForDummy);
+    Uint8List imageBytes = base64Decode(imageUrlForDummy);
     return Stack(
       children: [
         CircleAvatar(
