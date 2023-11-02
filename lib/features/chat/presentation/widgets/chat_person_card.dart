@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:kevell_care/configure/color/maian_color.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
-
-import '../../../../configure/color/maian_color.dart';
 import '../../data/model/chat_person_model.dart';
 
 class ChatPersonCard extends StatelessWidget {
   final Result result;
+
   final int? count;
   const ChatPersonCard({
     super.key,
     required this.result,
+  
     this.count,
   });
 

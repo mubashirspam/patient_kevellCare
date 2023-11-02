@@ -243,7 +243,7 @@ mixin _$ChatState {
   String get message => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
   bool get hasData => throw _privateConstructorUsedError;
-  ChatPersonModel? get result => throw _privateConstructorUsedError;
+  ChatProfileModel? get result => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ChatStateCopyWith<ChatState> get copyWith =>
@@ -260,7 +260,7 @@ abstract class $ChatStateCopyWith<$Res> {
       String message,
       bool isError,
       bool hasData,
-      ChatPersonModel? result});
+      ChatProfileModel? result});
 }
 
 /// @nodoc
@@ -302,7 +302,7 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
       result: freezed == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
-              as ChatPersonModel?,
+              as ChatProfileModel?,
     ) as $Val);
   }
 }
@@ -319,7 +319,7 @@ abstract class _$$_ChatStateCopyWith<$Res> implements $ChatStateCopyWith<$Res> {
       String message,
       bool isError,
       bool hasData,
-      ChatPersonModel? result});
+      ChatProfileModel? result});
 }
 
 /// @nodoc
@@ -359,7 +359,7 @@ class __$$_ChatStateCopyWithImpl<$Res>
       result: freezed == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
-              as ChatPersonModel?,
+              as ChatProfileModel?,
     ));
   }
 }
@@ -383,7 +383,7 @@ class _$_ChatState implements _ChatState {
   @override
   final bool hasData;
   @override
-  final ChatPersonModel? result;
+  final ChatProfileModel? result;
 
   @override
   String toString() {
@@ -420,7 +420,7 @@ abstract class _ChatState implements ChatState {
       required final String message,
       required final bool isError,
       required final bool hasData,
-      required final ChatPersonModel? result}) = _$_ChatState;
+      required final ChatProfileModel? result}) = _$_ChatState;
 
   @override
   bool get isLoading;
@@ -431,7 +431,7 @@ abstract class _ChatState implements ChatState {
   @override
   bool get hasData;
   @override
-  ChatPersonModel? get result;
+  ChatProfileModel? get result;
   @override
   @JsonKey(ignore: true)
   _$$_ChatStateCopyWith<_$_ChatState> get copyWith =>

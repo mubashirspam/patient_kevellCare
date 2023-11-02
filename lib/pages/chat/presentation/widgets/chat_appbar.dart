@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-
-
 
 class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ChatAppBar({

@@ -1,7 +1,12 @@
 import 'dart:developer';
+
+import 'package:kevell_care/features/chat/data/model/message_isar_model.dart';
 import 'package:flutter/material.dart';
 import 'package:kevell_care/features/chat/presentation/widgets/message_widget.dart';
+import '../../../core/helper/date.dart';
+import '../data/model/chat_person_model.dart';
 import '../domain/chat_service.dart';
+import '../domain/message_isar_repo.dart';
 
 class ChatingListWidget extends StatefulWidget {
   final Map chatParameter;
@@ -12,21 +17,33 @@ class ChatingListWidget extends StatefulWidget {
 }
 
 class _ChatingListWidgetState extends State<ChatingListWidget> {
+  Result result = Result();
   @override
   void initState() {
     super.initState();
-
+    result = widget.chatParameter["data"];
+    log(result.id.toString());
+    fetchAndDisplayMessages(result.id!);
     readChat();
   }
 
+  final TextEditingController _textEditingController = TextEditingController();
+  final List<MessageWidget> _messages = [];
+
   void readChat() {
-    // ChatService.instance.socket!.emit("offline-messages-receive", 1004);
+    ChatService.instance.socket!
+    .emit("offline-messages-receive", result.id);
 
     ChatService.instance.socket!.on("msg-recieve", (data) {
       log("msg-recieved $data");
+
       if (mounted) {
         log("msg-recieved $data");
-        setState(() {});
+        if (data['from'] == result.id) {
+          setState(() {
+            addReceivedMessages(data);
+          });
+        }
       }
     });
   }
@@ -34,16 +51,71 @@ class _ChatingListWidgetState extends State<ChatingListWidget> {
   void sendMessage(String chat) {
     ChatService.instance.socket!.emit('send-msg', {
       "from": widget.chatParameter['from'],
-      "to": widget.chatParameter['to'],
+      "to": result.id,
       "msg": chat,
       "name": "Mubashir"
     });
   }
 
-  final TextEditingController _textEditingController = TextEditingController();
-  final List<MessageWidget> _messages = [];
+  void _handleSubmitted(String text) async {
+    if (text.isNotEmpty) {
+      _textEditingController.clear();
+ 
+      await MessageIsarRepo.instance.saveMessage(
+          MessageIsar(message: text, time: DateTime.now(), isReceiving: false),
+          result.id!,
+          result.username!);
+      sendMessage(text);
 
+      if (mounted) {
+        setState(() {
+          _messages.insert(
+              _messages.length,
+              MessageWidget(
+                isReciving: false,
+                msg: text,
+                time: '22:01',
+              ));
+        });
+      }
+    }
+  }
 
+  void fetchAndDisplayMessages(int userId) async {
+    _messages.clear();
+    final messages = await MessageIsarRepo.instance.fetchMessages(userId);
+    log(messages.toString());
+    setState(() {
+      for (var message in messages) {
+        final msg = message.message;
+        final time = extractTime(message.time ?? DateTime.now());
+
+        final isReciving = message.isReceiving;
+        _messages.add(MessageWidget(
+          isReciving: isReciving,
+          msg: msg ?? '',
+          time: time,
+        ));
+      }
+    });
+  }
+
+  void addReceivedMessages(Map<String, dynamic> message) async {
+    String msg = message["msg"];
+    String time = extractTime(DateTime.parse(message["time"]));
+    MessageIsarRepo.instance.saveMessage(
+        MessageIsar(
+            message: msg,
+            time: DateTime.parse(message["time"]),
+            isReceiving: true),
+        result.id!,
+        result.username!);
+    _messages.add(MessageWidget(
+      isReciving: true,
+      msg: msg,
+      time: time,
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,22 +168,4 @@ class _ChatingListWidgetState extends State<ChatingListWidget> {
       ),
     );
   }
-
-  void _handleSubmitted(String text) {
-    if (text.isNotEmpty) {
-      _textEditingController.clear();
-      setState(() {
-        sendMessage(text);
-        _messages.insert(
-            _messages.length,
-            MessageWidget(
-              isReciving: false,
-              msg: text,
-              time: '22:01',
-            ));
-      });
-    }
-  }
-
-
 }

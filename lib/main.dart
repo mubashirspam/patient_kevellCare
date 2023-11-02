@@ -1,13 +1,20 @@
+
+
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:isar/isar.dart';
 import 'package:kevell_care/core/them/dark_theme.dart';
 import 'package:kevell_care/core/them/light_theme.dart';
 import 'package:kevell_care/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:kevell_care/firebase_options.dart';
 import 'package:kevell_care/pages/initialize/bloc/initialize_bloc.dart';
 import 'package:kevell_care/pages/initialize/initialize.dart';
+import 'package:path_provider/path_provider.dart';
 import 'configure/route/routes.dart';
 import 'core/di/injectable.dart';
 import 'core/notifications/push_notification.dart';
@@ -18,13 +25,26 @@ import 'features/profile/presentation/bloc/profile_bloc.dart';
 import 'features/report/presentation/bloc/report_bloc.dart';
 import 'features/signup/bloc/signup_bloc.dart';
 
+import 'features/chat/data/model/chat_isar_model.dart';
+
+import 'features/chat/data/model/message_isar_model.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await PushNotification().initNoticatin();
   await configureInjeactable();
-  // await deleteFromSS(secureStoreKey);
+if (!kIsWeb) {
+    Future<Directory?>? dir;
+    dir = getApplicationSupportDirectory();
+    final Directory? directory = await dir;
+    await Isar.open(
+      name: 'db',
+      [ChatIsarPersonModelSchema,MessageListIsarModelSchema],
+      directory: '${directory?.path}',
+    );
+  }
   runApp(const MyApp());
 }
 

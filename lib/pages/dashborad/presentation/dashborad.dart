@@ -1,12 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-import 'package:kevell_care/pages/chat_screen/presentation/chat_screen.dart';
-import 'package:kevell_care/pages/chat_screen/presentation/widgets/chat_appbar.dart';
+
 import '../../appoiment/presenation/appoinments_screen.dart';
 
 import '../../appoiment/presenation/widgets/appoiment_screen_appbar.dart';
 
+import '../../chat/presentation/chat_screen.dart';
+import '../../chat/presentation/widgets/chat_appbar.dart';
 import '../../home_screen/presentation/home_screen.dart';
 import '../../home_screen/presentation/widgets/home_appbar.dart';
 import '../../profile/presenation/profile_screen.dart';

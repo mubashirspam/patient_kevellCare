@@ -1,8 +1,9 @@
+import 'package:kevell_care/features/chat/presentation/bloc/chat_bloc.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../features/chat/presentation/all_chat_list_widget.dart';
-import '../../../features/chat/presentation/bloc/chat_bloc.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -12,9 +13,9 @@ class ChatScreen extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context
           .read<ChatBloc>()
-          .add(const ChatEvent.fetchChatProfile(id: '1003', isReloading: true));
+          .add(ChatEvent.fetchChatProfile(id: "", isReloading: true));
     });
-    return const SizedBox(
+    return SizedBox(
       width: double.maxFinite,
       height: double.maxFinite,
       child: AllChatListWidget(),

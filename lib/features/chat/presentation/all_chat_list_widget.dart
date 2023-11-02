@@ -1,21 +1,24 @@
 import 'dart:developer';
 
-import 'package:kevell_care/features/chat/domain/db_helper.dart';
 import 'package:kevell_care/features/widgets/error_widget.dart';
 import 'package:kevell_care/features/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
-
 import 'package:kevell_care/features/chat/presentation/widgets/chat_person_card.dart';
-
+import 'package:kevell_care/pages/chat/presentation/chating_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../pages/chat_screen/presentation/chating_screen.dart';
+import '../../../configure/value/constant.dart';
+import '../../../configure/value/secure_storage.dart';
 import '../data/model/chat_person_model.dart';
+import '../data/model/message_isar_model.dart';
 import '../domain/chat_service.dart';
+import '../domain/message_isar_repo.dart';
 import 'bloc/chat_bloc.dart';
 
 class AllChatListWidget extends StatefulWidget {
-  const AllChatListWidget({super.key});
+  const AllChatListWidget({
+    super.key,
+  });
 
   @override
   State<AllChatListWidget> createState() => _AllChatListWidgetState();
@@ -23,11 +26,16 @@ class AllChatListWidget extends StatefulWidget {
 
 class _AllChatListWidgetState extends State<AllChatListWidget> {
   Map<int, List<Map<String, dynamic>>> sortedData = {};
-  DatabaseHelper dbHelper = DatabaseHelper();
 
   @override
   void initState() {
-    ChatService.instance.init(userId: 1003);
+    chatServiceIniti();
+
+    super.initState();
+  }
+
+  void chatServiceIniti() async {
+    await ChatService.instance.init();
 
     ChatService.instance.socket!.on("get-users", (data) {
       log("get-users called ======= $data");
@@ -38,35 +46,37 @@ class _AllChatListWidgetState extends State<AllChatListWidget> {
     ChatService.instance.socket!.on("offline-messages", (response) {
       if (mounted) {
         setState(() {
+          log("offline-messages called");
           addReceivedMessages(response);
         });
       }
     });
-
-    super.initState();
   }
 
   void addReceivedMessages(response) async {
-    await dbHelper.open().then((value) async {
+    final id = await getFromSS(drIdsecureStoreKey);
+    if (id != null) {
       log("db opened");
       for (var item in response) {
         final from = item["from"];
         final msg = item["msg"];
-        final time = item["time"];
+        final time = DateTime.parse(item["time"]);
         if (!sortedData.containsKey(from)) {
           sortedData[from] = [];
         }
-        sortedData[from]!.add({"msg": msg, "time": time});
-        await dbHelper.insertMessage(from, msg, time,);
+
+        MessageIsarRepo.instance.saveMessage(
+            MessageIsar(message: msg, time: time, isReceiving: false),
+            int.parse(id),
+            "thulasiraman");
       }
 
-      // Move the setState outside the loop to trigger a rebuild after processing all messages.
       if (mounted) {
         setState(() {
           log("offline-messages $sortedData");
         });
       }
-    });
+    }
   }
 
   @override
@@ -86,15 +96,15 @@ class _AllChatListWidgetState extends State<AllChatListWidget> {
                   count = sortedData[id]!.length;
                 }
                 return GestureDetector(
-                    onTap: () {
-                      // setState(() => count == null);
-
-                      Navigator.of(context).pushNamed(ChatingScreen.routeName,
-                          arguments: {
-                            'from': 1003,
-                            'to': 1014,
+                    onTap: () async {
+                      await getFromSS(drIdsecureStoreKey).then((value) =>
+                          Navigator.of(context)
+                              .pushNamed(ChatingScreen.routeName, arguments: {
+                            'data': profiles[index],
+                            'from': int.parse(value!),
+                            'to': profiles[index].id,
                             'oldMessage': sortedData[id]
-                          });
+                          }));
                     },
                     child: ChatPersonCard(
                       result: profiles[index],
@@ -115,4 +125,3 @@ class _AllChatListWidgetState extends State<AllChatListWidget> {
     );
   }
 }
-
