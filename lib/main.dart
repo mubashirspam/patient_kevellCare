@@ -40,7 +40,7 @@ if (!kIsWeb) {
     dir = getApplicationSupportDirectory();
     final Directory? directory = await dir;
     await Isar.open(
-      name: 'db',
+      name: 'patientdb',
       [ChatIsarPersonModelSchema,MessageListIsarModelSchema],
       directory: '${directory?.path}',
     );

@@ -21,7 +21,7 @@ class FetchChatProfileRepoImpliment implements FetchChatProfileRepository {
       final ids = await getFromSS(drIdsecureStoreKey);
     try {
       final response = await Dio().get(ApiEndPoints.fetchChatProfile,
-          queryParameters: {'doctorid': ids});
+          queryParameters: {'patientId': ids});
 
       if (response.statusCode == 200) {
         final result = ChatProfileModel.fromJson(response.data);

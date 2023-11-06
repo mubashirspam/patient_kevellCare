@@ -64,7 +64,7 @@ class _ChatingListWidgetState extends State<ChatingListWidget> {
       await MessageIsarRepo.instance.saveMessage(
           MessageIsar(message: text, time: DateTime.now(), isReceiving: false),
           result.id!,
-          result.username!);
+          result.username??"");
       sendMessage(text);
 
       if (mounted) {
@@ -109,7 +109,7 @@ class _ChatingListWidgetState extends State<ChatingListWidget> {
             time: DateTime.parse(message["time"]),
             isReceiving: true),
         result.id!,
-        result.username!);
+        result.username??"");
     _messages.add(MessageWidget(
       isReciving: true,
       msg: msg,

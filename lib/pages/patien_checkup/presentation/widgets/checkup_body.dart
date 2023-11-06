@@ -19,6 +19,7 @@ import '../../../../core/helper/toast.dart';
 import '../../../../features/checkup/presentation/blood_pressure_widget.dart';
 import '../../../../features/checkup/presentation/postion_widget.dart';
 import '../../../../features/checkup/presentation/spo_widget.dart';
+import '../../../../features/checkup/presentation/stethoscope_widget.dart';
 import '../../../../features/checkup/presentation/unloack.dart';
 import '../../../../features/checkup/presentation/widgets/ecg_graph.dart';
 import '../../../initialize/initialize.dart';
@@ -50,6 +51,7 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
   String deviceId = "";
 
   bool tReading = false;
+    bool stethescopReading = false;
   bool sp02Reading = false;
   bool ecgReading = false;
   bool gsrReading = false;
@@ -61,12 +63,14 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
   bool ecgLoading = false;
   bool gsrLoading = false;
   bool postionLoading = false;
+    bool stethescopLoding = false;
   bool bpLoading = false;
 
   Map<String, dynamic> dataMap = {};
 
   String temparature = "0.00";
   String sop2 = "0.00";
+    String stethescopeAudio = "";
   String heartBeat = "0";
   String position = "";
   Map<String, String> bp = {"bpsys": "0", "bpdia": "0", "bpplus": "0"};
@@ -160,15 +164,17 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
 
         log("dataMap['number'] === ${dataMap['number']}");
 
-        if (dataMap['state'] != "unlock") {
-          if (dataMap["appointmentID"].toString() == "$appointmentID") {
-            log("dataMap['data']['content'] === ${dataMap['data']['content']}");
-          } else {
-            log("bad appoinmnet idsdsffvdmdvnfvf");
-          }
-        }
+        // if (dataMap['state'] != "unlock") {
+        //   if (dataMap["appointmentID"].toString() == "$appointmentID") {
+        //     log("dataMap['data']['content'] === ${dataMap['data']['content']}");
+        //   } else {
+        //     log("bad appoinmnet idsdsffvdmdvnfvf");
+        //   }
+        // }
 
-        if (dataMap['state'] == "unlock") {
+        if (dataMap['state'] == "error") {
+          log("errrrrrrrrrrooooooooooorrrrrrr");
+        } else if (dataMap['state'] == "unlock") {
           isUnloacking = false;
           isUnloacked = true;
           deviceId = dataMap['id'];
@@ -473,6 +479,27 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
                     context: context, message: "Please Unlock"),
             temparature: temparature,
           ),
+           StethoscopeWidget(
+
+        isReading: stethescopReading,
+       
+        onpress: isUnloacked
+            ? () {
+                setState(() => stethescopLoding = true);
+                publishMy({
+                  "id": "KC_EC94CB6F61DC",
+                  "patientID": patientID,
+                  "doctorID": doctorID,
+                  "appointmentID": appointmentID,
+                  "type": "Doctor",
+                  "command": "device",
+                  "number": 11,
+                  "date": DateTime.now().millisecondsSinceEpoch
+                }, "KC_EC94CB6F61DC/device");
+              }
+            : () => Toast.showToast(context: context, message: "Please Unlock"),
+        audio: stethescopeAudio,
+      ),
           Spo2Widget(
             isReading: sp02Reading,
             heartBeat: heartBeat,

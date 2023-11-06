@@ -30,12 +30,12 @@ class ApiEndPoints {
 
   static const patientreport = "$baseUrl/patient/api/ViewPatientReport_new";
 
-  // static const  endAppoinment = "$baseUrl/doctor/api/Finishtheappoinment";
-  static const fetchChatProfile =
-      "https://4001-2409-4072-2e85-c3c8-e82c-a7b3-ec5d-1f7a.ngrok-free.app/chat/api/getallusers";
-
-  static const websocketUrl = "https://kevelldigital.com/videocall";
+  static const websocketUrl =
+      "https://kevelldigital.com/videochat?type=videocall";
 
   static const chatWebsocketUrl =
-      "https://4001-2409-4072-2e85-c3c8-e82c-a7b3-ec5d-1f7a.ngrok-free.app/chat/api";
+      "https://kevelldigital.com/videochat?type=chat";
+
+  static const String fetchChatProfile =
+      "https://kevelldigital.com/videochat/chat/api/getallusers";
 }

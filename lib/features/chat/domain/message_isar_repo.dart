@@ -11,7 +11,7 @@ class MessageIsarRepo {
 
   Future<void> saveMessage(
       MessageIsar message, int userId, String userName) async {
-    var isar = Isar.getInstance('db');
+    var isar = Isar.getInstance('patientdb');
     final messageListCollection = isar!.collection<MessageListIsarModel>();
 
     await isar.writeTxn(() async {
@@ -41,7 +41,7 @@ class MessageIsarRepo {
 
 // Function to get messages of a particular user
   Future<List<MessageIsar>> fetchMessages(int userId) async {
-    var isar = Isar.getInstance('db');
+    var isar = Isar.getInstance('patientdb');
     final messageListCollection = isar!.collection<MessageListIsarModel>();
 
     List<MessageListIsarModel> userMessageList =

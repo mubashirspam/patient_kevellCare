@@ -17,7 +17,7 @@ class ChatIsarRepo {
     return; // No data to process
   }
 
-  var isar = Isar.getInstance('db');
+  var isar = Isar.getInstance('patientdb');
   final profileCollection = isar!.collection<ChatIsarPersonModel>();
 
   // Convert chatProfiles to a Map for easy lookup
@@ -64,7 +64,7 @@ class ChatIsarRepo {
 
 
 Future<ChatProfileModel?> getChatProfile() async {
-  var isar = Isar.getInstance('db');
+  var isar = Isar.getInstance('patientdb');
 
   final profileCollection = isar!.collection<ChatIsarPersonModel>();
 
@@ -88,7 +88,7 @@ Future<ChatProfileModel?> getChatProfile() async {
 }
 
   Future<void> deleteAllData() async {
-    var isar = Isar.getInstance('db');
+    var isar = Isar.getInstance('patientdb');
     final profileCollection = isar!.collection<ChatIsarPersonModel>();
     int deletedCount = 0;
     await isar.writeTxn(() async {
