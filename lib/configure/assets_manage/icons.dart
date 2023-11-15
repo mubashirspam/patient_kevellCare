@@ -39,6 +39,8 @@ class AppIcons {
   static const String settings = "assets/icons/profile/settings.svg";
 
   static const String logout = "assets/icons/profile/logout.svg";
+    static const String rating = "assets/icons/profile/rating.svg";
+
 
   static const String graphIcon = "assets/icons/profile/graph_icon.svg";
 }

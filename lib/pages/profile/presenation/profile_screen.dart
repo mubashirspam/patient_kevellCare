@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/configure/value/constant.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/profile/presentation/my_ratings.dart';
 
 import '../../../features/login/presentation/logout.dart';
 import '../../../features/profile/presentation/about.dart';
@@ -27,6 +28,7 @@ class ProfileScreen extends StatelessWidget {
       Settings(),
       NotificationItem(),
       FAQ(),
+      my_ratings(),
       About(),
       DarkMode(),
     ];

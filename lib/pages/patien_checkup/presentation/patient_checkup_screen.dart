@@ -6,8 +6,6 @@ import 'dart:math' as m;
 import 'package:flutter/material.dart';
 import 'package:kevell_care/features/checkup/presentation/temparature_widgtet.dart';
 import 'package:kevell_care/pages/initialize/initialize.dart';
-import 'package:mqtt_client/mqtt_client.dart';
-import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import '../../../configure/api/endpoints.dart';
 import '../../../core/helper/alert.dart';
