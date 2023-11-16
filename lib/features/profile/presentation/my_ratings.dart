@@ -1,11 +1,10 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kevell_care/features/profile/presentation/doctor_ratings.dart';
+import 'package:kevell_care/pages/rating/presentation/rating_screen.dart';
 
 import '../../../configure/assets_manage/icons.dart';
 
-import 'widgets/listtile_widget.dart';
+import '../../profile/presentation/widgets/listtile_widget.dart';
 
 
 
@@ -17,7 +16,7 @@ class my_ratings extends StatelessWidget {
     return ListTileWidget(
       onTap: () =>  Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => DoctorRating()),
+              MaterialPageRoute(builder: (context) => const DoctorRating()),
             ),
       iconName: AppIcons.rating,
       titleName: "My Ratings",

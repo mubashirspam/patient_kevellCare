@@ -9,7 +9,6 @@ import 'package:kevell_care/features/checkup/presentation/gsr_widget.dart';
 import 'package:kevell_care/features/checkup/presentation/temparature_widgtet.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:sliver_tools/sliver_tools.dart';

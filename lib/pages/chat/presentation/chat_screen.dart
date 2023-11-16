@@ -13,9 +13,9 @@ class ChatScreen extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context
           .read<ChatBloc>()
-          .add(ChatEvent.fetchChatProfile(id: "", isReloading: true));
+          .add(const ChatEvent.fetchChatProfile(id: "", isReloading: true));
     });
-    return SizedBox(
+    return const SizedBox(
       width: double.maxFinite,
       height: double.maxFinite,
       child: AllChatListWidget(),

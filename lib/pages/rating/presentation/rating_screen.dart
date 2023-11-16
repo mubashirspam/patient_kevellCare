@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-import 'package:kevell_care/features/profile/presentation/view_doctor_rating.dart';
+import 'package:kevell_care/features/rating/presentation/bloc/rating_bloc.dart';
+import 'package:kevell_care/features/rating/presentation/view_doctor_rating.dart';
 
-import '../../../features/profile/presentation/view_my_profile.dart';
 
 
 
@@ -11,6 +12,9 @@ class DoctorRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<RatingBloc>().add(const RatingEvent.getRating());
+    });
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
