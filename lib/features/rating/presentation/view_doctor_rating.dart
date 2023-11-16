@@ -30,7 +30,7 @@ class DoctorRatingScreen extends StatelessWidget {
             itemCount: 5,
             itemBuilder: (BuildContext context, int index)
              {
-              return const NotificationCard(
+              return const RatingCard(
                 title: 'Dr.Xavier',
                 message:
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..',
@@ -43,11 +43,11 @@ class DoctorRatingScreen extends StatelessWidget {
   }
 }
 
-class NotificationCard extends StatelessWidget {
+class RatingCard extends StatelessWidget {
   final String title;
   final String message;
 
-  const NotificationCard(
+  const RatingCard(
       {super.key, required this.title, required this.message});
 
   @override
