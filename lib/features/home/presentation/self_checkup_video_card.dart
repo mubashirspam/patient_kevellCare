@@ -19,7 +19,7 @@ class _SelfCheckupVideoCardState extends State<SelfCheckupVideoCard> {
 
       "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
     )..initialize().then((_) {
-      setState(() {}); // Initialize the video player
+      setState(() {}); 
     });
   }
 

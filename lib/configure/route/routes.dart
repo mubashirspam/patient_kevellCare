@@ -15,6 +15,7 @@ final Map<String, Widget Function(BuildContext)> route = {
   SignupScreen.routeName: (ctx) => const SignupScreen(),
   Dashboard.routeName: (ctx) => const Dashboard(),
   MyProfileScreen.routeName: (ctx) => const MyProfileScreen(),
+  
   BookNewAppointmentScreen.routeName: (ctx) => BookNewAppointmentScreen(
       index: ModalRoute.of(ctx)!.settings.arguments as int),
  ChatingScreen.routeName: (ctx) => ChatingScreen(

@@ -37,4 +37,11 @@ class ApiEndPoints {
 
   static const String fetchChatProfile =
       "https://kevelldigital.com/videochat/chat/api/getallusers";
+
+      //rating
+      
+  static const String rating =
+      "https://kevelldigital.com/register/api/create/review";
+       static const String getrating =
+      "https://kevelldigital.com/register/api/getrating?patient_id=1003";
 }
