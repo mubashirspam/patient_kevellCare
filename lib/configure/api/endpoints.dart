@@ -29,9 +29,8 @@ class ApiEndPoints {
       "$baseUrl/patient/api/patientreportgeneralinfo";
 
   static const patientreport = "$baseUrl/patient/api/ViewPatientReport_new";
-
   static const websocketUrl =
-      "https://kevelldigital.com/videochat?type=videocall";
+      "https://kevelldigital.com/videochat?type=videocall&callerId=";
 
   static const chatWebsocketUrl =
       "https://kevelldigital.com/videochat?type=chat";

@@ -1,28 +1,29 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'dart:io';
 
 import 'package:flutter/material.dart';
+
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/services.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'widgets/checkup_card.dart';
 
+// import 'package:flutter_audio_visualizer/flutter_audio_visualizer.dart';
+
 class StethoscopeWidget extends StatefulWidget {
-  final String audio;
+  final List<String> audio;
   final VoidCallback onpress;
   final bool isReading;
- 
+
   const StethoscopeWidget(
       {super.key,
       required this.audio,
       required this.onpress,
       required this.isReading,
-      });
+     });
 
   @override
   State<StethoscopeWidget> createState() => _StethoscopeWidgetState();
@@ -30,7 +31,7 @@ class StethoscopeWidget extends StatefulWidget {
 
 class _StethoscopeWidgetState extends State<StethoscopeWidget> {
   final audioPlayer = AudioPlayer();
-  bool isPlying = false;
+  bool isPlaying = false;
 
   bool isLoading = false;
 
@@ -55,13 +56,19 @@ class _StethoscopeWidgetState extends State<StethoscopeWidget> {
 
   @override
   void initState() {
-
-    _initAudioStreaming();
+    // _initAudioStreaming();
 
     playerStateSubscription = audioPlayer.onPlayerStateChanged.listen((event) {
       setState(() {
-        isPlying = event == PlayerState.playing;
+        isPlaying = event == PlayerState.playing;
       });
+    });
+
+    // Add this to your initState method
+    audioPlayer.onPlayerStateChanged.listen((PlayerState state) {
+      if (state == PlayerState.completed) {
+        playNextAudio();
+      }
     });
 
     durationChangedSubscription =
@@ -81,66 +88,27 @@ class _StethoscopeWidgetState extends State<StethoscopeWidget> {
     super.initState();
   }
 
+  Uint8List? bytes;
+  // void convertFile() async {
+  //   setState(() => isLoading = true);
 
-  ////////////////////////////*************************************** */////////////////////////////
-  ///////////////////////////////*************************************** */////////////////////////////
-  ///////////////////////////////*************************************** */////////////////////////////
-  ///////////////////////////////*************************************** */////////////////////////////
-  ///v
-  StreamController<Uint8List> controller = StreamController<Uint8List>();
+  //   bytes = base64Decode(widget.audio);
 
-  void _initAudioStreaming() {
-    // Replace with your actual Base64 encoded audio data
+  //   setState(() => isLoading = false);
+  // }
 
-    Stream<Uint8List> audioDataStream = getStreamingAudioData(widget.audio);
+  // List<String> audioQueue = []; // Your list of base64 audio strings
+  int currentAudioIndex = 0; // To keep track of the current audio
 
-    audioDataStream.listen((Uint8List audioData) async {
-      if (!isPlying) {
-        await audioPlayer.setSourceBytes(audioData);
-        isPlying = true;
-      }
-    });
-  }
+  void playNextAudio() async {
+    if (currentAudioIndex < widget.audio.length) {
+      String audio = widget.audio[currentAudioIndex];
+      bytes = base64Decode(audio);
 
-  Stream<Uint8List> getStreamingAudioData(String base64Data) {
-    final decodedData = base64Decode(base64Data);
+      await audioPlayer.play(BytesSource(bytes!));
 
-    const chunkSize = 1024;
-    for (int i = 0; i < decodedData.length; i += chunkSize) {
-      final end = i + chunkSize < decodedData.length
-          ? i + chunkSize
-          : decodedData.length;
-      final chunk = Uint8List.sublistView(decodedData, i, end);
-      controller.add(chunk);
+      currentAudioIndex++;
     }
-
-    controller.close();
-
-    return controller.stream;
-  }
-
-////////////////////////////*************************************** */////////////////////////////
-///////////////////////////////*************************************** */////////////////////////////
-///////////////////////////////*************************************** */////////////////////////////
-///////////////////////////////*************************************** */////////////////////////////
-
-  File? file;
-
-  void convertFile() async {
-    setState(() => isLoading = true);
-    final bytes = base64Decode(widget.audio);
-    final dir = await getTemporaryDirectory();
-    file = File('${dir.path}/audio.wav');
-
-    await file!.writeAsBytes(bytes);
-
-    setState(() => isLoading = false);
-  }
-
-  @override
-  void didChangeDependencies() {
-      // _initAudioStreaming();
-    super.didChangeDependencies();
   }
 
   @override
@@ -155,7 +123,7 @@ class _StethoscopeWidgetState extends State<StethoscopeWidget> {
   @override
   Widget build(BuildContext context) {
     return CheckupCard(
-    
+      
       name: "Stethoscope",
       onPress: widget.onpress,
       children: [
@@ -177,34 +145,22 @@ class _StethoscopeWidgetState extends State<StethoscopeWidget> {
                             )
                           : IconButton(
                               color: Colors.white,
-                              onPressed: file != null && widget.isReading
-                                  ? () async {
-                                      if (isPlying) {
-                                        await audioPlayer.pause();
-                                      } else {
-                                        setState(() {
-                                          isLoading = true;
-                                        });
-
-                                        audioPlayer
-                                            .play(DeviceFileSource(file!.path))
-                                            .then((value) async {
-                                          await audioPlayer.resume();
-                                          setState(() {
-                                            isLoading = false;
-                                          });
-                                        });
-                                      }
-                                    }
-                                  : () {
-                                      convertFile();
-                                    },
+                              onPressed: () async {
+                                if (isPlaying) {
+                                  await audioPlayer.pause();
+                                } else {
+                                  if (widget.audio.isNotEmpty) {
+                                    playNextAudio();
+                                  }
+                                }
+                              },
                               icon: Icon(
-                                isPlying ? Icons.pause : Icons.play_arrow,
+                                isPlaying ? Icons.pause : Icons.play_arrow,
                                 color: context.theme.primary,
                                 size: 30,
                               ),
                             ),
+                    
                     ),
                   ),
                   Expanded(child: SizedBox(height: 30, child: buildSlider()))
@@ -255,4 +211,41 @@ class _StethoscopeWidgetState extends State<StethoscopeWidget> {
           await audioPlayer.resume();
         },
       );
+}
+
+
+
+
+// Inside your widget build method
+// Visualizer(
+//   id: 'your_audio_id', // Replace with your audio player's id
+//   builder: (BuildContext context, List<int> fft) {
+//     return CustomPaint(
+//       painter: WavePainter(fft), // You'll need to create this custom painter
+//     );
+//   },
+// );
+
+// Then, create a custom painter to draw the wave
+class WavePainter extends CustomPainter {
+  final List<int> fft;
+
+  WavePainter(this.fft);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // Here, you can draw the wave based on the fft data
+    // This is just a simple example and may not create a perfect wave
+    final paint = Paint()..color = Colors.blue;
+    for (int i = 0; i < fft.length; i++) {
+      final barHeight = fft[i] / 500; // Adjust this value to fit your needs
+      canvas.drawRect(
+        Rect.fromLTWH(i.toDouble(), size.height - barHeight, 1, barHeight),
+        paint,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
