@@ -7,8 +7,8 @@ import 'package:kevell_care/features/rating/presentation/view_doctor_rating.dart
 
 
 
-class DoctorRating extends StatelessWidget {
-  const DoctorRating({super.key});
+class DoctorRatingScreen extends StatelessWidget {
+  const DoctorRatingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +59,10 @@ class DoctorRating extends StatelessWidget {
       
       ),
       body: const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(20),
-          child: DoctorRatingScreen(),
+        
+          child: DoctorRating(),
         ),
-      ),
+      
     );
   }
 }

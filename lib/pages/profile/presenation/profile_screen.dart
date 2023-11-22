@@ -31,6 +31,7 @@ class ProfileScreen extends StatelessWidget {
       my_ratings(),
       About(),
       DarkMode(),
+      Logout()
     ];
     return SizedBox(
       width: double.maxFinite,
@@ -68,15 +69,17 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 20),
             Expanded(
               child: SizedBox(
-                child: Column(
-                  children: List.generate(
-                    list.length,
-                    (index) => list[index],
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: List.generate(
+                      list.length,
+                      (index) => list[index],
+                    ),
                   ),
                 ),
               ),
             ),
-            const Logout()
+            // const Logout()
           ],
         ),
       ),

@@ -51,7 +51,6 @@ class ViewMyProfile extends StatelessWidget {
 
 class ViewMyProfileBlocBody extends StatelessWidget {
   final String name;
-
   final String imgUrl;
   final String mobile;
   final String dob;
@@ -76,7 +75,6 @@ class ViewMyProfileBlocBody extends StatelessWidget {
           ProfileNameCard(
             email: mobile,
             imageUrl:imgUrl,
-               
             name: name,
           ),
           const SizedBox(

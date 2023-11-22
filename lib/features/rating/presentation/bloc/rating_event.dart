@@ -8,10 +8,10 @@ class RatingEvent with _$RatingEvent {
   })=_BuildRating;
 
     const factory RatingEvent.getRating() = _GetRating;
-
-  const factory RatingEvent.rating({
-    required String reveiw,
+ const factory RatingEvent.editRating({
     required String rating,
-  }) = _Rating;
+    required String reveiw,
+  }) = _EditRating;
+
   
   }

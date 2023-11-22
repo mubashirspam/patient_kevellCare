@@ -12,7 +12,7 @@ class RatingModel {
     int responseCode;
     bool status;
     String message;
-    Data data;
+    List<Datum> data;
 
     RatingModel({
         required this.responseCode,
@@ -25,28 +25,28 @@ class RatingModel {
         responseCode: json["responseCode"],
         status: json["status"],
         message: json["message"],
-        data: Data.fromJson(json["data"]),
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
         "responseCode": responseCode,
         "status": status,
         "message": message,
-        "data": data.toJson(),
+        "data": List<dynamic>.from(data.map((x) => x.toJson())),
     };
 }
 
-class Data {
+class Datum {
     int ratings;
     String reveiw;
     int patientId;
     int appointmentId;
-    String appointmentReason;
+    dynamic appointmentReason;
     String patientName;
     String doctorName;
     int doctorId;
 
-    Data({
+    Datum({
         required this.ratings,
         required this.reveiw,
         required this.patientId,
@@ -57,7 +57,7 @@ class Data {
         required this.doctorId,
     });
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         ratings: json["ratings"],
         reveiw: json["reveiw"],
         patientId: json["patient_id"],

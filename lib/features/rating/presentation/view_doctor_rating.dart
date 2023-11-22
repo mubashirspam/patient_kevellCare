@@ -4,51 +4,45 @@ import 'package:kevell_care/core/helper/toast.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/rating/data/model/rating_model.dart';
 import 'package:kevell_care/features/rating/presentation/bloc/rating_bloc.dart';
-import 'package:kevell_care/features/rating/presentation/edit_rating.dart';
-import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
-import 'package:kevell_care/features/widgets/input_field/input_field_widget.dart';
-import 'package:kevell_care/features/widgets/loading_widget.dart';
+import 'package:kevell_care/features/rating/presentation/create_rating.dart';
 
-class DoctorRatingScreen extends StatelessWidget {
-  const DoctorRatingScreen({
+class DoctorRating extends StatelessWidget {
+  const DoctorRating({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
-      
     int crossAxisCount = 1;
+    return BlocBuilder<RatingBloc, RatingState>(
+            builder: (context, state) {
+              if(state.hasData){
+                 return ListView.builder(  
+                itemCount: state.ratingDetails!.data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return  RatingCard(
+                    review: state.ratingDetails!.data[index].reveiw,
+                    rating: state.ratingDetails!.data[index].ratings,
+                    doctorname:state.ratingDetails!.data[index].doctorName
 
-    return Column(
-      children: [
-        Expanded(
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: crossAxisCount,
-              childAspectRatio: 2,
-            ),
-            itemCount: 5,
-            itemBuilder: (BuildContext context, int index)
-             {
-              return const RatingCard(
-                title: 'Dr.Xavier',
-                message:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..',
-              );
+                  );
+                
+                },
+              ); 
+
+              }
+             return const Text("No data found");
             },
-          ),
-        ),
-      ],
-    );
+          );
   }
 }
 
 class RatingCard extends StatelessWidget {
-  final String title;
-  final String message;
+  final String review;
+  final int rating;
+  final String doctorname;
 
-  const RatingCard(
-      {super.key, required this.title, required this.message});
+  const RatingCard({super.key, required this.review, required this.rating, required this. doctorname, });
+  
 
   @override
   Widget build(BuildContext context) {
@@ -64,70 +58,59 @@ class RatingCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: BlocConsumer<RatingBloc, RatingState>(
-                 listener: (context, state) async {
-        if (state.unauthorized) {
-          Toast.showToast(
-            context: context,
-            message: "Unauthrized",
-          );
-          
-        } else if (state.isError) {
-          Toast.showToast(context: context, message: "Network Error");
-        }
-      },
+              listener: (context, state) async {
+                if (state.unauthorized) {
+                  Toast.showToast(
+                    context: context,
+                    message: "Unauthrized",
+                  );
+                } else if (state.isError) {
+                  Toast.showToast(context: context, message: "Network Error");
+                }
+              },
               builder: (context, state) {
-                 
-                  if (state.hasData) {
-                    RatingModel getRating =
-                        BlocProvider.of<RatingBloc>(context).state.ratingDetails!;
- return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                const CircleAvatar(
-                                  child: Image(
-                                    image: AssetImage("assets/images/doctor.png"),
-                                  ),
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  title,
-                                  style: Theme.of(context).textTheme.headlineSmall,
-                                ),
-                              ],
-                            ),
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                ),
-                                Icon(Icons.star_border_outlined),
-                                Icon(Icons.star_border_outlined),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              message,
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                            const SizedBox(height: 16),
-                          ],
-                        );
-                  }
-                 return const Center(child: Text("No data Found"));
-
-              }, 
+                if (state.hasData) {
+                  RatingModel getRating =
+                      BlocProvider.of<RatingBloc>(context).state.ratingDetails!;
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:[
+                      Row(
+                        children: [
+                          ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        "",
+                        errorBuilder: (context, error, stackTrace) =>
+                           const Icon(Icons.image_not_supported_outlined),
+                        fit: BoxFit.cover,
+                      )),
+                          const SizedBox(width: 8),
+                          Text(
+                            doctorname,
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                        ],
+                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(4, (index) {
+                             return Icon(
+                               Icons.star,
+                               color: index < rating ? Colors.amber : Colors.grey,
+                            );
+                        }),),
+                      const SizedBox(height: 8),
+                      Text(
+                        review,
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                      const SizedBox(height: 16),
+                    ],
+                  );
+                }
+                return const Center(child: Text("No data Found"));
+              },
             ),
           ),
           Positioned(
@@ -137,7 +120,11 @@ class RatingCard extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: IconButton(
                     onPressed: () {
-                      showPopup(context);
+                      showDialog(context: context, builder: (context)=> EditRating(
+                        review: review,
+                        rating: rating.toString(),
+                      ));
+                      
                     },
                     icon: Icon(
                       Icons.edit_document,
@@ -149,4 +136,3 @@ class RatingCard extends StatelessWidget {
     );
   }
 }
-
