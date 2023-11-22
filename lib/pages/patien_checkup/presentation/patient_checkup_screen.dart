@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+
 import 'package:sliver_tools/sliver_tools.dart';
 import '../../../configure/api/endpoints.dart';
 import '../../../features/checkup/presentation/checkup_header.dart';
+
 import '../../../features/video_call/service/signaling_service.dart';
 import 'widgets/checkup_body.dart';
 
@@ -27,7 +31,7 @@ class _PatientCheckupScreenState extends State<PatientCheckupScreen> {
     patientID = widget.checkupDetalis['patientID'];
     doctorID = widget.checkupDetalis['doctorID'];
     appointmentID = widget.checkupDetalis['appointmentID'];
-
+    log(patientID.toString());
     SignallingService.instance.init(
       websocketUrl: ApiEndPoints.websocketUrl,
       selfCallerID: patientID.toString(),

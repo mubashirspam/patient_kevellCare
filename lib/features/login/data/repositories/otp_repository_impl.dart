@@ -29,7 +29,7 @@ class OtpRepoImpliment implements OtpRepository {
 
       final response = await Dio(BaseOptions()).post(
         ApiEndPoints.otp,
-        options: Options(headers: headers),
+        // options: Options(headers: headers),
         data: {"otp": otp, "mobile": number},
       );
 
@@ -37,7 +37,7 @@ class OtpRepoImpliment implements OtpRepository {
         case 200:
         case 201:
           final result = OtpModel.fromJson(response.data);
-          log(result.toString());
+          log(result.toJson().toString());
           return Right(result);
         case 400:
         case 401:
