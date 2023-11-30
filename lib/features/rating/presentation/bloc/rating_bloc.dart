@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kevell_care/features/rating/data/model/rating_model.dart';
+import 'package:kevell_care/features/rating/domain/repositories/create%20_rating_repository.dart';
 import 'package:kevell_care/features/rating/domain/repositories/edit_rating_repository.dart';
 
 import 'package:kevell_care/features/rating/domain/repositories/get_rating_repository.dart';
@@ -13,9 +14,10 @@ part 'rating_bloc.freezed.dart';
 
 class RatingBloc extends Bloc<RatingEvent, RatingState> {
    final EditRatingRepository editRatingRepository;
+   final CreateRatingRepository createRatingRepository;
 
 final GetRatingRepository getRatingRepository;
-  RatingBloc(this.getRatingRepository, this.editRatingRepository,) : super(RatingState.initial()) {
+  RatingBloc(this.getRatingRepository, this.editRatingRepository,this.createRatingRepository) : super(RatingState.initial()) {
     
      on<_GetRating>((event, emit) async {
       if (state.hasData) {
@@ -54,6 +56,34 @@ final GetRatingRepository getRatingRepository;
       );
 
       final response = await editRatingRepository.editRating(
+        review: event.reveiw,
+        rating: event.rating,
+      
+      );
+
+      final result = response.fold(
+        (failure) => state.copyWith(
+          isUpdateLoading: false,
+          isError: true,
+        ),
+        (success) => state.copyWith(
+            isError: false,
+            isUpdateLoading: false,
+            ratingDetails: success,
+            hasData: true),
+      );
+      emit(result);
+    });
+    on<_CreateRating>((event, emit) async {
+      emit(
+        state.copyWith(
+          isUpdateLoading: true,
+          hasData: false,
+          isError: false,
+        ),
+      );
+
+      final response = await createRatingRepository.createrating(
         review: event.reveiw,
         rating: event.rating,
       

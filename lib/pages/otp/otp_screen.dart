@@ -140,6 +140,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   secureStoreKey, state.otpDetails!.data!.first.token!);
 
               log("Token : ${state.otpDetails!.data!.first.token}");
+              
               Toast.showToast(
                 context: context,
                 message: 'You are successfully Logined 🥳',

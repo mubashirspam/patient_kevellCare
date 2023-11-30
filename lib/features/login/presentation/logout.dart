@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kevell_care/pages/dashborad/presentation/widgets/bottom_navigation.dart';
 
 
 import '../../../configure/assets_manage/icons.dart';
 import '../../../configure/value/constant.dart';
 import '../../../configure/value/secure_storage.dart';
 import '../../../pages/initialize/initialize.dart';
-
 class Logout extends StatelessWidget {
   const Logout({super.key});
 
@@ -18,13 +18,14 @@ class Logout extends StatelessWidget {
       leading: SvgPicture.asset(AppIcons.logout),
       onTap: () async {
         await deleteFromSS(mailsecureStoreKey);
-
         await deleteFromSS(secureStoreKey)
-            .then((value) => Navigator.of(context).pushAndRemoveUntil(
+            .then((value) {
+            selectedIndexNorifier.value=0;
+            Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
                   builder: (context) => const Initialize(),
                 ),
-                (route) => false));
+                (route) => false);});
       },
       title: Text(
         "Logout",
@@ -36,3 +37,5 @@ class Logout extends StatelessWidget {
     );
   }
 }
+
+

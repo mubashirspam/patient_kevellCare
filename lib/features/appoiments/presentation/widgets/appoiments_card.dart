@@ -123,7 +123,8 @@ class AppoimentCard extends StatelessWidget {
                 );
               },
               child: const Icon(Icons.delete,
-                  color: MainConfigColorsDarkTheme.danger)),
+                  color: MainConfigColorsDarkTheme.danger)
+        ),
         ],
       ),
     );

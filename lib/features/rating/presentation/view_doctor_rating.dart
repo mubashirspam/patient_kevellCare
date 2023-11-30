@@ -4,7 +4,7 @@ import 'package:kevell_care/core/helper/toast.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/rating/data/model/rating_model.dart';
 import 'package:kevell_care/features/rating/presentation/bloc/rating_bloc.dart';
-import 'package:kevell_care/features/rating/presentation/create_rating.dart';
+import 'package:kevell_care/features/rating/presentation/edit_rating.dart';
 
 class DoctorRating extends StatelessWidget {
   const DoctorRating({
@@ -123,6 +123,7 @@ class RatingCard extends StatelessWidget {
                       showDialog(context: context, builder: (context)=> EditRating(
                         review: review,
                         rating: rating.toString(),
+                        doctorName: doctorname,
                       ));
                       
                     },
