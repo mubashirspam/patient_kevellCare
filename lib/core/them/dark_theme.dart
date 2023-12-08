@@ -5,7 +5,7 @@ import 'package:kevell_care/configure/color/maian_color.dart';
 import 'custom_theme_extension.dart';
 
 ThemeData darkTheme() {
-  final ThemeData base = ThemeData.dark();
+  final ThemeData base = ThemeData.dark(useMaterial3: false);
   return base.copyWith(
     // backgroundColor: AppColor.backgroundDark,
     colorScheme: const ColorScheme.dark(
@@ -48,12 +48,12 @@ ThemeData darkTheme() {
         color: MainConfigColorsDarkTheme.textPrimary,
         fontWeight: FontWeight.bold,
       ),
-       headlineMedium: TextStyle(
+      headlineMedium: TextStyle(
         fontSize: 18,
         color: MainConfigColorsDarkTheme.textPrimary,
         fontWeight: FontWeight.bold,
       ),
-       headlineSmall: TextStyle(
+      headlineSmall: TextStyle(
         fontSize: 14,
         color: MainConfigColorsDarkTheme.textPrimary,
         fontWeight: FontWeight.bold,
@@ -62,12 +62,10 @@ ThemeData darkTheme() {
           fontSize: 14,
           color: MainConfigColorsDarkTheme.textSecondary,
           fontWeight: FontWeight.bold),
-           titleMedium: TextStyle(
+      titleMedium: TextStyle(
           fontSize: 14,
           color: MainConfigColorsDarkTheme.textSecondary,
           fontWeight: FontWeight.normal),
-       
     ),
-    
   );
 }

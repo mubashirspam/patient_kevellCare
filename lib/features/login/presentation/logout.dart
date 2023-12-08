@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-
 import '../../../configure/assets_manage/icons.dart';
 import '../../../configure/value/constant.dart';
 import '../../../configure/value/secure_storage.dart';
+import '../../../pages/dashborad/presentation/widgets/bottom_navigation.dart';
 import '../../../pages/initialize/initialize.dart';
 
 class Logout extends StatelessWidget {
@@ -19,12 +19,15 @@ class Logout extends StatelessWidget {
       onTap: () async {
         await deleteFromSS(mailsecureStoreKey);
 
-        await deleteFromSS(secureStoreKey)
-            .then((value) => Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => const Initialize(),
-                ),
-                (route) => false));
+        await deleteFromSS(secureStoreKey).then((value) {
+          selectedIndexNorifier.value = 0;
+
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => const Initialize(),
+              ),
+              (route) => false);
+        });
       },
       title: Text(
         "Logout",

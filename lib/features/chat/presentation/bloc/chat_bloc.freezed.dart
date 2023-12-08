@@ -94,22 +94,22 @@ class _$ChatEventCopyWithImpl<$Res, $Val extends ChatEvent>
 }
 
 /// @nodoc
-abstract class _$$_FetchChatProfileCopyWith<$Res>
+abstract class _$$FetchChatProfileImplCopyWith<$Res>
     implements $ChatEventCopyWith<$Res> {
-  factory _$$_FetchChatProfileCopyWith(
-          _$_FetchChatProfile value, $Res Function(_$_FetchChatProfile) then) =
-      __$$_FetchChatProfileCopyWithImpl<$Res>;
+  factory _$$FetchChatProfileImplCopyWith(_$FetchChatProfileImpl value,
+          $Res Function(_$FetchChatProfileImpl) then) =
+      __$$FetchChatProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, bool isReloading});
 }
 
 /// @nodoc
-class __$$_FetchChatProfileCopyWithImpl<$Res>
-    extends _$ChatEventCopyWithImpl<$Res, _$_FetchChatProfile>
-    implements _$$_FetchChatProfileCopyWith<$Res> {
-  __$$_FetchChatProfileCopyWithImpl(
-      _$_FetchChatProfile _value, $Res Function(_$_FetchChatProfile) _then)
+class __$$FetchChatProfileImplCopyWithImpl<$Res>
+    extends _$ChatEventCopyWithImpl<$Res, _$FetchChatProfileImpl>
+    implements _$$FetchChatProfileImplCopyWith<$Res> {
+  __$$FetchChatProfileImplCopyWithImpl(_$FetchChatProfileImpl _value,
+      $Res Function(_$FetchChatProfileImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -118,7 +118,7 @@ class __$$_FetchChatProfileCopyWithImpl<$Res>
     Object? id = null,
     Object? isReloading = null,
   }) {
-    return _then(_$_FetchChatProfile(
+    return _then(_$FetchChatProfileImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -133,8 +133,8 @@ class __$$_FetchChatProfileCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchChatProfile implements _FetchChatProfile {
-  const _$_FetchChatProfile({required this.id, required this.isReloading});
+class _$FetchChatProfileImpl implements _FetchChatProfile {
+  const _$FetchChatProfileImpl({required this.id, required this.isReloading});
 
   @override
   final String id;
@@ -150,7 +150,7 @@ class _$_FetchChatProfile implements _FetchChatProfile {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchChatProfile &&
+            other is _$FetchChatProfileImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.isReloading, isReloading) ||
                 other.isReloading == isReloading));
@@ -162,8 +162,9 @@ class _$_FetchChatProfile implements _FetchChatProfile {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchChatProfileCopyWith<_$_FetchChatProfile> get copyWith =>
-      __$$_FetchChatProfileCopyWithImpl<_$_FetchChatProfile>(this, _$identity);
+  _$$FetchChatProfileImplCopyWith<_$FetchChatProfileImpl> get copyWith =>
+      __$$FetchChatProfileImplCopyWithImpl<_$FetchChatProfileImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -225,7 +226,7 @@ class _$_FetchChatProfile implements _FetchChatProfile {
 abstract class _FetchChatProfile implements ChatEvent {
   const factory _FetchChatProfile(
       {required final String id,
-      required final bool isReloading}) = _$_FetchChatProfile;
+      required final bool isReloading}) = _$FetchChatProfileImpl;
 
   @override
   String get id;
@@ -233,7 +234,7 @@ abstract class _FetchChatProfile implements ChatEvent {
   bool get isReloading;
   @override
   @JsonKey(ignore: true)
-  _$$_FetchChatProfileCopyWith<_$_FetchChatProfile> get copyWith =>
+  _$$FetchChatProfileImplCopyWith<_$FetchChatProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -308,10 +309,11 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
 }
 
 /// @nodoc
-abstract class _$$_ChatStateCopyWith<$Res> implements $ChatStateCopyWith<$Res> {
-  factory _$$_ChatStateCopyWith(
-          _$_ChatState value, $Res Function(_$_ChatState) then) =
-      __$$_ChatStateCopyWithImpl<$Res>;
+abstract class _$$ChatStateImplCopyWith<$Res>
+    implements $ChatStateCopyWith<$Res> {
+  factory _$$ChatStateImplCopyWith(
+          _$ChatStateImpl value, $Res Function(_$ChatStateImpl) then) =
+      __$$ChatStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -323,11 +325,11 @@ abstract class _$$_ChatStateCopyWith<$Res> implements $ChatStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_ChatStateCopyWithImpl<$Res>
-    extends _$ChatStateCopyWithImpl<$Res, _$_ChatState>
-    implements _$$_ChatStateCopyWith<$Res> {
-  __$$_ChatStateCopyWithImpl(
-      _$_ChatState _value, $Res Function(_$_ChatState) _then)
+class __$$ChatStateImplCopyWithImpl<$Res>
+    extends _$ChatStateCopyWithImpl<$Res, _$ChatStateImpl>
+    implements _$$ChatStateImplCopyWith<$Res> {
+  __$$ChatStateImplCopyWithImpl(
+      _$ChatStateImpl _value, $Res Function(_$ChatStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -339,7 +341,7 @@ class __$$_ChatStateCopyWithImpl<$Res>
     Object? hasData = null,
     Object? result = freezed,
   }) {
-    return _then(_$_ChatState(
+    return _then(_$ChatStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -366,8 +368,8 @@ class __$$_ChatStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ChatState implements _ChatState {
-  const _$_ChatState(
+class _$ChatStateImpl implements _ChatState {
+  const _$ChatStateImpl(
       {required this.isLoading,
       required this.message,
       required this.isError,
@@ -394,7 +396,7 @@ class _$_ChatState implements _ChatState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ChatState &&
+            other is _$ChatStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.message, message) || other.message == message) &&
@@ -410,8 +412,8 @@ class _$_ChatState implements _ChatState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ChatStateCopyWith<_$_ChatState> get copyWith =>
-      __$$_ChatStateCopyWithImpl<_$_ChatState>(this, _$identity);
+  _$$ChatStateImplCopyWith<_$ChatStateImpl> get copyWith =>
+      __$$ChatStateImplCopyWithImpl<_$ChatStateImpl>(this, _$identity);
 }
 
 abstract class _ChatState implements ChatState {
@@ -420,7 +422,7 @@ abstract class _ChatState implements ChatState {
       required final String message,
       required final bool isError,
       required final bool hasData,
-      required final ChatProfileModel? result}) = _$_ChatState;
+      required final ChatProfileModel? result}) = _$ChatStateImpl;
 
   @override
   bool get isLoading;
@@ -434,6 +436,6 @@ abstract class _ChatState implements ChatState {
   ChatProfileModel? get result;
   @override
   @JsonKey(ignore: true)
-  _$$_ChatStateCopyWith<_$_ChatState> get copyWith =>
+  _$$ChatStateImplCopyWith<_$ChatStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:math' as m;
 
+import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/checkup/presentation/ecg_widget.dart';
 import 'package:kevell_care/features/checkup/presentation/gsr_widget.dart';
 import 'package:kevell_care/features/checkup/presentation/temparature_widgtet.dart';
@@ -16,6 +17,8 @@ import 'package:sliver_tools/sliver_tools.dart';
 import '../../../../core/helper/alert.dart';
 import '../../../../core/helper/toast.dart';
 import '../../../../features/checkup/presentation/blood_pressure_widget.dart';
+import '../../../../features/checkup/presentation/bmi_widget.dart';
+import '../../../../features/checkup/presentation/glucose_widget.dart';
 import '../../../../features/checkup/presentation/postion_widget.dart';
 import '../../../../features/checkup/presentation/spo_widget.dart';
 import '../../../../features/checkup/presentation/stethoscope_widget.dart';
@@ -47,9 +50,11 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
 
   bool isAnalysisended = false;
 
-  String deviceId = "";
+  String deviceId = "KC_EC94CB6F61DC";
 
   bool tReading = false;
+  bool gReading = false;
+  bool bmiReading = false;
   bool stethescopReading = false;
   bool sp02Reading = false;
   bool ecgReading = false;
@@ -58,6 +63,8 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
   bool bpReading = false;
 
   bool tLoading = false;
+  bool gLoading = false;
+  bool bmiLoading = false;
   bool sp02Loading = false;
   bool ecgLoading = false;
   bool gsrLoading = false;
@@ -68,11 +75,13 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
   Map<String, dynamic> dataMap = {};
 
   String temparature = "0.00";
+  String glucose = "0";
   String sop2 = "0.00";
   List<String> stethescopeAudio = [];
   String heartBeat = "0";
   String position = "";
   Map<String, String> bp = {"bpsys": "0", "bpdia": "0", "bpplus": "0"};
+  Map<String, dynamic> bmiResponse = {};
 
   int ecgIndex = 0;
 
@@ -296,10 +305,56 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
             stethescopReading = false;
           }
 
-// ********************************** bp **********************************//
-// ********************************** bp **********************************//
+// ********************************** Glucose **********************************//
+// ********************************** Glucose **********************************//
 //
-        } else if (dataMap['number'].toString() == "5" &&
+        }
+        
+         else if (dataMap['number'].toString() == "10" &&
+            dataMap['state'] == "device" &&
+            dataMap["appointmentID"].toString() == "$appointmentID") {
+          isUnloacked = true;
+          gLoading = false;
+
+          if (dataMap['data']['content'] != null &&
+              dataMap['data']['type'] == "reading") {
+            glucose = dataMap['data']['content'].toString();
+            gReading = true;
+          }
+          if (dataMap['data']['content'] != null &&
+              dataMap['data']['type'] == "result") {
+            gReading = false;
+          }
+
+          log(glucose);
+
+// ********************************** BMI **********************************//
+// ********************************** BMI **********************************//
+        } 
+        
+        else if (dataMap['number'].toString() == "9" &&
+            dataMap['state'] == "device" &&
+            dataMap["appointmentID"].toString() == "$appointmentID") {
+          isUnloacked = true;
+          bmiLoading = false;
+
+          if (dataMap['data']['type'] == "reading") {
+            bmiResponse = dataMap['data'];
+            // bmiResponse = BmiResponse.fromJson(dataMap['data']);
+
+            bmiReading = true;
+          }
+          if (dataMap['data']['content'] != null &&
+              dataMap['data']['type'] == "result") {
+            bmiReading = false;
+          }
+
+          log(bmiResponse.toString());
+        }
+
+// ********************************** bp **********************************//
+// ********************************** bp **********************************//
+        else if (dataMap['number'].toString() == "5" &&
             dataMap['state'] == "device" &&
             dataMap["appointmentID"].toString().toString() ==
                 "$appointmentID") {
@@ -573,11 +628,12 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
             : () => Toast.showToast(context: context, message: "Please Unlock"),
         ecgResults: ecgResults,
       ),
-      GSRgWidget(
-        isReading: gsrReading,
-        data: gsrData,
+      GlucoseWidget(
+        isReading: gReading,
+        
         onpress: isUnloacked
             ? () {
+                setState(() => gLoading = true);
                 publishMy({
                   "id": "KC_EC94CB6F61DC",
                   "patientID": patientID,
@@ -585,31 +641,144 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
                   "appointmentID": appointmentID,
                   "type": "Doctor",
                   "command": "device",
-                  "number": 8,
+                  "number": 10,
                   "date": DateTime.now().millisecondsSinceEpoch
                 }, "KC_EC94CB6F61DC/device");
               }
             : () => Toast.showToast(context: context, message: "Please Unlock"),
-        gsr: temparature,
+        glucose: glucose,
       ),
-      PositionWidget(
-        isReading: tReading,
+      // GSRgWidget(
+      //   isReading: gsrReading,
+      //   data: gsrData,
+      //   onpress: isUnloacked
+      //       ? () {
+      //           publishMy({
+      //             "id": "KC_EC94CB6F61DC",
+      //             "patientID": patientID,
+      //             "doctorID": doctorID,
+      //             "appointmentID": appointmentID,
+      //             "type": "Doctor",
+      //             "command": "device",
+      //             "number": 8,
+      //             "date": DateTime.now().millisecondsSinceEpoch
+      //           }, "KC_EC94CB6F61DC/device");
+      //         }
+      //       : () => Toast.showToast(context: context, message: "Please Unlock"),
+      //   gsr: temparature,
+      // ),
+      // PositionWidget(
+      //   isReading: tReading,
+      //   onpress: isUnloacked
+      //       ? () {
+      //           publishMy({
+      //             "id": "KC_EC94CB6F61DC",
+      //             "patientID": patientID,
+      //             "doctorID": doctorID,
+      //             "appointmentID": appointmentID,
+      //             "type": "Doctor",
+      //             "command": "device",
+      //             "number": 4,
+      //             "date": DateTime.now().millisecondsSinceEpoch
+      //           }, "KC_EC94CB6F61DC/device");
+      //         }
+      //       : () => Toast.showToast(context: context, message: "Please Unlock"),
+      //   position: position,
+      // ),
+
+      BMIWidget(
+        isReading: bmiReading,
+       
         onpress: isUnloacked
             ? () {
-                publishMy({
-                  "id": "KC_EC94CB6F61DC",
-                  "patientID": patientID,
-                  "doctorID": doctorID,
-                  "appointmentID": appointmentID,
-                  "type": "Doctor",
-                  "command": "device",
-                  "number": 4,
-                  "date": DateTime.now().millisecondsSinceEpoch
-                }, "KC_EC94CB6F61DC/device");
+                showCustomDialog(context, (String g, String h) {
+                  log("$g :: $h");
+                  setState(() => bmiLoading = true);
+                  publishMy({
+                    "id": "KC_EC94CB6F61DC",
+                    "patientID": patientID,
+                    "doctorID": doctorID,
+                    "appointmentID": appointmentID,
+                    "type": "Doctor",
+                    "command": "device",
+                    "number": 9,
+                    "gender": g,
+                    "height": h,
+                    "date": DateTime.now().millisecondsSinceEpoch
+                  }, "KC_EC94CB6F61DC/device");
+
+                  Navigator.pop(context);
+                });
               }
             : () => Toast.showToast(context: context, message: "Please Unlock"),
-        position: position,
+        bmiResponse: bmiResponse,
       ),
     ]);
   }
+}
+void showCustomDialog(
+    BuildContext context, Function(String sex, String hegiht) onpress) {
+  final _formKey = GlobalKey<FormState>();
+  String _gender = 'Male';
+  String _height = '';
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        title: Text(
+          'Enter Details',
+          style: Theme.of(context)
+              .textTheme
+              .titleLarge!
+              .copyWith(color: context.theme.primary, fontSize: 18),
+        ),
+        content: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              DropdownButtonFormField<String>(
+                value: _gender,
+                items: ['Male', 'Female'].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (newValue) {
+                  _gender = newValue!;
+                },
+                decoration: InputDecoration(labelText: "Gender"),
+              ),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  _height = value;
+                },
+                decoration: InputDecoration(labelText: "Height in cm"),
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: Text('Cancel'),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          TextButton(
+            child: Text('Submit'),
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                onpress(_gender, _height);
+              }
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

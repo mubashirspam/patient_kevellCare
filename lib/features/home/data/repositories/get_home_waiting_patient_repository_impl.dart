@@ -18,17 +18,20 @@ class GetAvailableDoctorRepoImpliment implements GetAvailableDoctorRepository {
   Future<Either<MainFailure, HomeAvailableDoctorModel>>
       getHomeAvailableDoctor() async {
     try {
-        final token = await getTokenFromSS(secureStoreKey);
-
+      final token = await getTokenFromSS(secureStoreKey);
 
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
-      
-      final response = await Dio(BaseOptions()).get(
+
+      final response = await Dio().get(
         ApiEndPoints.getHomeAvailableDoctor,
-          options: Options(headers: headers),
+        // "https://kevelldigital.com/doctor/api/getalldoctorSchedule?from=1&to=10",
+        options: Options(
+          headers: headers,
+          validateStatus: (_) => true,
+        ),
       );
 
       switch (response.statusCode) {

@@ -19,11 +19,13 @@ class ReportState with _$ReportState {
     String? pdfPath,
     required DateTime startDate,
     required DateTime endDate,
+        required PdfActions ? action,
   }) = _ReportState;
 
   factory ReportState.initial() =>  ReportState(
         isGenaralInfoLoading: false,
         unauthorized: false,
+        action:null ,
         isError: false,
         hasReportData: false,
         isReportDataLoading: false,

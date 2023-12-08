@@ -88,22 +88,49 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       });
     });
 
-       on<_PickDate>((event, emit) {
+    on<_PickDate>((event, emit) {
       emit(state.copyWith(
         date: event.date,
       ));
     });
 
-
     on<_PickTime>((event, emit) {
-
       emit(state.copyWith(
         startTime: event.startTime,
         endTime: event.endTime,
-   
       ));
     });
 
-    
+    on<_Search>((event, emit) {
+      HomeAvailableDoctorModel? availableDoctors = state.availableDoctors;
+
+      if (availableDoctors != null) {
+        List<HomeAvailableDoctorModelDatum>? list = availableDoctors.data;
+
+        if (list != null && list.isNotEmpty) {
+          emit(state.copyWith(
+            hasAvailableDoctorData: false,
+          ));
+          list = filterDoctorsBySpecialistAndLocation(
+              list, event.specialist, event.location);
+
+          HomeAvailableDoctorModel updatedAvailableDoctors =
+              availableDoctors.copyWith(data: list);
+
+          emit(state.copyWith(
+              hasAvailableDoctorData: true,
+              availableDoctors: updatedAvailableDoctors));
+        }
+      }
+    });
   }
+}
+
+List<HomeAvailableDoctorModelDatum> filterDoctorsBySpecialistAndLocation(
+  List<HomeAvailableDoctorModelDatum> doctorList,
+  String specialist,
+  String location,
+) {
+  return doctorList.where((doctor) =>
+      doctor.specialist == specialist && doctor.location == location).toList();
 }

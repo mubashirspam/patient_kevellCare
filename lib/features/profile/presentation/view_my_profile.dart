@@ -51,7 +51,6 @@ class ViewMyProfile extends StatelessWidget {
 
 class ViewMyProfileBlocBody extends StatelessWidget {
   final String name;
-
   final String imgUrl;
   final String mobile;
   final String dob;

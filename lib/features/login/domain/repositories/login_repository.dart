@@ -6,6 +6,6 @@ import '../../data/models/login_model.dart';
 
 abstract class LoginRepository {
   Future<Either<MainFailure, LoginModel>> login({
-    required String usernameOrMobile,
+    required String usernameOrMobile, required String password,
   });
 }

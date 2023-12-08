@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LoginEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String usernameOrMobile) login,
+    required TResult Function(String usernameOrMobile, String password) login,
     required TResult Function(String otp, String number) varyfiyOtp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String usernameOrMobile)? login,
+    TResult? Function(String usernameOrMobile, String password)? login,
     TResult? Function(String otp, String number)? varyfiyOtp,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String usernameOrMobile)? login,
+    TResult Function(String usernameOrMobile, String password)? login,
     TResult Function(String otp, String number)? varyfiyOtp,
     required TResult orElse(),
   }) =>
@@ -75,29 +75,36 @@ class _$LoginEventCopyWithImpl<$Res, $Val extends LoginEvent>
 }
 
 /// @nodoc
-abstract class _$$_LoginCopyWith<$Res> {
-  factory _$$_LoginCopyWith(_$_Login value, $Res Function(_$_Login) then) =
-      __$$_LoginCopyWithImpl<$Res>;
+abstract class _$$LoginImplCopyWith<$Res> {
+  factory _$$LoginImplCopyWith(
+          _$LoginImpl value, $Res Function(_$LoginImpl) then) =
+      __$$LoginImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String usernameOrMobile});
+  $Res call({String usernameOrMobile, String password});
 }
 
 /// @nodoc
-class __$$_LoginCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res, _$_Login>
-    implements _$$_LoginCopyWith<$Res> {
-  __$$_LoginCopyWithImpl(_$_Login _value, $Res Function(_$_Login) _then)
+class __$$LoginImplCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$LoginImpl>
+    implements _$$LoginImplCopyWith<$Res> {
+  __$$LoginImplCopyWithImpl(
+      _$LoginImpl _value, $Res Function(_$LoginImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? usernameOrMobile = null,
+    Object? password = null,
   }) {
-    return _then(_$_Login(
+    return _then(_$LoginImpl(
       usernameOrMobile: null == usernameOrMobile
           ? _value.usernameOrMobile
           : usernameOrMobile // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -105,62 +112,66 @@ class __$$_LoginCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Login implements _Login {
-  const _$_Login({required this.usernameOrMobile});
+class _$LoginImpl implements _Login {
+  const _$LoginImpl({required this.usernameOrMobile, required this.password});
 
   @override
   final String usernameOrMobile;
+  @override
+  final String password;
 
   @override
   String toString() {
-    return 'LoginEvent.login(usernameOrMobile: $usernameOrMobile)';
+    return 'LoginEvent.login(usernameOrMobile: $usernameOrMobile, password: $password)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Login &&
+            other is _$LoginImpl &&
             (identical(other.usernameOrMobile, usernameOrMobile) ||
-                other.usernameOrMobile == usernameOrMobile));
+                other.usernameOrMobile == usernameOrMobile) &&
+            (identical(other.password, password) ||
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, usernameOrMobile);
+  int get hashCode => Object.hash(runtimeType, usernameOrMobile, password);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoginCopyWith<_$_Login> get copyWith =>
-      __$$_LoginCopyWithImpl<_$_Login>(this, _$identity);
+  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
+      __$$LoginImplCopyWithImpl<_$LoginImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String usernameOrMobile) login,
+    required TResult Function(String usernameOrMobile, String password) login,
     required TResult Function(String otp, String number) varyfiyOtp,
   }) {
-    return login(usernameOrMobile);
+    return login(usernameOrMobile, password);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String usernameOrMobile)? login,
+    TResult? Function(String usernameOrMobile, String password)? login,
     TResult? Function(String otp, String number)? varyfiyOtp,
   }) {
-    return login?.call(usernameOrMobile);
+    return login?.call(usernameOrMobile, password);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String usernameOrMobile)? login,
+    TResult Function(String usernameOrMobile, String password)? login,
     TResult Function(String otp, String number)? varyfiyOtp,
     required TResult orElse(),
   }) {
     if (login != null) {
-      return login(usernameOrMobile);
+      return login(usernameOrMobile, password);
     }
     return orElse();
   }
@@ -198,29 +209,32 @@ class _$_Login implements _Login {
 }
 
 abstract class _Login implements LoginEvent {
-  const factory _Login({required final String usernameOrMobile}) = _$_Login;
+  const factory _Login(
+      {required final String usernameOrMobile,
+      required final String password}) = _$LoginImpl;
 
   String get usernameOrMobile;
+  String get password;
   @JsonKey(ignore: true)
-  _$$_LoginCopyWith<_$_Login> get copyWith =>
+  _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_VaryfiyOtpCopyWith<$Res> {
-  factory _$$_VaryfiyOtpCopyWith(
-          _$_VaryfiyOtp value, $Res Function(_$_VaryfiyOtp) then) =
-      __$$_VaryfiyOtpCopyWithImpl<$Res>;
+abstract class _$$VaryfiyOtpImplCopyWith<$Res> {
+  factory _$$VaryfiyOtpImplCopyWith(
+          _$VaryfiyOtpImpl value, $Res Function(_$VaryfiyOtpImpl) then) =
+      __$$VaryfiyOtpImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String otp, String number});
 }
 
 /// @nodoc
-class __$$_VaryfiyOtpCopyWithImpl<$Res>
-    extends _$LoginEventCopyWithImpl<$Res, _$_VaryfiyOtp>
-    implements _$$_VaryfiyOtpCopyWith<$Res> {
-  __$$_VaryfiyOtpCopyWithImpl(
-      _$_VaryfiyOtp _value, $Res Function(_$_VaryfiyOtp) _then)
+class __$$VaryfiyOtpImplCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$VaryfiyOtpImpl>
+    implements _$$VaryfiyOtpImplCopyWith<$Res> {
+  __$$VaryfiyOtpImplCopyWithImpl(
+      _$VaryfiyOtpImpl _value, $Res Function(_$VaryfiyOtpImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -229,7 +243,7 @@ class __$$_VaryfiyOtpCopyWithImpl<$Res>
     Object? otp = null,
     Object? number = null,
   }) {
-    return _then(_$_VaryfiyOtp(
+    return _then(_$VaryfiyOtpImpl(
       otp: null == otp
           ? _value.otp
           : otp // ignore: cast_nullable_to_non_nullable
@@ -244,8 +258,8 @@ class __$$_VaryfiyOtpCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_VaryfiyOtp implements _VaryfiyOtp {
-  const _$_VaryfiyOtp({required this.otp, required this.number});
+class _$VaryfiyOtpImpl implements _VaryfiyOtp {
+  const _$VaryfiyOtpImpl({required this.otp, required this.number});
 
   @override
   final String otp;
@@ -261,7 +275,7 @@ class _$_VaryfiyOtp implements _VaryfiyOtp {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_VaryfiyOtp &&
+            other is _$VaryfiyOtpImpl &&
             (identical(other.otp, otp) || other.otp == otp) &&
             (identical(other.number, number) || other.number == number));
   }
@@ -272,13 +286,13 @@ class _$_VaryfiyOtp implements _VaryfiyOtp {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VaryfiyOtpCopyWith<_$_VaryfiyOtp> get copyWith =>
-      __$$_VaryfiyOtpCopyWithImpl<_$_VaryfiyOtp>(this, _$identity);
+  _$$VaryfiyOtpImplCopyWith<_$VaryfiyOtpImpl> get copyWith =>
+      __$$VaryfiyOtpImplCopyWithImpl<_$VaryfiyOtpImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String usernameOrMobile) login,
+    required TResult Function(String usernameOrMobile, String password) login,
     required TResult Function(String otp, String number) varyfiyOtp,
   }) {
     return varyfiyOtp(otp, number);
@@ -287,7 +301,7 @@ class _$_VaryfiyOtp implements _VaryfiyOtp {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String usernameOrMobile)? login,
+    TResult? Function(String usernameOrMobile, String password)? login,
     TResult? Function(String otp, String number)? varyfiyOtp,
   }) {
     return varyfiyOtp?.call(otp, number);
@@ -296,7 +310,7 @@ class _$_VaryfiyOtp implements _VaryfiyOtp {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String usernameOrMobile)? login,
+    TResult Function(String usernameOrMobile, String password)? login,
     TResult Function(String otp, String number)? varyfiyOtp,
     required TResult orElse(),
   }) {
@@ -341,12 +355,12 @@ class _$_VaryfiyOtp implements _VaryfiyOtp {
 abstract class _VaryfiyOtp implements LoginEvent {
   const factory _VaryfiyOtp(
       {required final String otp,
-      required final String number}) = _$_VaryfiyOtp;
+      required final String number}) = _$VaryfiyOtpImpl;
 
   String get otp;
   String get number;
   @JsonKey(ignore: true)
-  _$$_VaryfiyOtpCopyWith<_$_VaryfiyOtp> get copyWith =>
+  _$$VaryfiyOtpImplCopyWith<_$VaryfiyOtpImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -436,11 +450,11 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
 }
 
 /// @nodoc
-abstract class _$$_LoginStateCopyWith<$Res>
+abstract class _$$LoginStateImplCopyWith<$Res>
     implements $LoginStateCopyWith<$Res> {
-  factory _$$_LoginStateCopyWith(
-          _$_LoginState value, $Res Function(_$_LoginState) then) =
-      __$$_LoginStateCopyWithImpl<$Res>;
+  factory _$$LoginStateImplCopyWith(
+          _$LoginStateImpl value, $Res Function(_$LoginStateImpl) then) =
+      __$$LoginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -454,11 +468,11 @@ abstract class _$$_LoginStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LoginStateCopyWithImpl<$Res>
-    extends _$LoginStateCopyWithImpl<$Res, _$_LoginState>
-    implements _$$_LoginStateCopyWith<$Res> {
-  __$$_LoginStateCopyWithImpl(
-      _$_LoginState _value, $Res Function(_$_LoginState) _then)
+class __$$LoginStateImplCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res, _$LoginStateImpl>
+    implements _$$LoginStateImplCopyWith<$Res> {
+  __$$LoginStateImplCopyWithImpl(
+      _$LoginStateImpl _value, $Res Function(_$LoginStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -472,7 +486,7 @@ class __$$_LoginStateCopyWithImpl<$Res>
     Object? loginDetails = freezed,
     Object? otpDetails = freezed,
   }) {
-    return _then(_$_LoginState(
+    return _then(_$LoginStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -507,8 +521,8 @@ class __$$_LoginStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoginState implements _LoginState {
-  const _$_LoginState(
+class _$LoginStateImpl implements _LoginState {
+  const _$LoginStateImpl(
       {required this.isLoading,
       required this.message,
       required this.isError,
@@ -541,7 +555,7 @@ class _$_LoginState implements _LoginState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LoginState &&
+            other is _$LoginStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.message, message) || other.message == message) &&
@@ -563,8 +577,8 @@ class _$_LoginState implements _LoginState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>
-      __$$_LoginStateCopyWithImpl<_$_LoginState>(this, _$identity);
+  _$$LoginStateImplCopyWith<_$LoginStateImpl> get copyWith =>
+      __$$LoginStateImplCopyWithImpl<_$LoginStateImpl>(this, _$identity);
 }
 
 abstract class _LoginState implements LoginState {
@@ -575,7 +589,7 @@ abstract class _LoginState implements LoginState {
       required final bool otpVarified,
       required final bool hasValidationData,
       required final LoginModel? loginDetails,
-      required final OtpModel? otpDetails}) = _$_LoginState;
+      required final OtpModel? otpDetails}) = _$LoginStateImpl;
 
   @override
   bool get isLoading;
@@ -593,6 +607,6 @@ abstract class _LoginState implements LoginState {
   OtpModel? get otpDetails;
   @override
   @JsonKey(ignore: true)
-  _$$_LoginStateCopyWith<_$_LoginState> get copyWith =>
+  _$$LoginStateImplCopyWith<_$LoginStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

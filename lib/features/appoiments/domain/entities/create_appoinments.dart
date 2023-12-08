@@ -14,6 +14,8 @@ class AppoinmentsPayload {
     int? doctornameid;
     String? doctorname;
     String? appointmentlocation;
+    
+
     DateTime? appointmentdate;
     String? appointmentendtime;
     String? appointmentstarttime;
@@ -39,5 +41,8 @@ class AppoinmentsPayload {
         "appointmentdate": "${appointmentdate!.year.toString().padLeft(4, '0')}-${appointmentdate!.month.toString().padLeft(2, '0')}-${appointmentdate!.day.toString().padLeft(2, '0')}",
         "appointmentendtime": appointmentendtime,
         "appointmentstarttime": appointmentstarttime,
+        "specialist":"Dentist"
     };
 }
+
+

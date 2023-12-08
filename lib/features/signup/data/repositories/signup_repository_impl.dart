@@ -14,12 +14,11 @@ import '../models/signup_model.dart';
 class SignupRepoImpliment implements SignupRepository {
   @override
   Future<Either<MainFailure, SignupModel>> signup({
-    required int phone,
-    required String userName,
+    required Map<String,String> payload,
   }) async {
     try {
       final response = await Dio(BaseOptions()).post(ApiEndPoints.register,
-          data: {"Username": userName, "mobile": phone});
+          data: payload);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final registerResult = SignupModel.fromJson(response.data);

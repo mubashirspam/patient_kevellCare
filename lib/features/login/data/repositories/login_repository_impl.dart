@@ -17,21 +17,17 @@ class LoginRepoImpliment implements LoginRepository {
   @override
   Future<Either<MainFailure, LoginModel>> login({
     required String usernameOrMobile,
+    required String password,
   }) async {
     try {
       final fcm = await getTokenFromSS(fcmStoreKey);
-      final token = await getTokenFromSS(secureStoreKey);
 
-      final headers = {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      };
-      final response = await Dio(BaseOptions()).post(
+      final response = await Dio().post(
         ApiEndPoints.login,
-        options: Options(headers: headers),
         data: {
           'cred': usernameOrMobile,
           "device_token": fcm,
+          "Password": password,
           "device_type": "Android"
         },
       );

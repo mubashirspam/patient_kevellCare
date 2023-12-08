@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/configure/value/secure_storage.dart';
@@ -31,6 +32,32 @@ class BookNowWidget extends StatefulWidget {
 }
 
 class _BookNowWidgetState extends State<BookNowWidget> {
+  String selectedLocation = "Please select location";
+  void _showSelectionBottomSheet(
+    BuildContext context,
+    List<String> list,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return SizedBox(
+          height: 250,
+          child: CupertinoPicker(
+            itemExtent: 32,
+            onSelectedItemChanged: (index) {
+              setState(() {
+                selectedLocation = list[index];
+              });
+            },
+            children: list.map((v) {
+              return Text(v);
+            }).toList(),
+          ),
+        );
+      },
+    );
+  }
+
   TextEditingController remarkController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -122,6 +149,7 @@ class _BookNowWidgetState extends State<BookNowWidget> {
                         }).toList();
 
                         List<DropdownMenuItem<String>> timeSlotItems = [];
+                        List<String> timeSlotItemsString = [];
 
                         if (filteredObjects.isNotEmpty) {
                           List<String> formattedList = [];
@@ -171,8 +199,10 @@ class _BookNowWidgetState extends State<BookNowWidget> {
                               }
                             }
                             if (!foundMatch) {
+                              timeSlotItemsString.add(valueTimeSlot);
                               timeSlotItems.add(
                                 DropdownMenuItem<String>(
+                                 
                                   value: valueTimeSlot,
                                   child: Text(
                                     currentTimeSlot,
@@ -193,22 +223,46 @@ class _BookNowWidgetState extends State<BookNowWidget> {
 
                         return Row(
                           children: [
-                            Expanded(
-                              child: DropDownFiledWidet(
-                                hintText: "Time slot",
-                                items: timeSlotItems,
-                                onChanged: (ww) {
-                                  List<String> timestamps = ww.split(',');
+                            // Expanded(
+                            //   child: DropdownMenuWidget(
+                            //     item: timeSlotItemsString.isNotEmpty ?timeSlotItemsString:["Please select a time"],
+                            //     onSelected: (ww) {
+                            //       if (ww != null) {
+                            //         List<String> timestamps = ww.split(',');
 
-                                  context.read<HomeBloc>().add(
-                                        HomeEvent.pickTime(
-                                          endTime:
-                                              DateTime.parse(timestamps[0]),
-                                          startTime:
-                                              DateTime.parse(timestamps[1]),
-                                        ),
-                                      );
-                                },
+                            //   log(timestamps.toString());
+                            //         // context.read<HomeBloc>().add(
+                            //         //       HomeEvent.pickTime(
+                            //         //         endTime:
+                            //         //             DateTime.parse(timestamps[0]),
+                            //         //         startTime:
+                            //         //             DateTime.parse(timestamps[1]),
+                            //         //       ),
+                            //         //     );
+                            //       }
+                            //     },
+                            //   ),
+                            // ),
+                            Expanded(
+                              child: IntrinsicWidth(
+                                child: DropDownFiledWidet(
+                                  hintText: "Time slot",
+                                  items: timeSlotItems,
+                                  onChanged: (ww) {
+                                    List<String> timestamps = ww.split(',');
+
+                                    log(timestamps.toString());
+
+                                    context.read<HomeBloc>().add(
+                                          HomeEvent.pickTime(
+                                            endTime:
+                                                DateTime.parse(timestamps[0]),
+                                            startTime:
+                                                DateTime.parse(timestamps[1]),
+                                          ),
+                                        );
+                                  },
+                                ),
                               ),
                             ),
                           ],
@@ -228,6 +282,34 @@ class _BookNowWidgetState extends State<BookNowWidget> {
                     },
                   ),
                   const SizedBox(height: 15),
+                  Text(
+                    "Select place",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge!
+                        .copyWith(color: context.theme.textPrimary),
+                  ),
+                  const SizedBox(height: 10),
+                  GestureDetector(
+                    onTap: () {
+                      _showSelectionBottomSheet(context, locations);
+                    },
+                    child: Container(
+                        width: double.maxFinite,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: context.theme.inputFiled),
+                        padding: EdgeInsets.all(15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(selectedLocation,
+                                style: Theme.of(context).textTheme.titleLarge),
+                            const Icon(Icons.arrow_drop_down)
+                          ],
+                        )),
+                  ),
+                  const SizedBox(height: 10),
                   Text(
                     "Description",
                     style: Theme.of(context)
@@ -283,34 +365,51 @@ class _BookNowWidgetState extends State<BookNowWidget> {
                                   await getFromSS(drIdsecureStoreKey)
                                       .then((value) {
                                     if (value != null) {
-                                      context.read<AppoinmetsBloc>().add(
-                                            AppoinmetsEvent.createAppoinments(
-                                              appoinmentsPayload:
-                                                  AppoinmentsPayload(
-                                                patientId: int.parse(value),
-                                                appointmentdate: homeState.date,
-                                                appointmentendtime: homeState
-                                                    .startTime!
-                                                    .toIso8601String(),
-                                                appointmentlocation: "",
-                                                appointmentstarttime: homeState
-                                                    .endTime!
-                                                    .toIso8601String(),
-                                                doctorname: homeState
-                                                    .availableDoctors!
-                                                    .data![widget.index]
-                                                    .username,
-                                                doctornameid: homeState
-                                                    .availableDoctors!
-                                                    .data![widget.index]
-                                                    .id,
-                                                reasonformeetingdoctor:
-                                                    remarkController.value.text,
+                                      if (selectedLocation ==
+                                          "Please select location") {
+                                        return Toast.showToast(
+                                            context: context,
+                                            message:
+                                                "Please select an a location",
+                                            color: Colors.red);
+                                      } else {
+                                        context.read<AppoinmetsBloc>().add(
+                                              AppoinmetsEvent.createAppoinments(
+                                                appoinmentsPayload:
+                                                    AppoinmentsPayload(
+                                                  patientId: int.parse(value),
+                                                  appointmentdate:
+                                                      homeState.date,
+                                                  appointmentendtime: homeState
+                                                      .startTime!
+                                                      .toIso8601String(),
+                                                  appointmentlocation:
+                                                      selectedLocation,
+                                                  appointmentstarttime:
+                                                      homeState.endTime!
+                                                          .toIso8601String(),
+                                                  doctorname: homeState
+                                                      .availableDoctors!
+                                                      .data![widget.index]
+                                                      .username,
+                                                  doctornameid: homeState
+                                                      .availableDoctors!
+                                                      .data![widget.index]
+                                                      .id,
+                                                  reasonformeetingdoctor:
+                                                      remarkController
+                                                          .value.text,
+                                                ),
                                               ),
-                                            ),
-                                          );
+                                            );
+                                      }
                                     }
                                   });
+                                } else {
+                                  return Toast.showToast(
+                                      context: context,
+                                      message: "Please select an a time slote",
+                                      color: Colors.red);
                                 }
                               },
                               name: "Submit",
@@ -339,3 +438,44 @@ class TimeSlotValue {
     required this.endTime,
   });
 }
+
+List<String> locations = [
+  "Madurai",
+  "Chennai",
+  "Dindigul",
+  "Ariyalur",
+  "Coimbatore",
+  "Chengalpattu",
+  "Erode",
+  "Dharmapuri",
+  "Kallakurichi",
+  "Kanchipuram",
+  "Karur",
+  "Krishnagiri",
+  "Kanyakumari",
+  "Mayiladuthurai",
+  "Nagapattinam",
+  "Namakkal",
+  "Nilgiris",
+  "Perambalur",
+  "Pudukkottai",
+  "Ranipet",
+  "Salem",
+  "Sivagangai",
+  "Tenkasi",
+  "Thanjavur",
+  "Theni",
+  "Thoothukudi",
+  "Tiruchirappalli",
+  "Tirunelveli",
+  "Tirupattur",
+  "Tiruppur",
+  "Tiruvallur",
+  "Tiruvannamalai",
+  "Tiruvarur",
+  "Vellore",
+  "Viluppuram",
+  "Ramanathapuram",
+  "Cuddalore",
+  "Virudhunagar",
+];

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class MainConfigColorsLightTheme {
@@ -44,4 +46,12 @@ class MainConfigColorsDarkTheme {
   static const Color textWhite = Color(0x00000000);
 
   static const Color textThemePrimary = Color(0xFF0095F7);
+}
+Color generateLightColor() {
+  final Random random = Random();
+  final int red = 200 + random.nextInt(55);
+  final int green = 200 + random.nextInt(55);
+  final int blue = 200 + random.nextInt(55);
+
+  return Color.fromRGBO(red, green, blue, 1.0);
 }

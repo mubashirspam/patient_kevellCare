@@ -445,85 +445,83 @@ class EcginfoData {
 }
 
 class Prescription {
-  dynamic doctorId;
-  dynamic appointmentId;
-  String? patientId;
-  String? name;
-  String? type;
-  String? duration;
-  List<Timeoftheday>? timeoftheday;
-  List<Timeoftheday>? tobetaken;
-  String? remark;
-  int? pno;
+    String? name;
+    String? type;
+    String? duration;
+    Timeoftheday? timeoftheday;
+    List<Tobetaken>? tobetaken;
 
-  Prescription({
-    this.doctorId,
-    this.appointmentId,
-    this.patientId,
-    this.name,
-    this.type,
-    this.duration,
-    this.timeoftheday,
-    this.tobetaken,
-    this.remark,
-    this.pno,
-  });
+    Prescription({
+        this.name,
+        this.type,
+        this.duration,
+        this.timeoftheday,
+        this.tobetaken,
+    });
 
-  factory Prescription.fromJson(Map<String, dynamic> json) => Prescription(
-        doctorId: json["doctorID"],
-        appointmentId: json["appointmentID"],
-        patientId: json["patient_id"],
+    factory Prescription.fromJson(Map<String, dynamic> json) => Prescription(
         name: json["name"],
         type: json["type"],
         duration: json["duration"],
-        timeoftheday: json["timeoftheday"] == null
-            ? []
-            : List<Timeoftheday>.from(
-                json["timeoftheday"]!.map((x) => Timeoftheday.fromJson(x))),
-        tobetaken: json["tobetaken"] == null
-            ? []
-            : List<Timeoftheday>.from(
-                json["tobetaken"]!.map((x) => Timeoftheday.fromJson(x))),
-        remark: json["remark"],
-        pno: json["pno"],
-      );
+        timeoftheday: json["timeoftheday"] == null ? null : Timeoftheday.fromJson(json["timeoftheday"]),
+        tobetaken: json["tobetaken"] == null ? [] : List<Tobetaken>.from(json["tobetaken"]!.map((x) => Tobetaken.fromJson(x))),
+    );
 
-  Map<String, dynamic> toJson() => {
-        "doctorID": doctorId,
-        "appointmentID": appointmentId,
-        "patient_id": patientId,
+    Map<String, dynamic> toJson() => {
         "name": name,
         "type": type,
         "duration": duration,
-        "timeoftheday": timeoftheday == null
-            ? []
-            : List<dynamic>.from(timeoftheday!.map((x) => x.toJson())),
-        "tobetaken": tobetaken == null
-            ? []
-            : List<dynamic>.from(tobetaken!.map((x) => x.toJson())),
-        "remark": remark,
-        "pno": pno,
-      };
+        "timeoftheday": timeoftheday?.toJson(),
+        "tobetaken": tobetaken == null ? [] : List<dynamic>.from(tobetaken!.map((x) => x.toJson())),
+    };
 }
 
 class Timeoftheday {
-  String? name;
-  bool? value;
+    String? morning;
+    String? evening;
+    String? noon;
+    String? night;
 
-  Timeoftheday({
-    this.name,
-    this.value,
-  });
+    Timeoftheday({
+        this.morning,
+        this.evening,
+        this.noon,
+        this.night,
+    });
 
-  factory Timeoftheday.fromJson(Map<String, dynamic> json) => Timeoftheday(
+    factory Timeoftheday.fromJson(Map<String, dynamic> json) => Timeoftheday(
+        morning: json["morning"],
+        evening: json["evening"],
+        noon: json["noon"],
+        night: json["night"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "morning": morning,
+        "evening": evening,
+        "noon": noon,
+        "night": night,
+    };
+}
+
+class Tobetaken {
+    String? name;
+    bool? value;
+
+    Tobetaken({
+        this.name,
+        this.value,
+    });
+
+    factory Tobetaken.fromJson(Map<String, dynamic> json) => Tobetaken(
         name: json["name"],
         value: json["value"],
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
         "name": name,
         "value": value,
-      };
+    };
 }
 
 class SpO2Info {

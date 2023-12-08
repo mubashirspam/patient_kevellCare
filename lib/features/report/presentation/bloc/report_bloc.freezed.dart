@@ -21,7 +21,8 @@ mixin _$ReportEvent {
     required TResult Function(int id) fetchReportGeneralinfo,
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
-    required TResult Function(List<Prescription> data) genaratePdf,
+    required TResult Function(List<Prescription> data, PdfActions action)
+        genaratePdf,
     required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,7 +30,7 @@ mixin _$ReportEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult? Function(List<Prescription> data)? genaratePdf,
+    TResult? Function(List<Prescription> data, PdfActions action)? genaratePdf,
     TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,7 +38,7 @@ mixin _$ReportEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult Function(List<Prescription> data)? genaratePdf,
+    TResult Function(List<Prescription> data, PdfActions action)? genaratePdf,
     TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) =>
@@ -89,20 +90,22 @@ class _$ReportEventCopyWithImpl<$Res, $Val extends ReportEvent>
 }
 
 /// @nodoc
-abstract class _$$_FetchReportGeneralinfoCopyWith<$Res> {
-  factory _$$_FetchReportGeneralinfoCopyWith(_$_FetchReportGeneralinfo value,
-          $Res Function(_$_FetchReportGeneralinfo) then) =
-      __$$_FetchReportGeneralinfoCopyWithImpl<$Res>;
+abstract class _$$FetchReportGeneralinfoImplCopyWith<$Res> {
+  factory _$$FetchReportGeneralinfoImplCopyWith(
+          _$FetchReportGeneralinfoImpl value,
+          $Res Function(_$FetchReportGeneralinfoImpl) then) =
+      __$$FetchReportGeneralinfoImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int id});
 }
 
 /// @nodoc
-class __$$_FetchReportGeneralinfoCopyWithImpl<$Res>
-    extends _$ReportEventCopyWithImpl<$Res, _$_FetchReportGeneralinfo>
-    implements _$$_FetchReportGeneralinfoCopyWith<$Res> {
-  __$$_FetchReportGeneralinfoCopyWithImpl(_$_FetchReportGeneralinfo _value,
-      $Res Function(_$_FetchReportGeneralinfo) _then)
+class __$$FetchReportGeneralinfoImplCopyWithImpl<$Res>
+    extends _$ReportEventCopyWithImpl<$Res, _$FetchReportGeneralinfoImpl>
+    implements _$$FetchReportGeneralinfoImplCopyWith<$Res> {
+  __$$FetchReportGeneralinfoImplCopyWithImpl(
+      _$FetchReportGeneralinfoImpl _value,
+      $Res Function(_$FetchReportGeneralinfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -110,7 +113,7 @@ class __$$_FetchReportGeneralinfoCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
   }) {
-    return _then(_$_FetchReportGeneralinfo(
+    return _then(_$FetchReportGeneralinfoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -121,8 +124,8 @@ class __$$_FetchReportGeneralinfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
-  const _$_FetchReportGeneralinfo({required this.id});
+class _$FetchReportGeneralinfoImpl implements _FetchReportGeneralinfo {
+  const _$FetchReportGeneralinfoImpl({required this.id});
 
   @override
   final int id;
@@ -136,7 +139,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchReportGeneralinfo &&
+            other is _$FetchReportGeneralinfoImpl &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -146,9 +149,9 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchReportGeneralinfoCopyWith<_$_FetchReportGeneralinfo> get copyWith =>
-      __$$_FetchReportGeneralinfoCopyWithImpl<_$_FetchReportGeneralinfo>(
-          this, _$identity);
+  _$$FetchReportGeneralinfoImplCopyWith<_$FetchReportGeneralinfoImpl>
+      get copyWith => __$$FetchReportGeneralinfoImplCopyWithImpl<
+          _$FetchReportGeneralinfoImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -156,7 +159,8 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
     required TResult Function(int id) fetchReportGeneralinfo,
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
-    required TResult Function(List<Prescription> data) genaratePdf,
+    required TResult Function(List<Prescription> data, PdfActions action)
+        genaratePdf,
     required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) {
     return fetchReportGeneralinfo(id);
@@ -167,7 +171,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult? Function(List<Prescription> data)? genaratePdf,
+    TResult? Function(List<Prescription> data, PdfActions action)? genaratePdf,
     TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) {
     return fetchReportGeneralinfo?.call(id);
@@ -178,7 +182,7 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult Function(List<Prescription> data)? genaratePdf,
+    TResult Function(List<Prescription> data, PdfActions action)? genaratePdf,
     TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) {
@@ -229,29 +233,29 @@ class _$_FetchReportGeneralinfo implements _FetchReportGeneralinfo {
 
 abstract class _FetchReportGeneralinfo implements ReportEvent {
   const factory _FetchReportGeneralinfo({required final int id}) =
-      _$_FetchReportGeneralinfo;
+      _$FetchReportGeneralinfoImpl;
 
   int get id;
   @JsonKey(ignore: true)
-  _$$_FetchReportGeneralinfoCopyWith<_$_FetchReportGeneralinfo> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$FetchReportGeneralinfoImplCopyWith<_$FetchReportGeneralinfoImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_FetchReportCopyWith<$Res> {
-  factory _$$_FetchReportCopyWith(
-          _$_FetchReport value, $Res Function(_$_FetchReport) then) =
-      __$$_FetchReportCopyWithImpl<$Res>;
+abstract class _$$FetchReportImplCopyWith<$Res> {
+  factory _$$FetchReportImplCopyWith(
+          _$FetchReportImpl value, $Res Function(_$FetchReportImpl) then) =
+      __$$FetchReportImplCopyWithImpl<$Res>;
   @useResult
   $Res call({FetchReportPayload fetchReportPayload});
 }
 
 /// @nodoc
-class __$$_FetchReportCopyWithImpl<$Res>
-    extends _$ReportEventCopyWithImpl<$Res, _$_FetchReport>
-    implements _$$_FetchReportCopyWith<$Res> {
-  __$$_FetchReportCopyWithImpl(
-      _$_FetchReport _value, $Res Function(_$_FetchReport) _then)
+class __$$FetchReportImplCopyWithImpl<$Res>
+    extends _$ReportEventCopyWithImpl<$Res, _$FetchReportImpl>
+    implements _$$FetchReportImplCopyWith<$Res> {
+  __$$FetchReportImplCopyWithImpl(
+      _$FetchReportImpl _value, $Res Function(_$FetchReportImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -259,7 +263,7 @@ class __$$_FetchReportCopyWithImpl<$Res>
   $Res call({
     Object? fetchReportPayload = null,
   }) {
-    return _then(_$_FetchReport(
+    return _then(_$FetchReportImpl(
       fetchReportPayload: null == fetchReportPayload
           ? _value.fetchReportPayload
           : fetchReportPayload // ignore: cast_nullable_to_non_nullable
@@ -270,8 +274,8 @@ class __$$_FetchReportCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FetchReport implements _FetchReport {
-  const _$_FetchReport({required this.fetchReportPayload});
+class _$FetchReportImpl implements _FetchReport {
+  const _$FetchReportImpl({required this.fetchReportPayload});
 
   @override
   final FetchReportPayload fetchReportPayload;
@@ -285,7 +289,7 @@ class _$_FetchReport implements _FetchReport {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_FetchReport &&
+            other is _$FetchReportImpl &&
             (identical(other.fetchReportPayload, fetchReportPayload) ||
                 other.fetchReportPayload == fetchReportPayload));
   }
@@ -296,8 +300,8 @@ class _$_FetchReport implements _FetchReport {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_FetchReportCopyWith<_$_FetchReport> get copyWith =>
-      __$$_FetchReportCopyWithImpl<_$_FetchReport>(this, _$identity);
+  _$$FetchReportImplCopyWith<_$FetchReportImpl> get copyWith =>
+      __$$FetchReportImplCopyWithImpl<_$FetchReportImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -305,7 +309,8 @@ class _$_FetchReport implements _FetchReport {
     required TResult Function(int id) fetchReportGeneralinfo,
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
-    required TResult Function(List<Prescription> data) genaratePdf,
+    required TResult Function(List<Prescription> data, PdfActions action)
+        genaratePdf,
     required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) {
     return fetchReport(fetchReportPayload);
@@ -316,7 +321,7 @@ class _$_FetchReport implements _FetchReport {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult? Function(List<Prescription> data)? genaratePdf,
+    TResult? Function(List<Prescription> data, PdfActions action)? genaratePdf,
     TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) {
     return fetchReport?.call(fetchReportPayload);
@@ -327,7 +332,7 @@ class _$_FetchReport implements _FetchReport {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult Function(List<Prescription> data)? genaratePdf,
+    TResult Function(List<Prescription> data, PdfActions action)? genaratePdf,
     TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) {
@@ -378,49 +383,57 @@ class _$_FetchReport implements _FetchReport {
 
 abstract class _FetchReport implements ReportEvent {
   const factory _FetchReport(
-      {required final FetchReportPayload fetchReportPayload}) = _$_FetchReport;
+          {required final FetchReportPayload fetchReportPayload}) =
+      _$FetchReportImpl;
 
   FetchReportPayload get fetchReportPayload;
   @JsonKey(ignore: true)
-  _$$_FetchReportCopyWith<_$_FetchReport> get copyWith =>
+  _$$FetchReportImplCopyWith<_$FetchReportImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_GeneratePdfCopyWith<$Res> {
-  factory _$$_GeneratePdfCopyWith(
-          _$_GeneratePdf value, $Res Function(_$_GeneratePdf) then) =
-      __$$_GeneratePdfCopyWithImpl<$Res>;
+abstract class _$$GeneratePdfImplCopyWith<$Res> {
+  factory _$$GeneratePdfImplCopyWith(
+          _$GeneratePdfImpl value, $Res Function(_$GeneratePdfImpl) then) =
+      __$$GeneratePdfImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Prescription> data});
+  $Res call({List<Prescription> data, PdfActions action});
 }
 
 /// @nodoc
-class __$$_GeneratePdfCopyWithImpl<$Res>
-    extends _$ReportEventCopyWithImpl<$Res, _$_GeneratePdf>
-    implements _$$_GeneratePdfCopyWith<$Res> {
-  __$$_GeneratePdfCopyWithImpl(
-      _$_GeneratePdf _value, $Res Function(_$_GeneratePdf) _then)
+class __$$GeneratePdfImplCopyWithImpl<$Res>
+    extends _$ReportEventCopyWithImpl<$Res, _$GeneratePdfImpl>
+    implements _$$GeneratePdfImplCopyWith<$Res> {
+  __$$GeneratePdfImplCopyWithImpl(
+      _$GeneratePdfImpl _value, $Res Function(_$GeneratePdfImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? data = null,
+    Object? action = null,
   }) {
-    return _then(_$_GeneratePdf(
+    return _then(_$GeneratePdfImpl(
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
               as List<Prescription>,
+      action: null == action
+          ? _value.action
+          : action // ignore: cast_nullable_to_non_nullable
+              as PdfActions,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_GeneratePdf implements _GeneratePdf {
-  const _$_GeneratePdf({required final List<Prescription> data}) : _data = data;
+class _$GeneratePdfImpl implements _GeneratePdf {
+  const _$GeneratePdfImpl(
+      {required final List<Prescription> data, required this.action})
+      : _data = data;
 
   final List<Prescription> _data;
   @override
@@ -431,27 +444,31 @@ class _$_GeneratePdf implements _GeneratePdf {
   }
 
   @override
+  final PdfActions action;
+
+  @override
   String toString() {
-    return 'ReportEvent.genaratePdf(data: $data)';
+    return 'ReportEvent.genaratePdf(data: $data, action: $action)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GeneratePdf &&
-            const DeepCollectionEquality().equals(other._data, _data));
+            other is _$GeneratePdfImpl &&
+            const DeepCollectionEquality().equals(other._data, _data) &&
+            (identical(other.action, action) || other.action == action));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_data), action);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GeneratePdfCopyWith<_$_GeneratePdf> get copyWith =>
-      __$$_GeneratePdfCopyWithImpl<_$_GeneratePdf>(this, _$identity);
+  _$$GeneratePdfImplCopyWith<_$GeneratePdfImpl> get copyWith =>
+      __$$GeneratePdfImplCopyWithImpl<_$GeneratePdfImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -459,10 +476,11 @@ class _$_GeneratePdf implements _GeneratePdf {
     required TResult Function(int id) fetchReportGeneralinfo,
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
-    required TResult Function(List<Prescription> data) genaratePdf,
+    required TResult Function(List<Prescription> data, PdfActions action)
+        genaratePdf,
     required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) {
-    return genaratePdf(data);
+    return genaratePdf(data, action);
   }
 
   @override
@@ -470,10 +488,10 @@ class _$_GeneratePdf implements _GeneratePdf {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult? Function(List<Prescription> data)? genaratePdf,
+    TResult? Function(List<Prescription> data, PdfActions action)? genaratePdf,
     TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) {
-    return genaratePdf?.call(data);
+    return genaratePdf?.call(data, action);
   }
 
   @override
@@ -481,12 +499,12 @@ class _$_GeneratePdf implements _GeneratePdf {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult Function(List<Prescription> data)? genaratePdf,
+    TResult Function(List<Prescription> data, PdfActions action)? genaratePdf,
     TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) {
     if (genaratePdf != null) {
-      return genaratePdf(data);
+      return genaratePdf(data, action);
     }
     return orElse();
   }
@@ -531,30 +549,32 @@ class _$_GeneratePdf implements _GeneratePdf {
 }
 
 abstract class _GeneratePdf implements ReportEvent {
-  const factory _GeneratePdf({required final List<Prescription> data}) =
-      _$_GeneratePdf;
+  const factory _GeneratePdf(
+      {required final List<Prescription> data,
+      required final PdfActions action}) = _$GeneratePdfImpl;
 
   List<Prescription> get data;
+  PdfActions get action;
   @JsonKey(ignore: true)
-  _$$_GeneratePdfCopyWith<_$_GeneratePdf> get copyWith =>
+  _$$GeneratePdfImplCopyWith<_$GeneratePdfImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_PickDateCopyWith<$Res> {
-  factory _$$_PickDateCopyWith(
-          _$_PickDate value, $Res Function(_$_PickDate) then) =
-      __$$_PickDateCopyWithImpl<$Res>;
+abstract class _$$PickDateImplCopyWith<$Res> {
+  factory _$$PickDateImplCopyWith(
+          _$PickDateImpl value, $Res Function(_$PickDateImpl) then) =
+      __$$PickDateImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTime startDate, DateTime endDate});
 }
 
 /// @nodoc
-class __$$_PickDateCopyWithImpl<$Res>
-    extends _$ReportEventCopyWithImpl<$Res, _$_PickDate>
-    implements _$$_PickDateCopyWith<$Res> {
-  __$$_PickDateCopyWithImpl(
-      _$_PickDate _value, $Res Function(_$_PickDate) _then)
+class __$$PickDateImplCopyWithImpl<$Res>
+    extends _$ReportEventCopyWithImpl<$Res, _$PickDateImpl>
+    implements _$$PickDateImplCopyWith<$Res> {
+  __$$PickDateImplCopyWithImpl(
+      _$PickDateImpl _value, $Res Function(_$PickDateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -563,7 +583,7 @@ class __$$_PickDateCopyWithImpl<$Res>
     Object? startDate = null,
     Object? endDate = null,
   }) {
-    return _then(_$_PickDate(
+    return _then(_$PickDateImpl(
       startDate: null == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -578,8 +598,8 @@ class __$$_PickDateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PickDate implements _PickDate {
-  const _$_PickDate({required this.startDate, required this.endDate});
+class _$PickDateImpl implements _PickDate {
+  const _$PickDateImpl({required this.startDate, required this.endDate});
 
   @override
   final DateTime startDate;
@@ -595,7 +615,7 @@ class _$_PickDate implements _PickDate {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PickDate &&
+            other is _$PickDateImpl &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate));
@@ -607,8 +627,8 @@ class _$_PickDate implements _PickDate {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PickDateCopyWith<_$_PickDate> get copyWith =>
-      __$$_PickDateCopyWithImpl<_$_PickDate>(this, _$identity);
+  _$$PickDateImplCopyWith<_$PickDateImpl> get copyWith =>
+      __$$PickDateImplCopyWithImpl<_$PickDateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -616,7 +636,8 @@ class _$_PickDate implements _PickDate {
     required TResult Function(int id) fetchReportGeneralinfo,
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
-    required TResult Function(List<Prescription> data) genaratePdf,
+    required TResult Function(List<Prescription> data, PdfActions action)
+        genaratePdf,
     required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) {
     return pickDate(startDate, endDate);
@@ -627,7 +648,7 @@ class _$_PickDate implements _PickDate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult? Function(List<Prescription> data)? genaratePdf,
+    TResult? Function(List<Prescription> data, PdfActions action)? genaratePdf,
     TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) {
     return pickDate?.call(startDate, endDate);
@@ -638,7 +659,7 @@ class _$_PickDate implements _PickDate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult Function(List<Prescription> data)? genaratePdf,
+    TResult Function(List<Prescription> data, PdfActions action)? genaratePdf,
     TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) {
@@ -690,12 +711,12 @@ class _$_PickDate implements _PickDate {
 abstract class _PickDate implements ReportEvent {
   const factory _PickDate(
       {required final DateTime startDate,
-      required final DateTime endDate}) = _$_PickDate;
+      required final DateTime endDate}) = _$PickDateImpl;
 
   DateTime get startDate;
   DateTime get endDate;
   @JsonKey(ignore: true)
-  _$$_PickDateCopyWith<_$_PickDate> get copyWith =>
+  _$$PickDateImplCopyWith<_$PickDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -718,6 +739,7 @@ mixin _$ReportState {
   String? get pdfPath => throw _privateConstructorUsedError;
   DateTime get startDate => throw _privateConstructorUsedError;
   DateTime get endDate => throw _privateConstructorUsedError;
+  PdfActions? get action => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReportStateCopyWith<ReportState> get copyWith =>
@@ -746,7 +768,8 @@ abstract class $ReportStateCopyWith<$Res> {
       String pdfErrorMessage,
       String? pdfPath,
       DateTime startDate,
-      DateTime endDate});
+      DateTime endDate,
+      PdfActions? action});
 }
 
 /// @nodoc
@@ -778,6 +801,7 @@ class _$ReportStateCopyWithImpl<$Res, $Val extends ReportState>
     Object? pdfPath = freezed,
     Object? startDate = null,
     Object? endDate = null,
+    Object? action = freezed,
   }) {
     return _then(_value.copyWith(
       isGenaralInfoLoading: null == isGenaralInfoLoading
@@ -844,16 +868,20 @@ class _$ReportStateCopyWithImpl<$Res, $Val extends ReportState>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      action: freezed == action
+          ? _value.action
+          : action // ignore: cast_nullable_to_non_nullable
+              as PdfActions?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_ReportStateCopyWith<$Res>
+abstract class _$$ReportStateImplCopyWith<$Res>
     implements $ReportStateCopyWith<$Res> {
-  factory _$$_ReportStateCopyWith(
-          _$_ReportState value, $Res Function(_$_ReportState) then) =
-      __$$_ReportStateCopyWithImpl<$Res>;
+  factory _$$ReportStateImplCopyWith(
+          _$ReportStateImpl value, $Res Function(_$ReportStateImpl) then) =
+      __$$ReportStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -872,15 +900,16 @@ abstract class _$$_ReportStateCopyWith<$Res>
       String pdfErrorMessage,
       String? pdfPath,
       DateTime startDate,
-      DateTime endDate});
+      DateTime endDate,
+      PdfActions? action});
 }
 
 /// @nodoc
-class __$$_ReportStateCopyWithImpl<$Res>
-    extends _$ReportStateCopyWithImpl<$Res, _$_ReportState>
-    implements _$$_ReportStateCopyWith<$Res> {
-  __$$_ReportStateCopyWithImpl(
-      _$_ReportState _value, $Res Function(_$_ReportState) _then)
+class __$$ReportStateImplCopyWithImpl<$Res>
+    extends _$ReportStateCopyWithImpl<$Res, _$ReportStateImpl>
+    implements _$$ReportStateImplCopyWith<$Res> {
+  __$$ReportStateImplCopyWithImpl(
+      _$ReportStateImpl _value, $Res Function(_$ReportStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -902,8 +931,9 @@ class __$$_ReportStateCopyWithImpl<$Res>
     Object? pdfPath = freezed,
     Object? startDate = null,
     Object? endDate = null,
+    Object? action = freezed,
   }) {
-    return _then(_$_ReportState(
+    return _then(_$ReportStateImpl(
       isGenaralInfoLoading: null == isGenaralInfoLoading
           ? _value.isGenaralInfoLoading
           : isGenaralInfoLoading // ignore: cast_nullable_to_non_nullable
@@ -968,14 +998,18 @@ class __$$_ReportStateCopyWithImpl<$Res>
           ? _value.endDate
           : endDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      action: freezed == action
+          ? _value.action
+          : action // ignore: cast_nullable_to_non_nullable
+              as PdfActions?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_ReportState implements _ReportState {
-  const _$_ReportState(
+class _$ReportStateImpl implements _ReportState {
+  const _$ReportStateImpl(
       {required this.isGenaralInfoLoading,
       required this.isReportDataLoading,
       required this.hasGenaralInfoData,
@@ -991,7 +1025,8 @@ class _$_ReportState implements _ReportState {
       required this.pdfErrorMessage,
       this.pdfPath,
       required this.startDate,
-      required this.endDate});
+      required this.endDate,
+      required this.action});
 
   @override
   final bool isGenaralInfoLoading;
@@ -1025,17 +1060,19 @@ class _$_ReportState implements _ReportState {
   final DateTime startDate;
   @override
   final DateTime endDate;
+  @override
+  final PdfActions? action;
 
   @override
   String toString() {
-    return 'ReportState(isGenaralInfoLoading: $isGenaralInfoLoading, isReportDataLoading: $isReportDataLoading, hasGenaralInfoData: $hasGenaralInfoData, hasReportData: $hasReportData, unauthorized: $unauthorized, isError: $isError, reportGeneraInfo: $reportGeneraInfo, reportData: $reportData, isPdfLoading: $isPdfLoading, pdfCreated: $pdfCreated, pdf: $pdf, pdfError: $pdfError, pdfErrorMessage: $pdfErrorMessage, pdfPath: $pdfPath, startDate: $startDate, endDate: $endDate)';
+    return 'ReportState(isGenaralInfoLoading: $isGenaralInfoLoading, isReportDataLoading: $isReportDataLoading, hasGenaralInfoData: $hasGenaralInfoData, hasReportData: $hasReportData, unauthorized: $unauthorized, isError: $isError, reportGeneraInfo: $reportGeneraInfo, reportData: $reportData, isPdfLoading: $isPdfLoading, pdfCreated: $pdfCreated, pdf: $pdf, pdfError: $pdfError, pdfErrorMessage: $pdfErrorMessage, pdfPath: $pdfPath, startDate: $startDate, endDate: $endDate, action: $action)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReportState &&
+            other is _$ReportStateImpl &&
             (identical(other.isGenaralInfoLoading, isGenaralInfoLoading) ||
                 other.isGenaralInfoLoading == isGenaralInfoLoading) &&
             (identical(other.isReportDataLoading, isReportDataLoading) ||
@@ -1063,7 +1100,8 @@ class _$_ReportState implements _ReportState {
             (identical(other.pdfPath, pdfPath) || other.pdfPath == pdfPath) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
-            (identical(other.endDate, endDate) || other.endDate == endDate));
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.action, action) || other.action == action));
   }
 
   @override
@@ -1084,13 +1122,14 @@ class _$_ReportState implements _ReportState {
       pdfErrorMessage,
       pdfPath,
       startDate,
-      endDate);
+      endDate,
+      action);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReportStateCopyWith<_$_ReportState> get copyWith =>
-      __$$_ReportStateCopyWithImpl<_$_ReportState>(this, _$identity);
+  _$$ReportStateImplCopyWith<_$ReportStateImpl> get copyWith =>
+      __$$ReportStateImplCopyWithImpl<_$ReportStateImpl>(this, _$identity);
 }
 
 abstract class _ReportState implements ReportState {
@@ -1110,7 +1149,8 @@ abstract class _ReportState implements ReportState {
       required final String pdfErrorMessage,
       final String? pdfPath,
       required final DateTime startDate,
-      required final DateTime endDate}) = _$_ReportState;
+      required final DateTime endDate,
+      required final PdfActions? action}) = _$ReportStateImpl;
 
   @override
   bool get isGenaralInfoLoading;
@@ -1145,7 +1185,9 @@ abstract class _ReportState implements ReportState {
   @override
   DateTime get endDate;
   @override
+  PdfActions? get action;
+  @override
   @JsonKey(ignore: true)
-  _$$_ReportStateCopyWith<_$_ReportState> get copyWith =>
+  _$$ReportStateImplCopyWith<_$ReportStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

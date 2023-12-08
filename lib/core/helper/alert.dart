@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../pages/login_scrren/presentation/login_screen.dart';
+import '../../features/login/presentation/pages/login_screen.dart';
 
 
 class Alert {

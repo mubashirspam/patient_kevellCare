@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
-
 import '../../widgets/input_field/search_field.dart';
 
 class HomeSearchWidget extends StatelessWidget {
@@ -24,7 +23,7 @@ class HomeSearchWidget extends StatelessWidget {
               ),
             ),
           ),
-        const  SearchField(),
+          const SearchField(),
         ],
       ),
     );

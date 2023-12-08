@@ -97,25 +97,25 @@ class _$AppoinmetsEventCopyWithImpl<$Res, $Val extends AppoinmetsEvent>
 }
 
 /// @nodoc
-abstract class _$$_GetAppoinmentsCopyWith<$Res> {
-  factory _$$_GetAppoinmentsCopyWith(
-          _$_GetAppoinments value, $Res Function(_$_GetAppoinments) then) =
-      __$$_GetAppoinmentsCopyWithImpl<$Res>;
+abstract class _$$GetAppoinmentsImplCopyWith<$Res> {
+  factory _$$GetAppoinmentsImplCopyWith(_$GetAppoinmentsImpl value,
+          $Res Function(_$GetAppoinmentsImpl) then) =
+      __$$GetAppoinmentsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_GetAppoinmentsCopyWithImpl<$Res>
-    extends _$AppoinmetsEventCopyWithImpl<$Res, _$_GetAppoinments>
-    implements _$$_GetAppoinmentsCopyWith<$Res> {
-  __$$_GetAppoinmentsCopyWithImpl(
-      _$_GetAppoinments _value, $Res Function(_$_GetAppoinments) _then)
+class __$$GetAppoinmentsImplCopyWithImpl<$Res>
+    extends _$AppoinmetsEventCopyWithImpl<$Res, _$GetAppoinmentsImpl>
+    implements _$$GetAppoinmentsImplCopyWith<$Res> {
+  __$$GetAppoinmentsImplCopyWithImpl(
+      _$GetAppoinmentsImpl _value, $Res Function(_$GetAppoinmentsImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_GetAppoinments implements _GetAppoinments {
-  const _$_GetAppoinments();
+class _$GetAppoinmentsImpl implements _GetAppoinments {
+  const _$GetAppoinmentsImpl();
 
   @override
   String toString() {
@@ -125,7 +125,7 @@ class _$_GetAppoinments implements _GetAppoinments {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetAppoinments);
+        (other.runtimeType == runtimeType && other is _$GetAppoinmentsImpl);
   }
 
   @override
@@ -217,24 +217,24 @@ class _$_GetAppoinments implements _GetAppoinments {
 }
 
 abstract class _GetAppoinments implements AppoinmetsEvent {
-  const factory _GetAppoinments() = _$_GetAppoinments;
+  const factory _GetAppoinments() = _$GetAppoinmentsImpl;
 }
 
 /// @nodoc
-abstract class _$$_CreateAppoinmentsCopyWith<$Res> {
-  factory _$$_CreateAppoinmentsCopyWith(_$_CreateAppoinments value,
-          $Res Function(_$_CreateAppoinments) then) =
-      __$$_CreateAppoinmentsCopyWithImpl<$Res>;
+abstract class _$$CreateAppoinmentsImplCopyWith<$Res> {
+  factory _$$CreateAppoinmentsImplCopyWith(_$CreateAppoinmentsImpl value,
+          $Res Function(_$CreateAppoinmentsImpl) then) =
+      __$$CreateAppoinmentsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({AppoinmentsPayload appoinmentsPayload});
 }
 
 /// @nodoc
-class __$$_CreateAppoinmentsCopyWithImpl<$Res>
-    extends _$AppoinmetsEventCopyWithImpl<$Res, _$_CreateAppoinments>
-    implements _$$_CreateAppoinmentsCopyWith<$Res> {
-  __$$_CreateAppoinmentsCopyWithImpl(
-      _$_CreateAppoinments _value, $Res Function(_$_CreateAppoinments) _then)
+class __$$CreateAppoinmentsImplCopyWithImpl<$Res>
+    extends _$AppoinmetsEventCopyWithImpl<$Res, _$CreateAppoinmentsImpl>
+    implements _$$CreateAppoinmentsImplCopyWith<$Res> {
+  __$$CreateAppoinmentsImplCopyWithImpl(_$CreateAppoinmentsImpl _value,
+      $Res Function(_$CreateAppoinmentsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -242,7 +242,7 @@ class __$$_CreateAppoinmentsCopyWithImpl<$Res>
   $Res call({
     Object? appoinmentsPayload = null,
   }) {
-    return _then(_$_CreateAppoinments(
+    return _then(_$CreateAppoinmentsImpl(
       appoinmentsPayload: null == appoinmentsPayload
           ? _value.appoinmentsPayload
           : appoinmentsPayload // ignore: cast_nullable_to_non_nullable
@@ -253,8 +253,8 @@ class __$$_CreateAppoinmentsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CreateAppoinments implements _CreateAppoinments {
-  const _$_CreateAppoinments({required this.appoinmentsPayload});
+class _$CreateAppoinmentsImpl implements _CreateAppoinments {
+  const _$CreateAppoinmentsImpl({required this.appoinmentsPayload});
 
   @override
   final AppoinmentsPayload appoinmentsPayload;
@@ -268,7 +268,7 @@ class _$_CreateAppoinments implements _CreateAppoinments {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_CreateAppoinments &&
+            other is _$CreateAppoinmentsImpl &&
             (identical(other.appoinmentsPayload, appoinmentsPayload) ||
                 other.appoinmentsPayload == appoinmentsPayload));
   }
@@ -279,8 +279,8 @@ class _$_CreateAppoinments implements _CreateAppoinments {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_CreateAppoinmentsCopyWith<_$_CreateAppoinments> get copyWith =>
-      __$$_CreateAppoinmentsCopyWithImpl<_$_CreateAppoinments>(
+  _$$CreateAppoinmentsImplCopyWith<_$CreateAppoinmentsImpl> get copyWith =>
+      __$$CreateAppoinmentsImplCopyWithImpl<_$CreateAppoinmentsImpl>(
           this, _$identity);
 
   @override
@@ -371,29 +371,29 @@ class _$_CreateAppoinments implements _CreateAppoinments {
 abstract class _CreateAppoinments implements AppoinmetsEvent {
   const factory _CreateAppoinments(
           {required final AppoinmentsPayload appoinmentsPayload}) =
-      _$_CreateAppoinments;
+      _$CreateAppoinmentsImpl;
 
   AppoinmentsPayload get appoinmentsPayload;
   @JsonKey(ignore: true)
-  _$$_CreateAppoinmentsCopyWith<_$_CreateAppoinments> get copyWith =>
+  _$$CreateAppoinmentsImplCopyWith<_$CreateAppoinmentsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_UpdateAppoinmetsCopyWith<$Res> {
-  factory _$$_UpdateAppoinmetsCopyWith(
-          _$_UpdateAppoinmets value, $Res Function(_$_UpdateAppoinmets) then) =
-      __$$_UpdateAppoinmetsCopyWithImpl<$Res>;
+abstract class _$$UpdateAppoinmetsImplCopyWith<$Res> {
+  factory _$$UpdateAppoinmetsImplCopyWith(_$UpdateAppoinmetsImpl value,
+          $Res Function(_$UpdateAppoinmetsImpl) then) =
+      __$$UpdateAppoinmetsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({UpdateAppoinmentsPayload appoinmetsPayload});
 }
 
 /// @nodoc
-class __$$_UpdateAppoinmetsCopyWithImpl<$Res>
-    extends _$AppoinmetsEventCopyWithImpl<$Res, _$_UpdateAppoinmets>
-    implements _$$_UpdateAppoinmetsCopyWith<$Res> {
-  __$$_UpdateAppoinmetsCopyWithImpl(
-      _$_UpdateAppoinmets _value, $Res Function(_$_UpdateAppoinmets) _then)
+class __$$UpdateAppoinmetsImplCopyWithImpl<$Res>
+    extends _$AppoinmetsEventCopyWithImpl<$Res, _$UpdateAppoinmetsImpl>
+    implements _$$UpdateAppoinmetsImplCopyWith<$Res> {
+  __$$UpdateAppoinmetsImplCopyWithImpl(_$UpdateAppoinmetsImpl _value,
+      $Res Function(_$UpdateAppoinmetsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -401,7 +401,7 @@ class __$$_UpdateAppoinmetsCopyWithImpl<$Res>
   $Res call({
     Object? appoinmetsPayload = null,
   }) {
-    return _then(_$_UpdateAppoinmets(
+    return _then(_$UpdateAppoinmetsImpl(
       appoinmetsPayload: null == appoinmetsPayload
           ? _value.appoinmetsPayload
           : appoinmetsPayload // ignore: cast_nullable_to_non_nullable
@@ -412,8 +412,8 @@ class __$$_UpdateAppoinmetsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UpdateAppoinmets implements _UpdateAppoinmets {
-  const _$_UpdateAppoinmets({required this.appoinmetsPayload});
+class _$UpdateAppoinmetsImpl implements _UpdateAppoinmets {
+  const _$UpdateAppoinmetsImpl({required this.appoinmetsPayload});
 
   @override
   final UpdateAppoinmentsPayload appoinmetsPayload;
@@ -427,7 +427,7 @@ class _$_UpdateAppoinmets implements _UpdateAppoinmets {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UpdateAppoinmets &&
+            other is _$UpdateAppoinmetsImpl &&
             (identical(other.appoinmetsPayload, appoinmetsPayload) ||
                 other.appoinmetsPayload == appoinmetsPayload));
   }
@@ -438,8 +438,9 @@ class _$_UpdateAppoinmets implements _UpdateAppoinmets {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UpdateAppoinmetsCopyWith<_$_UpdateAppoinmets> get copyWith =>
-      __$$_UpdateAppoinmetsCopyWithImpl<_$_UpdateAppoinmets>(this, _$identity);
+  _$$UpdateAppoinmetsImplCopyWith<_$UpdateAppoinmetsImpl> get copyWith =>
+      __$$UpdateAppoinmetsImplCopyWithImpl<_$UpdateAppoinmetsImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -529,29 +530,29 @@ class _$_UpdateAppoinmets implements _UpdateAppoinmets {
 abstract class _UpdateAppoinmets implements AppoinmetsEvent {
   const factory _UpdateAppoinmets(
           {required final UpdateAppoinmentsPayload appoinmetsPayload}) =
-      _$_UpdateAppoinmets;
+      _$UpdateAppoinmetsImpl;
 
   UpdateAppoinmentsPayload get appoinmetsPayload;
   @JsonKey(ignore: true)
-  _$$_UpdateAppoinmetsCopyWith<_$_UpdateAppoinmets> get copyWith =>
+  _$$UpdateAppoinmetsImplCopyWith<_$UpdateAppoinmetsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeleteAppoinmetsCopyWith<$Res> {
-  factory _$$_DeleteAppoinmetsCopyWith(
-          _$_DeleteAppoinmets value, $Res Function(_$_DeleteAppoinmets) then) =
-      __$$_DeleteAppoinmetsCopyWithImpl<$Res>;
+abstract class _$$DeleteAppoinmetsImplCopyWith<$Res> {
+  factory _$$DeleteAppoinmetsImplCopyWith(_$DeleteAppoinmetsImpl value,
+          $Res Function(_$DeleteAppoinmetsImpl) then) =
+      __$$DeleteAppoinmetsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int id});
 }
 
 /// @nodoc
-class __$$_DeleteAppoinmetsCopyWithImpl<$Res>
-    extends _$AppoinmetsEventCopyWithImpl<$Res, _$_DeleteAppoinmets>
-    implements _$$_DeleteAppoinmetsCopyWith<$Res> {
-  __$$_DeleteAppoinmetsCopyWithImpl(
-      _$_DeleteAppoinmets _value, $Res Function(_$_DeleteAppoinmets) _then)
+class __$$DeleteAppoinmetsImplCopyWithImpl<$Res>
+    extends _$AppoinmetsEventCopyWithImpl<$Res, _$DeleteAppoinmetsImpl>
+    implements _$$DeleteAppoinmetsImplCopyWith<$Res> {
+  __$$DeleteAppoinmetsImplCopyWithImpl(_$DeleteAppoinmetsImpl _value,
+      $Res Function(_$DeleteAppoinmetsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -559,7 +560,7 @@ class __$$_DeleteAppoinmetsCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
   }) {
-    return _then(_$_DeleteAppoinmets(
+    return _then(_$DeleteAppoinmetsImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -570,8 +571,8 @@ class __$$_DeleteAppoinmetsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DeleteAppoinmets implements _DeleteAppoinmets {
-  const _$_DeleteAppoinmets({required this.id});
+class _$DeleteAppoinmetsImpl implements _DeleteAppoinmets {
+  const _$DeleteAppoinmetsImpl({required this.id});
 
   @override
   final int id;
@@ -585,7 +586,7 @@ class _$_DeleteAppoinmets implements _DeleteAppoinmets {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeleteAppoinmets &&
+            other is _$DeleteAppoinmetsImpl &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -595,8 +596,9 @@ class _$_DeleteAppoinmets implements _DeleteAppoinmets {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeleteAppoinmetsCopyWith<_$_DeleteAppoinmets> get copyWith =>
-      __$$_DeleteAppoinmetsCopyWithImpl<_$_DeleteAppoinmets>(this, _$identity);
+  _$$DeleteAppoinmetsImplCopyWith<_$DeleteAppoinmetsImpl> get copyWith =>
+      __$$DeleteAppoinmetsImplCopyWithImpl<_$DeleteAppoinmetsImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -685,29 +687,29 @@ class _$_DeleteAppoinmets implements _DeleteAppoinmets {
 
 abstract class _DeleteAppoinmets implements AppoinmetsEvent {
   const factory _DeleteAppoinmets({required final int id}) =
-      _$_DeleteAppoinmets;
+      _$DeleteAppoinmetsImpl;
 
   int get id;
   @JsonKey(ignore: true)
-  _$$_DeleteAppoinmetsCopyWith<_$_DeleteAppoinmets> get copyWith =>
+  _$$DeleteAppoinmetsImplCopyWith<_$DeleteAppoinmetsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_PickTimeCopyWith<$Res> {
-  factory _$$_PickTimeCopyWith(
-          _$_PickTime value, $Res Function(_$_PickTime) then) =
-      __$$_PickTimeCopyWithImpl<$Res>;
+abstract class _$$PickTimeImplCopyWith<$Res> {
+  factory _$$PickTimeImplCopyWith(
+          _$PickTimeImpl value, $Res Function(_$PickTimeImpl) then) =
+      __$$PickTimeImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DateTime startTime, DateTime endTime});
 }
 
 /// @nodoc
-class __$$_PickTimeCopyWithImpl<$Res>
-    extends _$AppoinmetsEventCopyWithImpl<$Res, _$_PickTime>
-    implements _$$_PickTimeCopyWith<$Res> {
-  __$$_PickTimeCopyWithImpl(
-      _$_PickTime _value, $Res Function(_$_PickTime) _then)
+class __$$PickTimeImplCopyWithImpl<$Res>
+    extends _$AppoinmetsEventCopyWithImpl<$Res, _$PickTimeImpl>
+    implements _$$PickTimeImplCopyWith<$Res> {
+  __$$PickTimeImplCopyWithImpl(
+      _$PickTimeImpl _value, $Res Function(_$PickTimeImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -716,7 +718,7 @@ class __$$_PickTimeCopyWithImpl<$Res>
     Object? startTime = null,
     Object? endTime = null,
   }) {
-    return _then(_$_PickTime(
+    return _then(_$PickTimeImpl(
       startTime: null == startTime
           ? _value.startTime
           : startTime // ignore: cast_nullable_to_non_nullable
@@ -731,8 +733,8 @@ class __$$_PickTimeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PickTime implements _PickTime {
-  const _$_PickTime({required this.startTime, required this.endTime});
+class _$PickTimeImpl implements _PickTime {
+  const _$PickTimeImpl({required this.startTime, required this.endTime});
 
   @override
   final DateTime startTime;
@@ -748,7 +750,7 @@ class _$_PickTime implements _PickTime {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PickTime &&
+            other is _$PickTimeImpl &&
             (identical(other.startTime, startTime) ||
                 other.startTime == startTime) &&
             (identical(other.endTime, endTime) || other.endTime == endTime));
@@ -760,8 +762,8 @@ class _$_PickTime implements _PickTime {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PickTimeCopyWith<_$_PickTime> get copyWith =>
-      __$$_PickTimeCopyWithImpl<_$_PickTime>(this, _$identity);
+  _$$PickTimeImplCopyWith<_$PickTimeImpl> get copyWith =>
+      __$$PickTimeImplCopyWithImpl<_$PickTimeImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -851,12 +853,12 @@ class _$_PickTime implements _PickTime {
 abstract class _PickTime implements AppoinmetsEvent {
   const factory _PickTime(
       {required final DateTime startTime,
-      required final DateTime endTime}) = _$_PickTime;
+      required final DateTime endTime}) = _$PickTimeImpl;
 
   DateTime get startTime;
   DateTime get endTime;
   @JsonKey(ignore: true)
-  _$$_PickTimeCopyWith<_$_PickTime> get copyWith =>
+  _$$PickTimeImplCopyWith<_$PickTimeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1018,11 +1020,11 @@ class _$AppoinmetsStateCopyWithImpl<$Res, $Val extends AppoinmetsState>
 }
 
 /// @nodoc
-abstract class _$$_AppoinmetsStateCopyWith<$Res>
+abstract class _$$AppoinmetsStateImplCopyWith<$Res>
     implements $AppoinmetsStateCopyWith<$Res> {
-  factory _$$_AppoinmetsStateCopyWith(
-          _$_AppoinmetsState value, $Res Function(_$_AppoinmetsState) then) =
-      __$$_AppoinmetsStateCopyWithImpl<$Res>;
+  factory _$$AppoinmetsStateImplCopyWith(_$AppoinmetsStateImpl value,
+          $Res Function(_$AppoinmetsStateImpl) then) =
+      __$$AppoinmetsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1047,11 +1049,11 @@ abstract class _$$_AppoinmetsStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AppoinmetsStateCopyWithImpl<$Res>
-    extends _$AppoinmetsStateCopyWithImpl<$Res, _$_AppoinmetsState>
-    implements _$$_AppoinmetsStateCopyWith<$Res> {
-  __$$_AppoinmetsStateCopyWithImpl(
-      _$_AppoinmetsState _value, $Res Function(_$_AppoinmetsState) _then)
+class __$$AppoinmetsStateImplCopyWithImpl<$Res>
+    extends _$AppoinmetsStateCopyWithImpl<$Res, _$AppoinmetsStateImpl>
+    implements _$$AppoinmetsStateImplCopyWith<$Res> {
+  __$$AppoinmetsStateImplCopyWithImpl(
+      _$AppoinmetsStateImpl _value, $Res Function(_$AppoinmetsStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1073,7 +1075,7 @@ class __$$_AppoinmetsStateCopyWithImpl<$Res>
     Object? updateResponse = freezed,
     Object? failure = freezed,
   }) {
-    return _then(_$_AppoinmetsState(
+    return _then(_$AppoinmetsStateImpl(
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -1140,8 +1142,8 @@ class __$$_AppoinmetsStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AppoinmetsState implements _AppoinmetsState {
-  const _$_AppoinmetsState(
+class _$AppoinmetsStateImpl implements _AppoinmetsState {
+  const _$AppoinmetsStateImpl(
       {required this.isLoading,
       required this.hasData,
       required this.isCreateLoading,
@@ -1198,7 +1200,7 @@ class _$_AppoinmetsState implements _AppoinmetsState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AppoinmetsState &&
+            other is _$AppoinmetsStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.hasData, hasData) || other.hasData == hasData) &&
@@ -1249,8 +1251,9 @@ class _$_AppoinmetsState implements _AppoinmetsState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AppoinmetsStateCopyWith<_$_AppoinmetsState> get copyWith =>
-      __$$_AppoinmetsStateCopyWithImpl<_$_AppoinmetsState>(this, _$identity);
+  _$$AppoinmetsStateImplCopyWith<_$AppoinmetsStateImpl> get copyWith =>
+      __$$AppoinmetsStateImplCopyWithImpl<_$AppoinmetsStateImpl>(
+          this, _$identity);
 }
 
 abstract class _AppoinmetsState implements AppoinmetsState {
@@ -1269,7 +1272,7 @@ abstract class _AppoinmetsState implements AppoinmetsState {
       required final DateTime? endTime,
       required final DeleteAppoinmentsModel? deleteResponse,
       required final UpdateAppoinmentsModel? updateResponse,
-      final MainFailure? failure}) = _$_AppoinmetsState;
+      final MainFailure? failure}) = _$AppoinmetsStateImpl;
 
   @override
   bool get isLoading;
@@ -1303,6 +1306,6 @@ abstract class _AppoinmetsState implements AppoinmetsState {
   MainFailure? get failure;
   @override
   @JsonKey(ignore: true)
-  _$$_AppoinmetsStateCopyWith<_$_AppoinmetsState> get copyWith =>
+  _$$AppoinmetsStateImplCopyWith<_$AppoinmetsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

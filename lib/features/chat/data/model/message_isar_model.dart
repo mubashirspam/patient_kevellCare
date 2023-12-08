@@ -2,6 +2,7 @@ import 'package:isar/isar.dart';
 
 part 'message_isar_model.g.dart';
 
+
 @collection
 class MessageListIsarModel {
   Id? id;

@@ -1,6 +1,6 @@
 const v1 = "v1";
 
-const secureStoreKey = 'token@key';
+const secureStoreKey = 'token@keyForPatient';
 
 const mailsecureStoreKey = 'mail@key';
 

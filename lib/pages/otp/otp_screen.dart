@@ -11,6 +11,7 @@ import '../../configure/value/constant.dart';
 import '../../configure/value/secure_storage.dart';
 import '../../core/helper/toast.dart';
 import '../../features/login/presentation/bloc/login_bloc.dart';
+import '../dashborad/presentation/widgets/bottom_navigation.dart';
 import '../initialize/initialize.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -131,7 +132,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
             if (!state.isLoading && state.otpVarified) {
               addToSS(
-                  mailsecureStoreKey, state.otpDetails!.data!.first.username!);
+                  mailsecureStoreKey, state.otpDetails!.data!.first.name??"");
 
               addToSS(drIdsecureStoreKey,
                   state.otpDetails!.data!.first.id!.toString());
@@ -144,7 +145,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 context: context,
                 message: 'You are successfully Logined 🥳',
               );
-
+          
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
                   builder: (context) => const Initialize(),

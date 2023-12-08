@@ -12,4 +12,10 @@ class HomeEvent with _$HomeEvent {
     required DateTime startTime,
     required DateTime endTime,
   }) = _PickTime;
+
+
+     const factory HomeEvent.search({
+    required String location,
+    required String specialist,
+  }) = _Search;
 }

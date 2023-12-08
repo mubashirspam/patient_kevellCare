@@ -38,7 +38,8 @@ class OtpModel {
 
 class Datum {
     int? id;
-    String? username;
+    String? name;
+  String? emailid;
     String? mobile;
     DateTime? createdAt;
     DateTime? updatedAt;
@@ -47,7 +48,8 @@ class Datum {
 
     Datum({
         this.id,
-        this.username,
+        this.emailid,
+        this.name,
         this.mobile,
         this.createdAt,
         this.updatedAt,
@@ -57,8 +59,9 @@ class Datum {
 
     factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["_id"],
-        username: json["Username"],
+        name: json["name"],
         mobile: json["mobile"],
+        emailid:json['emailid'],
         createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
         updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
         otp: json["otp"],
@@ -67,7 +70,7 @@ class Datum {
 
     Map<String, dynamic> toJson() => {
         "_id": id,
-        "Username": username,
+        "name": name,
         "mobile": mobile,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),

@@ -1,5 +1,4 @@
-
-
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:isar/isar.dart';
+import 'package:kevell_care/configure/value/secure_storage.dart';
 import 'package:kevell_care/core/them/dark_theme.dart';
 import 'package:kevell_care/core/them/light_theme.dart';
 import 'package:kevell_care/features/chat/presentation/bloc/chat_bloc.dart';
@@ -17,6 +17,7 @@ import 'package:kevell_care/pages/initialize/bloc/initialize_bloc.dart';
 import 'package:kevell_care/pages/initialize/initialize.dart';
 import 'package:path_provider/path_provider.dart';
 import 'configure/route/routes.dart';
+import 'configure/value/constant.dart';
 import 'core/di/injectable.dart';
 import 'core/notifications/push_notification.dart';
 import 'features/appoiments/presentation/bloc/appoinmets_bloc.dart';
@@ -27,7 +28,6 @@ import 'features/report/presentation/bloc/report_bloc.dart';
 import 'features/signup/bloc/signup_bloc.dart';
 
 import 'features/chat/data/model/chat_isar_model.dart';
-
 import 'features/chat/data/model/message_isar_model.dart';
 
 Future<void> main() async {
@@ -36,13 +36,15 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await PushNotification().initNoticatin();
   await configureInjeactable();
-if (!kIsWeb) {
+  await getTokenFromSS(secureStoreKey).then((value) => log("Token : $value"));
+
+  if (!kIsWeb) {
     Future<Directory?>? dir;
     dir = getApplicationSupportDirectory();
     final Directory? directory = await dir;
     await Isar.open(
       name: 'patientdb',
-      [ChatIsarPersonModelSchema,MessageListIsarModelSchema],
+      [ChatIsarPersonModelSchema, MessageListIsarModelSchema],
       directory: '${directory?.path}',
     );
   }
@@ -65,8 +67,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (ctx) => getIt<ReportBloc>()),
         BlocProvider(create: (ctx) => getIt<ProfileBloc>()),
         BlocProvider(create: (ctx) => getIt<ChatBloc>()),
-                BlocProvider(create: (ctx) => getIt<RatingBloc>()),
-
+        BlocProvider(create: (ctx) => getIt<RatingBloc>()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -74,8 +75,6 @@ class MyApp extends StatelessWidget {
         darkTheme: darkTheme(),
         themeMode: ThemeMode.light,
         home: const Initialize(),
-                initialRoute: '/dashboard',
-
         navigatorKey: navigatorKey,
         routes: route,
       ),

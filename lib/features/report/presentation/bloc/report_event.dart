@@ -12,6 +12,7 @@ class ReportEvent with _$ReportEvent {
 
   const factory ReportEvent.genaratePdf({
     required List<Prescription> data,
+    required PdfActions action,
   }) = _GeneratePdf;
   const factory ReportEvent.pickDate({
     required DateTime startDate,

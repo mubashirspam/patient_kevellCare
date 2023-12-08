@@ -1,21 +1,19 @@
-import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:kevell_care/features/report/presentation/bloc/report_bloc.dart';
 import 'package:kevell_care/features/widgets/loading_widget.dart';
 
+import '../../../configure/color/maian_color.dart';
 import '../../../configure/value/constant.dart';
 import '../../../configure/value/secure_storage.dart';
-import '../../../core/helper/toast.dart';
+
 import '../../../features/checkup/presentation/widgets/ecg_graph.dart';
 import '../../../features/report/data/model/report_model.dart';
 import '../../../features/report/domain/entities/fetch_report_payload.dart';
 import '../../../features/report/presentation/prescription_reports.dart';
 
 import 'widgets/report_appbar.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:share/share.dart';
 
 class ReportScreen extends StatelessWidget {
   final int appoimentId;
@@ -47,55 +45,7 @@ class ReportScreen extends StatelessWidget {
     return Scaffold(
       appBar: const ReportScreenAppBar(),
       body: SingleChildScrollView(
-        child: BlocConsumer<ReportBloc, ReportState>(
-          listener: (context, pdfState) async {
-            if (pdfState.isPdfLoading) {
-              showDialog(
-                  barrierDismissible: false,
-                  useSafeArea: true,
-                  barrierColor: Colors.black.withOpacity(0.1),
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      backgroundColor: context.theme.primary,
-                      elevation: 0,
-                      content: Row(
-                        children: [
-                          const SizedBox(width: 20),
-                          const SizedBox(
-                              height: 15,
-                              width: 15,
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                              )),
-                          const SizedBox(width: 20),
-                          Text(
-                            "Genarating Pdf...",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          )
-                        ],
-                      ),
-                    );
-                  });
-            }
-            if (pdfState.pdfError) {
-              Navigator.of(context, rootNavigator: true).pop(context);
-
-              Toast.showToast(
-                  context: context, message: pdfState.pdfErrorMessage);
-            }
-            if (!pdfState.isPdfLoading &&
-                pdfState.pdfCreated &&
-                pdfState.pdf != null) {
-              log("Prescription pdf created Sucsessfully");
-              await Future.delayed(const Duration(milliseconds: 1000), () {
-                Navigator.of(context, rootNavigator: true).pop(context);
-              });
-              final tempDir = await getTemporaryDirectory();
-              await Share.shareFiles(['${tempDir.path}/prescription.pdf'],
-                  text: 'Check out my PDF!');
-            }
-          },
+        child: BlocBuilder<ReportBloc, ReportState>(
           builder: (context, state) {
             if (state.isReportDataLoading) {
               return const LoadingWIdget();
@@ -114,7 +64,7 @@ class ReportScreen extends StatelessWidget {
               if (data != null) {
                 List<ECGData> ecgData = [];
                 List<double> voltageValues;
-
+                double widthEcg = 1;
                 if (data.ecginfo!.isNotEmpty) {
                   String? value = data.ecginfo!.first.data?.content;
                   if (value != null && value.isNotEmpty) {
@@ -129,7 +79,7 @@ class ReportScreen extends StatelessWidget {
                         return 0.0; // Handle non-numeric values or provide a suitable default
                       }
                     }).toList();
-
+                    widthEcg = double.parse(voltageValues.length.toString());
                     for (int i = 0; i < voltageValues.length; i++) {
                       ecgData.add(ECGData(
                         time: i,
@@ -140,7 +90,7 @@ class ReportScreen extends StatelessWidget {
                 }
                 List<ECGData> grsData = [];
                 List<double> grsvoltageValues;
-
+                double widthGsr = 1;
                 if (data.gsrinfo!.isNotEmpty) {
                   String? value = data.gsrinfo!.first.data?.content;
                   if (value != null && value.isNotEmpty) {
@@ -155,7 +105,7 @@ class ReportScreen extends StatelessWidget {
                         return 0.0; // Handle non-numeric values or provide a suitable default
                       }
                     }).toList();
-
+                    widthGsr = double.parse(grsvoltageValues.length.toString());
                     for (int i = 0; i < grsvoltageValues.length; i++) {
                       grsData.add(ECGData(
                         time: i,
@@ -204,13 +154,23 @@ class ReportScreen extends StatelessWidget {
                       ),
                     if (data.ecginfo!.isNotEmpty)
                       EcgResultCard(
+                        width: 2 * widthEcg,
+                        colors: [
+                          generateLightColor(),
+                          generateLightColor(),
+                        ],
                         ecgData: ecgData,
-                        name: "ECG Graph",
+                        name: "ECG",
                       ),
                     if (data.gsrinfo!.isNotEmpty)
                       EcgResultCard(
+                        width: 2 * widthGsr,
+                        colors: [
+                          generateLightColor(),
+                          generateLightColor(),
+                        ],
                         ecgData: grsData,
-                        name: "GRS Graph",
+                        name: "GRS ",
                       ),
                     Padding(
                       padding: const EdgeInsets.all(20).copyWith(top: 0),
@@ -276,8 +236,8 @@ class ResultCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           gradient: LinearGradient(
             colors: [
-              context.theme.secondary!,
-              context.theme.primary!,
+              generateLightColor(),
+              generateLightColor(),
             ],
           ),
         ),
@@ -304,23 +264,27 @@ class ResultCard extends StatelessWidget {
 }
 
 class EcgResultCard extends StatelessWidget {
-  const EcgResultCard({super.key, required this.ecgData, required this.name});
+  const EcgResultCard(
+      {super.key,
+      required this.ecgData,
+      required this.width,
+      required this.name,
+      required this.colors});
 
   final List<ECGData> ecgData;
   final String name;
+  final List<Color> colors;
+  final double width;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.maxFinite,
       margin: const EdgeInsets.all(20).copyWith(top: 0),
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         gradient: LinearGradient(
-          colors: [
-            context.theme.secondary!,
-            context.theme.primary!,
-          ],
+          colors: colors,
         ),
       ),
       child: Column(
@@ -334,14 +298,21 @@ class EcgResultCard extends StatelessWidget {
                 .copyWith(fontSize: 16),
           ),
           const SizedBox(height: 10),
-          ECGGraph(
-            data: ecgData,
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SizedBox(
+              width: width,
+              child: ECGGraph(
+                data: ecgData,
+              ),
+            ),
           ),
         ],
       ),
     );
   }
 }
+
 class BpCard extends StatelessWidget {
   final String parameter;
   final BpinfoData value;
@@ -360,8 +331,8 @@ class BpCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           gradient: LinearGradient(
             colors: [
-              context.theme.secondary!,
-              context.theme.primary!,
+              generateLightColor(),
+              generateLightColor(),
             ],
           ),
         ),

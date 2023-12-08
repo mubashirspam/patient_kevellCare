@@ -23,6 +23,20 @@ class HomeAvailableDoctorModel {
     this.data,
   });
 
+  HomeAvailableDoctorModel copyWith({
+    int? responseCode,
+    bool? status,
+    String? message,
+    List<HomeAvailableDoctorModelDatum>? data,
+  }) {
+    return HomeAvailableDoctorModel(
+      responseCode: responseCode ?? this.responseCode,
+      status: status ?? this.status,
+      message: message ?? this.message,
+      data: data ?? this.data,
+    );
+  }
+
   factory HomeAvailableDoctorModel.fromJson(Map<String, dynamic> json) =>
       HomeAvailableDoctorModel(
         responseCode: json["responseCode"],
@@ -49,7 +63,9 @@ class HomeAvailableDoctorModelDatum {
   String? username;
   String? emailid;
   String? mobileNo;
-  String? profileIamageInk;
+  String? profileImagelink;
+  String? specialist;
+  String? location;
   List<DatumDatum>? data;
 
   HomeAvailableDoctorModelDatum({
@@ -57,8 +73,10 @@ class HomeAvailableDoctorModelDatum {
     this.username,
     this.emailid,
     this.mobileNo,
+    this.profileImagelink,
+    this.specialist,
+    this.location,
     this.data,
-    this.profileIamageInk,
   });
 
   factory HomeAvailableDoctorModelDatum.fromJson(Map<String, dynamic> json) =>
@@ -67,7 +85,9 @@ class HomeAvailableDoctorModelDatum {
         username: json["username"],
         emailid: json["Emailid"],
         mobileNo: json["MobileNo"],
-        profileIamageInk: json["ProfileImagelink"],
+        profileImagelink: json["ProfileImagelink"],
+        specialist: json["specialist"],
+        location: json["location"],
         data: json["data"] == null
             ? []
             : List<DatumDatum>.from(
@@ -79,7 +99,9 @@ class HomeAvailableDoctorModelDatum {
         "username": username,
         "Emailid": emailid,
         "MobileNo": mobileNo,
-        'ProfileImagelink': profileIamageInk,
+        "ProfileImagelink": profileImagelink,
+        "specialist": specialist,
+        "location": location,
         "data": data == null
             ? []
             : List<dynamic>.from(data!.map((x) => x.toJson())),
@@ -96,12 +118,14 @@ class DatumDatum {
   String? month;
   String? year;
   DateTime? days;
+  bool? isScheduleApproved;
   DateTime? starttime;
   DateTime? endtime;
   int? timeperPatient;
   DateTime? createdAt;
   DateTime? updatedAt;
   int? v;
+  int? waitingpatient;
   List<Bookedtime>? bookedtime;
 
   DatumDatum({
@@ -114,12 +138,14 @@ class DatumDatum {
     this.month,
     this.year,
     this.days,
+    this.isScheduleApproved,
     this.starttime,
     this.endtime,
     this.timeperPatient,
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.waitingpatient,
     this.bookedtime,
   });
 
@@ -136,6 +162,7 @@ class DatumDatum {
         month: json["month"],
         year: json["year"],
         days: json["Days"] == null ? null : DateTime.parse(json["Days"]),
+        isScheduleApproved: json["is_schedule_approved"],
         starttime: json["starttime"] == null
             ? null
             : DateTime.parse(json["starttime"]),
@@ -149,6 +176,7 @@ class DatumDatum {
             ? null
             : DateTime.parse(json["updatedAt"]),
         v: json["__v"],
+        waitingpatient: json["waitingpatient"],
         bookedtime: json["bookedtime"] == null
             ? []
             : List<Bookedtime>.from(
@@ -168,12 +196,14 @@ class DatumDatum {
         "year": year,
         "Days":
             "${days!.year.toString().padLeft(4, '0')}-${days!.month.toString().padLeft(2, '0')}-${days!.day.toString().padLeft(2, '0')}",
+        "is_schedule_approved": isScheduleApproved,
         "starttime": starttime?.toIso8601String(),
         "endtime": endtime?.toIso8601String(),
         "timeperPatient": timeperPatient,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "__v": v,
+        "waitingpatient": waitingpatient,
         "bookedtime": bookedtime == null
             ? []
             : List<dynamic>.from(bookedtime!.map((x) => x.toJson())),

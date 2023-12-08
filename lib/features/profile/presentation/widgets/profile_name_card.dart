@@ -35,7 +35,7 @@ class ProfileNameCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(100),
                       child: Image.network(
                         imageUrl,
                         errorBuilder: (context, error, stackTrace) =>

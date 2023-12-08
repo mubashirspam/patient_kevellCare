@@ -27,6 +27,7 @@ class CreateAppoinmentsRepoImpliment implements CreateAppoinmentsRepository {
         'Content-Type': 'application/json',
       };
 
+      log(appoinmentsPayload.toJson().toString());
       final response = await Dio(BaseOptions()).post(
         ApiEndPoints.createAppoinments,
         data: appoinmentsPayload.toJson(),
@@ -37,7 +38,7 @@ class CreateAppoinmentsRepoImpliment implements CreateAppoinmentsRepository {
         case 200:
         case 201:
           final result = CreateResponse.fromJson(response.data);
-          log(result.toString());
+          log(result.toJson().toString());
           return Right(result);
         case 400:
         case 401:

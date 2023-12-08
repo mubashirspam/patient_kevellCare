@@ -1,11 +1,9 @@
-import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
 import '../../../configure/color/maian_color.dart';
-import '../../../configure/value/constant.dart';
+
 
 class ActiveAvatar extends StatelessWidget {
   final double? radius;
@@ -15,13 +13,23 @@ class ActiveAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Uint8List imageBytes = base64Decode(imageUrlForDummy);
     return Stack(
       children: [
         CircleAvatar(
+          backgroundColor: Colors.white,
           maxRadius: radius ?? 35,
           minRadius: radius ?? 35,
-          backgroundImage: MemoryImage(imageBytes),
+          child: Padding(
+            padding: const EdgeInsets.all(2),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Image.network(
+                  imageUrl ?? "",
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.image_not_supported_outlined),
+                  fit: BoxFit.fitWidth,
+                )),
+          ),
         ),
         isActive ?? true
             ? Positioned(

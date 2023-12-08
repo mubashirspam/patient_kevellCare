@@ -13,7 +13,7 @@ class ECGGraph extends StatelessWidget {
     return SfCartesianChart(
       primaryXAxis: NumericAxis(),
       primaryYAxis: NumericAxis(),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       borderWidth: 1,
       enableAxisAnimation: true,
 

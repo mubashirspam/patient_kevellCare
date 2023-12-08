@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/pages/signup_screen/presentation/signup_screen.dart';
 
-import '../../../features/login/presentation/login_widget.dart';
+import '../login_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/login-screen';
@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                               )),
                       const SizedBox(height: 20),
                       Text(
-                        "We're glad to have you back. Please enter your username to proceed.",
+                        "We're glad to have you back. Please enter your email to proceed.",
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w300,

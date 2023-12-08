@@ -44,6 +44,7 @@ class Datum {
     DateTime? dob;
     String? name;
     String? profileImagelink;
+    
 
     Datum({
         this.id,
@@ -53,6 +54,7 @@ class Datum {
         this.dob,
         this.name,
         this.profileImagelink,
+         
     });
 
     factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -63,6 +65,7 @@ class Datum {
         dob: json["dob"] == null ? null : DateTime.parse(json["dob"]),
         name: json["name"],
         profileImagelink: json["ProfileImagelink"],
+          
     );
 
     Map<String, dynamic> toJson() => {

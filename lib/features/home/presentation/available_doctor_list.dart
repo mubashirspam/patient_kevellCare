@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/features/home/presentation/widgets/availabel_doctor_card.dart';
@@ -63,6 +65,7 @@ class AvailableDoctorList extends StatelessWidget {
               ],
             );
           } else {
+            log("${state.availableDoctors!.data!.length}");
             return SliverList(
               delegate: SliverChildBuilderDelegate(
                 childCount: state.availableDoctors!.data!.length,

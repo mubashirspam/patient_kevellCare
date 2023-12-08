@@ -9,6 +9,7 @@ import 'package:kevell_care/core/helper/date.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 
+import '../../../../core/helper/enums.dart';
 import '../../data/model/report_general_info_model.dart';
 import '../../data/model/report_model.dart';
 import '../../data/repository/genarate_prescription_pdf_impliment.dart';
@@ -124,6 +125,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
               isPdfLoading: false,
               pdfCreated: true,
               pdf: pdf,
+               action: event.action,
               pdfPath: file.path,
             ),
           );

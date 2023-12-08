@@ -30,7 +30,7 @@ class AvailableDoctorCard extends StatelessWidget {
           SizedBox(
             child: Row(
               children: [
-                const ActiveAvatar(),
+                ActiveAvatar(imageUrl: data.profileImagelink),
                 const SizedBox(width: 15),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -43,10 +43,18 @@ class AvailableDoctorCard extends StatelessWidget {
                             .copyWith(fontSize: 16)),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 2),
-                      child: Text('Cardiologits',
+                      child: Text(data.specialist ?? "",
                           style: Theme.of(context)
                               .textTheme
-                              .titleMedium!
+                              .titleSmall!
+                              .copyWith(fontSize: 14)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 2),
+                      child: Text(data.location ?? "",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
                               .copyWith(fontSize: 14)),
                     ),
                     Text(
@@ -68,7 +76,7 @@ class AvailableDoctorCard extends StatelessWidget {
                 Chip(
                   backgroundColor: context.theme.primary,
                   label: Text(
-                    'Waiting patient - ${data.data!.length}',
+                    'Waiting patient - ${data.data!.first.waitingpatient}',
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           fontSize: 14,

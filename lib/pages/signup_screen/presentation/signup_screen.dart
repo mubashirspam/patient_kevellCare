@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/signup/presentation/signup_widget.dart';
 
-import '../../login_scrren/presentation/login_screen.dart';
+import '../../../features/login/presentation/pages/login_screen.dart';
 
 class SignupScreen extends StatelessWidget {
   static const routeName = '/signup-screen';

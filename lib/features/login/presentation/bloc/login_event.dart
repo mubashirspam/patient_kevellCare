@@ -4,6 +4,7 @@ part of 'login_bloc.dart';
 class LoginEvent with _$LoginEvent {
   const factory LoginEvent.login({
     required String usernameOrMobile,
+     required String password,
   }) = _Login;
 
   const factory LoginEvent.varyfiyOtp({

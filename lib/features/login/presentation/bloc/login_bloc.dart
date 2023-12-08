@@ -28,45 +28,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         ));
 
         final response = await loginRepository.login(
-            usernameOrMobile: event.usernameOrMobile);
+          usernameOrMobile: event.usernameOrMobile,
+          password: event.password,
+        );
 
-        response.fold(
-            (failure) => {
-                  failure.maybeWhen(
-                    clientFailure: (s) {
-                      log('clientFailure');
-                      return emit(state.copyWith(
-                        isLoading: false,
-                        message: "Client faliure",
-                        isError: true,
-                      ));
-                    },
-                    unauthorized: (String message) {
-                      log('emit unauthorized');
-                      return emit(state.copyWith(
-                        isLoading: false,
-                        message: message,
-                        isError: true,
-                      ));
-                    },
-                    serverFailure: (s) {
-                      log('emit serverFailure');
-                      return emit(state.copyWith(
-                        isLoading: false,
-                        message: "Server faliure",
-                        isError: true,
-                      ));
-                    },
-                    orElse: () {
-                      log('emit orElse');
-                      return emit(state.copyWith(
-                        isLoading: false,
-                        message: "Error",
-                        isError: true,
-                      ));
-                    },
-                  )
-                }, (success) {
+        response.fold((failure) {
+          return emit(state.copyWith(
+            isLoading: false,
+            message: failure.message,
+            isError: true,
+          ));
+        }, (success) {
           emit(
             state.copyWith(
               isError: false,
