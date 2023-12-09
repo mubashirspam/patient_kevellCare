@@ -19,7 +19,6 @@ final String? doctorName;
   @override
   State<EditRating> createState() => _EditRatingState();
 }
-
 class _EditRatingState extends State<EditRating> {
 
     late TextEditingController reviewController;
