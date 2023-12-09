@@ -6,21 +6,21 @@ import 'package:kevell_care/features/rating/presentation/bloc/rating_bloc.dart';
 import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
 import 'package:kevell_care/features/widgets/input_field/input_field_widget.dart';
 
-class EditRating extends StatefulWidget {
+class CreateRating extends StatefulWidget {
   final String? review;
   final String? rating;
 final String? doctorName;
-  const EditRating({
+  const CreateRating({
     super.key,
     this.review,
     this.rating, this.doctorName
   });
 
   @override
-  State<EditRating> createState() => _EditRatingState();
+  State<CreateRating> createState() => _CreateRatingState();
 }
 
-class _EditRatingState extends State<EditRating> {
+class _CreateRatingState extends State<CreateRating> {
 
     late TextEditingController reviewController;
     late TextEditingController ratingController;
@@ -207,7 +207,7 @@ class _EditRatingState extends State<EditRating> {
                                     ? null
                                     :() {
                           context.read<RatingBloc>().add(
-                          RatingEvent.editRating(
+                          RatingEvent.createrating(
                           reveiw: reviewController.value.text, 
                           rating: ''),
                            );

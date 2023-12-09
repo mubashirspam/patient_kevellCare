@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../pages/report/presentation/report_scree.dart';
+import '../../report/presentation/pages/report_scree.dart';
 import '../../widgets/error_widget.dart';
 import '../../widgets/loading_widget.dart';
 import 'bloc/appoinmets_bloc.dart';

@@ -7,7 +7,7 @@ import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../../configure/assets_manage/icons.dart';
 import '../../../core/helper/date.dart';
-import '../../../pages/report/presentation/report_scree.dart';
+import 'pages/report_scree.dart';
 
 import '../../widgets/error_widget.dart';
 import '../../widgets/input_field/date_filed.dart';

@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:kevell_care/features/report/presentation/bloc/report_bloc.dart';
 import 'package:kevell_care/features/widgets/loading_widget.dart';
 
-import '../../../configure/color/maian_color.dart';
-import '../../../configure/value/constant.dart';
-import '../../../configure/value/secure_storage.dart';
+import '../../../../configure/color/maian_color.dart';
+import '../../../../configure/value/constant.dart';
+import '../../../../configure/value/secure_storage.dart';
 
-import '../../../features/checkup/presentation/widgets/ecg_graph.dart';
-import '../../../features/report/data/model/report_model.dart';
-import '../../../features/report/domain/entities/fetch_report_payload.dart';
-import '../../../features/report/presentation/prescription_reports.dart';
+import '../../../checkup/presentation/widgets/ecg_graph.dart';
+import '../../data/model/report_model.dart';
+import '../../domain/entities/fetch_report_payload.dart';
+import '../prescription_reports.dart';
 
-import 'widgets/report_appbar.dart';
+import '../widget/report_appbar.dart';
 
 class ReportScreen extends StatelessWidget {
   final int appoimentId;
@@ -118,13 +118,6 @@ class ReportScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Text(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis pharetra suspendisse nisl, et interdum. Morbi fames et justo, mauris,et, scelerisque in aenean odio. Sed egestas quis pellentesque consectetur leo, proin est,",
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                    ),
                     Padding(
                       padding: const EdgeInsets.all(20).copyWith(top: 0),
                       child: Text(

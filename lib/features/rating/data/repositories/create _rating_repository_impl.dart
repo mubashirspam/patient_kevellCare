@@ -2,50 +2,56 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-
+import 'package:kevell_care/features/rating/data/model/rating_model.dart';
+import 'package:kevell_care/features/rating/domain/repositories/create%20_rating_repository.dart';
+import 'package:kevell_care/features/rating/domain/repositories/edit_rating_repository.dart';
 import '../../../../configure/api/endpoints.dart';
 import '../../../../configure/value/constant.dart';
 import '../../../../configure/value/secure_storage.dart';
 import '../../../../core/failiar/failiur_model.dart';
 import '../../../../core/failiar/main_failures.dart';
-import '../../domain/repositories/get_appoinments_repository.dart';
-import '../models/appoiments_model.dart';
+// import '../../../../core/network/netwrok.dart';
 
-@LazySingleton(as: GetAppoinmentsRepository)
-class GetAppoinmentsRepoImpliment implements GetAppoinmentsRepository {
+
+@LazySingleton(as:CreateRatingRepository)
+class CreateRatingRepoImpliment implements CreateRatingRepository {
   @override
-  Future<Either<MainFailure, AppoimentModel>> getAppoinments() async {
-    try {
+  Future<Either<MainFailure, RatingModel>> createrating({
+    required String review,
+    required String rating,
 
-       final token = await getTokenFromSS(secureStoreKey);
+  }) async {
+    try {
+      final token = await getTokenFromSS(secureStoreKey);
+      final id = await getTokenFromSS(drIdsecureStoreKey);
 
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
-      final id = await getTokenFromSS(drIdsecureStoreKey);
 
       final response = await Dio(BaseOptions()).post(
-        ApiEndPoints.fetchAppoinment,        options: Options(headers: headers),
-        data: {'patientId': int.parse(id.toString())},
+        ApiEndPoints.createRating,
+        options: Options(headers: headers),
+        data: {
+          "_id": int.parse("$id"),
+          "review": review,
+          "rating": rating,
+        
+        },
       );
 
       switch (response.statusCode) {
         case 200:
         case 201:
-          final result = AppoimentModel.fromJson(response.data);
-          log(result.toJson().toString());
+          final result = RatingModel.fromJson(response.data);
+          log(result.toString());
           return Right(result);
         case 400:
         case 401:
           final result = FailureModel.fromJson(response.data);
           return Left(
             MainFailure.unauthorized(message: result.message ?? "Unauthorized"),
-          );
-        case 502:
-          final result = FailureModel.fromJson(response.data);
-          return Left(
-            MainFailure.unauthorized(message: result.message ?? "Server Error"),
           );
         default:
           final result = FailureModel.fromJson(response.data);
@@ -56,7 +62,8 @@ class GetAppoinmentsRepoImpliment implements GetAppoinmentsRepository {
     } catch (e) {
       if (e is DioException) {
         log(e.toString());
-        if (e.response?.statusCode == 400 || e.response?.statusCode == 401) {
+        if (e.response?.statusCode == 400) {
+          log(e.toString());
           final result = FailureModel.fromJson(e.response!.data);
           return Left(
             MainFailure.unauthorized(message: result.message ?? "Unauthorized"),

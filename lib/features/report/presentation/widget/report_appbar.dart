@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
-
 class ReportScreenAppBar extends StatelessWidget
     implements PreferredSizeWidget {
   const ReportScreenAppBar({
@@ -34,10 +33,6 @@ class ReportScreenAppBar extends StatelessWidget
             Text(
               "Medical Reports",
               style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            Text(
-              "02/04/2022, Sartuday",
-              style: Theme.of(context).textTheme.titleMedium,
             ),
           ],
         ));

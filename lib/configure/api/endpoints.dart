@@ -40,8 +40,9 @@ class ApiEndPoints {
 
       //rating
       
-  static const String rating =
+  static const String createRating =
       "https://kevelldigital.com/register/api/create/review";
-       static const String getrating =
-      "https://kevelldigital.com/register/api/getrating?patient_id=1003";
+       static const String getrating ="https://kevelldigital.com/register/api/getrating?patient_id=1003";
+              static const String editRating ="https://kevelldigital.com/register/api/edit/review";
+
 }

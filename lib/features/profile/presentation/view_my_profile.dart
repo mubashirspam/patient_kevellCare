@@ -75,7 +75,6 @@ class ViewMyProfileBlocBody extends StatelessWidget {
           ProfileNameCard(
             email: mobile,
             imageUrl:imgUrl,
-               
             name: name,
           ),
           const SizedBox(

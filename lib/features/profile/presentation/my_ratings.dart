@@ -16,7 +16,7 @@ class my_ratings extends StatelessWidget {
     return ListTileWidget(
       onTap: () =>  Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const DoctorRating()),
+              MaterialPageRoute(builder: (context) => const DoctorRatingScreen()),
             ),
       iconName: AppIcons.rating,
       titleName: "My Ratings",

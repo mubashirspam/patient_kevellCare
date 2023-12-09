@@ -20,21 +20,24 @@ mixin _$RatingEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int rating) buildRating,
     required TResult Function() getRating,
-    required TResult Function(String reveiw, String rating) rating,
+    required TResult Function(String rating, String reveiw) editRating,
+    required TResult Function(String rating, String reveiw) createrating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int rating)? buildRating,
     TResult? Function()? getRating,
-    TResult? Function(String reveiw, String rating)? rating,
+    TResult? Function(String rating, String reveiw)? editRating,
+    TResult? Function(String rating, String reveiw)? createrating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int rating)? buildRating,
     TResult Function()? getRating,
-    TResult Function(String reveiw, String rating)? rating,
+    TResult Function(String rating, String reveiw)? editRating,
+    TResult Function(String rating, String reveiw)? createrating,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -42,21 +45,24 @@ mixin _$RatingEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_BuildRating value) buildRating,
     required TResult Function(_GetRating value) getRating,
-    required TResult Function(_Rating value) rating,
+    required TResult Function(_EditRating value) editRating,
+    required TResult Function(_CreateRating value) createrating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_BuildRating value)? buildRating,
     TResult? Function(_GetRating value)? getRating,
-    TResult? Function(_Rating value)? rating,
+    TResult? Function(_EditRating value)? editRating,
+    TResult? Function(_CreateRating value)? createrating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_BuildRating value)? buildRating,
     TResult Function(_GetRating value)? getRating,
-    TResult Function(_Rating value)? rating,
+    TResult Function(_EditRating value)? editRating,
+    TResult Function(_CreateRating value)? createrating,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -146,9 +152,10 @@ class _$BuildRatingImpl implements _BuildRating {
   TResult when<TResult extends Object?>({
     required TResult Function(int rating) buildRating,
     required TResult Function() getRating,
-    required TResult Function(String reveiw, String rating) rating,
+    required TResult Function(String rating, String reveiw) editRating,
+    required TResult Function(String rating, String reveiw) createrating,
   }) {
-    return buildRating(this.rating);
+    return buildRating(rating);
   }
 
   @override
@@ -156,9 +163,10 @@ class _$BuildRatingImpl implements _BuildRating {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int rating)? buildRating,
     TResult? Function()? getRating,
-    TResult? Function(String reveiw, String rating)? rating,
+    TResult? Function(String rating, String reveiw)? editRating,
+    TResult? Function(String rating, String reveiw)? createrating,
   }) {
-    return buildRating?.call(this.rating);
+    return buildRating?.call(rating);
   }
 
   @override
@@ -166,11 +174,12 @@ class _$BuildRatingImpl implements _BuildRating {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int rating)? buildRating,
     TResult Function()? getRating,
-    TResult Function(String reveiw, String rating)? rating,
+    TResult Function(String rating, String reveiw)? editRating,
+    TResult Function(String rating, String reveiw)? createrating,
     required TResult orElse(),
   }) {
     if (buildRating != null) {
-      return buildRating(this.rating);
+      return buildRating(rating);
     }
     return orElse();
   }
@@ -180,7 +189,8 @@ class _$BuildRatingImpl implements _BuildRating {
   TResult map<TResult extends Object?>({
     required TResult Function(_BuildRating value) buildRating,
     required TResult Function(_GetRating value) getRating,
-    required TResult Function(_Rating value) rating,
+    required TResult Function(_EditRating value) editRating,
+    required TResult Function(_CreateRating value) createrating,
   }) {
     return buildRating(this);
   }
@@ -190,7 +200,8 @@ class _$BuildRatingImpl implements _BuildRating {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_BuildRating value)? buildRating,
     TResult? Function(_GetRating value)? getRating,
-    TResult? Function(_Rating value)? rating,
+    TResult? Function(_EditRating value)? editRating,
+    TResult? Function(_CreateRating value)? createrating,
   }) {
     return buildRating?.call(this);
   }
@@ -200,7 +211,8 @@ class _$BuildRatingImpl implements _BuildRating {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_BuildRating value)? buildRating,
     TResult Function(_GetRating value)? getRating,
-    TResult Function(_Rating value)? rating,
+    TResult Function(_EditRating value)? editRating,
+    TResult Function(_CreateRating value)? createrating,
     required TResult orElse(),
   }) {
     if (buildRating != null) {
@@ -259,7 +271,8 @@ class _$GetRatingImpl implements _GetRating {
   TResult when<TResult extends Object?>({
     required TResult Function(int rating) buildRating,
     required TResult Function() getRating,
-    required TResult Function(String reveiw, String rating) rating,
+    required TResult Function(String rating, String reveiw) editRating,
+    required TResult Function(String rating, String reveiw) createrating,
   }) {
     return getRating();
   }
@@ -269,7 +282,8 @@ class _$GetRatingImpl implements _GetRating {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int rating)? buildRating,
     TResult? Function()? getRating,
-    TResult? Function(String reveiw, String rating)? rating,
+    TResult? Function(String rating, String reveiw)? editRating,
+    TResult? Function(String rating, String reveiw)? createrating,
   }) {
     return getRating?.call();
   }
@@ -279,7 +293,8 @@ class _$GetRatingImpl implements _GetRating {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int rating)? buildRating,
     TResult Function()? getRating,
-    TResult Function(String reveiw, String rating)? rating,
+    TResult Function(String rating, String reveiw)? editRating,
+    TResult Function(String rating, String reveiw)? createrating,
     required TResult orElse(),
   }) {
     if (getRating != null) {
@@ -293,7 +308,8 @@ class _$GetRatingImpl implements _GetRating {
   TResult map<TResult extends Object?>({
     required TResult Function(_BuildRating value) buildRating,
     required TResult Function(_GetRating value) getRating,
-    required TResult Function(_Rating value) rating,
+    required TResult Function(_EditRating value) editRating,
+    required TResult Function(_CreateRating value) createrating,
   }) {
     return getRating(this);
   }
@@ -303,7 +319,8 @@ class _$GetRatingImpl implements _GetRating {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_BuildRating value)? buildRating,
     TResult? Function(_GetRating value)? getRating,
-    TResult? Function(_Rating value)? rating,
+    TResult? Function(_EditRating value)? editRating,
+    TResult? Function(_CreateRating value)? createrating,
   }) {
     return getRating?.call(this);
   }
@@ -313,7 +330,8 @@ class _$GetRatingImpl implements _GetRating {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_BuildRating value)? buildRating,
     TResult Function(_GetRating value)? getRating,
-    TResult Function(_Rating value)? rating,
+    TResult Function(_EditRating value)? editRating,
+    TResult Function(_CreateRating value)? createrating,
     required TResult orElse(),
   }) {
     if (getRating != null) {
@@ -328,36 +346,36 @@ abstract class _GetRating implements RatingEvent {
 }
 
 /// @nodoc
-abstract class _$$RatingImplCopyWith<$Res> {
-  factory _$$RatingImplCopyWith(
-          _$RatingImpl value, $Res Function(_$RatingImpl) then) =
-      __$$RatingImplCopyWithImpl<$Res>;
+abstract class _$$EditRatingImplCopyWith<$Res> {
+  factory _$$EditRatingImplCopyWith(
+          _$EditRatingImpl value, $Res Function(_$EditRatingImpl) then) =
+      __$$EditRatingImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String reveiw, String rating});
+  $Res call({String rating, String reveiw});
 }
 
 /// @nodoc
-class __$$RatingImplCopyWithImpl<$Res>
-    extends _$RatingEventCopyWithImpl<$Res, _$RatingImpl>
-    implements _$$RatingImplCopyWith<$Res> {
-  __$$RatingImplCopyWithImpl(
-      _$RatingImpl _value, $Res Function(_$RatingImpl) _then)
+class __$$EditRatingImplCopyWithImpl<$Res>
+    extends _$RatingEventCopyWithImpl<$Res, _$EditRatingImpl>
+    implements _$$EditRatingImplCopyWith<$Res> {
+  __$$EditRatingImplCopyWithImpl(
+      _$EditRatingImpl _value, $Res Function(_$EditRatingImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reveiw = null,
     Object? rating = null,
+    Object? reveiw = null,
   }) {
-    return _then(_$RatingImpl(
-      reveiw: null == reveiw
-          ? _value.reveiw
-          : reveiw // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_$EditRatingImpl(
       rating: null == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
+              as String,
+      reveiw: null == reveiw
+          ? _value.reveiw
+          : reveiw // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -365,45 +383,46 @@ class __$$RatingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RatingImpl implements _Rating {
-  const _$RatingImpl({required this.reveiw, required this.rating});
+class _$EditRatingImpl implements _EditRating {
+  const _$EditRatingImpl({required this.rating, required this.reveiw});
 
   @override
-  final String reveiw;
-  @override
   final String rating;
+  @override
+  final String reveiw;
 
   @override
   String toString() {
-    return 'RatingEvent.rating(reveiw: $reveiw, rating: $rating)';
+    return 'RatingEvent.editRating(rating: $rating, reveiw: $reveiw)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RatingImpl &&
-            (identical(other.reveiw, reveiw) || other.reveiw == reveiw) &&
-            (identical(other.rating, rating) || other.rating == rating));
+            other is _$EditRatingImpl &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.reveiw, reveiw) || other.reveiw == reveiw));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, reveiw, rating);
+  int get hashCode => Object.hash(runtimeType, rating, reveiw);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$RatingImplCopyWith<_$RatingImpl> get copyWith =>
-      __$$RatingImplCopyWithImpl<_$RatingImpl>(this, _$identity);
+  _$$EditRatingImplCopyWith<_$EditRatingImpl> get copyWith =>
+      __$$EditRatingImplCopyWithImpl<_$EditRatingImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int rating) buildRating,
     required TResult Function() getRating,
-    required TResult Function(String reveiw, String rating) rating,
+    required TResult Function(String rating, String reveiw) editRating,
+    required TResult Function(String rating, String reveiw) createrating,
   }) {
-    return rating(reveiw, this.rating);
+    return editRating(rating, reveiw);
   }
 
   @override
@@ -411,9 +430,10 @@ class _$RatingImpl implements _Rating {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int rating)? buildRating,
     TResult? Function()? getRating,
-    TResult? Function(String reveiw, String rating)? rating,
+    TResult? Function(String rating, String reveiw)? editRating,
+    TResult? Function(String rating, String reveiw)? createrating,
   }) {
-    return rating?.call(reveiw, this.rating);
+    return editRating?.call(rating, reveiw);
   }
 
   @override
@@ -421,11 +441,12 @@ class _$RatingImpl implements _Rating {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int rating)? buildRating,
     TResult Function()? getRating,
-    TResult Function(String reveiw, String rating)? rating,
+    TResult Function(String rating, String reveiw)? editRating,
+    TResult Function(String rating, String reveiw)? createrating,
     required TResult orElse(),
   }) {
-    if (rating != null) {
-      return rating(reveiw, this.rating);
+    if (editRating != null) {
+      return editRating(rating, reveiw);
     }
     return orElse();
   }
@@ -435,9 +456,10 @@ class _$RatingImpl implements _Rating {
   TResult map<TResult extends Object?>({
     required TResult Function(_BuildRating value) buildRating,
     required TResult Function(_GetRating value) getRating,
-    required TResult Function(_Rating value) rating,
+    required TResult Function(_EditRating value) editRating,
+    required TResult Function(_CreateRating value) createrating,
   }) {
-    return rating(this);
+    return editRating(this);
   }
 
   @override
@@ -445,9 +467,10 @@ class _$RatingImpl implements _Rating {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_BuildRating value)? buildRating,
     TResult? Function(_GetRating value)? getRating,
-    TResult? Function(_Rating value)? rating,
+    TResult? Function(_EditRating value)? editRating,
+    TResult? Function(_CreateRating value)? createrating,
   }) {
-    return rating?.call(this);
+    return editRating?.call(this);
   }
 
   @override
@@ -455,25 +478,182 @@ class _$RatingImpl implements _Rating {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_BuildRating value)? buildRating,
     TResult Function(_GetRating value)? getRating,
-    TResult Function(_Rating value)? rating,
+    TResult Function(_EditRating value)? editRating,
+    TResult Function(_CreateRating value)? createrating,
     required TResult orElse(),
   }) {
-    if (rating != null) {
-      return rating(this);
+    if (editRating != null) {
+      return editRating(this);
     }
     return orElse();
   }
 }
 
-abstract class _Rating implements RatingEvent {
-  const factory _Rating(
-      {required final String reveiw,
-      required final String rating}) = _$RatingImpl;
+abstract class _EditRating implements RatingEvent {
+  const factory _EditRating(
+      {required final String rating,
+      required final String reveiw}) = _$EditRatingImpl;
 
-  String get reveiw;
   String get rating;
+  String get reveiw;
   @JsonKey(ignore: true)
-  _$$RatingImplCopyWith<_$RatingImpl> get copyWith =>
+  _$$EditRatingImplCopyWith<_$EditRatingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CreateRatingImplCopyWith<$Res> {
+  factory _$$CreateRatingImplCopyWith(
+          _$CreateRatingImpl value, $Res Function(_$CreateRatingImpl) then) =
+      __$$CreateRatingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String rating, String reveiw});
+}
+
+/// @nodoc
+class __$$CreateRatingImplCopyWithImpl<$Res>
+    extends _$RatingEventCopyWithImpl<$Res, _$CreateRatingImpl>
+    implements _$$CreateRatingImplCopyWith<$Res> {
+  __$$CreateRatingImplCopyWithImpl(
+      _$CreateRatingImpl _value, $Res Function(_$CreateRatingImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rating = null,
+    Object? reveiw = null,
+  }) {
+    return _then(_$CreateRatingImpl(
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as String,
+      reveiw: null == reveiw
+          ? _value.reveiw
+          : reveiw // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CreateRatingImpl implements _CreateRating {
+  const _$CreateRatingImpl({required this.rating, required this.reveiw});
+
+  @override
+  final String rating;
+  @override
+  final String reveiw;
+
+  @override
+  String toString() {
+    return 'RatingEvent.createrating(rating: $rating, reveiw: $reveiw)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateRatingImpl &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.reveiw, reveiw) || other.reveiw == reveiw));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, rating, reveiw);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateRatingImplCopyWith<_$CreateRatingImpl> get copyWith =>
+      __$$CreateRatingImplCopyWithImpl<_$CreateRatingImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int rating) buildRating,
+    required TResult Function() getRating,
+    required TResult Function(String rating, String reveiw) editRating,
+    required TResult Function(String rating, String reveiw) createrating,
+  }) {
+    return createrating(rating, reveiw);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int rating)? buildRating,
+    TResult? Function()? getRating,
+    TResult? Function(String rating, String reveiw)? editRating,
+    TResult? Function(String rating, String reveiw)? createrating,
+  }) {
+    return createrating?.call(rating, reveiw);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int rating)? buildRating,
+    TResult Function()? getRating,
+    TResult Function(String rating, String reveiw)? editRating,
+    TResult Function(String rating, String reveiw)? createrating,
+    required TResult orElse(),
+  }) {
+    if (createrating != null) {
+      return createrating(rating, reveiw);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_BuildRating value) buildRating,
+    required TResult Function(_GetRating value) getRating,
+    required TResult Function(_EditRating value) editRating,
+    required TResult Function(_CreateRating value) createrating,
+  }) {
+    return createrating(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_BuildRating value)? buildRating,
+    TResult? Function(_GetRating value)? getRating,
+    TResult? Function(_EditRating value)? editRating,
+    TResult? Function(_CreateRating value)? createrating,
+  }) {
+    return createrating?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_BuildRating value)? buildRating,
+    TResult Function(_GetRating value)? getRating,
+    TResult Function(_EditRating value)? editRating,
+    TResult Function(_CreateRating value)? createrating,
+    required TResult orElse(),
+  }) {
+    if (createrating != null) {
+      return createrating(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CreateRating implements RatingEvent {
+  const factory _CreateRating(
+      {required final String rating,
+      required final String reveiw}) = _$CreateRatingImpl;
+
+  String get rating;
+  String get reveiw;
+  @JsonKey(ignore: true)
+  _$$CreateRatingImplCopyWith<_$CreateRatingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
