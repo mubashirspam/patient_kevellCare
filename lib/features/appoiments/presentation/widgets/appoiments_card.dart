@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/configure/color/maian_color.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/rating/presentation/create_rating.dart';
 import '../../../../core/helper/alert.dart';
 import '../../../../core/helper/date.dart';
 import '../../data/models/appoiments_model.dart';
@@ -19,6 +20,7 @@ class AppoimentCard extends StatelessWidget {
     required this.isPast,
     required this.data,
   });
+  
 
   @override
   Widget build(BuildContext context) {
@@ -122,8 +124,25 @@ class AppoimentCard extends StatelessWidget {
                   },
                 );
               },
-              child: const Icon(Icons.delete,
-                  color: MainConfigColorsDarkTheme.danger)
+              child:  Row(
+                children: [
+                  const  Icon(Icons.delete,
+                   
+                      color: MainConfigColorsDarkTheme.danger),
+                      IconButton( onPressed: () {
+                          showDialog(context: context, builder: (context)=>  CreateRating(
+                        doctorName: data.doctorname??"",
+                        appointmentid:data.id,
+                        patientid:data.patientId
+                      ));
+                                                 log(data.patientId.toString());
+                                                 log(data.id.toString());
+
+                      }, icon:const Icon(Icons.star_border_outlined),
+                      )
+                ],
+              ),
+                  
         ),
         ],
       ),

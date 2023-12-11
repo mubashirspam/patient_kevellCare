@@ -5,15 +5,18 @@ import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/rating/presentation/bloc/rating_bloc.dart';
 import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
 import 'package:kevell_care/features/widgets/input_field/input_field_widget.dart';
-
+import 'dart:developer';
 class CreateRating extends StatefulWidget {
   final String? review;
   final String? rating;
 final String? doctorName;
+final int? appointmentid;
+final int? patientid;
+
   const CreateRating({
     super.key,
     this.review,
-    this.rating, this.doctorName
+    this.rating, this.doctorName,this.appointmentid,this.patientid
   });
 
   @override
@@ -21,23 +24,23 @@ final String? doctorName;
 }
 
 class _CreateRatingState extends State<CreateRating> {
-
+int selectedRating = 0;
     late TextEditingController reviewController;
     late TextEditingController ratingController;
 
   bool isButtonDisabled = true;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  
+  
 
   void validateForm() {
     if (_formKey.currentState!.validate()) {
-      // Form is valid
       setState(() {
-        isButtonDisabled = false; // Enable the button
+        isButtonDisabled = false;
       });
     } else {
-      // Form is invalid
       setState(() {
-        isButtonDisabled = true; // Disable the button
+        isButtonDisabled = true; 
       });
     }
   }
@@ -58,7 +61,8 @@ class _CreateRatingState extends State<CreateRating> {
         borderRadius: BorderRadius.circular(10.0),
       ),
       content: BlocConsumer<RatingBloc, RatingState>(
-        listener: (context, state) {
+        listener: (context, state)
+         {
    if (!state.isUpdateLoading && state.isError) {
               Toast.showToast(
                   context: context, message: "Error occured try again later");
@@ -68,12 +72,12 @@ class _CreateRatingState extends State<CreateRating> {
                   context: context, message: "Profile Updated Successfully");
 
               Navigator.of(context).pop();
-            }        },
+            }
+          },
         builder: (context, state) {
           return Form(
             key: _formKey,
             child: SingleChildScrollView(
-              
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -91,12 +95,14 @@ class _CreateRatingState extends State<CreateRating> {
                   const SizedBox(height: 10),
                    Text(widget.doctorName??""),
                   const SizedBox(height: 10),
+                      const Text("Dentist"),
+                  const SizedBox(height: 10),
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: context.theme.secondary),
-                    height: 80,
+                    height: 85,
                     child: Center(
                       child: Column(
                         children: [
@@ -105,17 +111,22 @@ class _CreateRatingState extends State<CreateRating> {
                             style: Theme.of(context).textTheme.titleLarge,
                             textAlign: TextAlign.center,
                           ),
-                          const SizedBox(
-                            height: 10,
+                     Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                         children: List.generate(4, (index) {
+                         return IconButton(
+                         icon: Icon(
+                          index < selectedRating ? Icons.star : Icons.star_border,
+                          color: Colors.amber,
                           ),
-                      //       Row(
-                      // mainAxisAlignment: MainAxisAlignment.center,
-                      //   children: List.generate(4, (index) {
-                      //        return Icon(
-                      //          Icons.star,
-                      //          color: index < widget.rating ? Colors.amber : Colors.grey,
-                      //       );
-                      //   }),),
+                          onPressed: () {
+                          setState(() {
+                           selectedRating = index + 1;
+                           });
+                        },
+                       );
+                      }),
+                    )
                         ],
                       ),
                     ),
@@ -203,14 +214,21 @@ class _CreateRatingState extends State<CreateRating> {
                       const SizedBox(width: 10),
                       Expanded(
                         child: TextButtonWidget(
-                          onPressed: isButtonDisabled
+                          onPressed:
+                 
+                           isButtonDisabled
                                     ? null
                                     :() {
                           context.read<RatingBloc>().add(
                           RatingEvent.createrating(
                           reveiw: reviewController.value.text, 
-                          rating: ''),
+                          rating: selectedRating.toString(), 
+                          // id: int.parse(appointmentid.toString()),
+                          // appointmentid: int.parse(patientid.toString())
+                        )
                            );
+                           log("rating==${selectedRating.toString()}");
+                           log(" review==${reviewController.toString()}");
                          },
                           name:'Submit',
                           isLoading:state.isUpdateLoading,

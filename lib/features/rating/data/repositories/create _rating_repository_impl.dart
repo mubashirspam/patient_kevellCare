@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kevell_care/features/rating/data/model/rating_model.dart';
 import 'package:kevell_care/features/rating/domain/repositories/create%20_rating_repository.dart';
-import 'package:kevell_care/features/rating/domain/repositories/edit_rating_repository.dart';
 import '../../../../configure/api/endpoints.dart';
 import '../../../../configure/value/constant.dart';
 import '../../../../configure/value/secure_storage.dart';
@@ -35,12 +34,13 @@ class CreateRatingRepoImpliment implements CreateRatingRepository {
         options: Options(headers: headers),
         data: {
           "_id": int.parse("$id"),
+          
           "review": review,
           "rating": rating,
         
         },
       );
-
+log("response === ${response.data}");
       switch (response.statusCode) {
         case 200:
         case 201:

@@ -15,6 +15,10 @@ class RatingEvent with _$RatingEvent {
  const factory RatingEvent.createrating({
     required String rating,
     required String reveiw,
+        // required int id,
+        //     required int appointmentid,
+
+
   }) = _CreateRating;
 
   
