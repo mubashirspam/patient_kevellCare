@@ -183,12 +183,14 @@ class _EditMyProfileState extends State<EditMyProfile> {
                     Text("Address",
                         style: Theme.of(context).textTheme.titleLarge),
                     const SizedBox(height: 10),
+                    
                     TextFieldWidget(
                       textEditingController: addressController,
                       onChanged: (value) {
                         validateForm();
                       },
-                      hintText: "Adress",
+                      labelText: "Street",
+                      hintText: "Street",
                       keyboardType: TextInputType.visiblePassword,
                       validate: (value) {
                         if (value == null || value.isEmpty) {
@@ -197,6 +199,131 @@ class _EditMyProfileState extends State<EditMyProfile> {
                         return null; // Return null if validation succeeds
                       },
                     ),
+                    const SizedBox(height: 10,),
+                    Row(
+                      children: [
+                        Expanded(child: 
+                         TextFieldWidget(
+                      textEditingController: addressController,
+                      onChanged: (value) {
+                        validateForm();
+                      },
+                      labelText: "City",
+                      hintText: "City",
+                      keyboardType: TextInputType.visiblePassword,
+                      validate: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter a adress";
+                        }
+                        return null; // Return null if validation succeeds
+                      },
+                    ),
+                    ),
+                    const SizedBox(width: 10,),
+                    Expanded(
+                      child: TextFieldWidget(
+                      textEditingController: addressController,
+                      onChanged: (value) {
+                        validateForm();
+                      },
+                      labelText: "State",
+                      hintText: "State",
+                      keyboardType: TextInputType.visiblePassword,
+                      validate: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter a adress";
+                        }
+                        return null; // Return null if validation succeeds
+                      },
+                    ),)
+                      ],
+                    ),
+                    const SizedBox(height: 10,),
+                     Row(
+                      children: [
+                        Expanded(child: 
+                         TextFieldWidget(
+                      textEditingController: addressController,
+                      onChanged: (value) {
+                        validateForm();
+                      },
+                      labelText: "District",
+                      hintText: "District",
+                      keyboardType: TextInputType.visiblePassword,
+                      validate: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter a adress";
+                        }
+                        return null; // Return null if validation succeeds
+                      },
+                    ),
+                    ),
+                    const SizedBox(width: 10,),
+                    Expanded(
+                      child: TextFieldWidget(
+                      textEditingController: addressController,
+                      onChanged: (value) {
+                        validateForm();
+                      },
+                      labelText: "Zipcode",
+                      hintText: "Zipcode",
+                      keyboardType: TextInputType.visiblePassword,
+                      validate: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter a adress";
+                        }
+                        return null; // Return null if validation succeeds
+                      },
+                    ),)
+                      ],
+                    ),
+                    const SizedBox(height: 10,),
+                    Text("Other Details",
+                        style: Theme.of(context).textTheme.titleLarge),
+                    const SizedBox(height: 10),
+                    
+                    const SizedBox(height: 10,),
+                     Row(
+                      children: [
+                        Expanded(child: 
+                         TextFieldWidget(
+                      textEditingController: addressController,
+                      onChanged: (value) {
+                        validateForm();
+                      },
+                      labelText: "Height",
+                      hintText: "Height",
+                      keyboardType: TextInputType.visiblePassword,
+                      validate: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter a adress";
+                        }
+                        return null; // Return null if validation succeeds
+                      },
+                    ),
+                    ),
+                    const SizedBox(width: 10,),
+                    Expanded(
+                      child: TextFieldWidget(
+                      textEditingController: addressController,
+                      onChanged: (value) {
+                        validateForm();
+                      },
+                      labelText: "Weight",
+                      hintText: "Weight",
+                      keyboardType: TextInputType.visiblePassword,
+                      validate: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Please enter a adress";
+                        }
+                        return null; // Return null if validation succeeds
+                      },
+                    ),)
+                      ],
+                    ),
+
+
+
                     const SizedBox(height: 20),
                     SizedBox(
                       child: Row(

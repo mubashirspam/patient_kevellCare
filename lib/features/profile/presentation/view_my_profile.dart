@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kevell_care/core/helper/date_formater.dart';
+import 'package:kevell_care/core/helper/date_validater.dart';
+import 'package:kevell_care/core/helper/validater.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/widgets/calender/calnder.dart';
+import 'package:kevell_care/features/widgets/input_field/input_field_widget.dart';
 
 import '../../../core/helper/date.dart';
 import '../../widgets/buttons/text_button_widget.dart';
@@ -15,6 +20,9 @@ class ViewMyProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      
+
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
     });
@@ -50,6 +58,7 @@ class ViewMyProfile extends StatelessWidget {
 }
 
 class ViewMyProfileBlocBody extends StatelessWidget {
+  
   final String name;
   final String imgUrl;
   final String mobile;
@@ -67,6 +76,8 @@ class ViewMyProfileBlocBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return SizedBox(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -78,71 +89,219 @@ class ViewMyProfileBlocBody extends StatelessWidget {
             name: name,
           ),
           const SizedBox(
-            height: 30,
+            height: 20,
           ),
-          Text("Basic Detail",
+          
+          Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,children: [
+                        Text("Basic Detail",
               style: Theme.of(context)
                   .textTheme
                   .headlineMedium!
-                  .copyWith(fontWeight: FontWeight.normal)),
-          const SizedBox(
-            height: 25,
-          ),
-          Text("Mobile", style: Theme.of(context).textTheme.headlineMedium),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Text(mobile,
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .copyWith(fontWeight: FontWeight.normal)),
-          ),
-          Divider(color: context.theme.textGrey),
-          Text("Date of Birth",
-              style: Theme.of(context).textTheme.headlineMedium),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Text(dateFormatToDDmonthYYYY(dob),
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .copyWith(fontWeight: FontWeight.normal)),
-          ),
-          Divider(color: context.theme.textGrey),
-          Text("Adress", style: Theme.of(context).textTheme.headlineMedium),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Text(address,
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .copyWith(fontWeight: FontWeight.normal)),
-          ),
-          const Spacer(),
-          TextButtonWidget(
-            onPressed: () {
-              showModalBottomSheet(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                isScrollControlled: true,
-                context: context,
-                builder: (context) => Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
-                  child: EditMyProfile(
-                    adress: address,
-                    name: name,
-                    mobile: mobile,
-                    dob: dob,
                   ),
-                ),
-              );
-            },
-            name: "Edit Profile",
-            isLoading: false,
-          ),
-        ],
+          const SizedBox(height:10),
+                      Text("Email", style: Theme.of(context).textTheme.headlineSmall),
+                        const SizedBox(height: 10),
+                     Text("harini@gmail.com",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.normal)),
+                       Divider(color: context.theme.textGrey),
+                        const SizedBox(height: 10),
+                        Row(
+                children: [
+                  Expanded(
+                      child: Text("Gender",
+                          style: Theme.of(context).textTheme.headlineSmall)),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    child: Text("DOB",
+                        style: Theme.of(context).textTheme.headlineSmall),
+                  ),
+                ],
+              ),
+              const SizedBox(height:10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text("Female",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.normal)),
+                            ),
+                         Divider(color: context.theme.textGrey),
+
+                            SizedBox(width: 10,),
+                            Expanded(child: 
+                        Text(dateFormatToDDmonthYYYY(dob),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.normal)) )
+                          ],
+                        ),
+                      Divider(color: context.theme.textGrey),
+                        const SizedBox(height: 10,),
+                          Text("Address",
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium),
+                  const SizedBox(height:10),
+                        Text("Street",
+                            style: Theme.of(context).textTheme.headlineSmall),
+                        const SizedBox(height: 10),
+                         Text("Thirupurakundram",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.normal)),
+                       Divider(color: context.theme.textGrey),
+
+                       const SizedBox(height: 10,),
+                       Text("City",
+                            style: Theme.of(context).textTheme.headlineSmall),
+                        const SizedBox(height: 10),
+                         Text("Madurai",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.normal)),
+                       Divider(color: context.theme.textGrey),
+
+                        const SizedBox(height: 10),
+                        Row(
+                children: [
+                  Expanded(
+                      child: Text("State",
+                          style: Theme.of(context).textTheme.headlineSmall)),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    child: Text("District",
+                        style: Theme.of(context).textTheme.headlineSmall),
+                  ),
+                ],
+              ),
+              const SizedBox(height:10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child:
+                         Text("Tamil Nadu",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.normal)),
+
+                            ),
+                               const SizedBox(width: 10),
+                        Expanded(
+                          child:  Text("Madurai",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.normal)),
+                        ),
+                          ],
+                        ),
+                      Divider(color: context.theme.textGrey),
+
+                        const SizedBox(height: 10),
+                        Text("Zipcode",
+                        style: Theme.of(context).textTheme.headlineSmall),
+                       const SizedBox(height: 10),
+
+                         Text("625001",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.normal)),
+                        
+                        Divider(color: context.theme.textGrey),
+                        const SizedBox(height: 10),
+
+
+                        Text("Other details",
+                            style: Theme.of(context).textTheme.headlineMedium),
+                            const SizedBox( height:5),
+                                 Row(
+                children: [
+                  Expanded(
+                      child: Text("Height",
+                          style: Theme.of(context).textTheme.headlineSmall)),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Expanded(
+                    child: Text("Weight",
+                        style: Theme.of(context).textTheme.headlineSmall),
+                  ),
+                ],
+              ),
+              const SizedBox(height:10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child:  Text("155 cm",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.normal)),
+                            ),
+                               const SizedBox(width: 10),
+                        Expanded(
+                          child:  Text("55 kg",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.normal)),
+                        ),
+                          ],
+                        ),
+                        Divider(color: context.theme.textGrey),
+                        const SizedBox(height: 10,),
+            TextButtonWidget(
+              onPressed: () {
+                showModalBottomSheet(
+                  
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (context) => Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: EditMyProfile(
+                      adress: address,
+                      name: name,
+                      mobile: mobile,
+                      dob: dob,
+                    ),
+                  ),
+                );
+              },
+              name: "Edit Profile",
+              isLoading: false,
+            ),
+                       
+                             ]),
+              ),
+            ),
+          
+        ]
       ),
     );
   }
 }
+
+
+
+

@@ -79,7 +79,6 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            // const Logout()
           ],
         ),
       ),
