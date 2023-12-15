@@ -107,7 +107,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             isError: false,
             isUpdateLoading: false,
             result: success,
-            hasData: true),
+            hasData: true
+            
+            ),
       );
       emit(result);
     });

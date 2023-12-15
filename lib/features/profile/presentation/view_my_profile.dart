@@ -37,15 +37,16 @@ class ViewMyProfile extends StatelessWidget {
         if (state.isLoading) {
           return const Center(child: LoadingWIdget());
         } else if (state.hasData) {
+        
           return ViewMyProfileBlocBody(
-            address: state.result!.data!.first.address ?? "No Adress",
-            dob: state.result!.data!.first.dob == null
+            address: state.result!.data!.address.toString() ?? "No Adress",
+            dob: state.result!.data!.dob == null
                 ? DateTime.now().toIso8601String()
-                : state.result!.data!.first.dob!.toIso8601String(),
-            imgUrl: state.result!.data!.first.profileImagelink!,
-            mobile: state.result!.data!.first.mobile ?? "No mobile",
-            name: state.result!.data!.first.name ??
-                state.result!.data!.first.username ??
+                : state.result!.data!.dob.toString(),
+            imgUrl: state.result!.data!.profileImagelink!,
+            mobile: state.result!.data!.mobileNo ?? "No mobile",
+            name: state.result!.data!.name ??
+                state.result!.data!.name ??
                 "No Name",
           );
         } else if (state.isError) {
@@ -105,7 +106,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
           const SizedBox(height:10),
                       Text("Email", style: Theme.of(context).textTheme.headlineSmall),
                         const SizedBox(height: 10),
-                     Text("harini@gmail.com",
+                     Text(mobile,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
