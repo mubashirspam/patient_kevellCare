@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/helper/date_formater.dart';
@@ -39,13 +41,18 @@ class ViewMyProfile extends StatelessWidget {
         } else if (state.hasData) {
         
           return ViewMyProfileBlocBody(
-            address: state.result!.data!.address.toString() ?? "No Adress",
-            dob: state.result!.data!.dob == null
+                        gender: state.result!.data.gender,
+            height: state.result!.data.height,
+            weight: state.result!.data.weight,
+
+            email: state.result!.data.emailId,
+          address: state.result!.data.address ?? {},
+              dob: state.result!.data.dob == null
                 ? DateTime.now().toIso8601String()
-                : state.result!.data!.dob.toString(),
+                : state.result!.data.dob.toString(),
             imgUrl: state.result!.data!.profileImagelink!,
             mobile: state.result!.data!.mobileNo ?? "No mobile",
-            name: state.result!.data!.name ??
+            name: state.result!.data.name ??
                 state.result!.data!.name ??
                 "No Name",
           );
@@ -59,15 +66,23 @@ class ViewMyProfile extends StatelessWidget {
 }
 
 class ViewMyProfileBlocBody extends StatelessWidget {
-  
+  final String gender;
   final String name;
   final String imgUrl;
   final String mobile;
   final String dob;
-  final String address;
+ final Map<String, dynamic> address; 
+   final String height;
+    final String weight;
+     final String email;
 
   const ViewMyProfileBlocBody({
+    required this.gender,
     required this.address,
+        required this.height,
+    required this.weight,
+    required this.email,
+
     required this.dob,
     required this.imgUrl,
     required this.mobile,
@@ -106,7 +121,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
           const SizedBox(height:10),
                       Text("Email", style: Theme.of(context).textTheme.headlineSmall),
                         const SizedBox(height: 10),
-                     Text(mobile,
+                     Text(email,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
@@ -131,7 +146,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                              child: Text("Female",
+                              child: Text(gender,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
@@ -141,7 +156,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
 
                             SizedBox(width: 10,),
                             Expanded(child: 
-                        Text(dateFormatToDDmonthYYYY(dob),
+                        Text(dob,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
@@ -158,7 +173,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
                         Text("Street",
                             style: Theme.of(context).textTheme.headlineSmall),
                         const SizedBox(height: 10),
-                         Text("Thirupurakundram",
+                         Text(address['street'] ?? "",
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
@@ -251,7 +266,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                              child:  Text("155 cm",
+                              child:  Text(height,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
@@ -259,7 +274,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
                             ),
                                const SizedBox(width: 10),
                         Expanded(
-                          child:  Text("55 kg",
+                          child:  Text(weight,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
@@ -281,7 +296,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
                     padding: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom),
                     child: EditMyProfile(
-                      adress: address,
+                      adress: address.,
                       name: name,
                       mobile: mobile,
                       dob: dob,

@@ -19,6 +19,11 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
     required String dob,
     required String address,
     required String mobileNumber,
+    // required String height,
+    // required String weight,
+    // // required String gender,
+    // // required String 
+
   }) async {
     try {
       final token = await getTokenFromSS(secureStoreKey);
@@ -37,7 +42,10 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
           "name": name,
           "mobile": mobileNumber,
           "dob": dob,
-          "Address": address
+          "Address": address,
+          // "height":height,
+          // "weight":weight,
+          
         },
       );
 

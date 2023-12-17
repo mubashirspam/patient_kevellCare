@@ -3,13 +3,13 @@ import '../value/constant.dart';
 class ApiEndPoints {
   static const login = "$baseUrl/register/api/patientLogin";
 
-  static const register = "$baseUrl/register/api/patientRegister";
+  static const register = "$baseUrl/patients/api/register";
 
   static const otp = "$baseUrl/register/api/VerifyPhoneOtp";
 
-  static const getprofile = "$baseUrl/register/api/GetPatientinfoBy";
+  static const getprofile = "$baseUrl/patients/api/patientinfoby";
 
-  static const updateProfile = "$baseUrl/register/api/patientprofileUpdate";
+  static const updateProfile = "$baseUrl/patients/api/profile";
 
   static const getHomeAvailableDoctor =
       "$baseUrl/doctor/api/getalldoctorSchedule";
