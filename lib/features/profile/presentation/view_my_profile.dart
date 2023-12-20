@@ -26,7 +26,7 @@ class ViewMyProfile extends StatelessWidget {
 
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
+      context.read<ProfileBloc>().add(const ProfileEvent.getProfile(id: 1000));
     });
     return BlocConsumer<ProfileBloc, ProfileState>(
       listener: (context, state) {
@@ -44,9 +44,13 @@ class ViewMyProfile extends StatelessWidget {
                         gender: state.result!.data.gender,
             height: state.result!.data.height,
             weight: state.result!.data.weight,
-
             email: state.result!.data.emailId,
-          address: state.result!.data.address ?? {},
+          street: state.result!.data.address.street,
+                    state: state.result!.data.address.state,
+          district: state.result!.data.address.district,
+          city: state.result!.data.address.city,
+          zipcode: state.result!.data.address.zipcode.toString(),
+
               dob: state.result!.data.dob == null
                 ? DateTime.now().toIso8601String()
                 : state.result!.data.dob.toString(),
@@ -71,17 +75,27 @@ class ViewMyProfileBlocBody extends StatelessWidget {
   final String imgUrl;
   final String mobile;
   final String dob;
- final Map<String, dynamic> address; 
    final String height;
     final String weight;
      final String email;
 
+          final String street;
+     final String state;
+     final String city;
+     final String zipcode;
+     final String district;
+
+
   const ViewMyProfileBlocBody({
     required this.gender,
-    required this.address,
+    required this.state,
         required this.height,
     required this.weight,
     required this.email,
+    required this.street,
+    required this.district,
+    required this.zipcode,
+    required this.city,
 
     required this.dob,
     required this.imgUrl,
@@ -173,7 +187,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
                         Text("Street",
                             style: Theme.of(context).textTheme.headlineSmall),
                         const SizedBox(height: 10),
-                         Text(address['street'] ?? "",
+                         Text(street,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
@@ -184,7 +198,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
                        Text("City",
                             style: Theme.of(context).textTheme.headlineSmall),
                         const SizedBox(height: 10),
-                         Text("Madurai",
+                         Text(city,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
@@ -211,7 +225,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
                           children: [
                             Expanded(
                               child:
-                         Text("Tamil Nadu",
+                         Text(state,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
@@ -220,7 +234,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
                             ),
                                const SizedBox(width: 10),
                         Expanded(
-                          child:  Text("Madurai",
+                          child:  Text(district,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
@@ -235,7 +249,7 @@ class ViewMyProfileBlocBody extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineSmall),
                        const SizedBox(height: 10),
 
-                         Text("625001",
+                         Text(zipcode,
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
@@ -296,10 +310,10 @@ class ViewMyProfileBlocBody extends StatelessWidget {
                     padding: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom),
                     child: EditMyProfile(
-                      adress: address.,
-                      name: name,
-                      mobile: mobile,
-                      dob: dob,
+                      // adress: address.,
+                      // name: name,
+                      // mobile: mobile,
+                      // dob: dob,
                     ),
                   ),
                 );

@@ -355,6 +355,13 @@ class _EditMyProfileState extends State<EditMyProfile> {
                                               mobileNumber:
                                                   mobileController.text,
                                               name: nameController.value.text,
+                                              height: '', 
+                                              street: '', 
+                                              weight: '', 
+                                              district: '', 
+                                              city: '', 
+                                              zipcode: '', 
+                                              state: '',
                                             ),
                                           );
                                     },

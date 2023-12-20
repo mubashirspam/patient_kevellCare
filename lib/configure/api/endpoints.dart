@@ -7,7 +7,9 @@ class ApiEndPoints {
 
   static const otp = "$baseUrl/register/api/VerifyPhoneOtp";
 
-  static const getprofile = "$baseUrl/patients/api/patientinfoby";
+  static const getprofile = 
+  // "$baseUrl/patients/api/patientinfoby";
+  "https://2a0c-183-82-33-226.ngrok.io/patients/api/patientinfoby";
 
   static const updateProfile = "$baseUrl/patients/api/profile";
 
@@ -40,9 +42,8 @@ class ApiEndPoints {
 
       //rating
       
-  static const String createRating =
-      "https://kevelldigital.com/register/api/create/review";
-       static const String getrating ="https://kevelldigital.com/register/api/getrating?patient_id=1003";
+  static const String createRating = "https://kevelldigital.com/register/api/create/review";
+       static const String getrating = "https://kevelldigital.com/register/api/getrating?patient_id=1003";
               static const String editRating ="https://kevelldigital.com/register/api/edit/review";
 
 }

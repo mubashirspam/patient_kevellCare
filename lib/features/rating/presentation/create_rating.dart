@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/helper/toast.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/rating/domain/entites/create-rating_payload.dart';
 import 'package:kevell_care/features/rating/presentation/bloc/rating_bloc.dart';
 import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
 import 'package:kevell_care/features/widgets/input_field/input_field_widget.dart';
@@ -63,16 +64,21 @@ int selectedRating = 0;
       content: BlocConsumer<RatingBloc, RatingState>(
         listener: (context, state)
          {
-   if (!state.isUpdateLoading && state.isError) {
-              Toast.showToast(
-                  context: context, message: "Error occured try again later");
-            }
-            if (!state.isUpdateLoading && state.hasData) {
-              Toast.showToast(
-                  context: context, message: "Profile Updated Successfully");
-
-              Navigator.of(context).pop();
-            }
+            if (state.hasData) {
+                      //  final name=  state.createDoctorDetails!.data!.name;
+                        Toast.showToast(
+                          context: context,
+                          message: "Rating Done successfully ",
+                        );
+                        Navigator.of(context).pop();
+                      }
+                      if (state.isError) {
+                        Toast.showToast(
+                          context: context,
+                          message: "fill all details",
+                        );
+                      }
+   
           },
         builder: (context, state) {
           return Form(
@@ -221,10 +227,13 @@ int selectedRating = 0;
                                     :() {
                           context.read<RatingBloc>().add(
                           RatingEvent.createrating(
-                          reveiw: reviewController.value.text, 
-                          rating: selectedRating.toString(), 
-                          // id: int.parse(appointmentid.toString()),
-                          // appointmentid: int.parse(patientid.toString())
+                            createRatingPayload: CreateRatingPayload(
+                               review: reviewController.value.text, 
+                          rating: selectedRating, 
+                          appoinmentId:widget.appointmentid ?? 0,
+                          patientId: widget.patientid ?? 0,
+                            )
+                         
                         )
                            );
                            log("rating==${selectedRating.toString()}");

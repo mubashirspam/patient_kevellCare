@@ -13,10 +13,7 @@ class RatingEvent with _$RatingEvent {
     required String reveiw,
   }) = _EditRating;
  const factory RatingEvent.createrating({
-    required String rating,
-    required String reveiw,
-        // required int id,
-        //     required int appointmentid,
+    required CreateRatingPayload createRatingPayload
 
 
   }) = _CreateRating;

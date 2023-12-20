@@ -121,11 +121,33 @@ class Data {
 }
 
 class Address {
-    Address();
+    String street;
+    String city;
+    String district;
+    String state;
+    int zipcode;
+
+    Address({
+        required this.street,
+        required this.city,
+        required this.district,
+        required this.state,
+        required this.zipcode,
+    });
 
     factory Address.fromJson(Map<String, dynamic> json) => Address(
+        street: json["street"],
+        city: json["city"],
+        district: json["district"],
+        state: json["state"],
+        zipcode: json["zipcode"],
     );
 
     Map<String, dynamic> toJson() => {
+        "street": street,
+        "city": city,
+        "district": district,
+        "state": state,
+        "zipcode": zipcode,
     };
 }

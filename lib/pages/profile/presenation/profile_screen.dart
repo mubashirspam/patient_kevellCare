@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
+      context.read<ProfileBloc>().add(const ProfileEvent.getProfile(id: 1000));
     });
     List<Widget> list = const [
       MyProfile(),

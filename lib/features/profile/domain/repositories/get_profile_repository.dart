@@ -5,5 +5,8 @@ import '../../../../core/failiar/main_failures.dart';
 import '../../data/models/profile_model.dart';
 
 abstract class GetProfileRepository {
-  Future<Either<MainFailure, ProfileModel>> getProfile();
+  Future<Either<MainFailure, ProfileModel>> getProfile({
+    required int id
+}
+  );
 }

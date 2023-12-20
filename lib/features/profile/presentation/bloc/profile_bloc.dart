@@ -34,7 +34,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         ),
       );
 
-      final response = await getprofileRepository.getProfile();
+      final response = await getprofileRepository.getProfile(
+        id: event.id
+      );
 
       final result = response.fold(
         (failure) => state.copyWith(
@@ -70,7 +72,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         address: event.address,
         dob: event.dob,
         mobileNumber: event.mobileNumber,
-        name: event.name,
+        name: event.name, 
+        street: event.street, 
+        city: event.city, 
+        district: event.district, 
+        zipcode: event.zipcode, 
+        state: event.state, 
+        height: event.height, 
+        weight: event.weight,
+
       );
 
       final result = response.fold(

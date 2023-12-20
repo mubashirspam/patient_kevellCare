@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kevell_care/features/rating/data/model/rating_model.dart';
+import 'package:kevell_care/features/rating/domain/entites/create-rating_payload.dart';
 import 'package:kevell_care/features/rating/domain/repositories/create%20_rating_repository.dart';
 import 'package:kevell_care/features/rating/domain/repositories/edit_rating_repository.dart';
 
@@ -84,9 +85,7 @@ final GetRatingRepository getRatingRepository;
       );
 
       final response = await createRatingRepository.createrating(
-        review: event.reveiw,
-        rating: event.rating,
-      
+      createRatingPayload: event.createRatingPayload
       );
 
       final result = response.fold(
