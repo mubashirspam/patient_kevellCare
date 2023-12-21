@@ -9,6 +9,7 @@ import 'package:sliver_tools/sliver_tools.dart';
 import '../../../configure/value/constant.dart';
 import '../../../configure/value/secure_storage.dart';
 import '../../../core/helper/toast.dart';
+import '../../appoiments/presentation/pages/book_new_appoiment_screen.dart';
 import '../../widgets/loading_widget.dart';
 import 'bloc/home_bloc.dart';
 
@@ -49,7 +50,25 @@ class AvailableDoctorList extends StatelessWidget {
 
         if (state.hasAvailableDoctorData) {
           if (state.availableDoctors!.data!.isEmpty) {
-            return MultiSliver(
+            return
+
+                //  SliverList(
+                //   delegate: SliverChildBuilderDelegate(
+                //     childCount: 1,
+                //     (context, index) => InkWell(
+                //       onTap: () => Navigator.of(context).pushNamed(
+                //           BookNewAppointmentScreen.routeName,
+                //           arguments: index),
+                //       child: AvailableDoctorCard(
+                //         data: HomeAvailableDoctorModelDatum(
+
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // );
+
+                MultiSliver(
               children: [
                 Container(
                   height: 200,
@@ -69,10 +88,13 @@ class AvailableDoctorList extends StatelessWidget {
             return SliverList(
               delegate: SliverChildBuilderDelegate(
                 childCount: state.availableDoctors!.data!.length,
-                (context, index) => AvailableDoctorCard(
-                  data: state.availableDoctors!.data![index],
-                  index: index,
-            
+                (context, index) => InkWell(
+                  onTap: () => Navigator.of(context).pushNamed(
+                      BookNewAppointmentScreen.routeName,
+                      arguments: state.availableDoctors!.data![index]),
+                  child: AvailableDoctorCard(
+                    data: state.availableDoctors!.data![index],
+                  ),
                 ),
               ),
             );

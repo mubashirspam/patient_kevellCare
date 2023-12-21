@@ -18,21 +18,22 @@ class GetProfileRepoImpliment implements GetProfileRepository {
   @override
   Future<Either<MainFailure, ProfileModel>> getProfile() async {
     try {
-     
       final mail = await getTokenFromSS(mailsecureStoreKey);
- final token = await getTokenFromSS(secureStoreKey);
+      final token = await getTokenFromSS(secureStoreKey);
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
 
-      log(mail.toString());
-
       final response = await Dio(BaseOptions()).get(
         ApiEndPoints.getprofile,
-        options: Options(headers: headers,  validateStatus: (_) => true,),
+        options: Options(
+          headers: headers,
+          validateStatus: (_) => true,
+        ),
         data: {'Username': mail},
       );
+      log(response.data.toString());
 
       switch (response.statusCode) {
         case 200:

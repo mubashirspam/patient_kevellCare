@@ -25,7 +25,6 @@ class _SearchFieldState extends State<SearchField> {
     },
   );
 
-
   String selectedLocation = " location";
   String selectedSpecialist = "specialization";
   void _showSelectionBottomSheet(
@@ -62,18 +61,23 @@ class _SearchFieldState extends State<SearchField> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: 55,
-        child: Row(
-          children: [
-            Expanded(child: containerSection(loacationWidget())),
-            const SizedBox(width: 15),
-            Expanded(child: containerSection(specializationWidget()))
-          ],
-        ),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: context.theme.backround,
+          boxShadow: [
+            BoxShadow(
+                blurRadius: 12,
+                color: Colors.black.withOpacity(0.1),
+                offset: const Offset(4, 4))
+          ]),
+      height: 55,
+      // margin: EdgeInsets.symmetric(horizontal: widget.margin ?? 20),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: TextField(
+        decoration:
+            InputDecoration(border: InputBorder.none, hintText: "Search.."),
       ),
     );
   }
@@ -88,7 +92,7 @@ class _SearchFieldState extends State<SearchField> {
                   color: Colors.black.withOpacity(0.1),
                   offset: const Offset(4, 4))
             ]),
-        height: 55,
+        height: 50,
         // margin: EdgeInsets.symmetric(horizontal: widget.margin ?? 20),
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: child,

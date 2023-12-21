@@ -3,15 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/configure/assets_manage/images.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/home/presentation/book_appoiment_category_list.dart';
+import 'package:kevell_care/features/home/presentation/pages/all_doctor_screen.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-import '../../../configure/value/constant.dart';
-import '../../../configure/value/secure_storage.dart';
-import '../../../features/home/presentation/available_doctor_list.dart';
-import '../../../features/home/presentation/bloc/home_bloc.dart';
-import '../../../features/home/presentation/home_search.dart';
-import '../../../features/home/presentation/self_check_card.dart';
-import '../../../features/home/presentation/self_checkup_video_card.dart';
-import '../../../features/widgets/avatar/active_avatar.dart';
+import '../../../../configure/value/constant.dart';
+import '../../../../configure/value/secure_storage.dart';
+import '../available_doctor_list.dart';
+import '../bloc/home_bloc.dart';
+import '../widgets/home_search.dart';
+import '../self_check_card.dart';
+import '../self_checkup_video_card.dart';
+import '../../../widgets/avatar/active_avatar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,40 +35,29 @@ class HomeScreen extends StatelessWidget {
                         .copyWith(top: 0),
                 width: double.maxFinite,
                 color: context.theme.primary,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const ActiveAvatar(
-                      isActive: false,
-                    ),
-                    const SizedBox(width: 10),
-                    Column(
+                child: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 15, bottom: 10),
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Welcome",
+                        Text("Hi, Mubashir",
                             style: Theme.of(context)
                                 .textTheme
-                                .headlineLarge!
-                                .copyWith(color: Colors.white, fontSize: 20)),
-                        const SizedBox(height: 4),
-                        FutureBuilder(
-                            future: getFromSS(mailsecureStoreKey),
-                            builder: (context, sn) {
-                              return Text(
-                                "How are you, ${sn.data.toString()}!",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleLarge!
-                                    .copyWith(
-                                      color: Colors.white,
-                                    ),
-                              );
-                            }),
+                                .headlineMedium!
+                                .copyWith(color: Colors.white, fontSize: 22)),
+                        const SizedBox(height: 5),
+                        Text(
+                          "Your health is in perfect condition! ✨",
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: Colors.white,
+                                  ),
+                        )
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],
@@ -77,9 +67,31 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20)
                   .copyWith(bottom: 20),
-              child: Text(
-                "Today Doctor Availabilty",
-                style: Theme.of(context).textTheme.headlineMedium,
+              child: Row(
+                children: [
+                  Text(
+                    "Top Doctor",
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => AllDoctorScreen()));
+                    },
+                    child: Text(
+                      "See More",
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge!
+                          .copyWith(color: context.theme.primary),
+                    ),
+                  ),
+                  Icon(
+                    Icons.chevron_right_rounded,
+                    color: context.theme.primary,
+                  )
+                ],
               ),
             ),
           ]),

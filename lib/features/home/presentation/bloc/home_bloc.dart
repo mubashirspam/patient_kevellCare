@@ -98,6 +98,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(state.copyWith(
         startTime: event.startTime,
         endTime: event.endTime,
+        token: event.token
       ));
     });
 

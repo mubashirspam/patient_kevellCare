@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/widgets/avatar/active_avatar.dart';
 
-import '../../../../core/helper/date.dart';
-import '../../../../pages/appoiment/presenation/book_new_appoiment_screen.dart';
+
 import '../../data/models/available_doctor_model.dart';
 
 class AvailableDoctorCard extends StatelessWidget {
   final HomeAvailableDoctorModelDatum data;
-  final int index;
+
 
   const AvailableDoctorCard({
     super.key,
     required this.data,
-    required this.index,
+
   });
 
   @override
@@ -25,84 +24,47 @@ class AvailableDoctorCard extends StatelessWidget {
         color: context.theme.secondary,
       ),
       padding: const EdgeInsets.all(15),
-      child: Column(
+      child: Row(
         children: [
-          SizedBox(
-            child: Row(
-              children: [
-                ActiveAvatar(imageUrl: data.profileImagelink),
-                const SizedBox(width: 15),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(data.username!,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineLarge!
-                            .copyWith(fontSize: 16)),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2),
-                      child: Text(data.specialist ?? "",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall!
-                              .copyWith(fontSize: 14)),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 2),
-                      child: Text(data.location ?? "",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall!
-                              .copyWith(fontSize: 14)),
-                    ),
-                    Text(
-                        'Availability -  ${extractTime(data.data!.first.starttime!)} to ${extractTime(data.data!.first.endtime!)}',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineLarge!
-                            .copyWith(fontSize: 16)),
-                  ],
-                ),
-              ],
-            ),
+          ActiveAvatar(
+            imageUrl: data.profileImagelink,
+            imgRadius: 6,
+            radius: 80,
+            isActive: false,
           ),
-          const SizedBox(height: 10),
-          SizedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Chip(
-                  backgroundColor: context.theme.primary,
-                  label: Text(
-                    'Waiting patient - ${data.data!.first.waitingpatient}',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () => Navigator.of(context).pushNamed(
-                      BookNewAppointmentScreen.routeName,
-                      arguments: index),
-                  child: Text(
-                    'Book Appointment',
-                    style: TextStyle(
-                      color: context.theme.primary,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          const SizedBox(width: 15),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Dr.${data.username}",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineLarge!
+                      .copyWith(fontSize: 18)),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                child: Text(data.specialist ?? "Cardiologist",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall!
+                        .copyWith(fontSize: 16)),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                child: Text(data.location ?? "Madurai",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleSmall!
+                        .copyWith(fontSize: 16)),
+              ),
+            ],
           ),
+          const Spacer(),
+          const Icon(Icons.chevron_right,)
         ],
       ),
     );
   }
 }
+

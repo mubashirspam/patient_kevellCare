@@ -39,3 +39,16 @@ extension DateTimeExtension on DateTime {
     return isBefore(other) || isAtSameMomentAs(other);
   }
 }
+
+String dateFormatToDay(DateTime inputDate) {
+  return DateFormat('E', 'en_US').format(inputDate);
+}
+String dateFormatToDayOfMonth(DateTime inputDate) {
+  return  DateFormat('d').format(inputDate); 
+}
+
+String dateFormatToMonthYear(DateTime date) {
+  return DateFormat('MMMM yyyy').format(date);
+}
+
+

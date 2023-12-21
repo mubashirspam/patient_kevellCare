@@ -2,15 +2,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
+import '../../../features/appoiments/presentation/pages/appoinments_screen.dart';
 import '../../../features/chat/presentation/pages/chat_screen.dart';
-import '../../appoiment/presenation/appoinments_screen.dart';
 
-import '../../appoiment/presenation/widgets/appoiment_screen_appbar.dart';
 
+import '../../../features/appoiments/presentation/widgets/appoiment_screen_appbar.dart';
 
 import '../../../features/chat/presentation/widgets/chat_appbar.dart';
-import '../../home_screen/presentation/home_screen.dart';
-import '../../home_screen/presentation/widgets/home_appbar.dart';
+import '../../../features/home/presentation/pages/home_screen.dart';
+import '../../../features/home/presentation/widgets/home_appbar.dart';
 import '../../profile/presenation/profile_screen.dart';
 import '../../profile/presenation/widgets/profile_appbar.dart';
 
@@ -28,11 +28,7 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   static final List<Map<String, dynamic>> _pagesOptions =
       <Map<String, dynamic>>[
-    {
-      "page": const HomeScreen(),
-      "appbar": const HomeAppBar(),
-      "flotingButton": null
-    },
+    {"page": const HomeScreen(), "appbar": HomeAppBar(), "flotingButton": null},
     {
       "page": const AppointmentScreen(),
       "appbar": AppoinmentAppBar,

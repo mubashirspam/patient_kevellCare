@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:kevell_care/pages/appoiment/presenation/book_new_appoiment_screen.dart';
 import 'package:kevell_care/pages/dashborad/presentation/dashborad.dart';
 import 'package:kevell_care/pages/otp/otp_screen.dart';
 import 'package:kevell_care/pages/patien_checkup/presentation/patient_checkup_screen.dart';
+import '../../features/appoiments/presentation/pages/book_new_appoiment_screen.dart';
 import '../../features/chat/presentation/pages/chating_screen.dart';
+import '../../features/home/data/models/available_doctor_model.dart';
 import '../../features/login/presentation/pages/login_screen.dart';
 import '../../pages/profile/presenation/my_profile_screen.dart';
 import '../../features/report/presentation/pages/report_scree.dart';
@@ -16,7 +17,7 @@ final Map<String, Widget Function(BuildContext)> route = {
   Dashboard.routeName: (ctx) => const Dashboard(),
   MyProfileScreen.routeName: (ctx) => const MyProfileScreen(),
   BookNewAppointmentScreen.routeName: (ctx) => BookNewAppointmentScreen(
-      index: ModalRoute.of(ctx)!.settings.arguments as int),
+      doctorData: ModalRoute.of(ctx)!.settings.arguments as HomeAvailableDoctorModelDatum),
   ChatingScreen.routeName: (ctx) => ChatingScreen(
       chatParameter: ModalRoute.of(ctx)!.settings.arguments as Map),
   PatientCheckupScreen.routeName: (ctx) => PatientCheckupScreen(

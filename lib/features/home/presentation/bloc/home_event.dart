@@ -8,13 +8,13 @@ class HomeEvent with _$HomeEvent {
     required DateTime date,
   }) = _PickDate;
 
-   const factory HomeEvent.pickTime({
+  const factory HomeEvent.pickTime({
     required DateTime startTime,
     required DateTime endTime,
+    required int token,
   }) = _PickTime;
 
-
-     const factory HomeEvent.search({
+  const factory HomeEvent.search({
     required String location,
     required String specialist,
   }) = _Search;

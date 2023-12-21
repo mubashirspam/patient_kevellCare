@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
-import '../../widgets/input_field/search_field.dart';
+import '../../../widgets/input_field/search_field.dart';
 
 class HomeSearchWidget extends StatelessWidget {
   const HomeSearchWidget({super.key});
@@ -14,7 +14,7 @@ class HomeSearchWidget extends StatelessWidget {
         children: [
           Container(
             width: double.maxFinite,
-            height: 20,
+            height: 30,
             decoration: BoxDecoration(
               color: context.theme.primary,
               borderRadius: const BorderRadius.only(

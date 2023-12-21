@@ -11,6 +11,7 @@ class HomeState with _$HomeState {
     required DateTime date,
     required DateTime? startTime,
     required DateTime? endTime,
+    required int? token,
     HomeAvailableDoctorModel? availableDoctors,
     required Option<Either<MainFailure, HomeAvailableDoctorModel>>
         failureOrSuccessOption,
@@ -26,5 +27,6 @@ class HomeState with _$HomeState {
       failureOrSuccessOption: none(),
       startTime: null,
       endTime: null,
+      token: null,
       date: DateTime.now());
 }
