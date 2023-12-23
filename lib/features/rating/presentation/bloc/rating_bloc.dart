@@ -83,7 +83,6 @@ final GetRatingRepository getRatingRepository;
           isError: false,
         ),
       );
-
       final response = await createRatingRepository.createrating(
       createRatingPayload: event.createRatingPayload
       );
@@ -95,8 +94,8 @@ final GetRatingRepository getRatingRepository;
         ),
         (success) => state.copyWith(
             isError: false,
-            isUpdateLoading: false,
             ratingDetails: success,
+            isUpdateLoading: false,
             hasData: true),
       );
       emit(result);

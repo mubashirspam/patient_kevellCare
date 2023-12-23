@@ -39,36 +39,30 @@ class CreateRatingRepoImpliment implements CreateRatingRepository {
 
 
 log("response === ${response.data}");
-      switch (response.statusCode) {
+  
+
+  switch (response.statusCode) {
         case 200:
         case 201:
-          final result = RatingModel.fromJson(response.data);
-          log(result.toString());
-          return Right(result);
+          final registerResult = RatingModel.fromJson(response.data);
+          log(response.data.toString());
+          return Right(registerResult);
         case 400:
         case 401:
-          final result = FailureModel.fromJson(response.data);
+          // final result = FailureModel.fromJson(response.data);
           return Left(
-            MainFailure.unauthorized(message: result.message ?? "Unauthorized"),
-          );
+              MainFailure.clientFailure(message: response.data['result'] ?? "Error"));
+        case 502:
+         
+          return const Left(MainFailure.serverFailure(message: ''));
         default:
-          final result = FailureModel.fromJson(response.data);
-          return Left(
-            MainFailure.unknown(message: result.message ?? "Unknown error"),
-          );
+          return const Left(MainFailure.clientFailure(message: ''));
       }
     } catch (e) {
       if (e is DioException) {
         log(e.toString());
-        if (e.response?.statusCode == 400) {
-          log(e.toString());
-          final result = FailureModel.fromJson(e.response!.data);
-          return Left(
-            MainFailure.unauthorized(message: result.message ?? "Unauthorized"),
-          );
-        }
       }
-      return const Left(MainFailure.clientFailure(message: "Client failure"));
+      return const Left(MainFailure.clientFailure(message: ''));
     }
   }
 }
