@@ -51,10 +51,10 @@ class ProfileScreen extends StatelessWidget {
                 }
                 if (state.hasData) {
                   return ProfileNameCard(
-                    email: state.result!.data!.emailId ?? "",
-                    imageUrl:state.result!.data!.profileImagelink??""
+                    email: state.result!.data.emailId ?? "",
+                    imageUrl:state.result!.data.profileImagelink??""
                         ,
-                    name: state.result!.data!.name ?? "",
+                    name: state.result!.data.name ?? "",
                   );
                 }
 

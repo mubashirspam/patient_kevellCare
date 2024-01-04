@@ -74,8 +74,9 @@ class MyApp extends StatelessWidget {
         theme: lightTheme(),
         darkTheme: darkTheme(),
         themeMode: ThemeMode.light,
-        home: const Initialize(),
-        navigatorKey: navigatorKey,
+        initialRoute: "/dashboard",
+        // home: const Initialize(),
+        // navigatorKey: navigatorKey,
         routes: route,
       ),
     );

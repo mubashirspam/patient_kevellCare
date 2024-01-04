@@ -5,7 +5,9 @@ class ApiEndPoints {
 
   static const register = "$baseUrl/patients/api/register";
 
-  static const otp = "$baseUrl/register/api/VerifyPhoneOtp";
+static const otp = "$baseUrl/register/api/VerifyPhoneOtp";
+
+static const forgot = "$baseUrl/v2/patients/forgot-password";
 
   static const getprofile = 
   // "$baseUrl/patients/api/patientinfoby";
@@ -16,12 +18,11 @@ class ApiEndPoints {
   static const getHomeAvailableDoctor =
       "$baseUrl/doctor/api/getalldoctorSchedule";
 
-// appoinment...
+// appoinment..
 
   static const createAppoinments = "$baseUrl/appointment/api/BookAppointment";
 
-  static const fetchAppoinment =
-      "$baseUrl/appointment/api/upcomingpasthistorypatient";
+  static const fetchAppoinment ="$baseUrl/appointment/api/upcomingpasthistorypatient";
 
   static const updateAppoinment = "$baseUrl/appointment/api/updateAppoinment";
 
