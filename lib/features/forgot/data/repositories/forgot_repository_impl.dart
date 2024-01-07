@@ -12,7 +12,7 @@
 // import '../../../../core/failiar/main_failures.dart';
 
 // @LazySingleton(as: ForgotRepository)
-// class ForgotRepoImpliment implements ForgotRepository {
+// abstract class ForgotRepoImpliment implements ForgotRepository {
 //   @override
 //   Future<Either<MainFailure, ForgotModel>> forgot({
 //     required String email,

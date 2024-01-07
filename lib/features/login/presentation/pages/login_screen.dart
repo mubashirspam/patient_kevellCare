@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/forgot/presentation/pages/forgot_screen.dart';
 import 'package:kevell_care/pages/signup_screen/presentation/signup_screen.dart';
 
 import '../login_widget.dart';
@@ -50,6 +51,14 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 40),
                       const LoginWidget(),
+                      TextButton(onPressed: (){
+
+                          Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>   ForgotScreen()
+                      ),
+                      );
+                      }, child: const Text("Forgot password"))
                     ],
                   ),
                 ),

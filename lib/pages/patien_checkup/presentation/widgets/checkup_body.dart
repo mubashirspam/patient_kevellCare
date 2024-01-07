@@ -6,7 +6,6 @@ import 'dart:math' as m;
 
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/checkup/presentation/ecg_widget.dart';
-import 'package:kevell_care/features/checkup/presentation/gsr_widget.dart';
 import 'package:kevell_care/features/checkup/presentation/temparature_widgtet.dart';
 
 import 'package:flutter/material.dart';
@@ -19,7 +18,6 @@ import '../../../../core/helper/toast.dart';
 import '../../../../features/checkup/presentation/blood_pressure_widget.dart';
 import '../../../../features/checkup/presentation/bmi_widget.dart';
 import '../../../../features/checkup/presentation/glucose_widget.dart';
-import '../../../../features/checkup/presentation/postion_widget.dart';
 import '../../../../features/checkup/presentation/spo_widget.dart';
 import '../../../../features/checkup/presentation/stethoscope_widget.dart';
 import '../../../../features/checkup/presentation/unloack.dart';
@@ -718,9 +716,9 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
 }
 void showCustomDialog(
     BuildContext context, Function(String sex, String hegiht) onpress) {
-  final _formKey = GlobalKey<FormState>();
-  String _gender = 'Male';
-  String _height = '';
+  final formKey = GlobalKey<FormState>();
+  String gender = 'Male';
+  String height = '';
 
   showDialog(
     context: context,
@@ -735,12 +733,12 @@ void showCustomDialog(
               .copyWith(color: context.theme.primary, fontSize: 18),
         ),
         content: Form(
-          key: _formKey,
+          key: formKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               DropdownButtonFormField<String>(
-                value: _gender,
+                value: gender,
                 items: ['Male', 'Female'].map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -748,32 +746,32 @@ void showCustomDialog(
                   );
                 }).toList(),
                 onChanged: (newValue) {
-                  _gender = newValue!;
+                  gender = newValue!;
                 },
-                decoration: InputDecoration(labelText: "Gender"),
+                decoration: const InputDecoration(labelText: "Gender"),
               ),
               TextFormField(
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
-                  _height = value;
+                  height = value;
                 },
-                decoration: InputDecoration(labelText: "Height in cm"),
+                decoration: const InputDecoration(labelText: "Height in cm"),
               ),
             ],
           ),
         ),
         actions: <Widget>[
           TextButton(
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
           TextButton(
-            child: Text('Submit'),
+            child: const Text('Submit'),
             onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                onpress(_gender, _height);
+              if (formKey.currentState!.validate()) {
+                onpress(gender, height);
               }
             },
           ),

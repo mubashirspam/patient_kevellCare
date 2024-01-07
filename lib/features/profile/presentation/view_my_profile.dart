@@ -76,7 +76,7 @@ class ViewMyProfile extends StatelessWidget {
                         padding: const EdgeInsets.all(4),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
-                          child: SizedBox(
+                          child: const SizedBox(
                             height: 100,
                             width: 100,
                             // child: CachedNetworkImage(

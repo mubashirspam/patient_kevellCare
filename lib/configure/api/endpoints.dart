@@ -1,13 +1,13 @@
 import '../value/constant.dart';
 
 class ApiEndPoints {
-  static const login = "$baseUrl/register/api/patientLogin";
+  static const login = "https://c896-2409-4072-6c0c-d77a-a9a1-e84d-e4a-5b52.ngrok-free.app/v2/patients/login";
 
   static const register = "$baseUrl/patients/api/register";
 
 static const otp = "$baseUrl/register/api/VerifyPhoneOtp";
 
-static const forgot = "$baseUrl/v2/patients/forgot-password";
+static const forgot = "https://4d7a-2409-4072-6c0c-d77a-64dd-ed12-fc8c-682.ngrok-free.app/v2/patients/forgot-password";
 
   static const getprofile = 
   // "$baseUrl/patients/api/patientinfoby";

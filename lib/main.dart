@@ -11,10 +11,10 @@ import 'package:kevell_care/configure/value/secure_storage.dart';
 import 'package:kevell_care/core/them/dark_theme.dart';
 import 'package:kevell_care/core/them/light_theme.dart';
 import 'package:kevell_care/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:kevell_care/features/forgot/presentation/bloc/forgot_bloc.dart';
 import 'package:kevell_care/features/rating/presentation/bloc/rating_bloc.dart';
 import 'package:kevell_care/firebase_options.dart';
 import 'package:kevell_care/pages/initialize/bloc/initialize_bloc.dart';
-import 'package:kevell_care/pages/initialize/initialize.dart';
 import 'package:path_provider/path_provider.dart';
 import 'configure/route/routes.dart';
 import 'configure/value/constant.dart';
@@ -67,6 +67,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (ctx) => getIt<ReportBloc>()),
         BlocProvider(create: (ctx) => getIt<ProfileBloc>()),
         BlocProvider(create: (ctx) => getIt<ChatBloc>()),
+       BlocProvider(create: (ctx) => getIt<ForgotBloc>()),
+
         BlocProvider(create: (ctx) => getIt<RatingBloc>()),
       ],
       child: MaterialApp(

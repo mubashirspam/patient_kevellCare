@@ -299,7 +299,7 @@ class _BookNowWidgetState extends State<BookNowWidget> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: context.theme.inputFiled),
-                        padding: EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(15),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

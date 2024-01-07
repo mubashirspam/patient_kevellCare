@@ -5,10 +5,8 @@ import 'package:injectable/injectable.dart';
 import 'package:kevell_care/features/rating/data/model/rating_model.dart';
 import 'package:kevell_care/features/rating/domain/entites/create-rating_payload.dart';
 import 'package:kevell_care/features/rating/domain/repositories/create%20_rating_repository.dart';
-import '../../../../configure/api/endpoints.dart';
 import '../../../../configure/value/constant.dart';
 import '../../../../configure/value/secure_storage.dart';
-import '../../../../core/failiar/failiur_model.dart';
 import '../../../../core/failiar/main_failures.dart';
 // import '../../../../core/network/netwrok.dart';
 

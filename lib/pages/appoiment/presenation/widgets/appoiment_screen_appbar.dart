@@ -18,7 +18,7 @@ class AppoinmentAppBar extends StatelessWidget implements PreferredSizeWidget {
         style: Theme.of(context).textTheme.headlineLarge,
       ),
       bottom: TabBar(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
             color: context.theme.primary),

@@ -4,7 +4,6 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../configure/api/endpoints.dart';
 import '../../../../configure/value/constant.dart';
 import '../../../../configure/value/secure_storage.dart';
 import '../../../../core/failiar/failiur_model.dart';
@@ -30,7 +29,7 @@ class GetProfileRepoImpliment implements GetProfileRepository {
         'Content-Type': 'application/json',
       };
       
-      log("token ${token}");
+      log("token $token");
 
 
       final response =

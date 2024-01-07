@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/forgot/presentation/pages/otp.dart';
-import 'package:kevell_care/features/forgot/presentation/pages/reset_password.dart';
-import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
 
 import '../../configure/value/constant.dart';
 import '../../configure/value/secure_storage.dart';
@@ -164,8 +162,8 @@ class _OtpScreenState extends State<OtpScreen> {
             }
           },
           builder: (context, state) {
-       final number = state.loginDetails?.data?.first?.mobile ?? '';
-final otp = state.loginDetails?.data?.first?.otp ?? '000000';
+       final number = state.loginDetails?.data.first.mobileNo ?? '';
+// final otp = state.loginDetails?.data?.first?. ?? '000000';
 
             log("number : $number");
             log("OTP : $otp");
@@ -208,33 +206,33 @@ final otp = state.loginDetails?.data?.first?.otp ?? '000000';
                   ),
                 ),
                 const SizedBox(height: 20),
-                TextButtonWidget(
-                  name: "Reset password",
-                  onPressed: _timerActive && otps.length == 6
-                      ? () {
-                          context.read<LoginBloc>().add(
-                                LoginEvent.varyfiyOtp(
-                                  number: number,
-                                  otp: otp,
-                                ),
-                              );
-                          if (otps.length == 6) {
-            //                     Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => ResetPassword()),
-            // );
-                          } else {
-                            deleteFromSS(secureStoreKey);
-                            Toast.showToast(
-                              color: Colors.red,
-                              context: context,
-                              message: "Incorrect otp",
-                            );
-                          }
-                        }
-                      : null,
-                  isLoading: state.isLoading,
-                )
+            //     TextButtonWidget(
+            //       name: "Reset password",
+            //       onPressed: _timerActive && otps.length == 6
+            //           ? () {
+            //               context.read<LoginBloc>().add(
+            //                     LoginEvent.varyfiyOtp(
+            //                       number: number,
+            //                       // otp: otp,
+            //                     ),
+            //                   );
+            //               if (otps.length == 6) {
+            // //                     Navigator.push(
+            // //   context,
+            // //   MaterialPageRoute(builder: (context) => ResetPassword()),
+            // // );
+            //               } else {
+            //                 deleteFromSS(secureStoreKey);
+            //                 Toast.showToast(
+            //                   color: Colors.red,
+            //                   context: context,
+            //                   message: "Incorrect otp",
+            //                 );
+            //               }
+            //             }
+            //           : null,
+            //       isLoading: state.isLoading,
+            //     )
               ],
             );
           },

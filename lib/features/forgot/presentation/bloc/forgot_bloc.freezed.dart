@@ -221,37 +221,14 @@ abstract class _Forgot implements ForgotEvent {
 
 /// @nodoc
 mixin _$ForgotState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    required TResult orElse(),
-  }) =>
+  bool get isLoading => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
+  bool get isError => throw _privateConstructorUsedError;
+  bool get hasData => throw _privateConstructorUsedError;
+  ForgotModel? get forgot => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ForgotStateCopyWith<ForgotState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -260,6 +237,13 @@ abstract class $ForgotStateCopyWith<$Res> {
   factory $ForgotStateCopyWith(
           ForgotState value, $Res Function(ForgotState) then) =
       _$ForgotStateCopyWithImpl<$Res, ForgotState>;
+  @useResult
+  $Res call(
+      {bool isLoading,
+      String message,
+      bool isError,
+      bool hasData,
+      ForgotModel? forgot});
 }
 
 /// @nodoc
@@ -271,100 +255,169 @@ class _$ForgotStateCopyWithImpl<$Res, $Val extends ForgotState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isLoading = null,
+    Object? message = null,
+    Object? isError = null,
+    Object? hasData = null,
+    Object? forgot = freezed,
+  }) {
+    return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      isError: null == isError
+          ? _value.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasData: null == hasData
+          ? _value.hasData
+          : hasData // ignore: cast_nullable_to_non_nullable
+              as bool,
+      forgot: freezed == forgot
+          ? _value.forgot
+          : forgot // ignore: cast_nullable_to_non_nullable
+              as ForgotModel?,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
+abstract class _$$ForgotStateImplCopyWith<$Res>
+    implements $ForgotStateCopyWith<$Res> {
+  factory _$$ForgotStateImplCopyWith(
+          _$ForgotStateImpl value, $Res Function(_$ForgotStateImpl) then) =
+      __$$ForgotStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {bool isLoading,
+      String message,
+      bool isError,
+      bool hasData,
+      ForgotModel? forgot});
 }
 
 /// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$ForgotStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+class __$$ForgotStateImplCopyWithImpl<$Res>
+    extends _$ForgotStateCopyWithImpl<$Res, _$ForgotStateImpl>
+    implements _$$ForgotStateImplCopyWith<$Res> {
+  __$$ForgotStateImplCopyWithImpl(
+      _$ForgotStateImpl _value, $Res Function(_$ForgotStateImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isLoading = null,
+    Object? message = null,
+    Object? isError = null,
+    Object? hasData = null,
+    Object? forgot = freezed,
+  }) {
+    return _then(_$ForgotStateImpl(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      isError: null == isError
+          ? _value.isError
+          : isError // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasData: null == hasData
+          ? _value.hasData
+          : hasData // ignore: cast_nullable_to_non_nullable
+              as bool,
+      forgot: freezed == forgot
+          ? _value.forgot
+          : forgot // ignore: cast_nullable_to_non_nullable
+              as ForgotModel?,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
+class _$ForgotStateImpl implements _ForgotState {
+  const _$ForgotStateImpl(
+      {required this.isLoading,
+      required this.message,
+      required this.isError,
+      required this.hasData,
+      required this.forgot});
+
+  @override
+  final bool isLoading;
+  @override
+  final String message;
+  @override
+  final bool isError;
+  @override
+  final bool hasData;
+  @override
+  final ForgotModel? forgot;
 
   @override
   String toString() {
-    return 'ForgotState.initial()';
+    return 'ForgotState(isLoading: $isLoading, message: $message, isError: $isError, hasData: $hasData, forgot: $forgot)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$ForgotStateImpl &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.isError, isError) || other.isError == isError) &&
+            (identical(other.hasData, hasData) || other.hasData == hasData) &&
+            (identical(other.forgot, forgot) || other.forgot == forgot));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, isLoading, message, isError, hasData, forgot);
 
+  @JsonKey(ignore: true)
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
+  @pragma('vm:prefer-inline')
+  _$$ForgotStateImplCopyWith<_$ForgotStateImpl> get copyWith =>
+      __$$ForgotStateImplCopyWithImpl<_$ForgotStateImpl>(this, _$identity);
 }
 
-abstract class _Initial implements ForgotState {
-  const factory _Initial() = _$InitialImpl;
+abstract class _ForgotState implements ForgotState {
+  const factory _ForgotState(
+      {required final bool isLoading,
+      required final String message,
+      required final bool isError,
+      required final bool hasData,
+      required final ForgotModel? forgot}) = _$ForgotStateImpl;
+
+  @override
+  bool get isLoading;
+  @override
+  String get message;
+  @override
+  bool get isError;
+  @override
+  bool get hasData;
+  @override
+  ForgotModel? get forgot;
+  @override
+  @JsonKey(ignore: true)
+  _$$ForgotStateImplCopyWith<_$ForgotStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
