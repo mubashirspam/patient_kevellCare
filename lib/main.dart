@@ -58,16 +58,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (ctx) => InitializeBloc()),
         BlocProvider(create: (ctx) => getIt<HomeBloc>()),
         BlocProvider(create: (ctx) => getIt<SignupBloc>()),
         BlocProvider(create: (ctx) => getIt<LoginBloc>()),
         BlocProvider(create: (ctx) => getIt<AppoinmetsBloc>()),
-        BlocProvider(create: (ctx) => InitializeBloc()),
         BlocProvider(create: (ctx) => getIt<ReportBloc>()),
         BlocProvider(create: (ctx) => getIt<ProfileBloc>()),
         BlocProvider(create: (ctx) => getIt<ChatBloc>()),
-       BlocProvider(create: (ctx) => getIt<ForgotBloc>()),
-
+        BlocProvider(create: (ctx) => getIt<ForgotBloc>()),
         BlocProvider(create: (ctx) => getIt<RatingBloc>()),
       ],
       child: MaterialApp(
