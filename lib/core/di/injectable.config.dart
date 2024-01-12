@@ -34,9 +34,11 @@ import '../../features/chat/data/repository/fetch_chat_profile_impliment.dart'
 import '../../features/chat/domain/repository/fetch_chat_profile_repository.dart'
     as _i11;
 import '../../features/chat/presentation/bloc/chat_bloc.dart' as _i43;
-import '../../features/forgot/domain/repositories/forgot_repository.dart'
+import '../../features/forgot/data/repositories/forgot_repository_impl.dart'
     as _i18;
-import '../../features/forgot/presentation/bloc/forgot_bloc.dart' as _i17;
+import '../../features/forgot/domain/repositories/forgot_repository.dart'
+    as _i17;
+import '../../features/forgot/presentation/bloc/forgot_bloc.dart' as _i44;
 import '../../features/home/data/repositories/get_home_waiting_patient_repository_impl.dart'
     as _i22;
 import '../../features/home/domain/repositories/get_home_waiting_patient_repository.dart'
@@ -48,7 +50,7 @@ import '../../features/login/data/repositories/otp_repository_impl.dart'
     as _i31;
 import '../../features/login/domain/repositories/login_repository.dart' as _i28;
 import '../../features/login/domain/repositories/otp_repository.dart' as _i30;
-import '../../features/login/presentation/bloc/login_bloc.dart' as _i44;
+import '../../features/login/presentation/bloc/login_bloc.dart' as _i45;
 import '../../features/profile/data/repositories/profile_get__repository_impl.dart'
     as _i24;
 import '../../features/profile/data/repositories/profile_update_repository_impl.dart'
@@ -61,7 +63,7 @@ import '../../features/profile/domain/repositories/update_profile_repository.dar
     as _i38;
 import '../../features/profile/domain/repositories/upload_image_repository.dart'
     as _i40;
-import '../../features/profile/presentation/bloc/profile_bloc.dart' as _i45;
+import '../../features/profile/presentation/bloc/profile_bloc.dart' as _i46;
 import '../../features/rating/data/repositories/create%20_rating_repository_impl.dart'
     as _i6;
 import '../../features/rating/data/repositories/edit_rating_repository_impl.dart'
@@ -84,7 +86,7 @@ import '../../features/report/domain/repositories/fetch_report_general_repositor
 import '../../features/report/domain/repositories/fetch_report_repository.dart'
     as _i15;
 import '../../features/report/presentation/bloc/report_bloc.dart' as _i33;
-import '../../features/signup/bloc/signup_bloc.dart' as _i46;
+import '../../features/signup/bloc/signup_bloc.dart' as _i47;
 import '../../features/signup/data/repositories/signup_repository_impl.dart'
     as _i35;
 import '../../features/signup/domain/repositories/signup_repository.dart'
@@ -115,8 +117,7 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i14.FetchReportGeneraInfoRepoImpliment());
     gh.lazySingleton<_i15.FetchReportRepository>(
         () => _i16.FetchReportRepoImpliment());
-    gh.factory<_i17.ForgotBloc>(
-        () => _i17.ForgotBloc(gh<_i18.ForgotRepository>()));
+    gh.lazySingleton<_i17.ForgotRepository>(() => _i18.ForgotRepoImpliment());
     gh.lazySingleton<_i19.GetAppoinmentsRepository>(
         () => _i20.GetAppoinmentsRepoImpliment());
     gh.lazySingleton<_i21.GetAvailableDoctorRepository>(
@@ -153,17 +154,19 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i43.ChatBloc>(
         () => _i43.ChatBloc(gh<_i11.FetchChatProfileRepository>()));
-    gh.factory<_i44.LoginBloc>(() => _i44.LoginBloc(
+    gh.factory<_i44.ForgotBloc>(
+        () => _i44.ForgotBloc(gh<_i17.ForgotRepository>()));
+    gh.factory<_i45.LoginBloc>(() => _i45.LoginBloc(
           gh<_i28.LoginRepository>(),
           gh<_i30.OtpRepository>(),
         ));
-    gh.factory<_i45.ProfileBloc>(() => _i45.ProfileBloc(
+    gh.factory<_i46.ProfileBloc>(() => _i46.ProfileBloc(
           gh<_i23.GetProfileRepository>(),
           gh<_i38.UpdateProfileRepository>(),
           gh<_i40.UploadImageRepository>(),
         ));
-    gh.factory<_i46.SignupBloc>(
-        () => _i46.SignupBloc(gh<_i34.SignupRepository>()));
+    gh.factory<_i47.SignupBloc>(
+        () => _i47.SignupBloc(gh<_i34.SignupRepository>()));
     return this;
   }
 }

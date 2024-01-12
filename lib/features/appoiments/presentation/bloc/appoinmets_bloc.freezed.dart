@@ -123,7 +123,7 @@ class _$GetAppoinmentsImpl implements _GetAppoinments {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$GetAppoinmentsImpl);
   }
@@ -265,7 +265,7 @@ class _$CreateAppoinmentsImpl implements _CreateAppoinments {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateAppoinmentsImpl &&
@@ -424,7 +424,7 @@ class _$UpdateAppoinmetsImpl implements _UpdateAppoinmets {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpdateAppoinmetsImpl &&
@@ -583,7 +583,7 @@ class _$DeleteAppoinmetsImpl implements _DeleteAppoinmets {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteAppoinmetsImpl &&
@@ -747,7 +747,7 @@ class _$PickTimeImpl implements _PickTime {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PickTimeImpl &&
@@ -1197,7 +1197,7 @@ class _$AppoinmetsStateImpl implements _AppoinmetsState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppoinmetsStateImpl &&

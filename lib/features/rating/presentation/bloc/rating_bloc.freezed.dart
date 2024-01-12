@@ -132,7 +132,7 @@ class _$BuildRatingImpl implements _BuildRating {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BuildRatingImpl &&
@@ -260,7 +260,7 @@ class _$GetRatingImpl implements _GetRating {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$GetRatingImpl);
   }
@@ -400,7 +400,7 @@ class _$EditRatingImpl implements _EditRating {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EditRatingImpl &&
@@ -550,7 +550,7 @@ class _$CreateRatingImpl implements _CreateRating {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateRatingImpl &&
@@ -858,7 +858,7 @@ class _$RatingStateImpl implements _RatingState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RatingStateImpl &&

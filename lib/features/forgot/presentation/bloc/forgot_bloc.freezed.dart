@@ -135,7 +135,7 @@ class _$ForgotImpl implements _Forgot {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ForgotImpl &&
@@ -375,7 +375,7 @@ class _$ForgotStateImpl implements _ForgotState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ForgotStateImpl &&

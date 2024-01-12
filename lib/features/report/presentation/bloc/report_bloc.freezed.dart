@@ -136,7 +136,7 @@ class _$FetchReportGeneralinfoImpl implements _FetchReportGeneralinfo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchReportGeneralinfoImpl &&
@@ -286,7 +286,7 @@ class _$FetchReportImpl implements _FetchReport {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchReportImpl &&
@@ -452,7 +452,7 @@ class _$GeneratePdfImpl implements _GeneratePdf {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GeneratePdfImpl &&
@@ -612,7 +612,7 @@ class _$PickDateImpl implements _PickDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PickDateImpl &&
@@ -1069,7 +1069,7 @@ class _$ReportStateImpl implements _ReportState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ReportStateImpl &&

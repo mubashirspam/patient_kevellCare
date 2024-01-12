@@ -126,7 +126,7 @@ class _$LoginImpl implements _Login {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoginImpl &&
@@ -272,7 +272,7 @@ class _$VaryfiyOtpImpl implements _VaryfiyOtp {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$VaryfiyOtpImpl &&
@@ -552,7 +552,7 @@ class _$LoginStateImpl implements _LoginState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoginStateImpl &&

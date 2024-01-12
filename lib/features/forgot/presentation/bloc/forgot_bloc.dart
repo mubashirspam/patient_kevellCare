@@ -22,7 +22,7 @@ class ForgotBloc extends Bloc<ForgotEvent, ForgotState> {
           isError: false,
         ));
 
-        final response = await forgotRepository.login(
+        final response = await forgotRepository.forgot(
           email: event.email,
         );
 

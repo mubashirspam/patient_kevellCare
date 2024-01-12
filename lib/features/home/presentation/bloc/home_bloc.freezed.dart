@@ -117,7 +117,7 @@ class _$GetHomeAvailableDoctorImpl implements _GetHomeAvailableDoctor {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetHomeAvailableDoctorImpl);
@@ -253,7 +253,7 @@ class _$PickDateImpl implements _PickDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PickDateImpl &&
@@ -416,7 +416,7 @@ class _$PickTimeImpl implements _PickTime {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PickTimeImpl &&
@@ -579,7 +579,7 @@ class _$SearchImpl implements _Search {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchImpl &&
@@ -944,7 +944,7 @@ class _$HomeStateImpl implements _HomeState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HomeStateImpl &&

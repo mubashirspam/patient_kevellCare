@@ -147,7 +147,7 @@ class _$FetchChatProfileImpl implements _FetchChatProfile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FetchChatProfileImpl &&
@@ -393,7 +393,7 @@ class _$ChatStateImpl implements _ChatState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChatStateImpl &&

@@ -171,7 +171,7 @@ class _$ClientFailureImpl implements _ClientFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ClientFailureImpl &&
@@ -339,7 +339,7 @@ class _$ServerFailureImpl implements _ServerFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ServerFailureImpl &&
@@ -507,7 +507,7 @@ class _$NoDataFoundImpl implements _NoDataFound {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NoDataFoundImpl &&
@@ -675,7 +675,7 @@ class _$UnauthorizedImpl implements _Unauthorized {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnauthorizedImpl &&
@@ -843,7 +843,7 @@ class _$ForbiddenImpl implements _Forbidden {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ForbiddenImpl &&
@@ -1010,7 +1010,7 @@ class _$ServiceUnavailableImpl implements _ServiceUnavailable {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ServiceUnavailableImpl &&
@@ -1179,7 +1179,7 @@ class _$UnknownFailureImpl implements _UnknownFailure {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UnknownFailureImpl &&

@@ -107,7 +107,7 @@ class _$InitialImpl implements _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
@@ -233,7 +233,7 @@ class _$ContectionChangedImpl implements _ContectionChanged {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ContectionChangedImpl &&
@@ -357,7 +357,7 @@ class _$ConnectionCheckImpl implements _ConnectionCheck {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$ConnectionCheckImpl);
   }
@@ -556,7 +556,7 @@ class _$InitializeStateImpl implements _InitializeState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InitializeStateImpl &&

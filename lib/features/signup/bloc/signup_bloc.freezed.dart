@@ -141,7 +141,7 @@ class _$SignupImpl implements _Signup {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignupImpl &&
@@ -383,7 +383,7 @@ class _$SignupStateImpl implements _SignupState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignupStateImpl &&

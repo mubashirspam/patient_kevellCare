@@ -167,7 +167,7 @@ class _$GetProfileImpl implements _GetProfile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetProfileImpl &&
@@ -440,7 +440,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpdateProfileImpl &&
@@ -658,7 +658,7 @@ class _$PickDateImpl implements _PickDate {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PickDateImpl &&
@@ -839,7 +839,7 @@ class _$UplaodImageImpl implements _UplaodImage {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UplaodImageImpl &&
@@ -1163,7 +1163,7 @@ class _$ProfileStateImpl implements _ProfileState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProfileStateImpl &&
