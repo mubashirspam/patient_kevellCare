@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/helper/toast.dart';
-import 'package:kevell_care/core/helper/validater.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/forgot/presentation/bloc/forgot_bloc.dart';
 import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
@@ -13,33 +12,10 @@ class ForgotScreen extends StatelessWidget {
    TextEditingController textEditingController = TextEditingController();
     GlobalKey<FormState> formKey = GlobalKey<FormState>();
    ForgotScreen({Key? key}) : super(key: key);
-
+ bool patient = false;
   @override
   Widget build(BuildContext context) {
  
-    String? validateEmailOrMobile(String? value) {
-      if (value == null || value.isEmpty) {
-        return 'Please enter an email address or mobile number';
-      } else if (regex.hasMatch(value)) {
-        if (!regexMobile.hasMatch(value)) {
-          return 'Please enter a valid mobile number or email';
-        }
-      } else if (regexMobile.hasMatch(value)) {
-        if (!regex.hasMatch(value)) {
-          return 'Please enter a valid email or mobile number';
-        }
-      } else {
-        return 'Please enter a valid email or mobile number';
-      }
-      return null;
-    }
-
-    void onSubmit() {
-      if (formKey.currentState != null && formKey.currentState!.validate()) {
-        print('Valid input! Ready to submit.');
-      }
-    }
-
     return Scaffold(
       backgroundColor: context.theme.primary,
       appBar: AppBar(
@@ -85,7 +61,11 @@ class ForgotScreen extends StatelessWidget {
                     onChanged: (value) {},
                     hintText: 'Enter your email address or mobile number',
                     keyboardType: TextInputType.text,
-                    validate: validateEmailOrMobile,
+                    validate: (userame) {
+                if (userame == null || userame.isEmpty) {
+                  return "Please enter an email / mobile nember ";
+                }               return null; // Return null if validation succeeds
+              },
                   ),
                   const SizedBox(
                     height: 30,
@@ -103,13 +83,17 @@ class ForgotScreen extends StatelessWidget {
                   }
       
                   if (!state.isLoading && state.hasData) {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        content: Text(state.message ?? ""),
-                      
-                      ),
-                    );
+                   Toast.showToast(
+                    context: context,
+                    message: 'OTP generated Successfully🥳',
+                  );
+
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => const OtpScreen(),
+                    ),
+                    (route) => false,
+                  );
                   }
       
       

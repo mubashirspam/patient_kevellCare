@@ -1,22 +1,24 @@
 import '../value/constant.dart';
 
 class ApiEndPoints {
-  static const login = "https://c896-2409-4072-6c0c-d77a-a9a1-e84d-e4a-5b52.ngrok-free.app/v2/patients/login";
+  static const login = "https://768e-183-82-33-226.ngrok-free.app/v2/patients/login";
 
-  static const register = "$baseUrl/patients/api/register";
+  static const register = "https://768e-183-82-33-226.ngrok-free.app/v2/patients/register";
 
-static const otp = "$baseUrl/register/api/VerifyPhoneOtp";
+static const verifyotp = "$baseUrl/v2/patients/verifyphoneotp";
 
-static const forgot = "https://4d7a-2409-4072-6c0c-d77a-64dd-ed12-fc8c-682.ngrok-free.app/v2/patients/forgot-password";
+static const forgot = "https://768e-183-82-33-226.ngrok-free.app/v2/patients/forgot-password";
+
+static const changepass = "$baseUrl/v2/patients/change-password";
 
   static const getprofile = 
-  // "$baseUrl/patients/api/patientinfoby";
-  "https://2a0c-183-82-33-226.ngrok.io/patients/api/patientinfoby";
+  // "$baseUrl/v2/patients/patientinfoby";
+  "https://768e-183-82-33-226.ngrok-free.app/v2/patients/patientinfoby";
 
-  static const updateProfile = "$baseUrl/patients/api/profile";
+  static const updateProfile = "$baseUrl/v2/patients/profile";
 
   static const getHomeAvailableDoctor =
-      "$baseUrl/doctor/api/getalldoctorSchedule";
+      "https://768e-183-82-33-226.ngrok-free.app/v2/patients/alldoctorSchedule";
 
 // appoinment..
 

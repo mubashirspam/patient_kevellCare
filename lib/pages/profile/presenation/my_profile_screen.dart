@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/profile/data/models/profile_model.dart';
 
 import '../../../features/profile/presentation/view_my_profile.dart';
 
 
 
 class MyProfileScreen extends StatelessWidget {
+  final Data profile;
   static const routeName = '/my-profile-screen';
-  const MyProfileScreen({super.key});
+  const MyProfileScreen({
+    required this.profile,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +38,10 @@ class MyProfileScreen extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineLarge,
         ),
       ),
-      body: const SafeArea(
+      body:  SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(20),
-          child: ViewMyProfile(),
+          padding: const EdgeInsets.all(20),
+          child: ViewMyProfile(profile:profile,),
         ),
       ),
     );

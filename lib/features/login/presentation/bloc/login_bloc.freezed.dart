@@ -372,7 +372,7 @@ mixin _$LoginState {
   bool get otpVarified => throw _privateConstructorUsedError;
   bool get hasValidationData => throw _privateConstructorUsedError;
   LoginModel? get loginDetails => throw _privateConstructorUsedError;
-  OtpModel? get otpDetails => throw _privateConstructorUsedError;
+  VerifyOtpModel? get otpDetails => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginStateCopyWith<LoginState> get copyWith =>
@@ -392,7 +392,7 @@ abstract class $LoginStateCopyWith<$Res> {
       bool otpVarified,
       bool hasValidationData,
       LoginModel? loginDetails,
-      OtpModel? otpDetails});
+      VerifyOtpModel? otpDetails});
 }
 
 /// @nodoc
@@ -444,7 +444,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
       otpDetails: freezed == otpDetails
           ? _value.otpDetails
           : otpDetails // ignore: cast_nullable_to_non_nullable
-              as OtpModel?,
+              as VerifyOtpModel?,
     ) as $Val);
   }
 }
@@ -464,7 +464,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       bool otpVarified,
       bool hasValidationData,
       LoginModel? loginDetails,
-      OtpModel? otpDetails});
+      VerifyOtpModel? otpDetails});
 }
 
 /// @nodoc
@@ -514,7 +514,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
       otpDetails: freezed == otpDetails
           ? _value.otpDetails
           : otpDetails // ignore: cast_nullable_to_non_nullable
-              as OtpModel?,
+              as VerifyOtpModel?,
     ));
   }
 }
@@ -544,7 +544,7 @@ class _$LoginStateImpl implements _LoginState {
   @override
   final LoginModel? loginDetails;
   @override
-  final OtpModel? otpDetails;
+  final VerifyOtpModel? otpDetails;
 
   @override
   String toString() {
@@ -589,7 +589,7 @@ abstract class _LoginState implements LoginState {
       required final bool otpVarified,
       required final bool hasValidationData,
       required final LoginModel? loginDetails,
-      required final OtpModel? otpDetails}) = _$LoginStateImpl;
+      required final VerifyOtpModel? otpDetails}) = _$LoginStateImpl;
 
   @override
   bool get isLoading;
@@ -604,7 +604,7 @@ abstract class _LoginState implements LoginState {
   @override
   LoginModel? get loginDetails;
   @override
-  OtpModel? get otpDetails;
+  VerifyOtpModel? get otpDetails;
   @override
   @JsonKey(ignore: true)
   _$$LoginStateImplCopyWith<_$LoginStateImpl> get copyWith =>

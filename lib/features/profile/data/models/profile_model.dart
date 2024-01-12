@@ -41,7 +41,7 @@ class Data {
     String name;
     String emailId;
     String mobileNo;
-    String dob;
+    DateTime dob;
     Address address;
     String profileImagelink;
     String kitId;
@@ -82,7 +82,7 @@ class Data {
         name: json["name"],
         emailId: json["email_id"],
         mobileNo: json["mobile_no"],
-        dob: json["dob"],
+        dob: DateTime.parse(json["dob"]),
         address: Address.fromJson(json["address"]),
         profileImagelink: json["profile_imagelink"],
         kitId: json["kit_id"],
@@ -103,7 +103,7 @@ class Data {
         "name": name,
         "email_id": emailId,
         "mobile_no": mobileNo,
-        "dob": dob,
+        "dob": dob.toIso8601String(),
         "address": address.toJson(),
         "profile_imagelink": profileImagelink,
         "kit_id": kitId,
@@ -123,31 +123,27 @@ class Data {
 class Address {
     String street;
     String city;
-    String district;
     String state;
-    int zipcode;
+    String zipCode;
 
     Address({
         required this.street,
         required this.city,
-        required this.district,
         required this.state,
-        required this.zipcode,
+        required this.zipCode,
     });
 
     factory Address.fromJson(Map<String, dynamic> json) => Address(
         street: json["street"],
         city: json["city"],
-        district: json["district"],
         state: json["state"],
-        zipcode: json["zipcode"],
+        zipCode: json["zipCode"],
     );
 
     Map<String, dynamic> toJson() => {
         "street": street,
         "city": city,
-        "district": district,
         "state": state,
-        "zipcode": zipcode,
+        "zipCode": zipCode,
     };
 }

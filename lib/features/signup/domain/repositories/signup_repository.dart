@@ -5,6 +5,9 @@ import '../../data/models/signup_model.dart';
 
 abstract class SignupRepository {
   Future<Either<MainFailure, SignupModel>> signup({
-    required Map<String,String> payload,
+  required String name,
+    required String mobileNo,
+    required String password,
+    required String email
   });
 }

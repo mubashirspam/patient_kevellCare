@@ -4,7 +4,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/forgot/presentation/bloc/forgot_bloc.dart';
 import 'package:kevell_care/features/forgot/presentation/pages/otp.dart';
+import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
 
 import '../../configure/value/constant.dart';
 import '../../configure/value/secure_storage.dart';
@@ -130,15 +132,15 @@ class _OtpScreenState extends State<OtpScreen> {
 
             if (!state.isLoading && state.otpVarified) {
               addToSS(
-                  mailsecureStoreKey, state.otpDetails!.data!.first.name??"");
+                  mailsecureStoreKey, state.otpDetails!.data.first.name??"");
 
               addToSS(drIdsecureStoreKey,
-                  state.otpDetails!.data!.first.id!.toString());
+                  state.otpDetails!.data.first.id.toString());
 
               addTokenToSS(
-                  secureStoreKey, state.otpDetails!.data!.first.token!);
+                  secureStoreKey, state.otpDetails!.data.first.token);
 
-              log("Token : ${state.otpDetails!.data!.first.token}");
+              log("Token : ${state.otpDetails!.data.first.token}");
               
               Toast.showToast(
                 context: context,
@@ -206,33 +208,33 @@ class _OtpScreenState extends State<OtpScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-            //     TextButtonWidget(
-            //       name: "Reset password",
-            //       onPressed: _timerActive && otps.length == 6
-            //           ? () {
-            //               context.read<LoginBloc>().add(
-            //                     LoginEvent.varyfiyOtp(
-            //                       number: number,
-            //                       // otp: otp,
-            //                     ),
-            //                   );
-            //               if (otps.length == 6) {
-            // //                     Navigator.push(
-            // //   context,
-            // //   MaterialPageRoute(builder: (context) => ResetPassword()),
-            // // );
-            //               } else {
-            //                 deleteFromSS(secureStoreKey);
-            //                 Toast.showToast(
-            //                   color: Colors.red,
-            //                   context: context,
-            //                   message: "Incorrect otp",
-            //                 );
-            //               }
-            //             }
-            //           : null,
-            //       isLoading: state.isLoading,
-            //     )
+                TextButtonWidget(
+                  name: "Reset password",
+                  onPressed: _timerActive && otps.length == 6
+                      ? () {
+                          context.read<ForgotBloc>().add(
+                                ForgotEvent.forgot(
+                                  email: number,
+                                  // otp: otp,
+                                ),
+                              );
+                          if (otps.length == 6) {
+            //                     Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => ResetPassword()),
+            // );
+                          } else {
+                            deleteFromSS(secureStoreKey);
+                            Toast.showToast(
+                              color: Colors.red,
+                              context: context,
+                              message: "Incorrect otp",
+                            );
+                          }
+                        }
+                      : null,
+                  isLoading: state.isLoading,
+                )
               ],
             );
           },

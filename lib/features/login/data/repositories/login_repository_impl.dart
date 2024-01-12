@@ -27,7 +27,7 @@ class LoginRepoImpliment implements LoginRepository {
         data: {
           'cred': usernameOrMobile,
           "device_token": fcm,
-          "Password": password,
+          "password": password,
           "device_type": "Android"
         },
       );

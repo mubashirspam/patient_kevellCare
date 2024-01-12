@@ -16,9 +16,7 @@ import '../models/profile_model.dart';
 class GetProfileRepoImpliment implements GetProfileRepository {
   @override
   Future<Either<MainFailure, ProfileModel>> getProfile(
-    {
-      required int id
-    }
+    
   ) async {
     try {
      
@@ -33,7 +31,7 @@ class GetProfileRepoImpliment implements GetProfileRepository {
 
 
       final response =
-          await Dio().get("https://2a0c-183-82-33-226.ngrok.io/patients/api/patientinfoby?id=1000");
+          await Dio().get("https://10aa-183-82-33-226.ngrok-free.app/v2/patients/patientinfoby");
 
       log("Response ${response.data}");
     

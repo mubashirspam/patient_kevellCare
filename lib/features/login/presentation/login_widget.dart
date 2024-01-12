@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/widgets/input_field/input_field_widget.dart';
 import 'package:kevell_care/pages/initialize/initialize.dart';
-import 'package:kevell_care/pages/otp/otp_screen.dart';
 
 import '../../../configure/value/constant.dart';
 import '../../../configure/value/secure_storage.dart';
@@ -93,36 +92,28 @@ class _LoginWidgetState extends State<LoginWidget> {
                 }
 
                 if (!state.isLoading && state.hasValidationData) {
-                  if (state.loginDetails!.data.first.id != null) {
-                    addToSS(mailsecureStoreKey,
-                        state.otpDetails!.data!.first.name??"");
+                  addToSS(mailsecureStoreKey,
+                      state.otpDetails!.data.first.name??"");
 
-                    addToSS(drIdsecureStoreKey,
-                        state.otpDetails!.data!.first.id!.toString());
+                  addToSS(drIdsecureStoreKey,
+                      state.otpDetails!.data.first.id.toString());
 
-                    addTokenToSS(
-                        secureStoreKey, state.otpDetails!.data!.first.token!);
+                  addTokenToSS(
+                      secureStoreKey, state.otpDetails!.data.first.token);
 
-                    log("Token : ${state.otpDetails!.data!.first.token}");
-                    Toast.showToast(
-                      context: context,
-                      message: 'You are successfully Logined 🥳',
-                    );
+                  log("Token : ${state.otpDetails!.data.first.token}");
+                  Toast.showToast(
+                    context: context,
+                    message: 'You are successfully Logined 🥳',
+                  );
 
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => const Initialize(),
-                      ),
-                      (route) => false,
-                    );
-                  } else {
-                    Toast.showToast(
-                      context: context,
-                      message: "Otp Generted successfully",
-                    );
-                    Navigator.of(context).pushNamed(OtpScreen.routeName);
-                  }
-                }
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => const Initialize(),
+                    ),
+                    (route) => false,
+                  );
+                                }
               },
               builder: (context, state) {
                 return TextButtonWidget(

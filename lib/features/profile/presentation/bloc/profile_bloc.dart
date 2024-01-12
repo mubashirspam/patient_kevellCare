@@ -35,7 +35,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
 
       final response = await getprofileRepository.getProfile(
-        id: event.id
+       
       );
 
       final result = response.fold(

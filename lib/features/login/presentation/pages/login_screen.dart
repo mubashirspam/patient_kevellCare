@@ -51,20 +51,27 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 40),
                       const LoginWidget(),
-                      TextButton(onPressed: (){
-
-                          Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) =>   ForgotScreen()
-                      ),
-                      );
-                      }, child: const Text("Forgot password"))
+                      Center(
+                        child: TextButton(onPressed: (){
+                        
+                            Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) =>   ForgotScreen()
+                        ),
+                        );
+                        }, child:  Text("Forgot password",
+                         style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                            color: context.theme.backround),)),
+                      )
                     ],
                   ),
                 ),
               ),
             ),
             Padding(
+              
               padding: const EdgeInsets.only(left: 20, top: 20),
               child: GestureDetector(
                 onTap: () =>

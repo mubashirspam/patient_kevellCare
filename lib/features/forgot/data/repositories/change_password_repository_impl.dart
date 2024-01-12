@@ -3,28 +3,28 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kevell_care/features/forgot/data/model/forgot_,model.dart';
-import 'package:kevell_care/features/forgot/domain/repositories/forgot_repository.dart';
+import 'package:kevell_care/features/forgot/data/model/change_password_model.dart';
+import 'package:kevell_care/features/forgot/domain/repositories/change_pass_repository.dart';
 import '../../../../configure/api/endpoints.dart';
 import '../../../../configure/value/constant.dart';
 import '../../../../configure/value/secure_storage.dart';
 import '../../../../core/failiar/failiur_model.dart';
 import '../../../../core/failiar/main_failures.dart';
 
-@LazySingleton(as: ForgotRepository)
- class ForgotRepoImpliment implements ForgotRepository {
+@LazySingleton(as: ChangePasswordRepository)
+ class ChangePassRepoImpliment implements ChangePasswordRepository {
   @override
-  Future<Either<MainFailure, ForgotModel>> forgot({
+  Future<Either<MainFailure, ChangePasswordModel>> change({
     required String email,
   }) async {
     try {
       final fcm = await getTokenFromSS(fcmStoreKey);
 
       final response = await Dio().post(
-        ApiEndPoints.forgot,
+        ApiEndPoints.verifyotp,
         data: {
           'cred': email,
-          "device_token": fcm,
+          // "device_token": fcm,
           "device_type": "Android"
         },
       );
@@ -32,7 +32,7 @@ import '../../../../core/failiar/main_failures.dart';
       switch (response.statusCode) {
         case 200:
         case 201:
-          final result = ForgotModel.fromJson(response.data);
+          final result = ChangePasswordModel.fromJson(response.data);
           log(result.toJson().toString());
           return Right(result);
         case 400:
