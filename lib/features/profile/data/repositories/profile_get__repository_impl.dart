@@ -24,9 +24,12 @@ class GetProfileRepoImpliment implements GetProfileRepository {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
+      
+      log("token $token");
 
-      final response = await Dio().get(
-          "https://2a0c-183-82-33-226.ngrok.io/patients/api/patientinfoby?id=1000");
+
+      final response =
+          await Dio().get("https://2a0c-183-82-33-226.ngrok.io/patients/api/patientinfoby?id=1000");
 
       log("Response ${response.data}");
 

@@ -163,11 +163,11 @@ class _OtpScreenState extends State<OtpScreen> {
             }
           },
           builder: (context, state) {
-       final number = state.loginDetails?.data?.first.mobile ?? '';
-final otp = state.loginDetails?.data?.first.otp ?? '000000';
+       final number = state.loginDetails?.data?.first.mobileNo ?? '';
+// final otp = state.loginDetails?.data?.first.otp ?? '000000';
 
-            log("number : $number");
-            log("OTP : $otp");
+            // log("number : $number");
+            // log("OTP : $otp");
 
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -207,33 +207,33 @@ final otp = state.loginDetails?.data?.first.otp ?? '000000';
                   ),
                 ),
                 const SizedBox(height: 20),
-                TextButtonWidget(
-                  name: "Reset password",
-                  onPressed: _timerActive && otps.length == 6
-                      ? () {
-                          context.read<LoginBloc>().add(
-                                LoginEvent.varyfiyOtp(
-                                  number: number,
-                                  otp: otp,
-                                ),
-                              );
-                          if (otps.length == 6) {
-            //                     Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => ResetPassword()),
-            // );
-                          } else {
-                            deleteFromSS(secureStoreKey);
-                            Toast.showToast(
-                              color: Colors.red,
-                              context: context,
-                              message: "Incorrect otp",
-                            );
-                          }
-                        }
-                      : null,
-                  isLoading: state.isLoading,
-                )
+            //     TextButtonWidget(
+            //       name: "Reset password",
+            //       onPressed: _timerActive && otps.length == 6
+            //           ? () {
+            //               context.read<LoginBloc>().add(
+            //                     LoginEvent.varyfiyOtp(
+            //                       number: number,
+            //                       // otp: otp,
+            //                     ),
+            //                   );
+            //               if (otps.length == 6) {
+            // //                     Navigator.push(
+            // //   context,
+            // //   MaterialPageRoute(builder: (context) => ResetPassword()),
+            // // );
+            //               } else {
+            //                 deleteFromSS(secureStoreKey);
+            //                 Toast.showToast(
+            //                   color: Colors.red,
+            //                   context: context,
+            //                   message: "Incorrect otp",
+            //                 );
+            //               }
+            //             }
+            //           : null,
+            //       isLoading: state.isLoading,
+            //     )
               ],
             );
           },
