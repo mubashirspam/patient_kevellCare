@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
+      context.read<ProfileBloc>().add(const ProfileEvent.getProfile(id: 1000));
     });
     List<Widget> list = const [
       MyProfile(),
@@ -51,10 +51,10 @@ class ProfileScreen extends StatelessWidget {
                 }
                 if (state.hasData) {
                   return ProfileNameCard(
-                    email: state.result!.data!.first.name ?? "",
-                    imageUrl:state.result!.data!.first.profileImagelink??""
+                    email: state.result!.data.emailId ?? "",
+                    imageUrl:state.result!.data.profileImagelink??""
                         ,
-                    name: state.result!.data!.first.username ?? "",
+                    name: state.result!.data.name ?? "",
                   );
                 }
 
@@ -79,7 +79,6 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            // const Logout()
           ],
         ),
       ),

@@ -10,5 +10,13 @@ abstract class UpdateProfileRepository {
     required String dob,
     required String address,
     required String mobileNumber,
+      required String street,
+    required String city,
+    required String district,
+    required String zipcode,
+    required String state,
+        required String height,
+    required String weight
+
   });
 }

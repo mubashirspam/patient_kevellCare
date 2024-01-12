@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
 import '../../../core/helper/debouncer.dart';
-import '../../home/presentation/bloc/home_bloc.dart';
 
 class SearchField extends StatefulWidget {
   final double? margin;
@@ -75,7 +73,7 @@ class _SearchFieldState extends State<SearchField> {
       height: 55,
       // margin: EdgeInsets.symmetric(horizontal: widget.margin ?? 20),
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: TextField(
+      child: const TextField(
         decoration:
             InputDecoration(border: InputBorder.none, hintText: "Search.."),
       ),

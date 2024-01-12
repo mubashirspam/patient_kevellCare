@@ -45,7 +45,7 @@ dependencies:
   dotted_border: ^2.0.0+3
 
   firebase_core: ^2.16.0
-  firebase_messaging: ^14.6.8
+  # firebase_messaging: ^14.6.8
   isar: ^3.1.0
   isar_flutter_libs: ^3.1.0
   audioplayers: ^5.2.0

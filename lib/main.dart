@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:isar/isar.dart';
 import 'package:kevell_care/configure/value/secure_storage.dart';
@@ -14,7 +13,6 @@ import 'package:kevell_care/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:kevell_care/features/rating/presentation/bloc/rating_bloc.dart';
 import 'package:kevell_care/firebase_options.dart';
 import 'package:kevell_care/pages/initialize/bloc/initialize_bloc.dart';
-import 'package:kevell_care/pages/initialize/initialize.dart';
 import 'package:path_provider/path_provider.dart';
 import 'configure/route/routes.dart';
 import 'configure/value/constant.dart';
@@ -32,9 +30,13 @@ import 'features/chat/data/model/message_isar_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await PushNotification().initNoticatin();
+
+  // if (Platform.isAndroid) {
+  //   await Firebase.initializeApp(
+  //       options: DefaultFirebaseOptions.currentPlatform);
+  //   await PushNotification().initNoticatin();
+  // }
+
   await configureInjeactable();
   await getTokenFromSS(secureStoreKey).then((value) => log("Token : $value"));
 
@@ -74,8 +76,9 @@ class MyApp extends StatelessWidget {
         theme: lightTheme(),
         darkTheme: darkTheme(),
         themeMode: ThemeMode.light,
-        home: const Initialize(),
-        navigatorKey: navigatorKey,
+        initialRoute: "/dashboard",
+        // home: const Initialize(),
+        // navigatorKey: navigatorKey,
         routes: route,
       ),
     );

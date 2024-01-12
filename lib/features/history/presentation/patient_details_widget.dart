@@ -52,7 +52,7 @@ class PatientDetailsWidget extends StatelessWidget {
                     state.reportGeneraInfo!.data!.address ?? "No Adress"),
                 const SizedBox(height: 20),
                 richText(context, "Case history",
-                    "\n \nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sagittis pharetra suspendisse nisl, et interdum. Morbi fames et justo, mauris, et, scelerisque in aenean odio. Sed egestas quis pellentesque consectetur leo, proin est, pellentesque lorem. In facilisis suspendisse asellus integer varius lectus iaculis dignissim.  ")
+                    "\n \nThe clinical presentation of the disease has a wide-spectrum presentation which makes diagnosis difficult. The mild pulmonary illness may appear as a flu-like illness. The severe form includes chronic pulmonary manifestation, which may occur in the presence of underlying lung disease.")
               ],
             ),
           );

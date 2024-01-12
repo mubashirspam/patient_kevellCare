@@ -186,7 +186,7 @@ class _ChckoutPageState extends State<ChckoutPage> {
                             .copyWith(fontWeight: FontWeight.normal)),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(
@@ -205,7 +205,7 @@ class _ChckoutPageState extends State<ChckoutPage> {
                             .copyWith(fontWeight: FontWeight.normal)),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 Row(

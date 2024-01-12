@@ -4,14 +4,13 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-import 'package:kevell_care/features/login/presentation/otp_widget.dart';
+import 'package:kevell_care/features/forgot/presentation/pages/otp.dart';
 import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
 
 import '../../configure/value/constant.dart';
 import '../../configure/value/secure_storage.dart';
 import '../../core/helper/toast.dart';
 import '../../features/login/presentation/bloc/login_bloc.dart';
-import '../dashborad/presentation/widgets/bottom_navigation.dart';
 import '../initialize/initialize.dart';
 
 class OtpScreen extends StatefulWidget {
@@ -63,11 +62,11 @@ class _OtpScreenState extends State<OtpScreen> {
     }
   }
 
-  // List<String> otp = List.filled(4, '');
-  // final List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
-  // final List<TextEditingController> otpControllers =
-  //     List.generate(4, (index) => TextEditingController());
-  // int currentField = 0;
+  List<String> otp = List.filled(6, '');
+  final List<FocusNode> focusNodes = List.generate(6, (index) => FocusNode());
+  final List<TextEditingController> otpControllers =
+      List.generate(6, (index) => TextEditingController());
+  int currentField = 0;
 
   // @override
   // void initState() {
@@ -86,20 +85,20 @@ class _OtpScreenState extends State<OtpScreen> {
   //   super.dispose();
   // }
 
-  // void _onOtpChange(String value) {
-  //   if (value.length == 1 && currentField < 3) {
-  //     setState(() {
-  //       currentField++;
-  //       focusNodes[currentField].requestFocus();
-  //     });
-  //   } else if (value.isEmpty && currentField > 0) {
-  //     setState(() {
-  //       currentField--;
-  //       focusNodes[currentField].requestFocus();
-  //     });
-  //   }
-  //   otp[currentField] = value;
-  // }
+  void _onOtpChange(String value) {
+    if (value.length == 1 && currentField < 3) {
+      setState(() {
+        currentField++;
+        focusNodes[currentField].requestFocus();
+      });
+    } else if (value.isEmpty && currentField > 0) {
+      setState(() {
+        currentField--;
+        focusNodes[currentField].requestFocus();
+      });
+    }
+    otp[currentField] = value;
+  }
   @override
   void initState() {
     sendOTP();
@@ -164,8 +163,8 @@ class _OtpScreenState extends State<OtpScreen> {
             }
           },
           builder: (context, state) {
-            final number = state.loginDetails!.data!.first.mobile!;
-            final otp = state.loginDetails!.data!.first.otp ?? "000000";
+       final number = state.loginDetails?.data?.first.mobile ?? '';
+final otp = state.loginDetails?.data?.first.otp ?? '000000';
 
             log("number : $number");
             log("OTP : $otp");
@@ -209,8 +208,8 @@ class _OtpScreenState extends State<OtpScreen> {
                 ),
                 const SizedBox(height: 20),
                 TextButtonWidget(
-                  name: "Verify otp",
-                  onPressed: _timerActive && otps.length == 4
+                  name: "Reset password",
+                  onPressed: _timerActive && otps.length == 6
                       ? () {
                           context.read<LoginBloc>().add(
                                 LoginEvent.varyfiyOtp(
@@ -218,21 +217,19 @@ class _OtpScreenState extends State<OtpScreen> {
                                   otp: otp,
                                 ),
                               );
-                          // if (otps.length == 4) {
-                          //   Navigator.of(context).pushAndRemoveUntil(
-                          //     MaterialPageRoute(
-                          //       builder: (context) => const Initialize(),
-                          //     ),
-                          //     (route) => false,
-                          //   );
-                          // } else {
-                          //   // deleteFromSS(secureStoreKey);
-                          //   Toast.showToast(
-                          //     color: Colors.red,
-                          //     context: context,
-                          //     message: "Incorrect otp",
-                          //   );
-                          // }
+                          if (otps.length == 6) {
+            //                     Navigator.push(
+            //   context,
+            //   MaterialPageRoute(builder: (context) => ResetPassword()),
+            // );
+                          } else {
+                            deleteFromSS(secureStoreKey);
+                            Toast.showToast(
+                              color: Colors.red,
+                              context: context,
+                              message: "Incorrect otp",
+                            );
+                          }
                         }
                       : null,
                   isLoading: state.isLoading,

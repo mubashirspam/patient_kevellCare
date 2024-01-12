@@ -5,7 +5,6 @@ import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/rating/presentation/bloc/rating_bloc.dart';
 import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
 import 'package:kevell_care/features/widgets/input_field/input_field_widget.dart';
-
 class EditRating extends StatefulWidget {
   final String? review;
   final String? rating;
@@ -20,23 +19,19 @@ final String? doctorName;
   State<EditRating> createState() => _EditRatingState();
 }
 class _EditRatingState extends State<EditRating> {
-
     late TextEditingController reviewController;
     late TextEditingController ratingController;
-
   bool isButtonDisabled = true;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void validateForm() {
     if (_formKey.currentState!.validate()) {
-      // Form is valid
       setState(() {
-        isButtonDisabled = false; // Enable the button
+        isButtonDisabled = false; 
       });
     } else {
-      // Form is invalid
       setState(() {
-        isButtonDisabled = true; // Disable the button
+        isButtonDisabled = true; 
       });
     }
   }
@@ -62,6 +57,7 @@ class _EditRatingState extends State<EditRating> {
               Toast.showToast(
                   context: context, message: "Error occured try again later");
             }
+
             if (!state.isUpdateLoading && state.hasData) {
               Toast.showToast(
                   context: context, message: "Profile Updated Successfully");

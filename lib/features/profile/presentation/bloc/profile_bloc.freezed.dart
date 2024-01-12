@@ -18,9 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getProfile,
+    required TResult Function(int id) getProfile,
     required TResult Function(
-            String name, String dob, String address, String mobileNumber)
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
     required TResult Function(File image) uplaodImage,
@@ -28,9 +38,19 @@ mixin _$ProfileEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getProfile,
+    TResult? Function(int id)? getProfile,
     TResult? Function(
-            String name, String dob, String address, String mobileNumber)?
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
     TResult? Function(File image)? uplaodImage,
@@ -38,9 +58,19 @@ mixin _$ProfileEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getProfile,
+    TResult Function(int id)? getProfile,
     TResult Function(
-            String name, String dob, String address, String mobileNumber)?
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,
     TResult Function(File image)? uplaodImage,
@@ -97,6 +127,8 @@ abstract class _$$GetProfileImplCopyWith<$Res> {
   factory _$$GetProfileImplCopyWith(
           _$GetProfileImpl value, $Res Function(_$GetProfileImpl) then) =
       __$$GetProfileImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int id});
 }
 
 /// @nodoc
@@ -106,66 +138,120 @@ class __$$GetProfileImplCopyWithImpl<$Res>
   __$$GetProfileImplCopyWithImpl(
       _$GetProfileImpl _value, $Res Function(_$GetProfileImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$GetProfileImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetProfileImpl implements _GetProfile {
-  const _$GetProfileImpl();
+  const _$GetProfileImpl({required this.id});
+
+  @override
+  final int id;
 
   @override
   String toString() {
-    return 'ProfileEvent.getProfile()';
+    return 'ProfileEvent.getProfile(id: $id)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetProfileImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$GetProfileImpl &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetProfileImplCopyWith<_$GetProfileImpl> get copyWith =>
+      __$$GetProfileImplCopyWithImpl<_$GetProfileImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getProfile,
+    required TResult Function(int id) getProfile,
     required TResult Function(
-            String name, String dob, String address, String mobileNumber)
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
     required TResult Function(File image) uplaodImage,
   }) {
-    return getProfile();
+    return getProfile(id);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getProfile,
+    TResult? Function(int id)? getProfile,
     TResult? Function(
-            String name, String dob, String address, String mobileNumber)?
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
     TResult? Function(File image)? uplaodImage,
   }) {
-    return getProfile?.call();
+    return getProfile?.call(id);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getProfile,
+    TResult Function(int id)? getProfile,
     TResult Function(
-            String name, String dob, String address, String mobileNumber)?
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,
     TResult Function(File image)? uplaodImage,
     required TResult orElse(),
   }) {
     if (getProfile != null) {
-      return getProfile();
+      return getProfile(id);
     }
     return orElse();
   }
@@ -209,7 +295,12 @@ class _$GetProfileImpl implements _GetProfile {
 }
 
 abstract class _GetProfile implements ProfileEvent {
-  const factory _GetProfile() = _$GetProfileImpl;
+  const factory _GetProfile({required final int id}) = _$GetProfileImpl;
+
+  int get id;
+  @JsonKey(ignore: true)
+  _$$GetProfileImplCopyWith<_$GetProfileImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -218,7 +309,18 @@ abstract class _$$UpdateProfileImplCopyWith<$Res> {
           _$UpdateProfileImpl value, $Res Function(_$UpdateProfileImpl) then) =
       __$$UpdateProfileImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String name, String dob, String address, String mobileNumber});
+  $Res call(
+      {String name,
+      String dob,
+      String address,
+      String mobileNumber,
+      String height,
+      String weight,
+      String street,
+      String city,
+      String district,
+      String zipcode,
+      String state});
 }
 
 /// @nodoc
@@ -236,6 +338,13 @@ class __$$UpdateProfileImplCopyWithImpl<$Res>
     Object? dob = null,
     Object? address = null,
     Object? mobileNumber = null,
+    Object? height = null,
+    Object? weight = null,
+    Object? street = null,
+    Object? city = null,
+    Object? district = null,
+    Object? zipcode = null,
+    Object? state = null,
   }) {
     return _then(_$UpdateProfileImpl(
       name: null == name
@@ -254,6 +363,34 @@ class __$$UpdateProfileImplCopyWithImpl<$Res>
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      height: null == height
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as String,
+      weight: null == weight
+          ? _value.weight
+          : weight // ignore: cast_nullable_to_non_nullable
+              as String,
+      street: null == street
+          ? _value.street
+          : street // ignore: cast_nullable_to_non_nullable
+              as String,
+      city: null == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String,
+      district: null == district
+          ? _value.district
+          : district // ignore: cast_nullable_to_non_nullable
+              as String,
+      zipcode: null == zipcode
+          ? _value.zipcode
+          : zipcode // ignore: cast_nullable_to_non_nullable
+              as String,
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -265,7 +402,14 @@ class _$UpdateProfileImpl implements _UpdateProfile {
       {required this.name,
       required this.dob,
       required this.address,
-      required this.mobileNumber});
+      required this.mobileNumber,
+      required this.height,
+      required this.weight,
+      required this.street,
+      required this.city,
+      required this.district,
+      required this.zipcode,
+      required this.state});
 
   @override
   final String name;
@@ -275,10 +419,24 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   final String address;
   @override
   final String mobileNumber;
+  @override
+  final String height;
+  @override
+  final String weight;
+  @override
+  final String street;
+  @override
+  final String city;
+  @override
+  final String district;
+  @override
+  final String zipcode;
+  @override
+  final String state;
 
   @override
   String toString() {
-    return 'ProfileEvent.updateProfile(name: $name, dob: $dob, address: $address, mobileNumber: $mobileNumber)';
+    return 'ProfileEvent.updateProfile(name: $name, dob: $dob, address: $address, mobileNumber: $mobileNumber, height: $height, weight: $weight, street: $street, city: $city, district: $district, zipcode: $zipcode, state: $state)';
   }
 
   @override
@@ -290,12 +448,20 @@ class _$UpdateProfileImpl implements _UpdateProfile {
             (identical(other.dob, dob) || other.dob == dob) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.mobileNumber, mobileNumber) ||
-                other.mobileNumber == mobileNumber));
+                other.mobileNumber == mobileNumber) &&
+            (identical(other.height, height) || other.height == height) &&
+            (identical(other.weight, weight) || other.weight == weight) &&
+            (identical(other.street, street) || other.street == street) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.district, district) ||
+                other.district == district) &&
+            (identical(other.zipcode, zipcode) || other.zipcode == zipcode) &&
+            (identical(other.state, state) || other.state == state));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, dob, address, mobileNumber);
+  int get hashCode => Object.hash(runtimeType, name, dob, address, mobileNumber,
+      height, weight, street, city, district, zipcode, state);
 
   @JsonKey(ignore: true)
   @override
@@ -306,42 +472,75 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getProfile,
+    required TResult Function(int id) getProfile,
     required TResult Function(
-            String name, String dob, String address, String mobileNumber)
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
     required TResult Function(File image) uplaodImage,
   }) {
-    return updateProfile(name, dob, address, mobileNumber);
+    return updateProfile(name, dob, address, mobileNumber, height, weight,
+        street, city, district, zipcode, state);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getProfile,
+    TResult? Function(int id)? getProfile,
     TResult? Function(
-            String name, String dob, String address, String mobileNumber)?
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
     TResult? Function(File image)? uplaodImage,
   }) {
-    return updateProfile?.call(name, dob, address, mobileNumber);
+    return updateProfile?.call(name, dob, address, mobileNumber, height, weight,
+        street, city, district, zipcode, state);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getProfile,
+    TResult Function(int id)? getProfile,
     TResult Function(
-            String name, String dob, String address, String mobileNumber)?
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,
     TResult Function(File image)? uplaodImage,
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
-      return updateProfile(name, dob, address, mobileNumber);
+      return updateProfile(name, dob, address, mobileNumber, height, weight,
+          street, city, district, zipcode, state);
     }
     return orElse();
   }
@@ -389,12 +588,26 @@ abstract class _UpdateProfile implements ProfileEvent {
       {required final String name,
       required final String dob,
       required final String address,
-      required final String mobileNumber}) = _$UpdateProfileImpl;
+      required final String mobileNumber,
+      required final String height,
+      required final String weight,
+      required final String street,
+      required final String city,
+      required final String district,
+      required final String zipcode,
+      required final String state}) = _$UpdateProfileImpl;
 
   String get name;
   String get dob;
   String get address;
   String get mobileNumber;
+  String get height;
+  String get weight;
+  String get street;
+  String get city;
+  String get district;
+  String get zipcode;
+  String get state;
   @JsonKey(ignore: true)
   _$$UpdateProfileImplCopyWith<_$UpdateProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -464,9 +677,19 @@ class _$PickDateImpl implements _PickDate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getProfile,
+    required TResult Function(int id) getProfile,
     required TResult Function(
-            String name, String dob, String address, String mobileNumber)
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
     required TResult Function(File image) uplaodImage,
@@ -477,9 +700,19 @@ class _$PickDateImpl implements _PickDate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getProfile,
+    TResult? Function(int id)? getProfile,
     TResult? Function(
-            String name, String dob, String address, String mobileNumber)?
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
     TResult? Function(File image)? uplaodImage,
@@ -490,9 +723,19 @@ class _$PickDateImpl implements _PickDate {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getProfile,
+    TResult Function(int id)? getProfile,
     TResult Function(
-            String name, String dob, String address, String mobileNumber)?
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,
     TResult Function(File image)? uplaodImage,
@@ -615,9 +858,19 @@ class _$UplaodImageImpl implements _UplaodImage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getProfile,
+    required TResult Function(int id) getProfile,
     required TResult Function(
-            String name, String dob, String address, String mobileNumber)
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
     required TResult Function(File image) uplaodImage,
@@ -628,9 +881,19 @@ class _$UplaodImageImpl implements _UplaodImage {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getProfile,
+    TResult? Function(int id)? getProfile,
     TResult? Function(
-            String name, String dob, String address, String mobileNumber)?
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
     TResult? Function(File image)? uplaodImage,
@@ -641,9 +904,19 @@ class _$UplaodImageImpl implements _UplaodImage {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getProfile,
+    TResult Function(int id)? getProfile,
     TResult Function(
-            String name, String dob, String address, String mobileNumber)?
+            String name,
+            String dob,
+            String address,
+            String mobileNumber,
+            String height,
+            String weight,
+            String street,
+            String city,
+            String district,
+            String zipcode,
+            String state)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,
     TResult Function(File image)? uplaodImage,

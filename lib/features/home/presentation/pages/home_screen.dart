@@ -5,14 +5,11 @@ import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/home/presentation/book_appoiment_category_list.dart';
 import 'package:kevell_care/features/home/presentation/pages/all_doctor_screen.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-import '../../../../configure/value/constant.dart';
-import '../../../../configure/value/secure_storage.dart';
 import '../available_doctor_list.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/home_search.dart';
 import '../self_check_card.dart';
 import '../self_checkup_video_card.dart';
-import '../../../widgets/avatar/active_avatar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -73,11 +70,11 @@ class HomeScreen extends StatelessWidget {
                     "Top Doctor",
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => AllDoctorScreen()));
+                          builder: (context) => const AllDoctorScreen()));
                     },
                     child: Text(
                       "See More",

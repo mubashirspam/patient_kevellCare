@@ -34,7 +34,7 @@ class TimeSlotWidget extends StatelessWidget {
                     "Choose a token",
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                 ],
               ),
               const SizedBox(height: 15),
@@ -127,7 +127,7 @@ class TimeSlotWidget extends StatelessWidget {
                                   color: statusEntry.value),
                             ),
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text(
                             statusEntry.key,
                             style: Theme.of(context)

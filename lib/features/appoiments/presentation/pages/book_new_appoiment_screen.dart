@@ -214,7 +214,7 @@ class BookNewAppointmentScreen extends StatelessWidget {
                         listener: (context, appointmentState) {
                           if (appointmentState.createData) {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => ChckoutPage(),
+                              builder: (context) => const ChckoutPage(),
                             ));
                           }
                           if (appointmentState.isError) {
@@ -228,7 +228,7 @@ class BookNewAppointmentScreen extends StatelessWidget {
                             name: "Book an Appointment",
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => ChckoutPage(),
+                                builder: (context) => const ChckoutPage(),
                               ));
 
                               // if (homeState.endTime != null) {
@@ -266,7 +266,7 @@ class BookNewAppointmentScreen extends StatelessWidget {
                   );
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               )
             ],

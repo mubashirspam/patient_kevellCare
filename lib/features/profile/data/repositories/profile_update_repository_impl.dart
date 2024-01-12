@@ -19,16 +19,23 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
     required String dob,
     required String address,
     required String mobileNumber,
+    required String height,
+    required String weight,
+    required String street,
+    required String city,
+    required String district,
+    required String zipcode,
+    required String state,
+    // // required String gender,
+    // // required String 
   }) async {
     try {
       final token = await getTokenFromSS(secureStoreKey);
       final id = await getTokenFromSS(drIdsecureStoreKey);
-
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
-
       final response = await Dio(BaseOptions()).put(
         ApiEndPoints.updateProfile,
         options: Options(headers: headers,  validateStatus: (_) => true,),
@@ -37,7 +44,16 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
           "name": name,
           "mobile": mobileNumber,
           "dob": dob,
-          "Address": address
+          "address": 
+          {
+              "street": street,
+              "city": city,
+              "district": district,
+              "zipcode": zipcode,
+              "state": state,
+          },
+          "height":height,
+          "weight":weight,
         },
       );
 

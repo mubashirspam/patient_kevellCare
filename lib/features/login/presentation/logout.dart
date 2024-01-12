@@ -5,7 +5,6 @@ import 'package:kevell_care/pages/dashborad/presentation/widgets/bottom_navigati
 import '../../../configure/assets_manage/icons.dart';
 import '../../../configure/value/constant.dart';
 import '../../../configure/value/secure_storage.dart';
-import '../../../pages/dashborad/presentation/widgets/bottom_navigation.dart';
 import '../../../pages/initialize/initialize.dart';
 
 class Logout extends StatelessWidget {

@@ -9,72 +9,145 @@ ProfileModel profileModelFromJson(String str) => ProfileModel.fromJson(json.deco
 String profileModelToJson(ProfileModel data) => json.encode(data.toJson());
 
 class ProfileModel {
-    bool? status;
-    int? responsecode;
-    String? message;
-    List<Datum>? data;
+    bool status;
+    int responsecode;
+    String message;
+    Data data;
 
     ProfileModel({
-        this.status,
-        this.responsecode,
-        this.message,
-        this.data,
+        required this.status,
+        required this.responsecode,
+        required this.message,
+        required this.data,
     });
 
     factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
         status: json["status"],
         responsecode: json["responsecode"],
         message: json["message"],
-        data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+        data: Data.fromJson(json["data"]),
     );
 
     Map<String, dynamic> toJson() => {
         "status": status,
         "responsecode": responsecode,
         "message": message,
-        "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
+        "data": data.toJson(),
     };
 }
 
-class Datum {
-    int? id;
-    String? username;
-    String? mobile;
-    String? address;
-    DateTime? dob;
-    String? name;
-    String? profileImagelink;
-    
+class Data {
+    int id;
+    String name;
+    String emailId;
+    String mobileNo;
+    String dob;
+    Address address;
+    String profileImagelink;
+    String kitId;
+    String bloodGroup;
+    String deviceId;
+    String diseases;
+    DateTime createdAt;
+    DateTime updatedAt;
+    String previousRecord;
+    String height;
+    String gender;
+    String weight;
+    bool termsApproved;
 
-    Datum({
-        this.id,
-        this.username,
-        this.mobile,
-        this.address,
-        this.dob,
-        this.name,
-        this.profileImagelink,
-         
+    Data({
+        required this.id,
+        required this.name,
+        required this.emailId,
+        required this.mobileNo,
+        required this.dob,
+        required this.address,
+        required this.profileImagelink,
+        required this.kitId,
+        required this.bloodGroup,
+        required this.deviceId,
+        required this.diseases,
+        required this.createdAt,
+        required this.updatedAt,
+        required this.previousRecord,
+        required this.height,
+        required this.gender,
+        required this.weight,
+        required this.termsApproved,
     });
 
-    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["_id"],
-        username: json["Username"],
-        mobile: json["mobile"],
-        address: json["Address"],
-        dob: json["dob"] == null ? null : DateTime.parse(json["dob"]),
         name: json["name"],
-        profileImagelink: json["ProfileImagelink"],
-          
+        emailId: json["email_id"],
+        mobileNo: json["mobile_no"],
+        dob: json["dob"],
+        address: Address.fromJson(json["address"]),
+        profileImagelink: json["profile_imagelink"],
+        kitId: json["kit_id"],
+        bloodGroup: json["bloodGroup"],
+        deviceId: json["device_id"],
+        diseases: json["diseases"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        previousRecord: json["previous_record"],
+        height: json["height"],
+        gender: json["gender"],
+        weight: json["weight"],
+        termsApproved: json["terms_approved"],
     );
 
     Map<String, dynamic> toJson() => {
         "_id": id,
-        "Username": username,
-        "mobile": mobile,
-        "Address": address,
-        "dob": dob?.toIso8601String(),
         "name": name,
-        "ProfileImagelink": profileImagelink,
+        "email_id": emailId,
+        "mobile_no": mobileNo,
+        "dob": dob,
+        "address": address.toJson(),
+        "profile_imagelink": profileImagelink,
+        "kit_id": kitId,
+        "bloodGroup": bloodGroup,
+        "device_id": deviceId,
+        "diseases": diseases,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "previous_record": previousRecord,
+        "height": height,
+        "gender": gender,
+        "weight": weight,
+        "terms_approved": termsApproved,
+    };
+}
+
+class Address {
+    String street;
+    String city;
+    String district;
+    String state;
+    int zipcode;
+
+    Address({
+        required this.street,
+        required this.city,
+        required this.district,
+        required this.state,
+        required this.zipcode,
+    });
+
+    factory Address.fromJson(Map<String, dynamic> json) => Address(
+        street: json["street"],
+        city: json["city"],
+        district: json["district"],
+        state: json["state"],
+        zipcode: json["zipcode"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "street": street,
+        "city": city,
+        "district": district,
+        "state": state,
+        "zipcode": zipcode,
     };
 }

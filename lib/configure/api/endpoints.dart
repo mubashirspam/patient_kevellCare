@@ -3,23 +3,26 @@ import '../value/constant.dart';
 class ApiEndPoints {
   static const login = "$baseUrl/register/api/patientLogin";
 
-  static const register = "$baseUrl/register/api/patientRegister";
+  static const register = "$baseUrl/patients/api/register";
 
-  static const otp = "$baseUrl/register/api/VerifyPhoneOtp";
+static const otp = "$baseUrl/register/api/VerifyPhoneOtp";
 
-  static const getprofile = "$baseUrl/register/api/GetPatientinfoBy";
+static const forgot = "$baseUrl/v2/patients/forgot-password";
 
-  static const updateProfile = "$baseUrl/register/api/patientprofileUpdate";
+  static const getprofile = 
+  // "$baseUrl/patients/api/patientinfoby";
+  "https://2a0c-183-82-33-226.ngrok.io/patients/api/patientinfoby";
+
+  static const updateProfile = "$baseUrl/patients/api/profile";
 
   static const getHomeAvailableDoctor =
       "$baseUrl/doctor/api/getalldoctorSchedule";
 
-// appoinment...
+// appoinment..
 
   static const createAppoinments = "$baseUrl/appointment/api/BookAppointment";
 
-  static const fetchAppoinment =
-      "$baseUrl/appointment/api/upcomingpasthistorypatient";
+  static const fetchAppoinment ="$baseUrl/appointment/api/upcomingpasthistorypatient";
 
   static const updateAppoinment = "$baseUrl/appointment/api/updateAppoinment";
 
@@ -40,9 +43,8 @@ class ApiEndPoints {
 
       //rating
       
-  static const String createRating =
-      "https://kevelldigital.com/register/api/create/review";
-       static const String getrating ="https://kevelldigital.com/register/api/getrating?patient_id=1003";
+  static const String createRating = "https://kevelldigital.com/register/api/create/review";
+       static const String getrating = "https://kevelldigital.com/register/api/getrating?patient_id=1003";
               static const String editRating ="https://kevelldigital.com/register/api/edit/review";
 
 }

@@ -24,7 +24,8 @@ class BookAppointmentCard extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: const Color(0xffBDE5FF)),
+                color: Colors.white,
+                  ),
               height: 80,
               child: Center(
                 child: Text(

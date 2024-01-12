@@ -17,7 +17,7 @@ class ActiveAvatar extends StatelessWidget {
         Container(
           height:radius?? 63,
           width: radius??63,
-          decoration: ShapeDecoration(
+          decoration: const ShapeDecoration(
             shape: CircleBorder(),
           ),
           child: ClipRRect(

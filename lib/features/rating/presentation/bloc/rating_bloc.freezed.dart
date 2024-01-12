@@ -21,7 +21,8 @@ mixin _$RatingEvent {
     required TResult Function(int rating) buildRating,
     required TResult Function() getRating,
     required TResult Function(String rating, String reveiw) editRating,
-    required TResult Function(String rating, String reveiw) createrating,
+    required TResult Function(CreateRatingPayload createRatingPayload)
+        createrating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +30,7 @@ mixin _$RatingEvent {
     TResult? Function(int rating)? buildRating,
     TResult? Function()? getRating,
     TResult? Function(String rating, String reveiw)? editRating,
-    TResult? Function(String rating, String reveiw)? createrating,
+    TResult? Function(CreateRatingPayload createRatingPayload)? createrating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +38,7 @@ mixin _$RatingEvent {
     TResult Function(int rating)? buildRating,
     TResult Function()? getRating,
     TResult Function(String rating, String reveiw)? editRating,
-    TResult Function(String rating, String reveiw)? createrating,
+    TResult Function(CreateRatingPayload createRatingPayload)? createrating,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -153,7 +154,8 @@ class _$BuildRatingImpl implements _BuildRating {
     required TResult Function(int rating) buildRating,
     required TResult Function() getRating,
     required TResult Function(String rating, String reveiw) editRating,
-    required TResult Function(String rating, String reveiw) createrating,
+    required TResult Function(CreateRatingPayload createRatingPayload)
+        createrating,
   }) {
     return buildRating(rating);
   }
@@ -164,7 +166,7 @@ class _$BuildRatingImpl implements _BuildRating {
     TResult? Function(int rating)? buildRating,
     TResult? Function()? getRating,
     TResult? Function(String rating, String reveiw)? editRating,
-    TResult? Function(String rating, String reveiw)? createrating,
+    TResult? Function(CreateRatingPayload createRatingPayload)? createrating,
   }) {
     return buildRating?.call(rating);
   }
@@ -175,7 +177,7 @@ class _$BuildRatingImpl implements _BuildRating {
     TResult Function(int rating)? buildRating,
     TResult Function()? getRating,
     TResult Function(String rating, String reveiw)? editRating,
-    TResult Function(String rating, String reveiw)? createrating,
+    TResult Function(CreateRatingPayload createRatingPayload)? createrating,
     required TResult orElse(),
   }) {
     if (buildRating != null) {
@@ -272,7 +274,8 @@ class _$GetRatingImpl implements _GetRating {
     required TResult Function(int rating) buildRating,
     required TResult Function() getRating,
     required TResult Function(String rating, String reveiw) editRating,
-    required TResult Function(String rating, String reveiw) createrating,
+    required TResult Function(CreateRatingPayload createRatingPayload)
+        createrating,
   }) {
     return getRating();
   }
@@ -283,7 +286,7 @@ class _$GetRatingImpl implements _GetRating {
     TResult? Function(int rating)? buildRating,
     TResult? Function()? getRating,
     TResult? Function(String rating, String reveiw)? editRating,
-    TResult? Function(String rating, String reveiw)? createrating,
+    TResult? Function(CreateRatingPayload createRatingPayload)? createrating,
   }) {
     return getRating?.call();
   }
@@ -294,7 +297,7 @@ class _$GetRatingImpl implements _GetRating {
     TResult Function(int rating)? buildRating,
     TResult Function()? getRating,
     TResult Function(String rating, String reveiw)? editRating,
-    TResult Function(String rating, String reveiw)? createrating,
+    TResult Function(CreateRatingPayload createRatingPayload)? createrating,
     required TResult orElse(),
   }) {
     if (getRating != null) {
@@ -420,7 +423,8 @@ class _$EditRatingImpl implements _EditRating {
     required TResult Function(int rating) buildRating,
     required TResult Function() getRating,
     required TResult Function(String rating, String reveiw) editRating,
-    required TResult Function(String rating, String reveiw) createrating,
+    required TResult Function(CreateRatingPayload createRatingPayload)
+        createrating,
   }) {
     return editRating(rating, reveiw);
   }
@@ -431,7 +435,7 @@ class _$EditRatingImpl implements _EditRating {
     TResult? Function(int rating)? buildRating,
     TResult? Function()? getRating,
     TResult? Function(String rating, String reveiw)? editRating,
-    TResult? Function(String rating, String reveiw)? createrating,
+    TResult? Function(CreateRatingPayload createRatingPayload)? createrating,
   }) {
     return editRating?.call(rating, reveiw);
   }
@@ -442,7 +446,7 @@ class _$EditRatingImpl implements _EditRating {
     TResult Function(int rating)? buildRating,
     TResult Function()? getRating,
     TResult Function(String rating, String reveiw)? editRating,
-    TResult Function(String rating, String reveiw)? createrating,
+    TResult Function(CreateRatingPayload createRatingPayload)? createrating,
     required TResult orElse(),
   }) {
     if (editRating != null) {
@@ -507,7 +511,7 @@ abstract class _$$CreateRatingImplCopyWith<$Res> {
           _$CreateRatingImpl value, $Res Function(_$CreateRatingImpl) then) =
       __$$CreateRatingImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String rating, String reveiw});
+  $Res call({CreateRatingPayload createRatingPayload});
 }
 
 /// @nodoc
@@ -521,18 +525,13 @@ class __$$CreateRatingImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? rating = null,
-    Object? reveiw = null,
+    Object? createRatingPayload = null,
   }) {
     return _then(_$CreateRatingImpl(
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as String,
-      reveiw: null == reveiw
-          ? _value.reveiw
-          : reveiw // ignore: cast_nullable_to_non_nullable
-              as String,
+      createRatingPayload: null == createRatingPayload
+          ? _value.createRatingPayload
+          : createRatingPayload // ignore: cast_nullable_to_non_nullable
+              as CreateRatingPayload,
     ));
   }
 }
@@ -540,16 +539,14 @@ class __$$CreateRatingImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$CreateRatingImpl implements _CreateRating {
-  const _$CreateRatingImpl({required this.rating, required this.reveiw});
+  const _$CreateRatingImpl({required this.createRatingPayload});
 
   @override
-  final String rating;
-  @override
-  final String reveiw;
+  final CreateRatingPayload createRatingPayload;
 
   @override
   String toString() {
-    return 'RatingEvent.createrating(rating: $rating, reveiw: $reveiw)';
+    return 'RatingEvent.createrating(createRatingPayload: $createRatingPayload)';
   }
 
   @override
@@ -557,12 +554,12 @@ class _$CreateRatingImpl implements _CreateRating {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateRatingImpl &&
-            (identical(other.rating, rating) || other.rating == rating) &&
-            (identical(other.reveiw, reveiw) || other.reveiw == reveiw));
+            (identical(other.createRatingPayload, createRatingPayload) ||
+                other.createRatingPayload == createRatingPayload));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, rating, reveiw);
+  int get hashCode => Object.hash(runtimeType, createRatingPayload);
 
   @JsonKey(ignore: true)
   @override
@@ -576,9 +573,10 @@ class _$CreateRatingImpl implements _CreateRating {
     required TResult Function(int rating) buildRating,
     required TResult Function() getRating,
     required TResult Function(String rating, String reveiw) editRating,
-    required TResult Function(String rating, String reveiw) createrating,
+    required TResult Function(CreateRatingPayload createRatingPayload)
+        createrating,
   }) {
-    return createrating(rating, reveiw);
+    return createrating(createRatingPayload);
   }
 
   @override
@@ -587,9 +585,9 @@ class _$CreateRatingImpl implements _CreateRating {
     TResult? Function(int rating)? buildRating,
     TResult? Function()? getRating,
     TResult? Function(String rating, String reveiw)? editRating,
-    TResult? Function(String rating, String reveiw)? createrating,
+    TResult? Function(CreateRatingPayload createRatingPayload)? createrating,
   }) {
-    return createrating?.call(rating, reveiw);
+    return createrating?.call(createRatingPayload);
   }
 
   @override
@@ -598,11 +596,11 @@ class _$CreateRatingImpl implements _CreateRating {
     TResult Function(int rating)? buildRating,
     TResult Function()? getRating,
     TResult Function(String rating, String reveiw)? editRating,
-    TResult Function(String rating, String reveiw)? createrating,
+    TResult Function(CreateRatingPayload createRatingPayload)? createrating,
     required TResult orElse(),
   }) {
     if (createrating != null) {
-      return createrating(rating, reveiw);
+      return createrating(createRatingPayload);
     }
     return orElse();
   }
@@ -647,11 +645,10 @@ class _$CreateRatingImpl implements _CreateRating {
 
 abstract class _CreateRating implements RatingEvent {
   const factory _CreateRating(
-      {required final String rating,
-      required final String reveiw}) = _$CreateRatingImpl;
+          {required final CreateRatingPayload createRatingPayload}) =
+      _$CreateRatingImpl;
 
-  String get rating;
-  String get reveiw;
+  CreateRatingPayload get createRatingPayload;
   @JsonKey(ignore: true)
   _$$CreateRatingImplCopyWith<_$CreateRatingImpl> get copyWith =>
       throw _privateConstructorUsedError;

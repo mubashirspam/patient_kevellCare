@@ -35,7 +35,7 @@ class MedicalServices extends StatelessWidget {
                   medicalServices[index].image,
                   color: context.theme.backround,
                   errorBuilder: (context, error, stackTrace) =>
-                      Icon(Icons.image_not_supported_outlined),
+                      const Icon(Icons.image_not_supported_outlined),
                 ),
               ),
               const SizedBox(height: 5),
