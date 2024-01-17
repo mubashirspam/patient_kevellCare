@@ -1,16 +1,17 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kevell_care/core/helper/date.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
-import '../../../core/helper/date.dart';
-import '../../../core/helper/date_formater.dart';
-import '../../../core/helper/date_validater.dart';
-import '../../../core/helper/toast.dart';
-import '../../../core/helper/validater.dart';
-import '../../widgets/buttons/text_button_widget.dart';
-import '../../widgets/calender/calnder.dart';
-import '../../widgets/input_field/input_field_widget.dart';
-import 'bloc/profile_bloc.dart';
+import '../../../../core/helper/date_formater.dart';
+import '../../../../core/helper/date_validater.dart';
+import '../../../../core/helper/toast.dart';
+import '../../../../core/helper/validater.dart';
+import '../../../widgets/buttons/text_button_widget.dart';
+import '../../../widgets/calender/calnder.dart';
+import '../../../widgets/input_field/input_field_widget.dart';
+import '../bloc/profile_bloc.dart';
 
 class EditMyProfile extends StatefulWidget {
   final String? name;
@@ -39,27 +40,12 @@ class _EditMyProfileState extends State<EditMyProfile> {
   late TextEditingController dobController;
   late TextEditingController addressController;
 
-  bool isButtonDisabled = true;
-
-  void validateForm() {
-    if (_formKey.currentState!.validate()) {
-
-      setState(() {
-        isButtonDisabled = false; // Enable the button
-      });
-    } else {
-      // Form is invalid
-      setState(() {
-        isButtonDisabled = true; // Disable the button
-      });
-    }
-  }
-
   @override
   void initState() {
     nameController = TextEditingController(text: widget.name);
-    dobController = TextEditingController(
-        text: dateFormatToddmmyyyy(DateTime.parse(widget.dob.toString())));
+    // dobController = TextEditingController(
+    //     text: dateFormatToddmmyyyy(DateTime.parse(widget.dob.toString())));
+    dobController = TextEditingController();
     mobileController = TextEditingController(text: widget.mobile);
     addressController = TextEditingController(text: widget.adress);
     super.initState();
@@ -91,6 +77,8 @@ class _EditMyProfileState extends State<EditMyProfile> {
             return Form(
               key: _formKey,
               child: SingleChildScrollView(
+                keyboardDismissBehavior:
+                    ScrollViewKeyboardDismissBehavior.onDrag,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,9 +93,6 @@ class _EditMyProfileState extends State<EditMyProfile> {
                     const SizedBox(height: 10),
                     TextFieldWidget(
                       textEditingController: nameController,
-                      onChanged: (value) {
-                        validateForm();
-                      },
                       hintText: "Name",
                       keyboardType: TextInputType.name,
                       validate: (name) {
@@ -123,9 +108,6 @@ class _EditMyProfileState extends State<EditMyProfile> {
                     const SizedBox(height: 10),
                     TextFieldWidget(
                       textEditingController: mobileController,
-                      onChanged: (value) {
-                        validateForm();
-                      },
                       hintText: "+91",
                       keyboardType: TextInputType.number,
                       validate: (number) {
@@ -143,6 +125,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
                     const SizedBox(height: 10),
                     TextFieldWidget(
                       textEditingController: dobController,
+                    
                       hintText: "12/12/2023",
                       inputFormatters: [DateInputFormatter()],
                       validate: DateValidator.validateDate,
@@ -168,6 +151,8 @@ class _EditMyProfileState extends State<EditMyProfile> {
                                   dobController = TextEditingController(
                                       text: dateFormatToddmmyyyy(
                                           onDateTimeChanged));
+
+                                  // Navigator.of(context).pop();
                                 },
                               );
                             },
@@ -183,14 +168,9 @@ class _EditMyProfileState extends State<EditMyProfile> {
                     Text("Address",
                         style: Theme.of(context).textTheme.titleLarge),
                     const SizedBox(height: 10),
-                    
                     TextFieldWidget(
                       textEditingController: addressController,
-                      onChanged: (value) {
-                        validateForm();
-                      },
-                      labelText: "Street",
-                      hintText: "Street",
+                      hintText: "Adress",
                       keyboardType: TextInputType.visiblePassword,
                       validate: (value) {
                         if (value == null || value.isEmpty) {
@@ -199,131 +179,6 @@ class _EditMyProfileState extends State<EditMyProfile> {
                         return null; // Return null if validation succeeds
                       },
                     ),
-                    const SizedBox(height: 10,),
-                    Row(
-                      children: [
-                        Expanded(child: 
-                         TextFieldWidget(
-                      textEditingController: addressController,
-                      onChanged: (value) {
-                        validateForm();
-                      },
-                      labelText: "City",
-                      hintText: "City",
-                      keyboardType: TextInputType.visiblePassword,
-                      validate: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter a adress";
-                        }
-                        return null; // Return null if validation succeeds
-                      },
-                    ),
-                    ),
-                    const SizedBox(width: 10,),
-                    Expanded(
-                      child: TextFieldWidget(
-                      textEditingController: addressController,
-                      onChanged: (value) {
-                        validateForm();
-                      },
-                      labelText: "State",
-                      hintText: "State",
-                      keyboardType: TextInputType.visiblePassword,
-                      validate: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter a adress";
-                        }
-                        return null; // Return null if validation succeeds
-                      },
-                    ),)
-                      ],
-                    ),
-                    const SizedBox(height: 10,),
-                     Row(
-                      children: [
-                        Expanded(child: 
-                         TextFieldWidget(
-                      textEditingController: addressController,
-                      onChanged: (value) {
-                        validateForm();
-                      },
-                      labelText: "District",
-                      hintText: "District",
-                      keyboardType: TextInputType.visiblePassword,
-                      validate: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter a adress";
-                        }
-                        return null; // Return null if validation succeeds
-                      },
-                    ),
-                    ),
-                    const SizedBox(width: 10,),
-                    Expanded(
-                      child: TextFieldWidget(
-                      textEditingController: addressController,
-                      onChanged: (value) {
-                        validateForm();
-                      },
-                      labelText: "Zipcode",
-                      hintText: "Zipcode",
-                      keyboardType: TextInputType.visiblePassword,
-                      validate: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter a adress";
-                        }
-                        return null; // Return null if validation succeeds
-                      },
-                    ),)
-                      ],
-                    ),
-                    const SizedBox(height: 10,),
-                    Text("Other Details",
-                        style: Theme.of(context).textTheme.titleLarge),
-                    const SizedBox(height: 10),
-                    
-                    const SizedBox(height: 10,),
-                     Row(
-                      children: [
-                        Expanded(child: 
-                         TextFieldWidget(
-                      textEditingController: addressController,
-                      onChanged: (value) {
-                        validateForm();
-                      },
-                      labelText: "Height",
-                      hintText: "Height",
-                      keyboardType: TextInputType.visiblePassword,
-                      validate: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter a adress";
-                        }
-                        return null; // Return null if validation succeeds
-                      },
-                    ),
-                    ),
-                    const SizedBox(width: 10,),
-                    Expanded(
-                      child: TextFieldWidget(
-                      textEditingController: addressController,
-                      onChanged: (value) {
-                        validateForm();
-                      },
-                      labelText: "Weight",
-                      hintText: "Weight",
-                      keyboardType: TextInputType.visiblePassword,
-                      validate: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter a adress";
-                        }
-                        return null; // Return null if validation succeeds
-                      },
-                    ),)
-                      ],
-                    ),
-
-
-
                     const SizedBox(height: 20),
                     SizedBox(
                       child: Row(
@@ -342,29 +197,15 @@ class _EditMyProfileState extends State<EditMyProfile> {
                           const SizedBox(width: 10),
                           Expanded(
                             child: TextButtonWidget(
-                              onPressed: isButtonDisabled
-                                  ? null
-                                  : () {
-                                    
-                                      context.read<ProfileBloc>().add(
-                                            ProfileEvent.updateProfile(
-                                              address:
-                                                  addressController.value.text,
-                                              dob: dateFormatToYYYYMMdd(
-                                                  state.date),
-                                              mobileNumber:
-                                                  mobileController.text,
-                                              name: nameController.value.text,
-                                              height: '', 
-                                              street: '', 
-                                              weight: '', 
-                                              district: '', 
-                                              city: '', 
-                                              zipcode: '', 
-                                              state: '',
-                                            ),
-                                          );
-                                    },
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  // context.read<ProfileBloc>().add(
+                                  //       ProfileEvent.updateProfile(
+                                  //         profileData:Profile()
+                                  //       ),
+                                  //     );
+                                }
+                              },
                               name: "Update",
                               isLoading: state.isUpdateLoading,
                             ),

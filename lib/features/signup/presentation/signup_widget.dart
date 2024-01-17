@@ -174,12 +174,11 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     if (_formKey.currentState!.validate()) {
                       context.read<SignupBloc>().add(
                             SignupEvent.signup(
-                                payload: model.Data(
-                              name: nameController.text,
-                              password: passwordController.value.text.trim(),
-                              mobile: mobileController.value.text.trim(),
-                              emailid: emailController.value.text.trim(),
-                            ).toRegsterJson()),
+                              name: nameController.value.text, 
+                              mobileNo: mobileController.value.text, 
+                              password: passwordController.value.text, 
+                              email: emailController.value.text
+                                ),
                           );
                     }
                   },

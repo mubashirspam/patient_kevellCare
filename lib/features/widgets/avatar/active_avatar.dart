@@ -5,28 +5,29 @@ import '../../../configure/color/maian_color.dart';
 
 class ActiveAvatar extends StatelessWidget {
   final double? radius;
-    final double? imgRadius;
+  final double? imgRadius;
   final bool? isActive;
   final String? imageUrl;
-  const ActiveAvatar({super.key, this.radius, this.isActive, this.imageUrl, this.imgRadius});
+  const ActiveAvatar(
+      {super.key, this.radius, this.isActive, this.imageUrl, this.imgRadius});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-          height:radius?? 63,
-          width: radius??63,
+          height: radius ?? 63,
+          width: radius ?? 63,
           decoration: const ShapeDecoration(
             shape: CircleBorder(),
           ),
           child: ClipRRect(
-              borderRadius: BorderRadius.circular(imgRadius??30),
+              borderRadius: BorderRadius.circular(imgRadius ?? 30),
               child: Image.network(
                 imageUrl ?? "",
                 errorBuilder: (context, error, stackTrace) =>
                     const Icon(Icons.image_not_supported_outlined),
-                fit: BoxFit.fitWidth,
+                fit: BoxFit.fill,
               )),
         ),
         isActive ?? true

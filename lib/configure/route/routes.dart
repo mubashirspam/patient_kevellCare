@@ -6,7 +6,6 @@ import '../../features/appoiments/presentation/pages/book_new_appoiment_screen.d
 import '../../features/chat/presentation/pages/chating_screen.dart';
 import '../../features/home/data/models/available_doctor_model.dart';
 import '../../features/login/presentation/pages/login_screen.dart';
-import '../../pages/profile/presenation/my_profile_screen.dart';
 import '../../features/report/presentation/pages/report_scree.dart';
 import '../../pages/signup_screen/presentation/signup_screen.dart';
 
@@ -15,7 +14,7 @@ final Map<String, Widget Function(BuildContext)> route = {
   LoginScreen.routeName: (ctx) => const LoginScreen(),
   SignupScreen.routeName: (ctx) => const SignupScreen(),
   Dashboard.routeName: (ctx) => const Dashboard(),
-  MyProfileScreen.routeName: (ctx) => const MyProfileScreen(),
+  // MyProfileScreen.routeName: (ctx) => const MyProfileScreen(),
   BookNewAppointmentScreen.routeName: (ctx) => BookNewAppointmentScreen(
       doctorData: ModalRoute.of(ctx)!.settings.arguments as HomeAvailableDoctorModelDatum),
   ChatingScreen.routeName: (ctx) => ChatingScreen(

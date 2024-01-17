@@ -24,6 +24,7 @@ import 'features/signup/bloc/signup_bloc.dart';
 
 import 'features/chat/data/model/chat_isar_model.dart';
 import 'features/chat/data/model/message_isar_model.dart';
+import 'pages/initialize/initialize.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,8 +75,8 @@ class MyApp extends StatelessWidget {
         theme: lightTheme(),
         darkTheme: darkTheme(),
         themeMode: ThemeMode.light,
-        initialRoute: "/dashboard",
-        // home: const Initialize(),
+        // initialRoute: "/dashboard",
+        home: const Initialize(),
         // navigatorKey: navigatorKey,
         routes: route,
       ),

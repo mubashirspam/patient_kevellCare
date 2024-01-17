@@ -11,7 +11,6 @@ import '../../../configure/value/constant.dart';
 import '../../../configure/value/secure_storage.dart';
 import '../../../core/helper/toast.dart';
 
-
 import '../../widgets/buttons/text_button_widget.dart';
 import 'bloc/login_bloc.dart';
 
@@ -33,8 +32,7 @@ class _LoginWidgetState extends State<LoginWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-
-     child: Form(
+      child: Form(
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +53,8 @@ class _LoginWidgetState extends State<LoginWidget> {
               validate: (userame) {
                 if (userame == null || userame.isEmpty) {
                   return "Please enter an email / mobile nember ";
-                }               return null; // Return null if validation succeeds
+                }
+                return null; // Return null if validation succeeds
               },
             ),
             const SizedBox(height: 20),
@@ -93,17 +92,19 @@ class _LoginWidgetState extends State<LoginWidget> {
                 }
 
                 if (!state.isLoading && state.hasValidationData) {
-                  if (state.loginDetails!.data.first.id != null) {
+                  if (state.loginDetails!.data!.first.token == null) {
+                    Navigator.of(context).pushNamed(OtpScreen.routeName);
+                  } else {
                     addToSS(mailsecureStoreKey,
-                        state.otpDetails!.data!.first.name??"");
+                        state.loginDetails!.data!.first.emailId!);
 
                     addToSS(drIdsecureStoreKey,
-                        state.otpDetails!.data!.first.id!.toString());
+                        state.loginDetails!.data!.first.id.toString());
 
                     addTokenToSS(
-                        secureStoreKey, state.otpDetails!.data!.first.token!);
+                        secureStoreKey, state.loginDetails!.data!.first.token!);
 
-                    log("Token : ${state.otpDetails!.data!.first.token}");
+                    log("Token : ${state.loginDetails!.data!.first.token}");
                     Toast.showToast(
                       context: context,
                       message: 'You are successfully Logined 🥳',
@@ -115,18 +116,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                       ),
                       (route) => false,
                     );
-                  } else {
-                    Toast.showToast(
-                      context: context,
-                      message: "Otp Generted successfully",
-                    );
-                    Navigator.of(context).pushNamed(OtpScreen.routeName);
                   }
                 }
               },
               builder: (context, state) {
                 return TextButtonWidget(
-                 bgColor: context.theme.backround,
+                  bgColor: context.theme.backround,
                   fgColor: context.theme.textPrimary,
                   name: "Login",
                   onPressed: () {
@@ -135,9 +130,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                             LoginEvent.login(
                                 usernameOrMobile: controller.value.text,
                                 password: passwordController.value.text),
-                        );
-                      }
-                    },
+                          );
+                    }
+                  },
                   isLoading: state.isLoading,
                 );
               },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
+
 class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   const ProfileAppBar({
     super.key,
@@ -10,6 +11,8 @@ class ProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading:const SizedBox(),
+      leadingWidth: 1,
       backgroundColor: context.theme.backround,
       centerTitle: false,
       title: Text(

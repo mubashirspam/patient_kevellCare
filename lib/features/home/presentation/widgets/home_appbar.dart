@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-import '../../../widgets/avatar/active_avatar.dart';
+
+import '../../../../configure/assets_manage/icons.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({
@@ -13,22 +15,18 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: context.theme.primary,
       centerTitle: false,
-      leadingWidth: 100,
-      leading: const Padding(
-        padding: EdgeInsets.only(left: 20),
-        child: ActiveAvatar(
-          radius: 30,
-          imageUrl: "",
-          isActive: false,
-        ),
-      ),
-      actions: const [
+      actions: [
         Padding(
-          padding: EdgeInsets.only(right: 20),
-          child: Icon(
-            Icons.menu,
-            color: Colors.white,
-            size: 30,
+          padding: const EdgeInsets.only(right: 15),
+          child: CircleAvatar(
+            backgroundColor: context.theme.secondary,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SvgPicture.asset(
+                AppIcons.notification,
+                width: 30,
+              ),
+            ),
           ),
         ),
       ],

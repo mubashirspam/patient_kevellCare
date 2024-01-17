@@ -23,7 +23,11 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           isError: false,
         ));
 
-        final response = await signupRepository.signup(payload: event.payload);
+        final response = await signupRepository.signup( 
+          mobileNo:event.mobileNo,
+         name: event.name, 
+         password: event.password, 
+         email: event.email);
 
         response.fold(
             (failure) => {

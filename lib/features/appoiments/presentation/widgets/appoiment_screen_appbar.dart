@@ -13,6 +13,9 @@ class AppoinmentAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: context.theme.primary,
       centerTitle: false,
+      leading: SizedBox(
+        width: 1,
+      ),
       title: Text(
         "Appointments",
         style: Theme.of(context).textTheme.headlineLarge,

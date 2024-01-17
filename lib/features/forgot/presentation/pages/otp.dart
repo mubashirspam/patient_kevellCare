@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kevell_care/core/helper/validater.dart';
 import 'package:kevell_care/features/widgets/input_field/input_field_widget.dart';
 
 class OtpFiled extends StatefulWidget {
@@ -18,29 +17,7 @@ class _OtpFiledState extends State<OtpFiled> {
 TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    String? validateEmailOrMobile(String? value) {
-      if (value == null || value.isEmpty) {
-        return 'Please enter an email address or mobile number';
-      } else if (regex.hasMatch(value)) {
-        if (!regexMobile.hasMatch(value)) {
-          return 'Please enter a valid mobile number or email';
-        }
-      } else if (regexMobile.hasMatch(value)) {
-        if (!regex.hasMatch(value)) {
-          return 'Please enter a valid email or mobile number';
-        }
-      } else {
-        return 'Please enter a valid email or mobile number';
-      }
-      return null; 
-    }
-  
-     void onSubmit() {
-      if (formKey.currentState != null && formKey.currentState!.validate()) {
-        print('Valid input! Ready to submit.');
-        
-      }
-    }
+    
 
    
   @override

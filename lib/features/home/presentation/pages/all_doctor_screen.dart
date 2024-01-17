@@ -6,6 +6,7 @@ import 'package:kevell_care/features/widgets/loading_widget.dart';
 import '../../../appoiments/presentation/pages/book_new_appoiment_screen.dart';
 import '../../../widgets/error_widget.dart';
 import '../../../widgets/input_field/search_field.dart';
+import '../../data/models/available_doctor_model.dart';
 import '../../data/models/medical_service_model.dart';
 import '../bloc/home_bloc.dart';
 import '../widgets/availabel_doctor_card.dart';
@@ -88,7 +89,26 @@ class AllDoctorScreen extends StatelessWidget {
                 ));
               }
             }
-            return const AppErrorWidget();
+            // return const AppErrorWidget();
+
+            return Expanded(
+                child: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: 2,
+              itemBuilder: (context, i) => InkWell(
+                onTap: () => Navigator.of(context).pushNamed(
+                    BookNewAppointmentScreen.routeName,
+                    arguments: state.availableDoctors!.data![i]),
+                child: AvailableDoctorCard(
+                  data: HomeAvailableDoctorModelDatum(
+                    profileImagelink: i == 0
+                        ? "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
+                        : "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww",
+                    username: i == 0 ? "Mubashir" : "Robin",
+                  ),
+                ),
+              ),
+            ));
           }),
         ],
       ),

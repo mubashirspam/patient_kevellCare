@@ -7,7 +7,9 @@ class ForgotState with _$ForgotState {
     required String message,
     required bool isError,
     required bool hasData,
+    required bool otpVarified,
     required ForgotModel? forgot,
+    required ChangePasswordModel? otp,
   }) = _ForgotState;
 
   factory ForgotState.initial() => const ForgotState(
@@ -16,5 +18,7 @@ class ForgotState with _$ForgotState {
         hasData: false,
         forgot: null,
         message: "",
+        otp: null,
+        otpVarified: false
       );
 }

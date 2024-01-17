@@ -15,7 +15,7 @@ import '../models/otp_model.dart';
 @LazySingleton(as: OtpRepository)
 class OtpRepoImpliment implements OtpRepository {
   @override
-  Future<Either<MainFailure, OtpModel>> varifyOtp({
+  Future<Either<MainFailure, VerifyOtpModel>> varifyOtp({
     required String otp,
     required String number,
   }) async {
@@ -28,7 +28,7 @@ class OtpRepoImpliment implements OtpRepository {
       };
 
       final response = await Dio(BaseOptions()).post(
-        ApiEndPoints.otp,
+        ApiEndPoints.verifyotp,
         // options: Options(headers: headers),
         data: {"otp": otp, "mobile": number},
       );
@@ -36,7 +36,7 @@ class OtpRepoImpliment implements OtpRepository {
       switch (response.statusCode) {
         case 200:
         case 201:
-          final result = OtpModel.fromJson(response.data);
+          final result = VerifyOtpModel.fromJson(response.data);
           log(result.toJson().toString());
           return Right(result);
         case 400:

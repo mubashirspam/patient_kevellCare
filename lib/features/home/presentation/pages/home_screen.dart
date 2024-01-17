@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Hi, Mubashir",
+                        Text("Hi,Robin",
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineMedium!

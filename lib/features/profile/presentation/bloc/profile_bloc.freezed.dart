@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int id) getProfile,
+    required TResult Function() getProfile,
     required TResult Function(
             String name,
             String dob,
@@ -38,7 +38,7 @@ mixin _$ProfileEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int id)? getProfile,
+    TResult? Function()? getProfile,
     TResult? Function(
             String name,
             String dob,
@@ -58,7 +58,7 @@ mixin _$ProfileEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int id)? getProfile,
+    TResult Function()? getProfile,
     TResult Function(
             String name,
             String dob,
@@ -127,8 +127,6 @@ abstract class _$$GetProfileImplCopyWith<$Res> {
   factory _$$GetProfileImplCopyWith(
           _$GetProfileImpl value, $Res Function(_$GetProfileImpl) then) =
       __$$GetProfileImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int id});
 }
 
 /// @nodoc
@@ -138,55 +136,31 @@ class __$$GetProfileImplCopyWithImpl<$Res>
   __$$GetProfileImplCopyWithImpl(
       _$GetProfileImpl _value, $Res Function(_$GetProfileImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-  }) {
-    return _then(_$GetProfileImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$GetProfileImpl implements _GetProfile {
-  const _$GetProfileImpl({required this.id});
-
-  @override
-  final int id;
+  const _$GetProfileImpl();
 
   @override
   String toString() {
-    return 'ProfileEvent.getProfile(id: $id)';
+    return 'ProfileEvent.getProfile()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GetProfileImpl &&
-            (identical(other.id, id) || other.id == id));
+        (other.runtimeType == runtimeType && other is _$GetProfileImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GetProfileImplCopyWith<_$GetProfileImpl> get copyWith =>
-      __$$GetProfileImplCopyWithImpl<_$GetProfileImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int id) getProfile,
+    required TResult Function() getProfile,
     required TResult Function(
             String name,
             String dob,
@@ -203,13 +177,13 @@ class _$GetProfileImpl implements _GetProfile {
     required TResult Function(DateTime date) pickDate,
     required TResult Function(File image) uplaodImage,
   }) {
-    return getProfile(id);
+    return getProfile();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int id)? getProfile,
+    TResult? Function()? getProfile,
     TResult? Function(
             String name,
             String dob,
@@ -226,13 +200,13 @@ class _$GetProfileImpl implements _GetProfile {
     TResult? Function(DateTime date)? pickDate,
     TResult? Function(File image)? uplaodImage,
   }) {
-    return getProfile?.call(id);
+    return getProfile?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int id)? getProfile,
+    TResult Function()? getProfile,
     TResult Function(
             String name,
             String dob,
@@ -251,7 +225,7 @@ class _$GetProfileImpl implements _GetProfile {
     required TResult orElse(),
   }) {
     if (getProfile != null) {
-      return getProfile(id);
+      return getProfile();
     }
     return orElse();
   }
@@ -295,12 +269,7 @@ class _$GetProfileImpl implements _GetProfile {
 }
 
 abstract class _GetProfile implements ProfileEvent {
-  const factory _GetProfile({required final int id}) = _$GetProfileImpl;
-
-  int get id;
-  @JsonKey(ignore: true)
-  _$$GetProfileImplCopyWith<_$GetProfileImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _GetProfile() = _$GetProfileImpl;
 }
 
 /// @nodoc
@@ -472,7 +441,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int id) getProfile,
+    required TResult Function() getProfile,
     required TResult Function(
             String name,
             String dob,
@@ -496,7 +465,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int id)? getProfile,
+    TResult? Function()? getProfile,
     TResult? Function(
             String name,
             String dob,
@@ -520,7 +489,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int id)? getProfile,
+    TResult Function()? getProfile,
     TResult Function(
             String name,
             String dob,
@@ -677,7 +646,7 @@ class _$PickDateImpl implements _PickDate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int id) getProfile,
+    required TResult Function() getProfile,
     required TResult Function(
             String name,
             String dob,
@@ -700,7 +669,7 @@ class _$PickDateImpl implements _PickDate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int id)? getProfile,
+    TResult? Function()? getProfile,
     TResult? Function(
             String name,
             String dob,
@@ -723,7 +692,7 @@ class _$PickDateImpl implements _PickDate {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int id)? getProfile,
+    TResult Function()? getProfile,
     TResult Function(
             String name,
             String dob,
@@ -858,7 +827,7 @@ class _$UplaodImageImpl implements _UplaodImage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int id) getProfile,
+    required TResult Function() getProfile,
     required TResult Function(
             String name,
             String dob,
@@ -881,7 +850,7 @@ class _$UplaodImageImpl implements _UplaodImage {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int id)? getProfile,
+    TResult? Function()? getProfile,
     TResult? Function(
             String name,
             String dob,
@@ -904,7 +873,7 @@ class _$UplaodImageImpl implements _UplaodImage {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int id)? getProfile,
+    TResult Function()? getProfile,
     TResult Function(
             String name,
             String dob,
