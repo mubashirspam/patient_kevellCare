@@ -1,17 +1,17 @@
-import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kevell_care/features/profile/data/models/profile_model.dart';
+import 'package:kevell_care/features/widgets/error_widget.dart';
+import 'package:kevell_care/features/widgets/loading_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../configure/value/constant.dart';
 import '../../../../core/helper/toast.dart';
 
-import '../../../widgets/error_widget.dart';
-import '../../data/models/profile_model.dart';
 import '../bloc/profile_bloc.dart';
 
 import '../upload_image.dart';
@@ -19,13 +19,14 @@ import 'edit_profile.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile-screen';
+
   const ProfileScreen({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
     });
 
@@ -36,13 +37,6 @@ class ProfileScreen extends StatelessWidget {
             context: context,
             message: "Please Login again ",
           );
-          // await deleteFromSS(secureStoreKey)
-          //     .then((value) => Navigator.of(context).pushAndRemoveUntil(
-          //           MaterialPageRoute(
-          //             builder: (context) => const Initialize(),
-          //           ),
-          //           (route) => false,
-          //         ));
         }
       },
       builder: (context, state) {
@@ -51,28 +45,31 @@ class ProfileScreen extends StatelessWidget {
             child: Shimmer.fromColors(
               baseColor: context.theme.secondary!,
               highlightColor: Colors.white,
-              child: ProfileBody(),
+              child: const LoadingWIdget(),
             ),
           );
         } else if (state.hasData) {
-          return ProfileBody();
+          return ProfileBody(profileData: state.result!);
         } else if (state.isError) {
-          // return const Center(child: AppErrorWidget());
-          return ProfileBody();
+          return const Center(child: AppErrorWidget());
         }
-        return Center(child: ProfileBody());
+        return const Center(child:Text("NO  data"));
       },
     );
   }
 }
 
 class ProfileBody extends StatelessWidget {
+  final ProfileModel profileData;
+
   const ProfileBody({
-    super.key,
-  });
+    Key? key,
+    required this.profileData,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -97,7 +94,7 @@ class ProfileBody extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 60, bottom: 5),
                           child: Text(
-                            "Mubahsir",
+                            profileData.data.name,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineMedium!
@@ -105,7 +102,7 @@ class ProfileBody extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "mubashir@gmail.com",
+                          profileData.data.emailId,
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium!
@@ -129,7 +126,7 @@ class ProfileBody extends StatelessWidget {
                           width: 100,
                           child: CachedNetworkImage(
                             fit: BoxFit.cover,
-                            imageUrl: imageUrlForDummy,
+                            imageUrl: profileData.data.profileImagelink,
                             placeholder: (context, url) => Shimmer.fromColors(
                                 baseColor: context.theme.secondary!,
                                 highlightColor: Colors.white,
@@ -144,7 +141,7 @@ class ProfileBody extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
+ Positioned(
                   top: 65,
                   right: 15,
                   child: InkWell(
@@ -162,11 +159,11 @@ class ProfileBody extends StatelessWidget {
                             .titleLarge!
                             .copyWith(color: context.theme.secondary),
                       )),
-                ),
-              ],
+                ),            
+                  ],
             ),
           ),
-          Padding(
+   Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -184,11 +181,15 @@ class ProfileBody extends StatelessWidget {
                         builder: (context) => Padding(
                           padding: EdgeInsets.only(
                               bottom: MediaQuery.of(context).viewInsets.bottom),
-                          child: const EditMyProfile(
-                            adress: "address",
-                            name: "name",
-                            mobile: "11",
-                            dob: "12/12/2023",
+                          child:  EditMyProfile(
+                            city: profileData.data.address.city,
+                             state: profileData.data.address.state,
+                              district: profileData.data.address.d,
+                               street: profileData.data.address.street,
+                                zipcode: profileData.data.address.zipCode,
+                            name: profileData.data.name,
+                            mobile:profileData.data.mobileNo,
+                            dob: profileData.data.dob.toString(),
                           ),
                         ),
                       );
@@ -202,7 +203,7 @@ class ProfileBody extends StatelessWidget {
                     )),
               ],
             ),
-          ),
+          ),    
           SizedBox(
             width: double.maxFinite,
             child: Card(
@@ -220,8 +221,8 @@ class ProfileBody extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: Text(
-                        "Username: ${mm["username"] ?? ""}",
-                        style: Theme.of(context).textTheme.headline6!.copyWith(
+                        "Username: ${profileData.data.name}",
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
                               color: Colors
                                   .white, // Replace with your desired color
                             ),
@@ -230,22 +231,14 @@ class ProfileBody extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: Text(
-                        "Email: ${mm["email"] ?? ""}",
+                        "Email: ${profileData.data.emailId}",
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: Text(
-                        "Mobile: ${mm["mobile"] ?? ""}",
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        "DOB: ${mm["DOB"] ?? ""}",
+                        "Mobile: ${profileData.data.mobileNo}",
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
@@ -253,14 +246,22 @@ class ProfileBody extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: Text(
-                        "Location: ${mm["location"] ?? ""}",
+                        "DOB:${profileData.data.dob}",
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Text(
+                        "Location: ${profileData.data.address}",
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: Text(
-                        "Registered ID: ${mm["registred_Id"] ?? ""}",
+                        "Registered ID: ${profileData.data.id}",
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
@@ -270,12 +271,11 @@ class ProfileBody extends StatelessWidget {
               ),
             ),
           ),
-        ],
+              ],
       ),
     );
   }
 }
-
 final mm = {
   "username": "MSD",
   "email": "MSD@gmail.com",

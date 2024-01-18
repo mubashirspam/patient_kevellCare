@@ -199,11 +199,11 @@ class _EditMyProfileState extends State<EditMyProfile> {
                             child: TextButtonWidget(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
-                                  // context.read<ProfileBloc>().add(
-                                  //       ProfileEvent.updateProfile(
-                                  //         profileData:Profile()
-                                  //       ),
-                                  //     );
+                                  context.read<ProfileBloc>().add(
+                                        ProfileEvent.updateProfile(
+                                          profileData:Profile()
+                                        ),
+                                      );
                                 }
                               },
                               name: "Update",

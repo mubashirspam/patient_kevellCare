@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kevell_care/configure/api/endpoints.dart';
 
 import '../../../../configure/value/constant.dart';
 import '../../../../configure/value/secure_storage.dart';
@@ -29,18 +30,18 @@ class GetProfileRepoImpliment implements GetProfileRepository {
       log("token $token");
 
 
-      final response =
-          await Dio().get("https://10aa-183-82-33-226.ngrok-free.app/v2/patients/patientinfoby");
+      // final response =
+      //     await Dio().get("https://573a-183-82-33-226.ngrok-free.app/v2/patients/patient-info");
 
-      log("Response ${response.data}");
+      // log("Response ${response.data}");
+  
+      // log(id.toString());
 
-      log(id.toString());
-
-      // final response = await Dio(BaseOptions()).get(
-      //   ApiEndPoints.getprofile,
-      //   options: Options(headers: headers,  validateStatus: (_) => true,),
-      //   data: {'id': int.parse("$id")},
-      // );
+      final response = await Dio(BaseOptions()).get(
+        V2.fetchProfile,
+        options: Options(headers: headers,  validateStatus: (_) => true,),
+        data: {'id': int.parse("$id")},
+      );
 
       switch (response.statusCode) {
         case 200:

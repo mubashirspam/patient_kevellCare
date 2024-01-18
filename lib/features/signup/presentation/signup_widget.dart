@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-import 'package:kevell_care/features/signup/data/models/signup_model.dart'
-    as model;
 
 import '../../../core/helper/toast.dart';
 import '../../../core/helper/validater.dart';

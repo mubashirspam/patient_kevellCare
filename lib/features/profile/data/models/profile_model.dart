@@ -55,6 +55,7 @@ class Data {
     String gender;
     String weight;
     bool termsApproved;
+    int v;
 
     Data({
         required this.id,
@@ -75,6 +76,7 @@ class Data {
         required this.gender,
         required this.weight,
         required this.termsApproved,
+        required this.v,
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -96,6 +98,7 @@ class Data {
         gender: json["gender"],
         weight: json["weight"],
         termsApproved: json["terms_approved"],
+        v: json["__v"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -117,6 +120,7 @@ class Data {
         "gender": gender,
         "weight": weight,
         "terms_approved": termsApproved,
+        "__v": v,
     };
 }
 

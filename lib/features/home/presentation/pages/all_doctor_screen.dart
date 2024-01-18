@@ -4,7 +4,6 @@ import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/widgets/loading_widget.dart';
 
 import '../../../appoiments/presentation/pages/book_new_appoiment_screen.dart';
-import '../../../widgets/error_widget.dart';
 import '../../../widgets/input_field/search_field.dart';
 import '../../data/models/available_doctor_model.dart';
 import '../../data/models/medical_service_model.dart';

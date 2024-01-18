@@ -27,7 +27,7 @@ class UploadImageRepoImpliment implements UploadImageRepository {
       FormData formData =
           FormData.fromMap({'_id': id, 'ProfileImagelink': img});
       final response = await Dio(BaseOptions()).put(
-        ApiEndPoints.updateProfile,
+        V2.updateProfile,
         data: formData,
       );
 

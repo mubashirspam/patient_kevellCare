@@ -7,6 +7,8 @@ import 'package:isar/isar.dart';
 import 'package:kevell_care/configure/value/secure_storage.dart';
 import 'package:kevell_care/core/them/dark_theme.dart';
 import 'package:kevell_care/core/them/light_theme.dart';
+import 'package:kevell_care/features/chat/data/model/chat_isar_model.dart';
+import 'package:kevell_care/features/chat/data/model/message_isar_model.dart';
 import 'package:kevell_care/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:kevell_care/features/forgot/presentation/bloc/forgot_bloc.dart';
 import 'package:kevell_care/features/rating/presentation/bloc/rating_bloc.dart';
@@ -22,8 +24,6 @@ import 'features/profile/presentation/bloc/profile_bloc.dart';
 import 'features/report/presentation/bloc/report_bloc.dart';
 import 'features/signup/bloc/signup_bloc.dart';
 
-import 'features/chat/data/model/chat_isar_model.dart';
-import 'features/chat/data/model/message_isar_model.dart';
 import 'pages/initialize/initialize.dart';
 
 Future<void> main() async {

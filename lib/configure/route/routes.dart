@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kevell_care/features/profile/presentation/pages/profile_screen.dart';
 import 'package:kevell_care/pages/dashborad/presentation/dashborad.dart';
 import 'package:kevell_care/pages/otp/otp_screen.dart';
 import 'package:kevell_care/pages/patien_checkup/presentation/patient_checkup_screen.dart';
@@ -14,7 +15,7 @@ final Map<String, Widget Function(BuildContext)> route = {
   LoginScreen.routeName: (ctx) => const LoginScreen(),
   SignupScreen.routeName: (ctx) => const SignupScreen(),
   Dashboard.routeName: (ctx) => const Dashboard(),
-  // MyProfileScreen.routeName: (ctx) => const MyProfileScreen(),
+  // ProfileScreen.routeName: (ctx) => const ProfileScreen(),
   BookNewAppointmentScreen.routeName: (ctx) => BookNewAppointmentScreen(
       doctorData: ModalRoute.of(ctx)!.settings.arguments as HomeAvailableDoctorModelDatum),
   ChatingScreen.routeName: (ctx) => ChatingScreen(
@@ -26,3 +27,5 @@ final Map<String, Widget Function(BuildContext)> route = {
       ReportScreen(appoimentId: ModalRoute.of(ctx)!.settings.arguments as int),
   OtpScreen.routeName: (ctx) => const OtpScreen(),
 };
+
+

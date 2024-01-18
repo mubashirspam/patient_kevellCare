@@ -26,14 +26,7 @@ class ForgotScreen extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-        title: const Text(
-          'Forgot Password ?',
-          style: TextStyle(
-            fontSize: 30,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+      
       ),
       body: Form(
         key: formKey,
@@ -45,6 +38,13 @@ class ForgotScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text("Forgot password ",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge!
+                              .copyWith(
+                                color: context.theme.backround,
+                              )),
                   const SizedBox(height: 50),
                   const Text(
                     "Provide your account's Email/mobile for which you \n  want to Reset your password",
@@ -64,6 +64,38 @@ class ForgotScreen extends StatelessWidget {
                     validate: (userame) {
                 if (userame == null || userame.isEmpty) {
                   return "Please enter an email / mobile nember ";
+                }               return null; // Return null if validation succeeds
+              },
+                  ),
+                   const SizedBox(height: 20),
+                   const Text(
+                    'New password',
+                  ),
+                  const SizedBox(height: 20),
+                  TextFieldWidget(
+                    textEditingController: textEditingController,
+                    onChanged: (value) {},
+                    hintText: 'Enter your Password',
+                    keyboardType: TextInputType.text,
+                    validate: (userame) {
+                if (userame == null || userame.isEmpty) {
+                  return "Please enter your Password";
+                }               return null; // Return null if validation succeeds
+              },
+                  ), 
+                   const SizedBox(height: 20),
+                   const Text(
+                    'Confirm Password',
+                  ),
+                  const SizedBox(height: 20),
+                  TextFieldWidget(
+                    textEditingController: textEditingController,
+                    onChanged: (value) {},
+                    hintText: 'Enter your password',
+                    keyboardType: TextInputType.text,
+                    validate: (userame) {
+                if (userame == null || userame.isEmpty) {
+                  return "Please enter your password ";
                 }               return null; // Return null if validation succeeds
               },
                   ),
