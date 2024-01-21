@@ -182,14 +182,17 @@ class ProfileBody extends StatelessWidget {
                           padding: EdgeInsets.only(
                               bottom: MediaQuery.of(context).viewInsets.bottom),
                           child:  EditMyProfile(
+                            height: profileData.data.height,
+                            weight: profileData.data.weight,
                             city: profileData.data.address.city,
                              state: profileData.data.address.state,
-                              district: profileData.data.address.d,
+                              // district: profileData.data.address.district
                                street: profileData.data.address.street,
                                 zipcode: profileData.data.address.zipCode,
                             name: profileData.data.name,
                             mobile:profileData.data.mobileNo,
                             dob: profileData.data.dob.toString(),
+                            
                           ),
                         ),
                       );
@@ -250,11 +253,46 @@ class ProfileBody extends StatelessWidget {
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
-
+                       Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Text(
+                        "Height: ${profileData.data.height}",
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),   Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Text(
+                        "Weight: ${profileData.data.weight}",
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                     Text("Address",
+                    style: Theme.of(context).textTheme.headlineMedium!),
                     Padding(
                       padding: const EdgeInsets.only(top: 15),
                       child: Text(
-                        "Location: ${profileData.data.address}",
+                        "Street: ${profileData.data.address.street}",
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                       Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Text(
+                        "City: ${profileData.data.address.city}",
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                       Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Text(
+                        "State: ${profileData.data.address.state}",
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ),
+                       Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Text(
+                        "Zipcode: ${profileData.data.address.zipCode}",
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
@@ -265,7 +303,6 @@ class ProfileBody extends StatelessWidget {
                         style: const TextStyle(color: Colors.white),
                       ),
                     ),
-                    // Add more Padding widgets for other details
                   ],
                 ),
               ),
