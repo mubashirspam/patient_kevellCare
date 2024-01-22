@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kevell_care/features/profile/presentation/pages/profile_screen.dart';
 import 'package:kevell_care/pages/dashborad/presentation/dashborad.dart';
 import 'package:kevell_care/pages/otp/otp_screen.dart';
 import 'package:kevell_care/pages/patien_checkup/presentation/patient_checkup_screen.dart';

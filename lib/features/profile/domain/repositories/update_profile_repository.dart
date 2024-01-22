@@ -8,11 +8,12 @@ abstract class UpdateProfileRepository {
   Future<Either<MainFailure, ProfileModel>> updateProfile({
     required String name,
     required String dob,
-    required String address,
     required String mobileNumber,
       required String street,
     required String city,
-    required String district,
+    required String email,
+        required String gender,
+
     required String zipcode,
     required String state,
         required String height,

@@ -21,7 +21,7 @@ import '../../../../core/failiar/main_failures.dart';
       final fcm = await getTokenFromSS(fcmStoreKey);
 
       final response = await Dio().post(
-        ApiEndPoints.forgot,
+        V2.forgot,
         data: {
           'cred': email,
           "device_token": fcm,

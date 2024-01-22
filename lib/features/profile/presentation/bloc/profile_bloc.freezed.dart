@@ -22,6 +22,8 @@ mixin _$ProfileEvent {
     required TResult Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -41,6 +43,8 @@ mixin _$ProfileEvent {
     TResult? Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -60,6 +64,8 @@ mixin _$ProfileEvent {
     TResult Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -161,6 +167,8 @@ class _$GetProfileImpl implements _GetProfile {
     required TResult Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -183,6 +191,8 @@ class _$GetProfileImpl implements _GetProfile {
     TResult? Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -205,6 +215,8 @@ class _$GetProfileImpl implements _GetProfile {
     TResult Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -275,6 +287,8 @@ abstract class _$$UpdateProfileImplCopyWith<$Res> {
   $Res call(
       {String name,
       String dob,
+      String email,
+      String gender,
       String mobileNumber,
       String height,
       String weight,
@@ -298,6 +312,8 @@ class __$$UpdateProfileImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? dob = null,
+    Object? email = null,
+    Object? gender = null,
     Object? mobileNumber = null,
     Object? height = null,
     Object? weight = null,
@@ -315,6 +331,14 @@ class __$$UpdateProfileImplCopyWithImpl<$Res>
       dob: null == dob
           ? _value.dob
           : dob // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      gender: null == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
               as String,
       mobileNumber: null == mobileNumber
           ? _value.mobileNumber
@@ -358,6 +382,8 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   const _$UpdateProfileImpl(
       {required this.name,
       required this.dob,
+      required this.email,
+      required this.gender,
       required this.mobileNumber,
       required this.height,
       required this.weight,
@@ -371,6 +397,10 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   final String name;
   @override
   final String dob;
+  @override
+  final String email;
+  @override
+  final String gender;
   @override
   final String mobileNumber;
   @override
@@ -390,7 +420,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
 
   @override
   String toString() {
-    return 'ProfileEvent.updateProfile(name: $name, dob: $dob, mobileNumber: $mobileNumber, height: $height, weight: $weight, street: $street, city: $city, district: $district, zipcode: $zipcode, state: $state)';
+    return 'ProfileEvent.updateProfile(name: $name, dob: $dob, email: $email, gender: $gender, mobileNumber: $mobileNumber, height: $height, weight: $weight, street: $street, city: $city, district: $district, zipcode: $zipcode, state: $state)';
   }
 
   @override
@@ -400,6 +430,8 @@ class _$UpdateProfileImpl implements _UpdateProfile {
             other is _$UpdateProfileImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.dob, dob) || other.dob == dob) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.mobileNumber, mobileNumber) ||
                 other.mobileNumber == mobileNumber) &&
             (identical(other.height, height) || other.height == height) &&
@@ -413,8 +445,8 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, dob, mobileNumber, height,
-      weight, street, city, district, zipcode, state);
+  int get hashCode => Object.hash(runtimeType, name, dob, email, gender,
+      mobileNumber, height, weight, street, city, district, zipcode, state);
 
   @JsonKey(ignore: true)
   @override
@@ -429,6 +461,8 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     required TResult Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -441,8 +475,8 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     required TResult Function(DateTime date) pickDate,
     required TResult Function(File image) uplaodImage,
   }) {
-    return updateProfile(name, dob, mobileNumber, height, weight, street, city,
-        district, zipcode, state);
+    return updateProfile(name, dob, email, gender, mobileNumber, height, weight,
+        street, city, district, zipcode, state);
   }
 
   @override
@@ -452,6 +486,8 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     TResult? Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -464,8 +500,8 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     TResult? Function(DateTime date)? pickDate,
     TResult? Function(File image)? uplaodImage,
   }) {
-    return updateProfile?.call(name, dob, mobileNumber, height, weight, street,
-        city, district, zipcode, state);
+    return updateProfile?.call(name, dob, email, gender, mobileNumber, height,
+        weight, street, city, district, zipcode, state);
   }
 
   @override
@@ -475,6 +511,8 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     TResult Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -489,8 +527,8 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
-      return updateProfile(name, dob, mobileNumber, height, weight, street,
-          city, district, zipcode, state);
+      return updateProfile(name, dob, email, gender, mobileNumber, height,
+          weight, street, city, district, zipcode, state);
     }
     return orElse();
   }
@@ -537,6 +575,8 @@ abstract class _UpdateProfile implements ProfileEvent {
   const factory _UpdateProfile(
       {required final String name,
       required final String dob,
+      required final String email,
+      required final String gender,
       required final String mobileNumber,
       required final String height,
       required final String weight,
@@ -548,6 +588,8 @@ abstract class _UpdateProfile implements ProfileEvent {
 
   String get name;
   String get dob;
+  String get email;
+  String get gender;
   String get mobileNumber;
   String get height;
   String get weight;
@@ -629,6 +671,8 @@ class _$PickDateImpl implements _PickDate {
     required TResult Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -651,6 +695,8 @@ class _$PickDateImpl implements _PickDate {
     TResult? Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -673,6 +719,8 @@ class _$PickDateImpl implements _PickDate {
     TResult Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -807,6 +855,8 @@ class _$UplaodImageImpl implements _UplaodImage {
     required TResult Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -829,6 +879,8 @@ class _$UplaodImageImpl implements _UplaodImage {
     TResult? Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,
@@ -851,6 +903,8 @@ class _$UplaodImageImpl implements _UplaodImage {
     TResult Function(
             String name,
             String dob,
+            String email,
+            String gender,
             String mobileNumber,
             String height,
             String weight,

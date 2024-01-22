@@ -10,6 +10,9 @@ import 'package:kevell_care/pages/otp/otp_screen.dart';
 class ForgotScreen extends StatelessWidget {
   static const routeName = '/forgot-screen';
    TextEditingController textEditingController = TextEditingController();
+      TextEditingController passwordController = TextEditingController();
+   TextEditingController confirmpassController = TextEditingController();
+
     GlobalKey<FormState> formKey = GlobalKey<FormState>();
    ForgotScreen({Key? key}) : super(key: key);
  bool patient = false;
@@ -73,7 +76,7 @@ class ForgotScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextFieldWidget(
-                    textEditingController: textEditingController,
+                    textEditingController: passwordController,
                     onChanged: (value) {},
                     hintText: 'Enter your Password',
                     keyboardType: TextInputType.text,
@@ -89,7 +92,7 @@ class ForgotScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   TextFieldWidget(
-                    textEditingController: textEditingController,
+                    textEditingController: confirmpassController,
                     onChanged: (value) {},
                     hintText: 'Enter your password',
                     keyboardType: TextInputType.text,

@@ -9,7 +9,6 @@ import 'package:kevell_care/features/widgets/error_widget.dart';
 import 'package:kevell_care/features/widgets/loading_widget.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../../configure/value/constant.dart';
 import '../../../../core/helper/toast.dart';
 
 import '../bloc/profile_bloc.dart';
@@ -26,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
     });
 
@@ -70,85 +69,131 @@ class ProfileBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: double.maxFinite,
-            height: 170,
-            child: Stack(
-              children: [
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: double.maxFinite,
-                    height: 120,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: context.theme.primary,
-                    ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 60, bottom: 5),
-                          child: Text(
-                            profileData.data.name,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              width: double.maxFinite,
+              height: 170,
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      width: double.maxFinite,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: context.theme.primary,
+                      ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 60, bottom: 5),
+                            child: Text(
+                              profileData.data.name,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineMedium!
+                                  .copyWith(color: context.theme.backround),
+                            ),
+                          ),
+                          Text(
+                            profileData.data.emailId,
                             style: Theme.of(context)
                                 .textTheme
-                                .headlineMedium!
+                                .titleMedium!
                                 .copyWith(color: context.theme.backround),
                           ),
-                        ),
-                        Text(
-                          profileData.data.emailId,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium!
-                              .copyWith(color: context.theme.backround),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundColor: context.theme.secondary,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: SizedBox(
-                          height: 100,
-                          width: 100,
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl: profileData.data.profileImagelink,
-                            placeholder: (context, url) => Shimmer.fromColors(
-                                baseColor: context.theme.secondary!,
-                                highlightColor: Colors.white,
-                                child: CircleAvatar(
-                                  backgroundColor: context.theme.secondary,
-                                )),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.image_not_supported_rounded),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundColor: context.theme.secondary,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: SizedBox(
+                            height: 100,
+                            width: 100,
+                            child: CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl: profileData.data.profileImagelink,
+                              placeholder: (context, url) => Shimmer.fromColors(
+                                  baseColor: context.theme.secondary!,
+                                  highlightColor: Colors.white,
+                                  child: CircleAvatar(
+                                    backgroundColor: context.theme.secondary,
+                                  )),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.image_not_supported_rounded),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
- Positioned(
-                  top: 65,
-                  right: 15,
-                  child: InkWell(
+     Positioned(
+                    top: 65,
+                    right: 15,
+                    child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const UploadImagePage(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "EDIT",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge!
+                              .copyWith(color: context.theme.secondary),
+                        )),
+                  ),            
+                    ],
+              ),
+            ),
+       Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Basic Details",
+                      style: Theme.of(context).textTheme.headlineMedium!),
+                  InkWell(
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const UploadImagePage(),
+                        showModalBottomSheet(
+                          backgroundColor: Colors.transparent,
+                          useSafeArea: true,
+                          elevation: 0,
+                          isScrollControlled: true,
+                          context: context,
+                          builder: (context) => Padding(
+                            padding: EdgeInsets.only(
+                                bottom: MediaQuery.of(context).viewInsets.bottom),
+                            child:  EditMyProfile(
+                              height: profileData.data.height,
+                              weight: profileData.data.weight,
+                              city: profileData.data.address.city,
+                               state: profileData.data.address.state,
+                                // district: profileData.data.address.district
+                                 street: profileData.data.address.street,
+                                  zipcode: profileData.data.address.zipCode,
+                              name: profileData.data.name,
+                              mobile:profileData.data.mobileNo,
+                              dob: profileData.data.dob.toString(),
+                              
+                            ),
                           ),
                         );
                       },
@@ -157,158 +202,125 @@ class ProfileBody extends StatelessWidget {
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge!
-                            .copyWith(color: context.theme.secondary),
+                            .copyWith(color: context.theme.primary),
                       )),
-                ),            
-                  ],
-            ),
-          ),
-   Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Basic Details",
-                    style: Theme.of(context).textTheme.headlineMedium!),
-                InkWell(
-                    onTap: () {
-                      showModalBottomSheet(
-                        backgroundColor: Colors.transparent,
-                        useSafeArea: true,
-                        elevation: 0,
-                        isScrollControlled: true,
-                        context: context,
-                        builder: (context) => Padding(
-                          padding: EdgeInsets.only(
-                              bottom: MediaQuery.of(context).viewInsets.bottom),
-                          child:  EditMyProfile(
-                            height: profileData.data.height,
-                            weight: profileData.data.weight,
-                            city: profileData.data.address.city,
-                             state: profileData.data.address.state,
-                              // district: profileData.data.address.district
-                               street: profileData.data.address.street,
-                                zipcode: profileData.data.address.zipCode,
-                            name: profileData.data.name,
-                            mobile:profileData.data.mobileNo,
-                            dob: profileData.data.dob.toString(),
-                            
-                          ),
-                        ),
-                      );
-                    },
-                    child: Text(
-                      "EDIT",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge!
-                          .copyWith(color: context.theme.primary),
-                    )),
-              ],
-            ),
-          ),    
-          SizedBox(
-            width: double.maxFinite,
-            child: Card(
-              elevation: 0,
-              margin: const EdgeInsets.all(0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+                ],
               ),
-              color: context.theme.primary,
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        "Username: ${profileData.data.name}",
-                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                              color: Colors
-                                  .white, // Replace with your desired color
+            ),    
+            SizedBox(
+                width: double.maxFinite,
+                child:  Card(
+                    elevation: 0,
+                    margin: const EdgeInsets.all(0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    color: context.theme.primary,
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              "Username: ${profileData.data.name}",
+                              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                    color: Colors
+                                        .white, // Replace with your desired color
+                                  ),
                             ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              "Email: ${profileData.data.emailId}",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              "Mobile: ${profileData.data.mobileNo}",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              "DOB:${profileData.data.dob}",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                             Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              "Height: ${profileData.data.height}",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),   Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              "Weight: ${profileData.data.weight}",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+    
+                           Padding(
+                            padding: const EdgeInsets.only(top: 15),
+    
+                             child: Text("Address",
+                                                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                      color: Colors
+                                          .white, // Replace with your desired color
+                                    ),
+                                                   ),
+                           ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              "Street: ${profileData.data.address.street}",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                             Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              "City: ${profileData.data.address.city}",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                             Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              "State: ${profileData.data.address.state}",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                             Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              "Zipcode: ${profileData.data.address.zipCode}",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              "Registered ID: ${profileData.data.id}",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        "Email: ${profileData.data.emailId}",
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        "Mobile: ${profileData.data.mobileNo}",
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        "DOB:${profileData.data.dob}",
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                       Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        "Height: ${profileData.data.height}",
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),   Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        "Weight: ${profileData.data.weight}",
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                     Text("Address",
-                    style: Theme.of(context).textTheme.headlineMedium!),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        "Street: ${profileData.data.address.street}",
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                       Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        "City: ${profileData.data.address.city}",
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                       Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        "State: ${profileData.data.address.state}",
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                       Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        "Zipcode: ${profileData.data.address.zipCode}",
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Text(
-                        "Registered ID: ${profileData.data.id}",
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ),
-              ],
+              
+            
+                ],
+        ),
       ),
     );
   }

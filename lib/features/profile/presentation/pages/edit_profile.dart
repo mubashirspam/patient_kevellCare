@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/helper/date.dart';
@@ -22,14 +24,18 @@ class EditMyProfile extends StatefulWidget {
   final String? zipcode;
   final String? height;
   final String? weight;
+  final String? email;
+  final String? gender;
 
   final String? dob;
 
   const EditMyProfile({
     super.key,
     this.street,
-        this.height,
+    this.height,
     this.weight,
+    this.email,
+    this.gender,
 
     this.zipcode,
     this.city,
@@ -49,7 +55,15 @@ class _EditMyProfileState extends State<EditMyProfile> {
   late TextEditingController nameController;
   late TextEditingController mobileController;
   late TextEditingController dobController;
-  late TextEditingController addressController;
+  late TextEditingController streetController;
+    late TextEditingController cityController;
+  late TextEditingController zipcodeController;
+  late TextEditingController heightController;
+  late TextEditingController weightController;
+late TextEditingController emailIdController;
+late TextEditingController genderController;
+  late TextEditingController stateController;
+
 
   @override
   void initState() {
@@ -58,7 +72,15 @@ class _EditMyProfileState extends State<EditMyProfile> {
     //     text: dateFormatToddmmyyyy(DateTime.parse(widget.dob.toString())));
     dobController = TextEditingController();
     mobileController = TextEditingController(text: widget.mobile);
-    addressController = TextEditingController(text: widget.state);
+   stateController = TextEditingController(text: widget.state);
+        streetController = TextEditingController(text: widget.street);
+    cityController = TextEditingController(text: widget.city);
+    zipcodeController = TextEditingController(text: widget.zipcode);
+    heightController = TextEditingController(text: widget.height);
+    weightController = TextEditingController(text: widget.weight);
+    emailIdController = TextEditingController(text: widget.email);
+    genderController = TextEditingController(text: widget.gender);
+
     super.initState();
   }
 
@@ -130,6 +152,39 @@ class _EditMyProfileState extends State<EditMyProfile> {
                         return null; // Return null if validation succeeds
                       },
                     ),
+                     const SizedBox(height: 20),
+                    Text("EmailId",
+                        style: Theme.of(context).textTheme.titleLarge),
+                    const SizedBox(height: 10),
+                    TextFieldWidget(
+                      textEditingController: emailIdController,
+                      hintText: "zxy@gmail.com",
+                      keyboardType: TextInputType.text,
+                      validate: (number) {
+                        if (number == null || number.isEmpty) {
+                          return "Please enter an Email address";
+                        } else if (!regex.hasMatch(number)) {
+                          return "Please enter a valid Email address";
+                        }
+                        return null; // Return null if validation succeeds
+                      },
+                    ),
+                    const SizedBox(height: 20,),
+                    Text("Gender",
+                        style: Theme.of(context).textTheme.titleLarge),
+                    const SizedBox(height: 10),
+                    TextFieldWidget(
+                      textEditingController: genderController,
+                      hintText: "Gender",
+                      keyboardType: TextInputType.name,
+                      validate: (name) {
+                        if (name == null || name.isEmpty) {
+                          return "Please enter an gender";
+                        }
+                        return null; // Return null if validation succeeds
+                      },
+                    ),
+                    
                     const SizedBox(height: 20),
                     Text("Date of birth",
                         style: Theme.of(context).textTheme.titleLarge),
@@ -183,7 +238,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
                       children: [
                         Expanded(
                           child: TextFieldWidget(
-                            textEditingController: addressController,
+                            textEditingController: streetController,
                             hintText: "Street",
                             keyboardType: TextInputType.visiblePassword,
                             validate: (value) {
@@ -197,7 +252,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
                         const SizedBox(width: 10,),
                          Expanded(
                           child: TextFieldWidget(
-                            textEditingController: addressController,
+                            textEditingController: cityController,
                             hintText: "City",
                             keyboardType: TextInputType.visiblePassword,
                             validate: (value) {
@@ -215,7 +270,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
                       children: [
                         Expanded(
                           child: TextFieldWidget(
-                            textEditingController: addressController,
+                            textEditingController: stateController,
                             hintText: "State",
                             keyboardType: TextInputType.visiblePassword,
                             validate: (value) {
@@ -229,12 +284,44 @@ class _EditMyProfileState extends State<EditMyProfile> {
                         const SizedBox(width: 10,),
                          Expanded(
                           child: TextFieldWidget(
-                            textEditingController: addressController,
+                            textEditingController: zipcodeController,
                             hintText: "Zipcode",
                             keyboardType: TextInputType.visiblePassword,
                             validate: (value) {
                               if (value == null || value.isEmpty) {
                                 return "Please enter a adress";
+                              }
+                              return null; // Return null if validation succeeds
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                     const SizedBox(height: 10,),
+                     Row(
+                      children: [
+                        Expanded(
+                          child: TextFieldWidget(
+                            textEditingController: heightController,
+                            hintText: "Height",
+                            keyboardType: TextInputType.visiblePassword,
+                            validate: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Please enter a Height";
+                              }
+                              return null; // Return null if validation succeeds
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 10,),
+                         Expanded(
+                          child: TextFieldWidget(
+                            textEditingController: weightController,
+                            hintText: "Weight",
+                            keyboardType: TextInputType.visiblePassword,
+                            validate: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Please enter a Weight";
                               }
                               return null; // Return null if validation succeeds
                             },
@@ -263,13 +350,17 @@ class _EditMyProfileState extends State<EditMyProfile> {
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   context.read<ProfileBloc>().add(
-                                        ProfileEvent.updateProfile(
-                                          dob: '',
-                                           mobileNumber: '', 
-                                           street: '',
-                                            weight: '',
-                                             name: '',
-                                              address: '', city: '', height: '', district: '', zipcode: '', state: ''
+                                         ProfileEvent.updateProfile(
+                                          dob:dobController.value.text,
+                                           mobileNumber: mobileController.value.text, 
+                                           street:streetController.value.text,
+                                            weight: weightController.value.text,
+                                             name: nameController.value.text,
+                                               city: cityController.value.text,
+                                                height:heightController.value.text,
+                                                 district: '', 
+                                                 zipcode: '',
+                                                  state: '', email: '', gender: ''
                                         ),
                                       );
                                 }
