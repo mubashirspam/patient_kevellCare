@@ -36,25 +36,24 @@ import '../../features/chat/domain/repository/fetch_chat_profile_repository.dart
 import '../../features/chat/presentation/bloc/chat_bloc.dart' as _i45;
 import '../../features/forgot/data/repositories/change_password_repository_impl.dart'
     as _i4;
-import '../../features/forgot/data/repositories/forgot_repository_impl.dart'
-    as _i20;
 import '../../features/forgot/domain/repositories/change_pass_repository.dart'
     as _i3;
-import '../../features/forgot/domain/repositories/forgot_repository.dart'
-    as _i19;
-import '../../features/forgot/presentation/bloc/forgot_bloc.dart' as _i46;
 import '../../features/home/data/repositories/get_home_waiting_patient_repository_impl.dart'
     as _i24;
 import '../../features/home/domain/repositories/get_home_waiting_patient_repository.dart'
     as _i23;
 import '../../features/home/presentation/bloc/home_bloc.dart' as _i29;
+import '../../features/login/data/repositories/forgot_repository_impl.dart'
+    as _i20;
 import '../../features/login/data/repositories/login_repository_impl.dart'
     as _i31;
 import '../../features/login/data/repositories/otp_repository_impl.dart'
     as _i33;
+import '../../features/login/domain/repositories/forgot_repository.dart'
+    as _i19;
 import '../../features/login/domain/repositories/login_repository.dart' as _i30;
 import '../../features/login/domain/repositories/otp_repository.dart' as _i32;
-import '../../features/login/presentation/bloc/login_bloc.dart' as _i47;
+import '../../features/login/presentation/bloc/login_bloc.dart' as _i46;
 import '../../features/profile/data/repositories/profile_get__repository_impl.dart'
     as _i26;
 import '../../features/profile/data/repositories/profile_update_repository_impl.dart'
@@ -67,7 +66,7 @@ import '../../features/profile/domain/repositories/update_profile_repository.dar
     as _i40;
 import '../../features/profile/domain/repositories/upload_image_repository.dart'
     as _i42;
-import '../../features/profile/presentation/bloc/profile_bloc.dart' as _i48;
+import '../../features/profile/presentation/bloc/profile_bloc.dart' as _i47;
 import '../../features/rating/data/repositories/create%20_rating_repository_impl.dart'
     as _i8;
 import '../../features/rating/data/repositories/edit_rating_repository_impl.dart'
@@ -90,7 +89,7 @@ import '../../features/report/domain/repositories/fetch_report_general_repositor
 import '../../features/report/domain/repositories/fetch_report_repository.dart'
     as _i17;
 import '../../features/report/presentation/bloc/report_bloc.dart' as _i35;
-import '../../features/signup/bloc/signup_bloc.dart' as _i49;
+import '../../features/signup/bloc/signup_bloc.dart' as _i48;
 import '../../features/signup/data/repositories/signup_repository_impl.dart'
     as _i37;
 import '../../features/signup/domain/repositories/signup_repository.dart'
@@ -160,21 +159,18 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i45.ChatBloc>(
         () => _i45.ChatBloc(gh<_i13.FetchChatProfileRepository>()));
-    gh.factory<_i46.ForgotBloc>(() => _i46.ForgotBloc(
-          gh<_i19.ForgotRepository>(),
-          gh<_i3.ChangePasswordRepository>(),
-        ));
-    gh.factory<_i47.LoginBloc>(() => _i47.LoginBloc(
+    gh.factory<_i46.LoginBloc>(() => _i46.LoginBloc(
           gh<_i30.LoginRepository>(),
           gh<_i32.OtpRepository>(),
+          gh<_i19.ForgotRepository>(),
         ));
-    gh.factory<_i48.ProfileBloc>(() => _i48.ProfileBloc(
+    gh.factory<_i47.ProfileBloc>(() => _i47.ProfileBloc(
           gh<_i25.GetProfileRepository>(),
           gh<_i40.UpdateProfileRepository>(),
           gh<_i42.UploadImageRepository>(),
         ));
-    gh.factory<_i49.SignupBloc>(
-        () => _i49.SignupBloc(gh<_i36.SignupRepository>()));
+    gh.factory<_i48.SignupBloc>(
+        () => _i48.SignupBloc(gh<_i36.SignupRepository>()));
     return this;
   }
 }

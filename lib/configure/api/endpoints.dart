@@ -10,11 +10,15 @@ class V2 {
 
   static const login = "$baseUrl/$service/login";
 
-  static const fetchProfile = "https://f855-183-82-33-226.ngrok-free.app/$service/patient-info";
+  static const fetchProfile = "$baseUrl/$service/patient-info";
 
-  static const updateProfile = "https://f855-183-82-33-226.ngrok-free.app/$service/profile";
+  static const updateProfile = "$baseUrl/$service/profile";
 
   static const forgot = "$baseUrl/$service/forgot-password";
+
+  static const change_password = "$baseUrl/$service/change-password";
+  
+  static const verifyotp = "$baseUrl/$service/verify-otp";
 
 }
 

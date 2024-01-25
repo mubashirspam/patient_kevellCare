@@ -24,7 +24,7 @@ final Map<String, Widget Function(BuildContext)> route = {
           ModalRoute.of(ctx)!.settings.arguments as Map<String, dynamic>),
   ReportScreen.routeName: (ctx) =>
       ReportScreen(appoimentId: ModalRoute.of(ctx)!.settings.arguments as int),
-  OtpScreen.routeName: (ctx) => const OtpScreen(),
+  OtpScreen.routeName: (ctx) => const OtpScreen(password: '', email: '', otp: '',),
 };
 
 

@@ -16,6 +16,8 @@ import '../../../../core/failiar/main_failures.dart';
   @override
   Future<Either<MainFailure, ChangePasswordModel>> change({
     required String email,
+    required String otp,
+    required String password,
   }) async {
     try {
       final fcm = await getTokenFromSS(fcmStoreKey);
@@ -24,7 +26,8 @@ import '../../../../core/failiar/main_failures.dart';
         ApiEndPoints.verifyotp,
         data: {
           'cred': email,
-          // "device_token": fcm,
+          'otp':otp,
+          'password':password,
           "device_type": "Android"
         },
       );

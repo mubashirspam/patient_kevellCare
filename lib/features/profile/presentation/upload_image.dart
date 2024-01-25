@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kevell_care/configure/value/constant.dart';
+import 'package:kevell_care/configure/value/secure_storage.dart';
 
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:path_provider/path_provider.dart';
@@ -85,14 +87,14 @@ class _UploadImagePageState extends State<UploadImagePage> {
   Future<void> uploadImage(String image64) async {
     Dio dio = Dio();
 
-    // final id = await getTokenFromSS(drIdsecureStoreKey);
+    final id = await getTokenFromSS(drIdsecureStoreKey);
 
     try {
       setState(() => isLoading = true);
 
       Response response = await dio.put(
-          'https://kevelldigital.com/doctor/api/profile',
-          data: {'id': 1014, 'ProfileImagelink': image64});
+          'https://kevelldigital.com/v2/patients/profile',
+          data: {'id': 1000, 'ProfileImagelink': image64});
       log('  upload image');
 
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -203,19 +205,19 @@ class _UploadImagePageState extends State<UploadImagePage> {
               onPressed: () async {
                 _selectImage(ImageSource.camera);
 
-                // Map<Permission, PermissionStatus> statuses = await [
-                //   Permission.accessMediaLocation,
-                //   Permission.storage,
-                //   Permission.camera,
-                // ].request();
-                // if (statuses[Permission.storage]!.isGranted &&
-                //     statuses[Permission.camera]!.isGranted) {
-                //   _selectImage(ImageSource.camera);
-                // } else {
-                //   requestPermission(Permission.storage);
-                //   requestPermission(Permission.camera);
-                //   log('no permission provided');
-                // }
+                Map<Permission, PermissionStatus> statuses = await [
+                  Permission.accessMediaLocation,
+                  Permission.storage,
+                  Permission.camera,
+                ].request();
+                if (statuses[Permission.storage]!.isGranted &&
+                    statuses[Permission.camera]!.isGranted) {
+                  _selectImage(ImageSource.camera);
+                } else {
+                  requestPermission(Permission.storage);
+                  requestPermission(Permission.camera);
+                  log('no permission provided');
+                }
               },
               icon: const Icon(
                 Icons.camera,

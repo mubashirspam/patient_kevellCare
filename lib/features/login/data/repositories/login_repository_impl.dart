@@ -18,6 +18,7 @@ class LoginRepoImpliment implements LoginRepository {
   Future<Either<MainFailure, LoginModel>> login({
     required String usernameOrMobile,
     required String password,
+    required bool islogin
   }) async {
     try {
       final fcm = await getTokenFromSS(fcmStoreKey);

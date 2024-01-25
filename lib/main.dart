@@ -67,7 +67,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (ctx) => getIt<ReportBloc>()),
         BlocProvider(create: (ctx) => getIt<ProfileBloc>()),
         BlocProvider(create: (ctx) => getIt<ChatBloc>()),
-        BlocProvider(create: (ctx) => getIt<ForgotBloc>()),
         BlocProvider(create: (ctx) => getIt<RatingBloc>()),
       ],
       child: MaterialApp(
@@ -75,7 +74,7 @@ class MyApp extends StatelessWidget {
         theme: lightTheme(),
         darkTheme: darkTheme(),
         themeMode: ThemeMode.light,
-        initialRoute: "/dashboard",
+        // initialRoute: "/dashboard",
         home: const Initialize(),
         // navigatorKey: navigatorKey,
         routes: route,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/helper/toast.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-import 'package:kevell_care/features/forgot/presentation/bloc/forgot_bloc.dart';
+import 'package:kevell_care/features/login/presentation/bloc/login_bloc.dart';
 import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
 import 'package:kevell_care/features/widgets/input_field/input_field_widget.dart';
 import 'package:kevell_care/pages/otp/otp_screen.dart';
@@ -108,7 +108,7 @@ class ForgotScreen extends StatelessWidget {
                   // GestureDetector(
       
                   // child:
-                  BlocConsumer<ForgotBloc, ForgotState>(
+                  BlocConsumer<LoginBloc, LoginState>(
                     listener: (context, state) {
        if (!state.isLoading && state.isError) {
                     Toast.showToast(
@@ -117,7 +117,7 @@ class ForgotScreen extends StatelessWidget {
                     );
                   }
       
-                  if (!state.isLoading && state.hasData) {
+                  if (!state.isLoading && state.hasValidationData) {
                    Toast.showToast(
                     context: context,
                     message: 'OTP generated Successfully🥳',
@@ -125,7 +125,12 @@ class ForgotScreen extends StatelessWidget {
 
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
-                      builder: (context) => const OtpScreen(),
+                      builder: (context) =>  OtpScreen(
+                        password: confirmpassController.value.text, 
+                        email: textEditingController.value.text, 
+                        otp: state.otpDetails.toString(),
+                        
+                      ),
                     ),
                     (route) => false,
                   );
@@ -141,8 +146,8 @@ class ForgotScreen extends StatelessWidget {
                           onPressed: () {
                            {
                       if (formKey.currentState!.validate()) {
-                        context.read<ForgotBloc>().add(
-                              ForgotEvent.forgot(
+                        context.read<LoginBloc>().add(
+                              LoginEvent.forgot(
                                   email: textEditingController.value.text,
                                   ),
                           );

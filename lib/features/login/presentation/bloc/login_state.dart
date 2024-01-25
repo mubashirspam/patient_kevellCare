@@ -9,6 +9,8 @@ class LoginState with _$LoginState {
     required bool otpVarified,
     required bool hasValidationData,
     required LoginModel? loginDetails,
+        required ForgotModel? forgot,
+
     required VerifyOtpModel ? otpDetails,
   }) = _LoginState;
 
@@ -20,5 +22,6 @@ class LoginState with _$LoginState {
         loginDetails: null,
         otpDetails: null,
         message: "",
+        forgot: null
       );
 }

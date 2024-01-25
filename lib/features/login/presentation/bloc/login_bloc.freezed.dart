@@ -19,19 +19,23 @@ mixin _$LoginEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String usernameOrMobile, String password) login,
-    required TResult Function(String otp, String number) varyfiyOtp,
+    required TResult Function(String otp, String number, bool islogin)
+        varyfiyOtp,
+    required TResult Function(String email) forgot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String usernameOrMobile, String password)? login,
-    TResult? Function(String otp, String number)? varyfiyOtp,
+    TResult? Function(String otp, String number, bool islogin)? varyfiyOtp,
+    TResult? Function(String email)? forgot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String usernameOrMobile, String password)? login,
-    TResult Function(String otp, String number)? varyfiyOtp,
+    TResult Function(String otp, String number, bool islogin)? varyfiyOtp,
+    TResult Function(String email)? forgot,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +43,21 @@ mixin _$LoginEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
     required TResult Function(_VaryfiyOtp value) varyfiyOtp,
+    required TResult Function(_Forgot value) forgot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Login value)? login,
     TResult? Function(_VaryfiyOtp value)? varyfiyOtp,
+    TResult? Function(_Forgot value)? forgot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
     TResult Function(_VaryfiyOtp value)? varyfiyOtp,
+    TResult Function(_Forgot value)? forgot,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -149,7 +156,9 @@ class _$LoginImpl implements _Login {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String usernameOrMobile, String password) login,
-    required TResult Function(String otp, String number) varyfiyOtp,
+    required TResult Function(String otp, String number, bool islogin)
+        varyfiyOtp,
+    required TResult Function(String email) forgot,
   }) {
     return login(usernameOrMobile, password);
   }
@@ -158,7 +167,8 @@ class _$LoginImpl implements _Login {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String usernameOrMobile, String password)? login,
-    TResult? Function(String otp, String number)? varyfiyOtp,
+    TResult? Function(String otp, String number, bool islogin)? varyfiyOtp,
+    TResult? Function(String email)? forgot,
   }) {
     return login?.call(usernameOrMobile, password);
   }
@@ -167,7 +177,8 @@ class _$LoginImpl implements _Login {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String usernameOrMobile, String password)? login,
-    TResult Function(String otp, String number)? varyfiyOtp,
+    TResult Function(String otp, String number, bool islogin)? varyfiyOtp,
+    TResult Function(String email)? forgot,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -181,6 +192,7 @@ class _$LoginImpl implements _Login {
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
     required TResult Function(_VaryfiyOtp value) varyfiyOtp,
+    required TResult Function(_Forgot value) forgot,
   }) {
     return login(this);
   }
@@ -190,6 +202,7 @@ class _$LoginImpl implements _Login {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Login value)? login,
     TResult? Function(_VaryfiyOtp value)? varyfiyOtp,
+    TResult? Function(_Forgot value)? forgot,
   }) {
     return login?.call(this);
   }
@@ -199,6 +212,7 @@ class _$LoginImpl implements _Login {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
     TResult Function(_VaryfiyOtp value)? varyfiyOtp,
+    TResult Function(_Forgot value)? forgot,
     required TResult orElse(),
   }) {
     if (login != null) {
@@ -226,7 +240,7 @@ abstract class _$$VaryfiyOtpImplCopyWith<$Res> {
           _$VaryfiyOtpImpl value, $Res Function(_$VaryfiyOtpImpl) then) =
       __$$VaryfiyOtpImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String otp, String number});
+  $Res call({String otp, String number, bool islogin});
 }
 
 /// @nodoc
@@ -242,6 +256,7 @@ class __$$VaryfiyOtpImplCopyWithImpl<$Res>
   $Res call({
     Object? otp = null,
     Object? number = null,
+    Object? islogin = null,
   }) {
     return _then(_$VaryfiyOtpImpl(
       otp: null == otp
@@ -252,6 +267,10 @@ class __$$VaryfiyOtpImplCopyWithImpl<$Res>
           ? _value.number
           : number // ignore: cast_nullable_to_non_nullable
               as String,
+      islogin: null == islogin
+          ? _value.islogin
+          : islogin // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -259,16 +278,19 @@ class __$$VaryfiyOtpImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$VaryfiyOtpImpl implements _VaryfiyOtp {
-  const _$VaryfiyOtpImpl({required this.otp, required this.number});
+  const _$VaryfiyOtpImpl(
+      {required this.otp, required this.number, required this.islogin});
 
   @override
   final String otp;
   @override
   final String number;
+  @override
+  final bool islogin;
 
   @override
   String toString() {
-    return 'LoginEvent.varyfiyOtp(otp: $otp, number: $number)';
+    return 'LoginEvent.varyfiyOtp(otp: $otp, number: $number, islogin: $islogin)';
   }
 
   @override
@@ -277,11 +299,12 @@ class _$VaryfiyOtpImpl implements _VaryfiyOtp {
         (other.runtimeType == runtimeType &&
             other is _$VaryfiyOtpImpl &&
             (identical(other.otp, otp) || other.otp == otp) &&
-            (identical(other.number, number) || other.number == number));
+            (identical(other.number, number) || other.number == number) &&
+            (identical(other.islogin, islogin) || other.islogin == islogin));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, otp, number);
+  int get hashCode => Object.hash(runtimeType, otp, number, islogin);
 
   @JsonKey(ignore: true)
   @override
@@ -293,29 +316,33 @@ class _$VaryfiyOtpImpl implements _VaryfiyOtp {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String usernameOrMobile, String password) login,
-    required TResult Function(String otp, String number) varyfiyOtp,
+    required TResult Function(String otp, String number, bool islogin)
+        varyfiyOtp,
+    required TResult Function(String email) forgot,
   }) {
-    return varyfiyOtp(otp, number);
+    return varyfiyOtp(otp, number, islogin);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String usernameOrMobile, String password)? login,
-    TResult? Function(String otp, String number)? varyfiyOtp,
+    TResult? Function(String otp, String number, bool islogin)? varyfiyOtp,
+    TResult? Function(String email)? forgot,
   }) {
-    return varyfiyOtp?.call(otp, number);
+    return varyfiyOtp?.call(otp, number, islogin);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String usernameOrMobile, String password)? login,
-    TResult Function(String otp, String number)? varyfiyOtp,
+    TResult Function(String otp, String number, bool islogin)? varyfiyOtp,
+    TResult Function(String email)? forgot,
     required TResult orElse(),
   }) {
     if (varyfiyOtp != null) {
-      return varyfiyOtp(otp, number);
+      return varyfiyOtp(otp, number, islogin);
     }
     return orElse();
   }
@@ -325,6 +352,7 @@ class _$VaryfiyOtpImpl implements _VaryfiyOtp {
   TResult map<TResult extends Object?>({
     required TResult Function(_Login value) login,
     required TResult Function(_VaryfiyOtp value) varyfiyOtp,
+    required TResult Function(_Forgot value) forgot,
   }) {
     return varyfiyOtp(this);
   }
@@ -334,6 +362,7 @@ class _$VaryfiyOtpImpl implements _VaryfiyOtp {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Login value)? login,
     TResult? Function(_VaryfiyOtp value)? varyfiyOtp,
+    TResult? Function(_Forgot value)? forgot,
   }) {
     return varyfiyOtp?.call(this);
   }
@@ -343,6 +372,7 @@ class _$VaryfiyOtpImpl implements _VaryfiyOtp {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Login value)? login,
     TResult Function(_VaryfiyOtp value)? varyfiyOtp,
+    TResult Function(_Forgot value)? forgot,
     required TResult orElse(),
   }) {
     if (varyfiyOtp != null) {
@@ -355,12 +385,154 @@ class _$VaryfiyOtpImpl implements _VaryfiyOtp {
 abstract class _VaryfiyOtp implements LoginEvent {
   const factory _VaryfiyOtp(
       {required final String otp,
-      required final String number}) = _$VaryfiyOtpImpl;
+      required final String number,
+      required final bool islogin}) = _$VaryfiyOtpImpl;
 
   String get otp;
   String get number;
+  bool get islogin;
   @JsonKey(ignore: true)
   _$$VaryfiyOtpImplCopyWith<_$VaryfiyOtpImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ForgotImplCopyWith<$Res> {
+  factory _$$ForgotImplCopyWith(
+          _$ForgotImpl value, $Res Function(_$ForgotImpl) then) =
+      __$$ForgotImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String email});
+}
+
+/// @nodoc
+class __$$ForgotImplCopyWithImpl<$Res>
+    extends _$LoginEventCopyWithImpl<$Res, _$ForgotImpl>
+    implements _$$ForgotImplCopyWith<$Res> {
+  __$$ForgotImplCopyWithImpl(
+      _$ForgotImpl _value, $Res Function(_$ForgotImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(_$ForgotImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ForgotImpl implements _Forgot {
+  const _$ForgotImpl({required this.email});
+
+  @override
+  final String email;
+
+  @override
+  String toString() {
+    return 'LoginEvent.forgot(email: $email)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ForgotImpl &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, email);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ForgotImplCopyWith<_$ForgotImpl> get copyWith =>
+      __$$ForgotImplCopyWithImpl<_$ForgotImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String usernameOrMobile, String password) login,
+    required TResult Function(String otp, String number, bool islogin)
+        varyfiyOtp,
+    required TResult Function(String email) forgot,
+  }) {
+    return forgot(email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String usernameOrMobile, String password)? login,
+    TResult? Function(String otp, String number, bool islogin)? varyfiyOtp,
+    TResult? Function(String email)? forgot,
+  }) {
+    return forgot?.call(email);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String usernameOrMobile, String password)? login,
+    TResult Function(String otp, String number, bool islogin)? varyfiyOtp,
+    TResult Function(String email)? forgot,
+    required TResult orElse(),
+  }) {
+    if (forgot != null) {
+      return forgot(email);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Login value) login,
+    required TResult Function(_VaryfiyOtp value) varyfiyOtp,
+    required TResult Function(_Forgot value) forgot,
+  }) {
+    return forgot(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Login value)? login,
+    TResult? Function(_VaryfiyOtp value)? varyfiyOtp,
+    TResult? Function(_Forgot value)? forgot,
+  }) {
+    return forgot?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Login value)? login,
+    TResult Function(_VaryfiyOtp value)? varyfiyOtp,
+    TResult Function(_Forgot value)? forgot,
+    required TResult orElse(),
+  }) {
+    if (forgot != null) {
+      return forgot(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Forgot implements LoginEvent {
+  const factory _Forgot({required final String email}) = _$ForgotImpl;
+
+  String get email;
+  @JsonKey(ignore: true)
+  _$$ForgotImplCopyWith<_$ForgotImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -372,6 +544,7 @@ mixin _$LoginState {
   bool get otpVarified => throw _privateConstructorUsedError;
   bool get hasValidationData => throw _privateConstructorUsedError;
   LoginModel? get loginDetails => throw _privateConstructorUsedError;
+  ForgotModel? get forgot => throw _privateConstructorUsedError;
   VerifyOtpModel? get otpDetails => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -392,6 +565,7 @@ abstract class $LoginStateCopyWith<$Res> {
       bool otpVarified,
       bool hasValidationData,
       LoginModel? loginDetails,
+      ForgotModel? forgot,
       VerifyOtpModel? otpDetails});
 }
 
@@ -414,6 +588,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
     Object? otpVarified = null,
     Object? hasValidationData = null,
     Object? loginDetails = freezed,
+    Object? forgot = freezed,
     Object? otpDetails = freezed,
   }) {
     return _then(_value.copyWith(
@@ -441,6 +616,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.loginDetails
           : loginDetails // ignore: cast_nullable_to_non_nullable
               as LoginModel?,
+      forgot: freezed == forgot
+          ? _value.forgot
+          : forgot // ignore: cast_nullable_to_non_nullable
+              as ForgotModel?,
       otpDetails: freezed == otpDetails
           ? _value.otpDetails
           : otpDetails // ignore: cast_nullable_to_non_nullable
@@ -464,6 +643,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       bool otpVarified,
       bool hasValidationData,
       LoginModel? loginDetails,
+      ForgotModel? forgot,
       VerifyOtpModel? otpDetails});
 }
 
@@ -484,6 +664,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
     Object? otpVarified = null,
     Object? hasValidationData = null,
     Object? loginDetails = freezed,
+    Object? forgot = freezed,
     Object? otpDetails = freezed,
   }) {
     return _then(_$LoginStateImpl(
@@ -511,6 +692,10 @@ class __$$LoginStateImplCopyWithImpl<$Res>
           ? _value.loginDetails
           : loginDetails // ignore: cast_nullable_to_non_nullable
               as LoginModel?,
+      forgot: freezed == forgot
+          ? _value.forgot
+          : forgot // ignore: cast_nullable_to_non_nullable
+              as ForgotModel?,
       otpDetails: freezed == otpDetails
           ? _value.otpDetails
           : otpDetails // ignore: cast_nullable_to_non_nullable
@@ -529,6 +714,7 @@ class _$LoginStateImpl implements _LoginState {
       required this.otpVarified,
       required this.hasValidationData,
       required this.loginDetails,
+      required this.forgot,
       required this.otpDetails});
 
   @override
@@ -544,11 +730,13 @@ class _$LoginStateImpl implements _LoginState {
   @override
   final LoginModel? loginDetails;
   @override
+  final ForgotModel? forgot;
+  @override
   final VerifyOtpModel? otpDetails;
 
   @override
   String toString() {
-    return 'LoginState(isLoading: $isLoading, message: $message, isError: $isError, otpVarified: $otpVarified, hasValidationData: $hasValidationData, loginDetails: $loginDetails, otpDetails: $otpDetails)';
+    return 'LoginState(isLoading: $isLoading, message: $message, isError: $isError, otpVarified: $otpVarified, hasValidationData: $hasValidationData, loginDetails: $loginDetails, forgot: $forgot, otpDetails: $otpDetails)';
   }
 
   @override
@@ -566,13 +754,14 @@ class _$LoginStateImpl implements _LoginState {
                 other.hasValidationData == hasValidationData) &&
             (identical(other.loginDetails, loginDetails) ||
                 other.loginDetails == loginDetails) &&
+            (identical(other.forgot, forgot) || other.forgot == forgot) &&
             (identical(other.otpDetails, otpDetails) ||
                 other.otpDetails == otpDetails));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, message, isError,
-      otpVarified, hasValidationData, loginDetails, otpDetails);
+      otpVarified, hasValidationData, loginDetails, forgot, otpDetails);
 
   @JsonKey(ignore: true)
   @override
@@ -589,6 +778,7 @@ abstract class _LoginState implements LoginState {
       required final bool otpVarified,
       required final bool hasValidationData,
       required final LoginModel? loginDetails,
+      required final ForgotModel? forgot,
       required final VerifyOtpModel? otpDetails}) = _$LoginStateImpl;
 
   @override
@@ -603,6 +793,8 @@ abstract class _LoginState implements LoginState {
   bool get hasValidationData;
   @override
   LoginModel? get loginDetails;
+  @override
+  ForgotModel? get forgot;
   @override
   VerifyOtpModel? get otpDetails;
   @override

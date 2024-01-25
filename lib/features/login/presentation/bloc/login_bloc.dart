@@ -2,7 +2,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kevell_care/features/login/data/models/forgot_,model.dart';
 import 'package:kevell_care/features/login/data/models/otp_model.dart';
+import 'package:kevell_care/features/login/domain/repositories/forgot_repository.dart';
 
 import '../../data/models/login_model.dart';
 import '../../domain/repositories/login_repository.dart';
@@ -16,7 +18,9 @@ part 'login_bloc.freezed.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginRepository loginRepository;
   final OtpRepository otpRepository;
-  LoginBloc(this.loginRepository, this.otpRepository)
+    final ForgotRepository forgotRepository;
+
+  LoginBloc(this.loginRepository, this.otpRepository,this.forgotRepository)
       : super(LoginState.initial()) {
     on<_Login>(
       (event, emit) async {
@@ -24,11 +28,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           isLoading: true,
           hasValidationData: false,
           isError: false,
+          
         ));
 
         final response = await loginRepository.login(
           usernameOrMobile: event.usernameOrMobile,
           password: event.password,
+          islogin: true
         );
 
         response.fold((failure) {
@@ -63,6 +69,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final response = await otpRepository.varifyOtp(
         number: event.number,
         otp: event.otp,
+        islogin: false
       );
 
       final result = response.fold(
@@ -76,9 +83,45 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             isLoading: false,
             otpVarified: true,
             otpDetails: success,
-            message: success.result ?? ""),
+            message: success.result ?? "your Otp has been verified"
+            ),
       );
       emit(result);
     });
+
+    
+ 
+    on<_Forgot>(
+      (event, emit) async {
+        emit(state.copyWith(
+          isLoading: true,
+          hasValidationData: false,
+          isError: false,
+          
+        ));
+
+        final response = await forgotRepository.forgot(
+          email: event.email,
+        );
+
+        response.fold((failure) {
+          return emit(state.copyWith(
+            isLoading: false,
+            message: failure.message,
+            isError: true,
+          ));
+        }, (success) {
+          emit(
+            state.copyWith(
+              isError: false,
+              hasValidationData: true,
+              isLoading: false,
+              forgot: success,
+              message: 'otp generated successfully',
+            ),
+          );
+        });
+      },
+    );
   }
 }

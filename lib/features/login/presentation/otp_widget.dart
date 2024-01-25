@@ -17,19 +17,22 @@ class _OtpFiledState extends State<OtpFiled> {
   @override
   void dispose() {
     for (var controller in controllers) {
-      controller.dispose();
+    controller.dispose();
     }
     for (var focusNode in focusNodes) {
-      focusNode.dispose();
+    focusNode.dispose();
     }
     super.dispose();
   }
 
   void _onTextChanged(int index, String newText) {
     if (newText.isNotEmpty) {
-      if (index < 3) {
+      if (index < 3) 
+      {
         FocusScope.of(context).requestFocus(focusNodes[index + 1]);
-      } else {
+      } 
+      else 
+      {
         final otpValue =
             controllers.map((controller) => controller.text).join();
         widget.onOtpEntered(otpValue);
@@ -43,7 +46,7 @@ class _OtpFiledState extends State<OtpFiled> {
     }
   }
 
-  @override
+@override
   Widget build(BuildContext context) {
     return Row(
       children: List.generate(
@@ -56,9 +59,9 @@ class _OtpFiledState extends State<OtpFiled> {
               onChanged: (newText) => _onTextChanged(index, newText),
               focusNode: focusNodes[index],
               inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp("[0-9 ]")),
+                FilteringTextInputFormatter.allow(RegExp("[0-9]")),
                 LengthLimitingTextInputFormatter(1),
-              ],
+                ],
               keyboardType: TextInputType.number,
               textAlign: TextAlign.center,
             ),

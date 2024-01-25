@@ -1,5 +1,4 @@
 
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,9 +67,9 @@ late TextEditingController genderController;
   @override
   void initState() {
     nameController = TextEditingController(text: widget.name);
-    // dobController = TextEditingController(
-    //     text: dateFormatToddmmyyyy(DateTime.parse(widget.dob.toString())));
-    dobController = TextEditingController();
+    dobController = TextEditingController(
+        text: dateFormatToddmmyyyy(DateTime.parse(widget.dob.toString())));
+    // dobController = TextEditingController();
     mobileController = TextEditingController(text: widget.mobile);
    stateController = TextEditingController(text: widget.state);
         streetController = TextEditingController(text: widget.street);
@@ -118,9 +117,7 @@ late TextEditingController genderController;
                   children: [
                     Text("Edit Profile",
                         style: Theme.of(context).textTheme.headlineLarge!),
-                    const SizedBox(
-                      height: 25,
-                    ),
+                    const SizedBox(height: 25,),
                     Text("Full Name",
                         style: Theme.of(context).textTheme.titleLarge),
                     const SizedBox(height: 10),
@@ -190,7 +187,6 @@ late TextEditingController genderController;
                         style: Theme.of(context).textTheme.titleLarge),
                     const SizedBox(height: 10),
                     TextFieldWidget(
-                      textEditingController: dobController,
                     
                       hintText: "12/12/2023",
                       inputFormatters: [DateInputFormatter()],
@@ -243,9 +239,9 @@ late TextEditingController genderController;
                             keyboardType: TextInputType.visiblePassword,
                             validate: (value) {
                               if (value == null || value.isEmpty) {
-                                return "Please enter a adress";
+                                return "Please Enter the Street";
                               }
-                              return null; // Return null if validation succeeds
+                              return null;
                             },
                           ),
                         ),
@@ -257,9 +253,9 @@ late TextEditingController genderController;
                             keyboardType: TextInputType.visiblePassword,
                             validate: (value) {
                               if (value == null || value.isEmpty) {
-                                return "Please enter a adress";
+                                return "Please enter a City";
                               }
-                              return null; // Return null if validation succeeds
+                              return null; 
                             },
                           ),
                         ),
@@ -275,9 +271,9 @@ late TextEditingController genderController;
                             keyboardType: TextInputType.visiblePassword,
                             validate: (value) {
                               if (value == null || value.isEmpty) {
-                                return "Please enter a adress";
+                                return "Please enter a State";
                               }
-                              return null; // Return null if validation succeeds
+                              return null; 
                             },
                           ),
                         ),
@@ -289,9 +285,9 @@ late TextEditingController genderController;
                             keyboardType: TextInputType.visiblePassword,
                             validate: (value) {
                               if (value == null || value.isEmpty) {
-                                return "Please enter a adress";
+                                return "Please Enter a Zipcode ";
                               }
-                              return null; // Return null if validation succeeds
+                              return null; 
                             },
                           ),
                         ),
@@ -309,7 +305,7 @@ late TextEditingController genderController;
                               if (value == null || value.isEmpty) {
                                 return "Please enter a Height";
                               }
-                              return null; // Return null if validation succeeds
+                              return null;
                             },
                           ),
                         ),
@@ -323,7 +319,7 @@ late TextEditingController genderController;
                               if (value == null || value.isEmpty) {
                                 return "Please enter a Weight";
                               }
-                              return null; // Return null if validation succeeds
+                              return null; 
                             },
                           ),
                         ),
@@ -351,16 +347,16 @@ late TextEditingController genderController;
                                 if (_formKey.currentState!.validate()) {
                                   context.read<ProfileBloc>().add(
                                          ProfileEvent.updateProfile(
-                                          dob:dobController.value.text,
+                                          dob:dateFormatToYYYYMMdd(
+                                                  state.date),
+
                                            mobileNumber: mobileController.value.text, 
                                            street:streetController.value.text,
                                             weight: weightController.value.text,
                                              name: nameController.value.text,
                                                city: cityController.value.text,
                                                 height:heightController.value.text,
-                                                 district: '', 
-                                                 zipcode: '',
-                                                  state: '', email: '', gender: ''
+                                                  state: '', email: '', gender: '', district: '', zipcode: ''
                                         ),
                                       );
                                 }

@@ -173,32 +173,36 @@ class ProfileBody extends StatelessWidget {
                   InkWell(
                       onTap: () {
                         showModalBottomSheet(
+                          
                           backgroundColor: Colors.transparent,
                           useSafeArea: true,
                           elevation: 0,
                           isScrollControlled: true,
                           context: context,
-                          builder: (context) => Padding(
-                            padding: EdgeInsets.only(
-                                bottom: MediaQuery.of(context).viewInsets.bottom),
-                            child:  EditMyProfile(
-                              height: profileData.data.height,
-                              weight: profileData.data.weight,
-                              city: profileData.data.address.city,
-                               state: profileData.data.address.state,
-                                // district: profileData.data.address.district
-                                 street: profileData.data.address.street,
-                                  zipcode: profileData.data.address.zipCode,
-                              name: profileData.data.name,
-                              mobile:profileData.data.mobileNo,
-                              dob: profileData.data.dob.toString(),
-                              
+                          builder: (context) => Container(
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  bottom: MediaQuery.of(context).viewInsets.bottom),
+                              child:  EditMyProfile(
+                                height: profileData.data.height,
+                                weight: profileData.data.weight,
+                                city: profileData.data.address.city,
+                                state: profileData.data.address.state,
+                             // district: profileData.data.address.district,
+                                street: profileData.data.address.street,
+                                zipcode: profileData.data.address.zipCode,
+                                name: profileData.data.name,
+                                mobile:profileData.data.mobileNo,
+                                dob: profileData.data.dob.toString(),
+                                gender: profileData.data.gender,
+                                email: profileData.data.emailId,
+                              ),
                             ),
                           ),
                         );
                       },
-                      child: Text(
-                        "EDIT",
+                      child:
+                       Text("EDIT",
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge!
@@ -225,10 +229,8 @@ class ProfileBody extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 15),
                             child: Text(
                               "Username: ${profileData.data.name}",
-                              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                                    color: Colors
-                                        .white, // Replace with your desired color
-                                  ),
+                                                            style: const TextStyle(color: Colors.white),
+
                             ),
                           ),
                           Padding(
@@ -253,6 +255,13 @@ class ProfileBody extends StatelessWidget {
                               style: const TextStyle(color: Colors.white),
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Text(
+                              "Gender:${profileData.data.gender}",
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
                              Padding(
                             padding: const EdgeInsets.only(top: 15),
                             child: Text(
@@ -271,9 +280,8 @@ class ProfileBody extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 15),
     
                              child: Text("Address",
-                                                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                                      color: Colors
-                                          .white, // Replace with your desired color
+                                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                                      color: Colors .white, 
                                     ),
                                                    ),
                            ),
@@ -316,9 +324,7 @@ class ProfileBody extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-              
-            
+                )
                 ],
         ),
       ),

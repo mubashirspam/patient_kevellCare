@@ -7,5 +7,6 @@ abstract class OtpRepository {
   Future<Either<MainFailure, VerifyOtpModel>> varifyOtp({
     required String otp,
     required String number,
+    required bool islogin
   });
 }

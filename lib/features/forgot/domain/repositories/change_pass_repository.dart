@@ -7,5 +7,8 @@ import '../../../../core/failiar/main_failures.dart';
 abstract class ChangePasswordRepository {
   Future<Either<MainFailure, ChangePasswordModel>> change({
     required String email,
+        required String otp,
+    required String password,
+
   });
 }
