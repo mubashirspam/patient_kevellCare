@@ -41,20 +41,20 @@ class Datum {
     String name;
     String mobileNo;
     String emailId;
+    bool ismobileVerified;
     DateTime createdAt;
     DateTime updatedAt;
     String otp;
-    bool ismobileVerified;
 
     Datum({
         required this.id,
         required this.name,
         required this.mobileNo,
         required this.emailId,
+        required this.ismobileVerified,
         required this.createdAt,
         required this.updatedAt,
         required this.otp,
-        required this.ismobileVerified,
     });
 
     factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -62,10 +62,10 @@ class Datum {
         name: json["name"],
         mobileNo: json["mobile_no"],
         emailId: json["email_id"],
+        ismobileVerified: json["ismobile_verified"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         otp: json["otp"],
-        ismobileVerified: json["ismobile_verified"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -73,9 +73,9 @@ class Datum {
         "name": name,
         "mobile_no": mobileNo,
         "email_id": emailId,
+        "ismobile_verified": ismobileVerified,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
         "otp": otp,
-        "ismobile_verified": ismobileVerified,
     };
 }

@@ -14,7 +14,8 @@ import '../../domain/repositories/get_profile_repository.dart';
 import '../models/profile_model.dart';
 
 @LazySingleton(as: GetProfileRepository)
-class GetProfileRepoImpliment implements GetProfileRepository {
+class GetProfileRepoImpliment implements 
+GetProfileRepository {
   @override
   Future<Either<MainFailure, ProfileModel>> getProfile(
     
@@ -33,7 +34,6 @@ class GetProfileRepoImpliment implements GetProfileRepository {
       // final response =
       //     await Dio().get("https://573a-183-82-33-226.ngrok-free.app/v2/patients/patient-info");
 
-      // log("Response ${response.data}");
   
       // log(id.toString());
 
@@ -42,6 +42,7 @@ class GetProfileRepoImpliment implements GetProfileRepository {
         options: Options(headers: headers,  validateStatus: (_) => true,),
         data: {'id': int.parse("$id")},
       );
+      log("Response ${response.data}");
 
       switch (response.statusCode) {
         case 200:

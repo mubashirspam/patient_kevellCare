@@ -22,14 +22,13 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
     required String weight,
     required String street,
     required String city,
-        required String email,
+    required String district,
+    required String email,
     required String gender,
-
-    // required String district,
     required String zipcode,
     required String state,
     // // required String gender,
-    // // required String 
+
   }) async {
     try {
       final token = await getTokenFromSS(secureStoreKey);
@@ -50,7 +49,7 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
           {
               "street": street,
               "city": city,
-              // "district": district,
+              "district": district,
               "zipcode": zipcode,
               "state": state,
           },

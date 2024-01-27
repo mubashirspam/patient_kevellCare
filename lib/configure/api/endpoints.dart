@@ -6,7 +6,7 @@ import '../value/constant.dart';
 
 class V2 {
   // AUTH & USER
-  static const register = "$baseUrl/$service/register";
+  static const register = "https://f525-183-82-33-226.ngrok-free.app/$service/register";
 
   static const login = "$baseUrl/$service/login";
 

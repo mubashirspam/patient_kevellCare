@@ -55,7 +55,6 @@ class Data {
     String gender;
     String weight;
     bool termsApproved;
-    int v;
 
     Data({
         required this.id,
@@ -76,7 +75,6 @@ class Data {
         required this.gender,
         required this.weight,
         required this.termsApproved,
-        required this.v,
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -98,7 +96,6 @@ class Data {
         gender: json["gender"],
         weight: json["weight"],
         termsApproved: json["terms_approved"],
-        v: json["__v"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -120,7 +117,6 @@ class Data {
         "gender": gender,
         "weight": weight,
         "terms_approved": termsApproved,
-        "__v": v,
     };
 }
 
@@ -129,12 +125,14 @@ class Address {
     String city;
     String state;
     String zipCode;
+    String district;
 
     Address({
         required this.street,
         required this.city,
         required this.state,
         required this.zipCode,
+        required this.district,
     });
 
     factory Address.fromJson(Map<String, dynamic> json) => Address(
@@ -142,6 +140,7 @@ class Address {
         city: json["city"],
         state: json["state"],
         zipCode: json["zipCode"],
+        district: json["district"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -149,5 +148,6 @@ class Address {
         "city": city,
         "state": state,
         "zipCode": zipCode,
+        "district": district,
     };
 }

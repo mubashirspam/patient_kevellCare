@@ -77,7 +77,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         name: event.name, 
         street: event.street, 
         city: event.city, 
-        // district: event.district, 
+        district: event.district, 
         zipcode: event.zipcode, 
         state: event.state, 
         height: event.height, 

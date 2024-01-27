@@ -16,6 +16,8 @@ class ForgotScreen extends StatelessWidget {
     GlobalKey<FormState> formKey = GlobalKey<FormState>();
    ForgotScreen({Key? key}) : super(key: key);
  bool patient = false;
+  bool islogin = true;
+
   @override
   Widget build(BuildContext context) {
  

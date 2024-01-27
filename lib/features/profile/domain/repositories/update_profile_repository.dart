@@ -9,14 +9,15 @@ abstract class UpdateProfileRepository {
     required String name,
     required String dob,
     required String mobileNumber,
-      required String street,
+    required String street,
     required String city,
     required String email,
-        required String gender,
+    required String gender,
+    required String district,
 
     required String zipcode,
     required String state,
-        required String height,
+    required String height,
     required String weight
 
   });

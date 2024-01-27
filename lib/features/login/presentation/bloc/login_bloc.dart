@@ -34,7 +34,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         final response = await loginRepository.login(
           usernameOrMobile: event.usernameOrMobile,
           password: event.password,
-          islogin: true
+          islogin: false
         );
 
         response.fold((failure) {
@@ -69,7 +69,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final response = await otpRepository.varifyOtp(
         number: event.number,
         otp: event.otp,
-        islogin: false
+        islogin: true
       );
 
       final result = response.fold(
