@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/helper/date.dart';
@@ -25,7 +23,7 @@ class EditMyProfile extends StatefulWidget {
   final String? weight;
   final String? email;
   final String? gender;
-
+  final String? district;
   final String? dob;
 
   const EditMyProfile({
@@ -35,7 +33,7 @@ class EditMyProfile extends StatefulWidget {
     this.weight,
     this.email,
     this.gender,
-
+    this.district,
     this.zipcode,
     this.city,
     this.state,
@@ -55,14 +53,13 @@ class _EditMyProfileState extends State<EditMyProfile> {
   late TextEditingController mobileController;
   late TextEditingController dobController;
   late TextEditingController streetController;
-    late TextEditingController cityController;
+  late TextEditingController cityController;
   late TextEditingController zipcodeController;
   late TextEditingController heightController;
   late TextEditingController weightController;
-late TextEditingController emailIdController;
-late TextEditingController genderController;
+  late TextEditingController emailIdController;
+  late TextEditingController genderController;
   late TextEditingController stateController;
-
 
   @override
   void initState() {
@@ -71,8 +68,8 @@ late TextEditingController genderController;
         text: dateFormatToddmmyyyy(DateTime.parse(widget.dob.toString())));
     // dobController = TextEditingController();
     mobileController = TextEditingController(text: widget.mobile);
-   stateController = TextEditingController(text: widget.state);
-        streetController = TextEditingController(text: widget.street);
+    stateController = TextEditingController(text: widget.state);
+    streetController = TextEditingController(text: widget.street);
     cityController = TextEditingController(text: widget.city);
     zipcodeController = TextEditingController(text: widget.zipcode);
     heightController = TextEditingController(text: widget.height);
@@ -100,7 +97,7 @@ late TextEditingController genderController;
             }
             if (!state.isUpdateLoading && state.hasData) {
               Toast.showToast(
-                  context: context, message: "Profile Updated Successfully");
+                  context: context, message: "Profile updated Successfully");
 
               Navigator.of(context).pop();
             }
@@ -117,7 +114,9 @@ late TextEditingController genderController;
                   children: [
                     Text("Edit Profile",
                         style: Theme.of(context).textTheme.headlineLarge!),
-                    const SizedBox(height: 25,),
+                    const SizedBox(
+                      height: 25,
+                    ),
                     Text("Full Name",
                         style: Theme.of(context).textTheme.titleLarge),
                     const SizedBox(height: 10),
@@ -149,24 +148,9 @@ late TextEditingController genderController;
                         return null; // Return null if validation succeeds
                       },
                     ),
-                     const SizedBox(height: 20),
-                    Text("EmailId",
-                        style: Theme.of(context).textTheme.titleLarge),
-                    const SizedBox(height: 10),
-                    TextFieldWidget(
-                      textEditingController: emailIdController,
-                      hintText: "zxy@gmail.com",
-                      keyboardType: TextInputType.text,
-                      validate: (number) {
-                        if (number == null || number.isEmpty) {
-                          return "Please enter an Email address";
-                        } else if (!regex.hasMatch(number)) {
-                          return "Please enter a valid Email address";
-                        }
-                        return null; // Return null if validation succeeds
-                      },
+                    const SizedBox(
+                      height: 20,
                     ),
-                    const SizedBox(height: 20,),
                     Text("Gender",
                         style: Theme.of(context).textTheme.titleLarge),
                     const SizedBox(height: 10),
@@ -181,13 +165,11 @@ late TextEditingController genderController;
                         return null; // Return null if validation succeeds
                       },
                     ),
-                    
                     const SizedBox(height: 20),
                     Text("Date of birth",
                         style: Theme.of(context).textTheme.titleLarge),
                     const SizedBox(height: 10),
                     TextFieldWidget(
-                    
                       hintText: "12/12/2023",
                       inputFormatters: [DateInputFormatter()],
                       validate: DateValidator.validateDate,
@@ -245,8 +227,10 @@ late TextEditingController genderController;
                             },
                           ),
                         ),
-                        const SizedBox(width: 10,),
-                         Expanded(
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
                           child: TextFieldWidget(
                             textEditingController: cityController,
                             hintText: "City",
@@ -255,14 +239,16 @@ late TextEditingController genderController;
                               if (value == null || value.isEmpty) {
                                 return "Please enter a City";
                               }
-                              return null; 
+                              return null;
                             },
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10,),
-                     Row(
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
                       children: [
                         Expanded(
                           child: TextFieldWidget(
@@ -273,12 +259,14 @@ late TextEditingController genderController;
                               if (value == null || value.isEmpty) {
                                 return "Please enter a State";
                               }
-                              return null; 
+                              return null;
                             },
                           ),
                         ),
-                        const SizedBox(width: 10,),
-                         Expanded(
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
                           child: TextFieldWidget(
                             textEditingController: zipcodeController,
                             hintText: "Zipcode",
@@ -287,14 +275,16 @@ late TextEditingController genderController;
                               if (value == null || value.isEmpty) {
                                 return "Please Enter a Zipcode ";
                               }
-                              return null; 
+                              return null;
                             },
                           ),
                         ),
                       ],
                     ),
-                     const SizedBox(height: 10,),
-                     Row(
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
                       children: [
                         Expanded(
                           child: TextFieldWidget(
@@ -309,8 +299,10 @@ late TextEditingController genderController;
                             },
                           ),
                         ),
-                        const SizedBox(width: 10,),
-                         Expanded(
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
                           child: TextFieldWidget(
                             textEditingController: weightController,
                             hintText: "Weight",
@@ -319,7 +311,7 @@ late TextEditingController genderController;
                               if (value == null || value.isEmpty) {
                                 return "Please enter a Weight";
                               }
-                              return null; 
+                              return null;
                             },
                           ),
                         ),
@@ -346,18 +338,21 @@ late TextEditingController genderController;
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   context.read<ProfileBloc>().add(
-                                         ProfileEvent.updateProfile(
-                                          dob:dateFormatToYYYYMMdd(
-                                                  state.date),
-
-                                           mobileNumber: mobileController.value.text, 
-                                           street:streetController.value.text,
+                                        ProfileEvent.updateProfile(
+                                            dob: dateFormatToYYYYMMdd(
+                                                state.date),
+                                            mobileNumber:
+                                                mobileController.value.text,
+                                            street: streetController.value.text,
                                             weight: weightController.value.text,
-                                             name: nameController.value.text,
-                                               city: cityController.value.text,
-                                                height:heightController.value.text,
-                                                  state: '', email: '', gender: '', district: '', zipcode: ''
-                                        ),
+                                            name: nameController.value.text,
+                                            city: cityController.value.text,
+                                            height: heightController.value.text,
+                                            state: '',
+                                            email: '',
+                                            gender: '',
+                                            district: '',
+                                            zipcode: ''),
                                       );
                                 }
                               },
