@@ -14,12 +14,10 @@ import '../../domain/repositories/get_profile_repository.dart';
 import '../models/profile_model.dart';
 
 @LazySingleton(as: GetProfileRepository)
-class GetProfileRepoImpliment implements 
-GetProfileRepository {
+class GetProfileRepoImpliment implements GetProfileRepository {
   @override
   Future<Either<MainFailure, ProfileModel>> getProfile(
-    
-  ) async {
+      {required int id}) async {
     try {
       final id = await getTokenFromSS(drIdsecureStoreKey);
       final token = await getTokenFromSS(secureStoreKey);
@@ -27,23 +25,19 @@ GetProfileRepository {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
-      
+
       log("token $token");
-
-
-      // final response =
-      //     await Dio().get("https://573a-183-82-33-226.ngrok-free.app/v2/patients/patient-info");
-
-  
-      // log(id.toString());
-
       final response = await Dio(BaseOptions()).get(
-        V2.fetchProfile,
-        options: Options(headers: headers,  validateStatus: (_) => true,),
+        // V2.fetchprofile,
+        "https://89f4-183-82-33-226.ngrok-free.app/v2/patients/patient-info?id=$id",
+        options: Options(
+          headers: headers,
+          validateStatus: (_) => true,
+        ),
         data: {'id': int.parse("$id")},
       );
-      log("Response ${response.data}");
-
+      log("Response   ${response.data}");
+      print("Response : ${response.data}");
       switch (response.statusCode) {
         case 200:
         case 201:

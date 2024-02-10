@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final createRatingPayload = createRatingPayloadFromJson(jsonString);
 
 import 'dart:convert';
 

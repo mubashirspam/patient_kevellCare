@@ -25,11 +25,11 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
-    });
+      context.read<ProfileBloc>().add(const ProfileEvent.getProfile(id: 1006));
+    });  
 
     return BlocConsumer<ProfileBloc, ProfileState>(
-      listener: (context, state) async {
+      listener: (context, state) async {  
         if (state.unauthorized) {
           Toast.showToast(
             context: context,
@@ -46,9 +46,11 @@ class ProfileScreen extends StatelessWidget {
               child: const LoadingWIdget(),
             ),
           );
-        } else if (state.hasData) {
+        } 
+        else if (state.hasData) {
           return ProfileBody(profileData: state.result!);
-        } else if (state.isError) {
+        } 
+        else if (state.isError) {
           return const Center(child: AppErrorWidget());
         }
         return const Center(child: Text("NO  data"));
@@ -91,7 +93,8 @@ class ProfileBody extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 60, bottom: 5),
-                            child: Text(
+                            child: 
+                            Text(
                               profileData.data.name,
                               style: Theme.of(context)
                                   .textTheme
@@ -176,25 +179,23 @@ class ProfileBody extends StatelessWidget {
                           elevation: 0,
                           isScrollControlled: true,
                           context: context,
-                          builder: (context) => Container(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  bottom:
-                                      MediaQuery.of(context).viewInsets.bottom),
-                              child: EditMyProfile(
-                                height: profileData.data.height,
-                                weight: profileData.data.weight,
-                                city: profileData.data.address.city,
-                                state: profileData.data.address.state,
-                                district: profileData.data.address.district,
-                                street: profileData.data.address.street,
-                                zipcode: profileData.data.address.zipCode,
-                                name: profileData.data.name,
-                                mobile: profileData.data.mobileNo,
-                                dob: profileData.data.dob.toString(),
-                                gender: profileData.data.gender,
-                                email: profileData.data.emailId,
-                              ),
+                          builder: (context) => Padding(
+                            padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom),
+                            child: EditMyProfile(
+                              height: profileData.data.height,
+                              weight: profileData.data.weight,
+                              city: profileData.data.address.city,
+                              state: profileData.data.address.state,
+                              district: profileData.data.address.district,
+                              street: profileData.data.address.street,
+                              zipcode: profileData.data.address.zipCode,
+                              name: profileData.data.name,
+                              mobile: profileData.data.mobileNo,
+                              dob: profileData.data.dob.toString(),
+                              gender: profileData.data.gender,
+                              email: profileData.data.emailId,
                             ),
                           ),
                         );
@@ -285,25 +286,23 @@ class ProfileBody extends StatelessWidget {
                           elevation: 0,
                           isScrollControlled: true,
                           context: context,
-                          builder: (context) => Container(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  bottom:
-                                      MediaQuery.of(context).viewInsets.bottom),
-                              child: EditMyProfile(
-                                height: profileData.data.height,
-                                weight: profileData.data.weight,
-                                city: profileData.data.address.city,
-                                state: profileData.data.address.state,
-                                // district: profileData.data.address.district,
-                                street: profileData.data.address.street,
-                                zipcode: profileData.data.address.zipCode,
-                                name: profileData.data.name,
-                                mobile: profileData.data.mobileNo,
-                                dob: profileData.data.dob.toString(),
-                                gender: profileData.data.gender,
-                                email: profileData.data.emailId,
-                              ),
+                          builder: (context) => Padding(
+                            padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom),
+                            child: EditMyProfile(
+                              height: profileData.data.height,
+                              weight: profileData.data.weight,
+                              city: profileData.data.address.city,
+                              state: profileData.data.address.state,
+                              // district: profileData.data.address.district,
+                              street: profileData.data.address.street,
+                              zipcode: profileData.data.address.zipCode,
+                              name: profileData.data.name,
+                              mobile: profileData.data.mobileNo,
+                              dob: profileData.data.dob.toString(),
+                              gender: profileData.data.gender,
+                              email: profileData.data.emailId,
                             ),
                           ),
                         );
@@ -387,25 +386,23 @@ class ProfileBody extends StatelessWidget {
                           elevation: 0,
                           isScrollControlled: true,
                           context: context,
-                          builder: (context) => Container(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                  bottom:
-                                      MediaQuery.of(context).viewInsets.bottom),
-                              child: EditMyProfile(
-                                height: profileData.data.height,
-                                weight: profileData.data.weight,
-                                city: profileData.data.address.city,
-                                state: profileData.data.address.state,
-                                // district: profileData.data.address.district,
-                                street: profileData.data.address.street,
-                                zipcode: profileData.data.address.zipCode,
-                                name: profileData.data.name,
-                                mobile: profileData.data.mobileNo,
-                                dob: profileData.data.dob.toString(),
-                                gender: profileData.data.gender,
-                                email: profileData.data.emailId,
-                              ),
+                          builder: (context) => Padding(
+                            padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom),
+                            child: EditMyProfile(
+                              height: profileData.data.height,
+                              weight: profileData.data.weight,
+                              city: profileData.data.address.city,
+                              state: profileData.data.address.state,
+                              // district: profileData.data.address.district,
+                              street: profileData.data.address.street,
+                              zipcode: profileData.data.address.zipCode,
+                              name: profileData.data.name,
+                              mobile: profileData.data.mobileNo,
+                              dob: profileData.data.dob.toString(),
+                              gender: profileData.data.gender,
+                              email: profileData.data.emailId,
                             ),
                           ),
                         );
