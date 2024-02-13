@@ -21,13 +21,13 @@ class UploadImageRepoImpliment implements UploadImageRepository {
     required File image,
   }) async {
     try {
-      final id = await getTokenFromSS(drIdsecureStoreKey);
+      final id = await getTokenFromSS(patientId);
       final img = await MultipartFile.fromFile(image.path);
 
       FormData formData =
           FormData.fromMap({'_id': id, 'ProfileImagelink': img});
       final response = await Dio(BaseOptions()).put(
-        V2.updateProfile,
+        V2.fetchProfile,
         data: formData,
       );
 

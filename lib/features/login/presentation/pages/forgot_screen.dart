@@ -14,7 +14,7 @@ class ForgotScreen extends StatelessWidget {
    TextEditingController confirmpassController = TextEditingController();
 
     GlobalKey<FormState> formKey = GlobalKey<FormState>();
-   ForgotScreen({Key? key}) : super(key: key);
+   ForgotScreen({super.key});
  bool patient = false;
   bool islogin = true;
 

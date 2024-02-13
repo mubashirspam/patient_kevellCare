@@ -5,9 +5,9 @@ import '../../data/models/medical_service_model.dart';
 
 class MedicalServices extends StatelessWidget {
   const MedicalServices({
-    Key? key,
+    super.key,
     required this.medicalServices,
-  }) : super(key: key);
+  });
 
   final List<MedicalServicesModel> medicalServices;
 

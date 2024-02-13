@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/widgets/avatar/active_avatar.dart';
 
-
 import '../../data/models/available_doctor_model.dart';
 
 class AvailableDoctorCard extends StatelessWidget {
-  final HomeAvailableDoctorModelDatum data;
-
+  final AvailableDoctor data;
 
   const AvailableDoctorCard({
     super.key,
     required this.data,
-
   });
 
   @override
@@ -30,14 +27,14 @@ class AvailableDoctorCard extends StatelessWidget {
             imageUrl: data.profileImagelink,
             imgRadius: 6,
             radius: 80,
-            isActive: false,
+            isActive: true,
           ),
           const SizedBox(width: 15),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Dr.${data.username}",
+              Text("Dr.${data.name}",
                   style: Theme.of(context)
                       .textTheme
                       .headlineLarge!
@@ -61,10 +58,11 @@ class AvailableDoctorCard extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          const Icon(Icons.chevron_right,)
+          const Icon(
+            Icons.chevron_right,
+          )
         ],
       ),
     );
   }
 }
-

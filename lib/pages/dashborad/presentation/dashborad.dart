@@ -7,12 +7,11 @@ import 'package:kevell_care/pages/dashborad/presentation/widgets/deawer_widget.d
 import '../../../features/appoiments/presentation/pages/appoinments_screen.dart';
 import '../../../features/chat/presentation/pages/chat_screen.dart';
 
-import '../../../features/appoiments/presentation/widgets/appoiment_screen_appbar.dart';
+
 
 import '../../../features/chat/presentation/widgets/chat_appbar.dart';
 import '../../../features/home/presentation/pages/home_screen.dart';
 import '../../../features/home/presentation/widgets/home_appbar.dart';
-
 
 import '../../../features/profile/presentation/pages/profile_screen.dart';
 import '../../../features/profile/presentation/widgets/profile_appbar.dart';
@@ -35,11 +34,7 @@ class _DashboardState extends State<Dashboard> {
       "appbar": const HomeAppBar(),
       "flotingButton": null
     },
-    {
-      "page": const AppointmentScreen(),
-      "appbar": AppoinmentAppBar,
-      "flotingButton": null
-    },
+    {"page": const AppointmentScreen(), "appbar": "", "flotingButton": null},
     {
       "page": const ChatScreen(),
       "appbar": const ChatAppBar(),
@@ -67,6 +62,7 @@ class _DashboardState extends State<Dashboard> {
           child: Scaffold(
             appBar: index == 1
                 ? AppBar(
+                    leading: const SizedBox(),leadingWidth: 1,
                     backgroundColor: context.theme.backround,
                     centerTitle: false,
                     title: Text(
@@ -108,7 +104,7 @@ class _DashboardState extends State<Dashboard> {
             floatingActionButton:
                 _pagesOptions.elementAt(index)["flotingButton"],
             bottomNavigationBar: const BottomWidget(),
-            drawer:  const DrawerWidget(),
+            drawer: const DrawerWidget(),
           ),
         );
       },

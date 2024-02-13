@@ -9,6 +9,7 @@ class AppoinmetsState with _$AppoinmetsState {
     required bool createData,
     required bool isError,
     AppoimentModel? appoimentData,
+    CreateAppointment? createAppointmentData,
     required bool isUpdateLoading,
     required bool isDeleteLoading,
     required bool isDeleted,
@@ -17,7 +18,8 @@ class AppoinmetsState with _$AppoinmetsState {
     required DateTime? endTime,
     required DeleteAppoinmentsModel? deleteResponse,
     required UpdateAppoinmentsModel? updateResponse,
-    MainFailure? failure,
+    required MainFailure? failure,
+    required PaymentStatus paymentStatus,
   }) = _AppoinmetsState;
 
   factory AppoinmetsState.initial() => const AppoinmetsState(
@@ -33,8 +35,12 @@ class AppoinmetsState with _$AppoinmetsState {
         isUpdated: false,
         deleteResponse: null,
         updateResponse: null,
+        createAppointmentData: null,
         endTime: null,
         startTime: null,
+        paymentStatus: PaymentStatus.notCreated,
         failure: null,
       );
 }
+
+enum PaymentStatus { created, success, failed, notCreated }

@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
-
 import '../../../../core/helper/date.dart';
 import '../../../../core/helper/toast.dart';
 import '../../../home/data/models/available_doctor_model.dart';
 import '../../../home/presentation/bloc/home_bloc.dart';
 import '../../../widgets/input_field/input_field_widget.dart';
+import '../../domain/entities/create_appoinments.dart';
 import '../bloc/appoinmets_bloc.dart';
 import '../widgets/date_list.dart';
 import '../widgets/token_list.dart';
 import 'checkout_page.dart';
 
 class BookNewAppointmentScreen extends StatelessWidget {
-  final HomeAvailableDoctorModelDatum doctorData;
+  final AvailableDoctor doctorData;
   static const routeName = '/book-new-appoiment';
   BookNewAppointmentScreen({
     super.key,
@@ -85,7 +85,7 @@ class BookNewAppointmentScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Dr.${doctorData.username}",
+                              "Dr.${doctorData.name}",
                               style: Theme.of(context).textTheme.headlineMedium,
                             ),
                             Text(
@@ -121,7 +121,7 @@ class BookNewAppointmentScreen extends StatelessWidget {
               BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
                   final List<DateTime?> dateList =
-                      doctorData.data!.map((e) => e.days).toList();
+                      doctorData.schedule!.map((e) => e.days).toList();
 
                   int activeIndex =
                       dateList.indexWhere((element) => element == state.date);
@@ -136,8 +136,8 @@ class BookNewAppointmentScreen extends StatelessWidget {
                 builder: (context, state) {
                   List<Map<String, dynamic>> timeList = [];
 
-                  List<DatumDatum> filteredObjects =
-                      doctorData.data!.where((object) {
+                  List<Schedule> filteredObjects =
+                      doctorData.schedule!.where((object) {
                     return object.days == state.date;
                   }).toList();
 
@@ -145,6 +145,8 @@ class BookNewAppointmentScreen extends StatelessWidget {
                     List<String> formattedList = [];
                     List<Bookedtime> bookedtimeSlots =
                         filteredObjects.first.bookedtime ?? [];
+
+                   
 
                     if (bookedtimeSlots.isNotEmpty) {
                       for (var slot in bookedtimeSlots) {
@@ -156,11 +158,18 @@ class BookNewAppointmentScreen extends StatelessWidget {
 
                         formattedList.add(formattedSlot);
                       }
+                      //  print("booked time === ${formattedList.toString()} ");
                     }
 
-                    int timePerPatient = filteredObjects.first.timeperPatient!;
-                    DateTime startTimeDt = filteredObjects.first.starttime!;
-                    DateTime endTimeDt = filteredObjects.first.endtime!;
+                    int timePerPatient = filteredObjects.first.timePerPatient!;
+                    DateTime startTimeDt = filteredObjects.first.startTime!;
+                    DateTime endTimeDt = filteredObjects.first.endTime!;
+
+                      print("timePerPatient ==== ${filteredObjects.first.timePerPatient!}");
+                        print("startTimeDt ==== ${ filteredObjects.first.startTime!}");
+                          print("endTimeDt ==== ${filteredObjects.first.endTime!}");
+
+
                     while (startTimeDt
                         .add(Duration(minutes: timePerPatient))
                         .isBefore(
@@ -171,13 +180,18 @@ class BookNewAppointmentScreen extends StatelessWidget {
                       String currentTimeSlot =
                           "${extractTime(startTimeDt)} to ${extractTime(endTimeSlotDt)}";
 
+                          // print("currentTimeSlot ==== $currentTimeSlot");
+
                       bool foundMatch = formattedList.contains(currentTimeSlot);
+                      //  print("foundMatch ==== $foundMatch");
 
                       timeList.add({
                         "startTime": startTimeDt,
-                        "endTime": endTimeDt,
+                        "endTime": endTimeSlotDt,
                         "isBooked": foundMatch,
                       });
+
+                      // print(timeList.toString());
 
                       startTimeDt = endTimeSlotDt;
                     }
@@ -204,7 +218,6 @@ class BookNewAppointmentScreen extends StatelessWidget {
                   },
                 ),
               ),
-             
               BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, homeState) {
                   return SafeArea(
@@ -214,7 +227,14 @@ class BookNewAppointmentScreen extends StatelessWidget {
                         listener: (context, appointmentState) {
                           if (appointmentState.createData) {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const ChckoutPage(),
+                              builder: (context) => ChckoutPage(
+                                checkoutDetails: appointmentState
+                                    .createAppointmentData!.data!,
+                                    date:homeState.date ,
+                                    doctorName: doctorData.name??"",
+                                    time: "${extractTime(homeState.startTime!)} to ${extractTime(homeState.endTime!)} ",
+
+                              ),
                             ));
                           }
                           if (appointmentState.isError) {
@@ -227,36 +247,28 @@ class BookNewAppointmentScreen extends StatelessWidget {
                           return TextButtonWidget(
                             name: "Book an Appointment",
                             onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const ChckoutPage(),
-                              ));
-
-                              // if (homeState.endTime != null) {
-                              //   context.read<AppoinmetsBloc>().add(
-                              //         AppoinmetsEvent.createAppoinments(
-                              //           appoinmentsPayload: AppoinmentsPayload(
-                              //             patientId: 1014,
-                              //             appointmentDate: homeState.date,
-                              //             appointmentStarttime:
-                              //                 homeState.startTime,
-                              //             appointmentEndtime: homeState.endTime,
-                              //             doctorname: doctorData.username,
-                              //             doctorId: doctorData.id,
-                              //             amount: 1000,
-                              //             partialPayment: false,
-                              //             apptToken: 1,
-                              //             token:homeSate.token
-                              //             reasonFormeetingDoctor:
-                              //                 remarkController.value.text,
-                              //           ),
-                              //         ),
-                              //       );
-                              // } else {
-                              //   return Toast.showToast(
-                              //       context: context,
-                              //       message: "Please select an a time slote",
-                              //       color: Colors.red);
-                              // }
+                              if (homeState.endTime != null) {
+                                context.read<AppoinmetsBloc>().add(
+                                      AppoinmetsEvent.createAppoinments(
+                                        appoinmentsPayload: AppointmentsPayload(
+                                          appointmentDate: homeState.date,
+                                          appointmentStarttime:
+                                              homeState.startTime,
+                                          appointmentEndtime: homeState.endTime,
+                                          doctorId: doctorData.id,
+                                          amount: 1000,
+                                          apptToken: homeState.token,
+                                          reasonFormeetingDoctor:
+                                              remarkController.value.text,
+                                        ),
+                                      ),
+                                    );
+                              } else {
+                                return Toast.showToast(
+                                    context: context,
+                                    message: "Please select an a time slote",
+                                    color: Colors.red);
+                              }
                             },
                             isLoading: state.isCreateLoading,
                           );

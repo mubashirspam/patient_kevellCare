@@ -5,8 +5,6 @@ import 'package:socket_io_client/socket_io_client.dart';
 import '../../../configure/value/constant.dart';
 import '../../../configure/value/secure_storage.dart';
 
-
-
 class ChatService {
   // instance of Socket
   Socket? socket;
@@ -15,7 +13,7 @@ class ChatService {
   static final instance = ChatService._();
 
   init() async {
-    final id = await getFromSS(drIdsecureStoreKey);
+    final id = await getFromSS(patientId);
     int userId;
     if (id != null) {
       userId = int.parse(id);

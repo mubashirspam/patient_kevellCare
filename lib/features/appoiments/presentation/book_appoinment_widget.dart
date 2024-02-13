@@ -363,7 +363,7 @@
 //                               isLoading: appointmentState.isCreateLoading,
 //                               onPressed: () async {
 //                                 if (homeState.endTime != null) {
-//                                   await getFromSS(drIdsecureStoreKey)
+//                                   await getFromSS(patientId)
 //                                       .then((value) {
 //                                     if (value != null) {
 //                                       if (selectedLocation ==

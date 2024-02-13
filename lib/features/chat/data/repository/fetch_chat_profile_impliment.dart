@@ -13,21 +13,17 @@ import '../model/chat_person_model.dart';
 
 @LazySingleton(as: FetchChatProfileRepository)
 class FetchChatProfileRepoImpliment implements FetchChatProfileRepository {
- 
   @override
   Future<Either<MainFailure, ChatProfileModel>> fetchChatProfile({
     required String id,
   }) async {
-      final ids = await getFromSS(drIdsecureStoreKey);
+    final ids = await getFromSS(patientId);
     try {
       final response = await Dio().get(ApiEndPoints.fetchChatProfile,
           queryParameters: {'patientId': ids});
 
       if (response.statusCode == 200) {
         final result = ChatProfileModel.fromJson(response.data);
-      
-
-       
 
         return Right(result);
       } else {

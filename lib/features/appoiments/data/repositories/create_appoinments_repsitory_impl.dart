@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../configure/api/endpoints.dart';
 
 import '../../../../configure/value/constant.dart';
 import '../../../../configure/value/secure_storage.dart';
@@ -16,29 +15,34 @@ import '../models/create_appoinment_resonse.dart';
 @LazySingleton(as: CreateAppoinmentsRepository)
 class CreateAppoinmentsRepoImpliment implements CreateAppoinmentsRepository {
   @override
-  Future<Either<MainFailure, CreateResponse>> createAppoinments({
-    required AppoinmentsPayload appoinmentsPayload,
+  Future<Either<MainFailure, CreateAppointment>> createAppoinments({
+    required AppointmentsPayload appoinmentsPayload,
   }) async {
     try {
+      AppointmentsPayload payload = appoinmentsPayload;
       final token = await getTokenFromSS(secureStoreKey);
+      final id = await getTokenFromSS(patientId);
+
+      payload.patientId = int.parse(id!);
 
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
 
-      log(appoinmentsPayload.toJson().toString());
+      print(payload.toJson().toString());
       final response = await Dio(BaseOptions()).post(
-        ApiEndPoints.createAppoinments,
-        data: appoinmentsPayload.toJson(),
+        // V2.bookAppointment,
+        "https://9104-183-82-33-226.ngrok-free.app/$service2/book-appointment",
+        data: payload.toJson(),
         options: Options(headers: headers),
       );
 
       switch (response.statusCode) {
         case 200:
         case 201:
-          final result = CreateResponse.fromJson(response.data);
-          log(result.toJson().toString());
+          final result = CreateAppointment.fromJson(response.data);
+
           return Right(result);
         case 400:
         case 401:

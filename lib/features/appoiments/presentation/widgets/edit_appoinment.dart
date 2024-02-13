@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:kevell_care/core/helper/date.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/appoiments/presentation/bloc/appoinmets_bloc.dart';
 
@@ -11,7 +10,7 @@ import '../../data/models/appoiments_model.dart';
 import '../../domain/entities/update_appoinments.dart';
 
 class EditAppoinmentWidget extends StatefulWidget {
-  final Past data;
+  final Appointment data;
 
   const EditAppoinmentWidget({
     super.key,
@@ -31,42 +30,42 @@ class _EditAppoinmentWidgetState extends State<EditAppoinmentWidget> {
     super.initState();
   }
 
-  @override
-  void didChangeDependencies() {
-    int timePerPatient = widget.data.doctordata!.timeperPatient ?? 0;
+  // @override
+  // void didChangeDependencies() {
+  //   int timePerPatient = widget.data. ?? 0;
 
-    DateTime startTimeDt = widget.data.doctordata!.starttime!;
+  //   DateTime startTimeDt = widget.data!.starttime!;
 
-    DateTime endTimeDt = widget.data.doctordata!.endtime!;
-    timeSlotItems.clear();
-    while (startTimeDt
-        .add(Duration(minutes: timePerPatient))
-        .isBefore(endTimeDt.add(Duration(minutes: timePerPatient)))) {
-      DateTime endTimeSlotDt =
-          startTimeDt.add(Duration(minutes: timePerPatient));
+  //   DateTime endTimeDt = widget.data!.endtime!;
+  //   timeSlotItems.clear();
+  //   while (startTimeDt
+  //       .add(Duration(minutes: timePerPatient))
+  //       .isBefore(endTimeDt.add(Duration(minutes: timePerPatient)))) {
+  //     DateTime endTimeSlotDt =
+  //         startTimeDt.add(Duration(minutes: timePerPatient));
 
-      String valueTimeSlot = "$startTimeDt,$endTimeSlotDt";
+  //     String valueTimeSlot = "$startTimeDt,$endTimeSlotDt";
 
-      String currentTimeSlot =
-          "${extractTime(startTimeDt)} to ${extractTime(endTimeSlotDt)}";
-      // Format this as needed
+  //     String currentTimeSlot =
+  //         "${extractTime(startTimeDt)} to ${extractTime(endTimeSlotDt)}";
+  //     // Format this as needed
 
-      timeSlotItems.add(
-        DropdownMenuItem<String>(
-          value: valueTimeSlot,
-          child: Text(
-            currentTimeSlot,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: context.theme.textPrimary,
-                ),
-          ),
-        ),
-      );
+  //     timeSlotItems.add(
+  //       DropdownMenuItem<String>(
+  //         value: valueTimeSlot,
+  //         child: Text(
+  //           currentTimeSlot,
+  //           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+  //                 color: context.theme.textPrimary,
+  //               ),
+  //         ),
+  //       ),
+  //     );
 
-      startTimeDt = endTimeSlotDt;
-    }
-    super.didChangeDependencies();
-  }
+  //     startTimeDt = endTimeSlotDt;
+  //   }
+  //   super.didChangeDependencies();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +143,7 @@ class _EditAppoinmentWidgetState extends State<EditAppoinmentWidget> {
                                       appoinmetsPayload:
                                           UpdateAppoinmentsPayload(
                                         appointmentdate:
-                                            widget.data.appointmentdate,
+                                            widget.data.appointmentDate,
                                         endtime:
                                             state.endTime!.toIso8601String(),
                                         id: widget.data.id,

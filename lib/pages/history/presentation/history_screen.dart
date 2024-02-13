@@ -15,7 +15,7 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await getTokenFromSS(drIdsecureStoreKey).then((value) {
+      await getTokenFromSS(patientId).then((value) {
         if (value != null) {
           int id = int.parse(value);
 

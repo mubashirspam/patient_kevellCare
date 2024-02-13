@@ -2,8 +2,9 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kevell_care/configure/api/endpoints.dart';
 
-import '../../../../configure/api/endpoints.dart';
+
 import '../../../../configure/value/constant.dart';
 import '../../../../configure/value/secure_storage.dart';
 import '../../../../core/failiar/failiur_model.dart';
@@ -23,11 +24,11 @@ class GetAppoinmentsRepoImpliment implements GetAppoinmentsRepository {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
-      final id = await getTokenFromSS(drIdsecureStoreKey);
+      final id = await getTokenFromSS(patientId);
 
       final response = await Dio(BaseOptions()).post(
-        ApiEndPoints.fetchAppoinment,        options: Options(headers: headers),
-        data: {'patientId': int.parse(id.toString())},
+       V2.appointmets,     options: Options(headers: headers),
+        data: {'patient_id': int.parse(id.toString())},
       );
 
       switch (response.statusCode) {

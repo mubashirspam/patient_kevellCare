@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class SelfCheckupVideoCard extends StatefulWidget {
-  const SelfCheckupVideoCard({Key? key}) : super(key: key);
+  const SelfCheckupVideoCard({super.key});
 
   @override
   _SelfCheckupVideoCardState createState() => _SelfCheckupVideoCardState();

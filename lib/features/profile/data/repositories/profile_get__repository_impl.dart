@@ -17,17 +17,15 @@ import '../models/profile_model.dart';
 class GetProfileRepoImpliment implements 
 GetProfileRepository {
   @override
-  Future<Either<MainFailure, ProfileModel>> getProfile(
-    
-  ) async {
+  Future<Either<MainFailure, ProfileModel>> getProfile() async {
     try {
-      final id = await getTokenFromSS(drIdsecureStoreKey);
+      final id = await getTokenFromSS(patientId);
       final token = await getTokenFromSS(secureStoreKey);
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
-      
+
       log("token $token");
 
 

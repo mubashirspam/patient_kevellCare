@@ -9,8 +9,9 @@ import '../../../configure/value/constant.dart';
 import '../../../configure/value/secure_storage.dart';
 import '../../../core/helper/toast.dart';
 import '../../appoiments/presentation/pages/book_new_appoiment_screen.dart';
+import '../../widgets/error_widget.dart';
 import '../../widgets/loading_widget.dart';
-import '../data/models/available_doctor_model.dart';
+
 import 'bloc/home_bloc.dart';
 
 class AvailableDoctorList extends StatelessWidget {
@@ -49,7 +50,7 @@ class AvailableDoctorList extends StatelessWidget {
         }
 
         if (state.hasAvailableDoctorData) {
-          if (state.availableDoctors!.data!.isEmpty) {
+          if (state.availableDoctors!.availableDoctors!.isEmpty) {
             return MultiSliver(
               children: [
                 Container(
@@ -66,42 +67,24 @@ class AvailableDoctorList extends StatelessWidget {
               ],
             );
           } else {
-            log("${state.availableDoctors!.data!.length}");
+            log("${state.availableDoctors!.availableDoctors!.length}");
             return SliverList(
               delegate: SliverChildBuilderDelegate(
-                childCount: state.availableDoctors!.data!.length,
+                childCount: state.availableDoctors!.availableDoctors!.length,
                 (context, index) => InkWell(
                   onTap: () => Navigator.of(context).pushNamed(
                       BookNewAppointmentScreen.routeName,
-                      arguments: state.availableDoctors!.data![index]),
+                      arguments: state.availableDoctors!.availableDoctors![index]),
                   child: AvailableDoctorCard(
-                    data: state.availableDoctors!.data![index],
+                    data: state.availableDoctors!.availableDoctors![index],
                   ),
                 ),
               ),
             );
           }
         }
-        // return MultiSliver(
-        //   children: const [AppErrorWidget()],
-        // );
-
-        return SliverList(
-          delegate: SliverChildBuilderDelegate(
-            childCount: 1,
-            (context, index) => InkWell(
-              onTap: () => Navigator.of(context).pushNamed(
-                  BookNewAppointmentScreen.routeName,
-                  arguments: index),
-              child: AvailableDoctorCard(
-                data: HomeAvailableDoctorModelDatum(
-                  profileImagelink:
-                      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww",
-                  username: "Mubashir",
-                ),
-              ),
-            ),
-          ),
+        return MultiSliver(
+          children: const [AppErrorWidget()],
         );
       },
     );

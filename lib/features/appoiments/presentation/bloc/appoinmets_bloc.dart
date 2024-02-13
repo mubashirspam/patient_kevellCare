@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kevell_care/core/failiar/main_failures.dart';
 import 'package:kevell_care/features/appoiments/data/models/appoiments_model.dart';
+import 'package:kevell_care/features/appoiments/data/models/create_appoinment_resonse.dart';
 import 'package:kevell_care/features/appoiments/domain/entities/create_appoinments.dart';
 import 'package:kevell_care/features/appoiments/domain/repositories/create_appoinments_repository.dart';
 import 'package:kevell_care/features/appoiments/domain/repositories/delete_appoinments_repository.dart';
@@ -11,6 +12,7 @@ import 'package:kevell_care/features/appoiments/domain/repositories/update_appoi
 
 import '../../data/models/delete_appoinments_model.dart';
 import '../../data/models/update_appoinments_model.dart';
+import '../../domain/entities/payment_payload.dart';
 import '../../domain/entities/update_appoinments.dart';
 
 part 'appoinmets_event.dart';
@@ -87,6 +89,7 @@ class AppoinmetsBloc extends Bloc<AppoinmetsEvent, AppoinmetsState> {
           isError: false,
           isCreateLoading: false,
           createData: true,
+          createAppointmentData: success
         ),
       );
       emit(result);

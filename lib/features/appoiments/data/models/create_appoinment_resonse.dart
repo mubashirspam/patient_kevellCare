@@ -1,53 +1,76 @@
-// To parse this JSON data, do
-//
-//     final createResponse = createResponseFromJson(jsonString);
 
-import 'dart:convert';
 
-CreateResponse createResponseFromJson(String str) => CreateResponse.fromJson(json.decode(str));
-
-String createResponseToJson(CreateResponse data) => json.encode(data.toJson());
-
-class CreateResponse {
+class CreateAppointment {
+    int? responseCode;
     bool? status;
-    int? responsecode;
     String? message;
-    Data? data;
+    CheckoutDetails? data;
 
-    CreateResponse({
+    CreateAppointment({
+        this.responseCode,
         this.status,
-        this.responsecode,
         this.message,
         this.data,
     });
 
-    factory CreateResponse.fromJson(Map<String, dynamic> json) => CreateResponse(
+    factory CreateAppointment.fromJson(Map<String, dynamic> json) => CreateAppointment(
+        responseCode: json["responseCode"],
         status: json["status"],
-        responsecode: json["responsecode"],
         message: json["message"],
-        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+        data: json["data"] == null ? null : CheckoutDetails.fromJson(json["data"]),
     );
 
-    Map<String, dynamic> toJson() => {
-        "status": status,
-        "responsecode": responsecode,
-        "message": message,
-        "data": data?.toJson(),
-    };
+ 
 }
 
-class Data {
-    int? result;
+class CheckoutDetails {
+    String? entityType;
+    int? doctorId;
+    int? patientId;
+    int? appointmentId;
+    int? amount;
+    String? orderStatus;
+    String? receiptId;
+    String? currency;
+    String? orderId;
+    List<dynamic>? acquirerData;
+    DateTime? createdAt;
+    DateTime? updatedAt;
+    int? id;
+    int? v;
 
-    Data({
-        this.result,
+    CheckoutDetails({
+        this.entityType,
+        this.doctorId,
+        this.patientId,
+        this.appointmentId,
+        this.amount,
+        this.orderStatus,
+        this.receiptId,
+        this.currency,
+        this.orderId,
+        this.acquirerData,
+        this.createdAt,
+        this.updatedAt,
+        this.id,
+        this.v,
     });
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
-        result: json["Result"],
+    factory CheckoutDetails.fromJson(Map<String, dynamic> json) => CheckoutDetails(
+        entityType: json["entity_type"],
+        doctorId: json["doctor_id"],
+        patientId: json["patient_id"],
+        appointmentId: json["appointment_id"],
+        amount: json["amount"],
+        orderStatus: json["order_status"],
+        receiptId: json["receipt_id"],
+        currency: json["currency"],
+        orderId: json["order_id"],
+        acquirerData: json["acquirer_data"] == null ? [] : List<dynamic>.from(json["acquirer_data"]!.map((x) => x)),
+        createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+        id: json["_id"],
+        v: json["__v"],
     );
 
-    Map<String, dynamic> toJson() => {
-        "Result": result,
-    };
 }

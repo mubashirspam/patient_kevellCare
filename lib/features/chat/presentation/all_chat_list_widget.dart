@@ -55,7 +55,7 @@ class _AllChatListWidgetState extends State<AllChatListWidget> {
   }
 
   void addReceivedMessages(response) async {
-    final id = await getFromSS(drIdsecureStoreKey);
+    final id = await getFromSS(patientId);
     if (id != null) {
       log("db opened");
       for (var item in response) {
@@ -98,7 +98,7 @@ class _AllChatListWidgetState extends State<AllChatListWidget> {
                 }
                 return GestureDetector(
                     onTap: () async {
-                      await getFromSS(drIdsecureStoreKey).then((value) =>
+                      await getFromSS(patientId).then((value) =>
                           Navigator.of(context)
                               .pushNamed(ChatingScreen.routeName, arguments: {
                             'data': profiles[index],

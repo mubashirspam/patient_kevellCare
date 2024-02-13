@@ -1,46 +1,35 @@
 import '../value/constant.dart';
 
-
-
-
-
 class V2 {
   // AUTH & USER
-  static const register = "https://f525-183-82-33-226.ngrok-free.app/$service/register";
-
+  static const register = "$baseUrl/$service/register";
   static const login = "$baseUrl/$service/login";
+  static const fetchProfile = "$baseUrl/$service/users/details";
 
-  static const fetchProfile = "$baseUrl/$service/patient-info";
+  // appoinment
 
-  static const updateProfile = "$baseUrl/$service/profile";
-
-  static const forgot = "$baseUrl/$service/forgot-password";
-
-  static const change_password = "$baseUrl/$service/change-password";
-  
-  static const verifyotp = "$baseUrl/$service/verify-otp";
-
+  static const availableDoctor = "$baseUrl/$service/doctor-schedule";
+  static const bookAppointment = "$baseUrl/$service2/book-appointment";
+  static const appointmets = "$baseUrl/$service2/past-appointments";
 }
 
-
-
-
-
 class ApiEndPoints {
+  static const login =
+      "https://768e-183-82-33-226.ngrok-free.app/v2/patients/login";
 
-  static const login = "https://768e-183-82-33-226.ngrok-free.app/v2/patients/login";
+  static const register =
+      "https://768e-183-82-33-226.ngrok-free.app/v2/patients/register";
 
-  static const register = "https://768e-183-82-33-226.ngrok-free.app/v2/patients/register";
+  static const verifyotp = "$baseUrl/v2/patients/verifyphoneotp";
 
-static const verifyotp = "$baseUrl/v2/patients/verifyphoneotp";
+  static const forgot =
+      "https://768e-183-82-33-226.ngrok-free.app/v2/patients/forgot-password";
 
-static const forgot = "https://768e-183-82-33-226.ngrok-free.app/v2/patients/forgot-password";
+  static const changepass = "$baseUrl/v2/patients/change-password";
 
-static const changepass = "$baseUrl/v2/patients/change-password";
-
-  static const getprofile = 
-  // "$baseUrl/v2/patients/patientinfoby";
-  "https://768e-183-82-33-226.ngrok-free.app/v2/patients/patientinfoby";
+  static const getprofile =
+      // "$baseUrl/v2/patients/patientinfoby";
+      "https://768e-183-82-33-226.ngrok-free.app/v2/patients/patientinfoby";
 
   static const updateProfile = "$baseUrl/v2/patients/profile";
 
@@ -50,8 +39,6 @@ static const changepass = "$baseUrl/v2/patients/change-password";
 // appoinment..
 
   static const createAppoinments = "$baseUrl/appointment/api/BookAppointment";
-
-  static const fetchAppoinment ="$baseUrl/appointment/api/upcomingpasthistorypatient";
 
   static const updateAppoinment = "$baseUrl/appointment/api/updateAppoinment";
 
@@ -70,10 +57,12 @@ static const changepass = "$baseUrl/v2/patients/change-password";
   static const String fetchChatProfile =
       "https://kevelldigital.com/videochat/chat/api/getallusers";
 
-      //rating
-      
-  static const String createRating = "https://kevelldigital.com/register/api/create/review";
-       static const String getrating = "https://kevelldigital.com/register/api/getrating?patient_id=1003";
-              static const String editRating ="https://kevelldigital.com/register/api/edit/review";
+  //rating
 
+  static const String createRating =
+      "https://kevelldigital.com/register/api/create/review";
+  static const String getrating =
+      "https://kevelldigital.com/register/api/getrating?patient_id=1003";
+  static const String editRating =
+      "https://kevelldigital.com/register/api/edit/review";
 }

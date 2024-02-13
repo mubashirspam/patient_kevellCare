@@ -699,9 +699,9 @@ mixin _$HomeState {
   DateTime? get startTime => throw _privateConstructorUsedError;
   DateTime? get endTime => throw _privateConstructorUsedError;
   int? get token => throw _privateConstructorUsedError;
-  HomeAvailableDoctorModel? get availableDoctors =>
+  AvailableDoctorModel? get availableDoctors =>
       throw _privateConstructorUsedError;
-  Option<Either<MainFailure, HomeAvailableDoctorModel>>
+  Option<Either<MainFailure, AvailableDoctorModel>>
       get failureOrSuccessOption => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -724,8 +724,8 @@ abstract class $HomeStateCopyWith<$Res> {
       DateTime? startTime,
       DateTime? endTime,
       int? token,
-      HomeAvailableDoctorModel? availableDoctors,
-      Option<Either<MainFailure, HomeAvailableDoctorModel>>
+      AvailableDoctorModel? availableDoctors,
+      Option<Either<MainFailure, AvailableDoctorModel>>
           failureOrSuccessOption});
 }
 
@@ -794,11 +794,11 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
       availableDoctors: freezed == availableDoctors
           ? _value.availableDoctors
           : availableDoctors // ignore: cast_nullable_to_non_nullable
-              as HomeAvailableDoctorModel?,
+              as AvailableDoctorModel?,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, HomeAvailableDoctorModel>>,
+              as Option<Either<MainFailure, AvailableDoctorModel>>,
     ) as $Val);
   }
 }
@@ -821,8 +821,8 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       DateTime? startTime,
       DateTime? endTime,
       int? token,
-      HomeAvailableDoctorModel? availableDoctors,
-      Option<Either<MainFailure, HomeAvailableDoctorModel>>
+      AvailableDoctorModel? availableDoctors,
+      Option<Either<MainFailure, AvailableDoctorModel>>
           failureOrSuccessOption});
 }
 
@@ -889,11 +889,11 @@ class __$$HomeStateImplCopyWithImpl<$Res>
       availableDoctors: freezed == availableDoctors
           ? _value.availableDoctors
           : availableDoctors // ignore: cast_nullable_to_non_nullable
-              as HomeAvailableDoctorModel?,
+              as AvailableDoctorModel?,
       failureOrSuccessOption: null == failureOrSuccessOption
           ? _value.failureOrSuccessOption
           : failureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<MainFailure, HomeAvailableDoctorModel>>,
+              as Option<Either<MainFailure, AvailableDoctorModel>>,
     ));
   }
 }
@@ -933,9 +933,9 @@ class _$HomeStateImpl implements _HomeState {
   @override
   final int? token;
   @override
-  final HomeAvailableDoctorModel? availableDoctors;
+  final AvailableDoctorModel? availableDoctors;
   @override
-  final Option<Either<MainFailure, HomeAvailableDoctorModel>>
+  final Option<Either<MainFailure, AvailableDoctorModel>>
       failureOrSuccessOption;
 
   @override
@@ -1001,8 +1001,8 @@ abstract class _HomeState implements HomeState {
       required final DateTime? startTime,
       required final DateTime? endTime,
       required final int? token,
-      final HomeAvailableDoctorModel? availableDoctors,
-      required final Option<Either<MainFailure, HomeAvailableDoctorModel>>
+      final AvailableDoctorModel? availableDoctors,
+      required final Option<Either<MainFailure, AvailableDoctorModel>>
           failureOrSuccessOption}) = _$HomeStateImpl;
 
   @override
@@ -1024,10 +1024,9 @@ abstract class _HomeState implements HomeState {
   @override
   int? get token;
   @override
-  HomeAvailableDoctorModel? get availableDoctors;
+  AvailableDoctorModel? get availableDoctors;
   @override
-  Option<Either<MainFailure, HomeAvailableDoctorModel>>
-      get failureOrSuccessOption;
+  Option<Either<MainFailure, AvailableDoctorModel>> get failureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>

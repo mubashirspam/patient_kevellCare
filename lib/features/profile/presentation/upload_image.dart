@@ -1,13 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_cropper/image_cropper.dart';
+// import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kevell_care/configure/value/constant.dart';
-import 'package:kevell_care/configure/value/secure_storage.dart';
 
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:path_provider/path_provider.dart';
@@ -54,63 +51,37 @@ class _UploadImagePageState extends State<UploadImagePage> {
     }
   }
 
-  _cropImage(File imgFile) async {
-    final croppedFile = await ImageCropper().cropImage(
-        sourcePath: imgFile.path,
-        aspectRatioPresets: Platform.isAndroid
-            ? [
-                CropAspectRatioPreset.square,
-              ]
-            : [
-                CropAspectRatioPreset.square,
-              ],
-        uiSettings: [
-          AndroidUiSettings(
-              toolbarTitle: "Image Cropper",
-              toolbarColor: Colors.deepOrange,
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
-          IOSUiSettings(
-            title: "Image Cropper",
-          )
-        ]);
-    if (croppedFile != null) {
-      imageCache.clear();
-      setState(() {
-        _selectedImage = File(croppedFile.path);
-      });
-      // reload();
-    }
-  }
+  // _cropImage(File imgFile) async {
+  //   final croppedFile = await ImageCropper().cropImage(
+  //       sourcePath: imgFile.path,
+  //       aspectRatioPresets: Platform.isAndroid
+  //           ? [
+  //               CropAspectRatioPreset.square,
+  //             ]
+  //           : [
+  //               CropAspectRatioPreset.square,
+  //             ],
+  //       uiSettings: [
+  //         AndroidUiSettings(
+  //             toolbarTitle: "Image Cropper",
+  //             toolbarColor: Colors.deepOrange,
+  //             toolbarWidgetColor: Colors.white,
+  //             initAspectRatio: CropAspectRatioPreset.original,
+  //             lockAspectRatio: false),
+  //         IOSUiSettings(
+  //           title: "Image Cropper",
+  //         )
+  //       ]);
+  //   if (croppedFile != null) {
+  //     imageCache.clear();
+  //     setState(() {
+  //       _selectedImage = File(croppedFile.path);
+  //     });
+  //     // reload();
+  //   }
+  // }
 
-  Future<void> uploadImage(String image64) async {
-    Dio dio = Dio();
 
-    final id = await getTokenFromSS(drIdsecureStoreKey);
-
-    try {
-      setState(() => isLoading = true);
-
-      Response response = await dio.put(
-          'https://kevelldigital.com/v2/patients/profile',
-          data: {'id': 1000, 'ProfileImagelink': image64});
-      log('  upload image');
-
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        log('suscessssssss to upload image ; ${response.statusCode}');
-        log('suscessssssss ; $response');
-      } else {
-        log('Failed to upload image ; ${response.statusCode}');
-      }
-    } catch (error) {
-      log('Error uploading image: $error');
-    } finally {
-      // context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
-      Navigator.of(context).pop();
-      setState(() => isLoading = false);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -168,27 +139,26 @@ class _UploadImagePageState extends State<UploadImagePage> {
               },
               builder: (context, state) {
                 return TextButtonWidget(
-                    onPressed: isButtonDisabled
-                        ? null
-                        : () async {
-                            if (_selectedImage != null) {
-                              // List<int> imageBytes =
-                              //     await _selectedImage!.readAsBytes();
-                              // String base64String = base64Encode(imageBytes);
-                              // log(base64String);
-                              // uploadImage(base64String);
+                  onPressed: isButtonDisabled
+                      ? null
+                      : () async {
+                          if (_selectedImage != null) {
+                            // List<int> imageBytes =
+                            //     await _selectedImage!.readAsBytes();
+                            // String base64String = base64Encode(imageBytes);
+                            // log(base64String);
+                            // uploadImage(base64String);
 
-
-                              context.read<ProfileBloc>().add(
-                                    ProfileEvent.uplaodImage(
-                                        image: _selectedImage!),
-                                  );
-                            }
-                          },
-                    name: "upload",
-                    // isLoading: isLoading
-                    isLoading: state.isUpdateLoading,
-                    );
+                            context.read<ProfileBloc>().add(
+                                  ProfileEvent.uplaodImage(
+                                      image: _selectedImage!),
+                                );
+                          }
+                        },
+                  name: "upload",
+                  // isLoading: isLoading
+                  isLoading: state.isUpdateLoading,
+                );
               },
             ),
           ),

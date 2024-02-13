@@ -1,12 +1,8 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-import 'package:kevell_care/features/forgot/data/model/change_password_model.dart';
-import 'package:kevell_care/features/forgot/presentation/bloc/forgot_bloc.dart';
-import 'package:kevell_care/features/forgot/presentation/pages/otp.dart';
 import 'package:kevell_care/features/login/presentation/bloc/login_bloc.dart';
 import 'package:kevell_care/features/login/presentation/otp_widget.dart';
 import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
@@ -111,6 +107,7 @@ class _OtpScreenState extends State<OtpScreen> {
     }
     otp[currentField] = value;
   }
+
   @override
   void initState() {
     sendOTP();
@@ -145,7 +142,7 @@ class _OtpScreenState extends State<OtpScreen> {
               addToSS(
                   mailsecureStoreKey, state.forgot!.data.first.name??"");
 
-              addToSS(drIdsecureStoreKey,
+              addToSS(patientId,
                   state.forgot!.data.first.id.toString());
 
               // addTokenToSS(
@@ -157,7 +154,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 context: context,
                 message: 'You are successfully Logined 🥳',
               );
-          
+
               Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
                   builder: (context) => const Initialize(),
@@ -175,7 +172,7 @@ class _OtpScreenState extends State<OtpScreen> {
             }
           },
           builder: (context, state) {
-       final email = state.forgot?.data?.first.emailId ?? '';
+       final email = state.forgot?.data.first.emailId ?? '';
 // final otp = state.loginDetails?.data?.first.otp ?? '000000';
 
             // log("number : $number");

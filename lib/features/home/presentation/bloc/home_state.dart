@@ -12,8 +12,8 @@ class HomeState with _$HomeState {
     required DateTime? startTime,
     required DateTime? endTime,
     required int? token,
-    HomeAvailableDoctorModel? availableDoctors,
-    required Option<Either<MainFailure, HomeAvailableDoctorModel>>
+    AvailableDoctorModel? availableDoctors,
+    required Option<Either<MainFailure, AvailableDoctorModel>>
         failureOrSuccessOption,
   }) = _HomeState;
 

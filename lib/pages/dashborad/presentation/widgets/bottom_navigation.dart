@@ -8,7 +8,7 @@ import '../../../../configure/assets_manage/icons.dart';
 ValueNotifier<int> selectedIndexNorifier = ValueNotifier<int>(0);
 
 class BottomWidget extends StatelessWidget {
-  const BottomWidget({Key? key}) : super(key: key);
+  const BottomWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

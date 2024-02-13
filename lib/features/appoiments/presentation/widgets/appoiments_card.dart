@@ -13,14 +13,13 @@ import 'edit_appoinment.dart';
 
 class AppoimentCard extends StatelessWidget {
   final bool isPast;
-  final Past data;
+  final Appointment data;
 
   const AppoimentCard({
     super.key,
     required this.isPast,
     required this.data,
   });
-  
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class AppoimentCard extends StatelessWidget {
             ),
             child: Center(
               child: Text(
-                formatDateForSchedule(data.appointmentdate!),
+                formatDateForSchedule(data.appointmentDate!),
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge!
@@ -66,7 +65,7 @@ class AppoimentCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    "${extractTime(data.appointmentstarttime!)} to ${extractTime(data.appointmentendtime!)}  ",
+                    "${extractTime(data.appointmentStarttime!)} to ${extractTime(data.appointmentEndtime!)}  ",
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           color: context.theme.textPrimary,
                         ),
@@ -78,72 +77,73 @@ class AppoimentCard extends StatelessWidget {
           isPast
               ? const SizedBox()
               : InkWell(
-                  onTap: () {  showModalBottomSheet(
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                        isScrollControlled: true,
-                        context: context,
-                        builder: (context) => EditAppoinmentWidget(
-                         data: data,
-                        ),
-                      );},
+                  onTap: () {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) => EditAppoinmentWidget(
+                        data: data,
+                      ),
+                    );
+                  },
                   child: Icon(Icons.edit_square, color: context.theme.primary)),
           const SizedBox(width: 15),
           InkWell(
-              onTap: () {
-                log(data.id.toString());
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return BlocBuilder<AppoinmetsBloc, AppoinmetsState>(
-                      builder: (context, state) {
-                        log(state.isDeleted.toString());
-                        return MyCustomAlertDialog(
-                          successMessage:
-                              "Successfully deleted your appoinment.",
-                          questionMesage:
-                              'Are you sure you want to delete the appoinment?',
-                          okPressed: () {
-                            context.read<AppoinmetsBloc>().add(
-                                  const AppoinmetsEvent.getAppoinments(),
-                                );
-                            Navigator.of(context).pop();
-                          },
-                          onPress: () {
-                            context.read<AppoinmetsBloc>().add(
-                                  AppoinmetsEvent.deleteAppoinments(
-                                    id: data.id!,
-                                  ),
-                                );
-                          },
-                          isLoading: state.isDeleteLoading,
-                          isCompleted: state.isDeleted,
-                        );
-                      },
-                    );
-                  },
-                );
-              },
-              child:  Row(
-                children: [
-                  const  Icon(Icons.delete,
-                   
-                      color: MainConfigColorsDarkTheme.danger),
-                      IconButton( onPressed: () {
-                          showDialog(context: context, builder: (context)=>  CreateRating(
-                        doctorName: data.doctorname??"",
-                        appointmentid:data.id,
-                        patientid:data.patientId
-                      ));
-                                                 log(data.patientId.toString());
-                                                 log(data.id.toString());
-
-                      }, icon:const Icon(Icons.star_border_outlined),
-                      )
-                ],
-              ),
-                  
-        ),
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return BlocBuilder<AppoinmetsBloc, AppoinmetsState>(
+                    builder: (context, state) {
+                      log(state.isDeleted.toString());
+                      return MyCustomAlertDialog(
+                        successMessage: "Successfully deleted your appoinment.",
+                        questionMesage:
+                            'Are you sure you want to delete the appoinment?',
+                        okPressed: () {
+                          context.read<AppoinmetsBloc>().add(
+                                const AppoinmetsEvent.getAppoinments(),
+                              );
+                          Navigator.of(context).pop();
+                        },
+                        onPress: () {
+                          context.read<AppoinmetsBloc>().add(
+                                AppoinmetsEvent.deleteAppoinments(
+                                  id: data.id!,
+                                ),
+                              );
+                        },
+                        isLoading: state.isDeleteLoading,
+                        isCompleted: state.isDeleted,
+                      );
+                    },
+                  );
+                },
+              );
+            },
+            child: Row(
+              children: [
+                const Icon(Icons.delete,
+                    color: MainConfigColorsDarkTheme.danger),
+                if (isPast)
+                  IconButton(
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => CreateRating(
+                              doctorName: data.doctorname ?? "",
+                              appointmentid: data.id,
+                              patientid: data.patientId));
+                      log(data.patientId.toString());
+                      log(data.id.toString());
+                    },
+                    icon: const Icon(Icons.star_border_outlined),
+                  )
+              ],
+            ),
+          ),
         ],
       ),
     );

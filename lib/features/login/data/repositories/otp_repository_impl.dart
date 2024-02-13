@@ -29,7 +29,7 @@
         };
 
         final response = await Dio(BaseOptions()).post(
-          V2.verifyotp,
+          V2.login,
           // options: Options(headers: headers),
           data: {"otp": otp, "mobile": number},
         );

@@ -27,34 +27,35 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
     required String gender,
     required String zipcode,
     required String state,
+
+    
     // // required String gender,
 
   }) async {
     try {
       final token = await getTokenFromSS(secureStoreKey);
-      final id = await getTokenFromSS(drIdsecureStoreKey);
+      final id = await getTokenFromSS(patientId);
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
       final response = await Dio(BaseOptions()).put(
-        V2.updateProfile,
+        V2.fetchProfile,
         options: Options(headers: headers,  validateStatus: (_) => true,),
         data: {
           "_id": int.parse("$id"),
           "name": name,
           "mobile": mobileNumber,
           "dob": dob,
-          "address": 
-          {
-              "street": street,
-              "city": city,
-              "district": district,
-              "zipcode": zipcode,
-              "state": state,
+          "address": {
+            "street": street,
+            "city": city,
+            "district": district,
+            "zipcode": zipcode,
+            "state": state,
           },
-          "height":height,
-          "weight":weight,
+          "height": height,
+          "weight": weight,
         },
       );
 

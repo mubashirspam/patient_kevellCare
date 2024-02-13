@@ -17,18 +17,18 @@ class PastAppoimentList extends StatelessWidget {
           return const LoadingWIdget();
         }
         if (state.hasData) {
-          if (state.appoimentData!.message!.past!.isNotEmpty) {
+          if (state.appoimentData!.data!.past!.isNotEmpty) {
             return ListView.builder(
               padding: const EdgeInsets.all(0),
-              itemCount: state.appoimentData!.message!.past!.length,
+              itemCount: state.appoimentData!.data!.past!.length,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () => Navigator.of(context).pushNamed(
                     ReportScreen.routeName,
-                    arguments: state.appoimentData!.message!.past![index].id,
+                    arguments: state.appoimentData!.data!.past![index].id,
                   ),
                   child: AppoimentCard(
-                    data: state.appoimentData!.message!.past![index],
+                    data: state.appoimentData!.data!.past![index],
                     isPast: true,
                   ),
                 );

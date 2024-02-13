@@ -15,7 +15,7 @@ import '../../domain/repositories/get_home_waiting_patient_repository.dart';
 @LazySingleton(as: GetAvailableDoctorRepository)
 class GetAvailableDoctorRepoImpliment implements GetAvailableDoctorRepository {
   @override
-  Future<Either<MainFailure, HomeAvailableDoctorModel>>
+  Future<Either<MainFailure, AvailableDoctorModel>>
       getHomeAvailableDoctor() async {
     try {
       final token = await getTokenFromSS(secureStoreKey);
@@ -26,8 +26,7 @@ class GetAvailableDoctorRepoImpliment implements GetAvailableDoctorRepository {
       };
 
       final response = await Dio().get(
-        ApiEndPoints.getHomeAvailableDoctor,
-        // "https://kevelldigital.com/doctor/api/getalldoctorSchedule?from=1&to=10",
+        V2.availableDoctor,
         options: Options(
           headers: headers,
           validateStatus: (_) => true,
@@ -37,7 +36,7 @@ class GetAvailableDoctorRepoImpliment implements GetAvailableDoctorRepository {
       switch (response.statusCode) {
         case 200:
         case 201:
-          final result = HomeAvailableDoctorModel.fromJson(response.data);
+          final result = AvailableDoctorModel.fromJson(response.data);
           log(result.toString());
           return Right(result);
         case 400:

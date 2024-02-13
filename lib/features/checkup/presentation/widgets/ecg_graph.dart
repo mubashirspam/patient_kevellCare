@@ -11,13 +11,13 @@ class ECGGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SfCartesianChart(
-      primaryXAxis: NumericAxis(),
-      primaryYAxis: NumericAxis(),
+      primaryXAxis: const NumericAxis(),
+      primaryYAxis: const NumericAxis(),
       backgroundColor: Colors.transparent,
       borderWidth: 1,
       enableAxisAnimation: true,
 
-      series: <ChartSeries>[
+      series: <CartesianSeries>[
         LineSeries<ECGData, int>(
           dataSource: data,
           xValueMapper: (ECGData data, _) => data.time,

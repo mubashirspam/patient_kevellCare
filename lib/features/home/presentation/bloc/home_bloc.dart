@@ -1,7 +1,8 @@
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
+
 import 'package:dartz/dartz.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kevell_care/features/home/data/models/available_doctor_model.dart';
@@ -96,17 +97,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<_PickTime>((event, emit) {
       emit(state.copyWith(
-        startTime: event.startTime,
-        endTime: event.endTime,
-        token: event.token
-      ));
+          startTime: event.startTime,
+          endTime: event.endTime,
+          token: event.token));
     });
 
     on<_Search>((event, emit) {
-      HomeAvailableDoctorModel? availableDoctors = state.availableDoctors;
+      AvailableDoctorModel? availableDoctors = state.availableDoctors;
 
       if (availableDoctors != null) {
-        List<HomeAvailableDoctorModelDatum>? list = availableDoctors.data;
+        List<AvailableDoctor>? list = availableDoctors.availableDoctors;
 
         if (list != null && list.isNotEmpty) {
           emit(state.copyWith(
@@ -115,8 +115,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           list = filterDoctorsBySpecialistAndLocation(
               list, event.specialist, event.location);
 
-          HomeAvailableDoctorModel updatedAvailableDoctors =
-              availableDoctors.copyWith(data: list);
+          AvailableDoctorModel updatedAvailableDoctors =
+              availableDoctors.copyWith(availableDoctors: list);
 
           emit(state.copyWith(
               hasAvailableDoctorData: true,
@@ -127,11 +127,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 }
 
-List<HomeAvailableDoctorModelDatum> filterDoctorsBySpecialistAndLocation(
-  List<HomeAvailableDoctorModelDatum> doctorList,
+List<AvailableDoctor> filterDoctorsBySpecialistAndLocation(
+  List<AvailableDoctor> doctorList,
   String specialist,
   String location,
 ) {
-  return doctorList.where((doctor) =>
-      doctor.specialist == specialist && doctor.location == location).toList();
+  return doctorList
+      .where((doctor) =>
+          doctor.specialist == specialist && doctor.location == location)
+      .toList();
 }

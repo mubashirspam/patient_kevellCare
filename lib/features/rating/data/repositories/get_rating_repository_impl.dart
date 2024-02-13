@@ -13,15 +13,13 @@ import '../../../../core/failiar/failiur_model.dart';
 import '../../../../core/failiar/main_failures.dart';
 // import '../../../../core/network/netwrok.dart';
 
-
 @LazySingleton(as: GetRatingRepository)
 class GetRatingRepoImpliment implements GetRatingRepository {
   @override
   Future<Either<MainFailure, RatingModel>> getRating() async {
     try {
-     
-      final id = await getTokenFromSS(drIdsecureStoreKey);
- final token = await getTokenFromSS(secureStoreKey);
+      final id = await getTokenFromSS(patientId);
+      final token = await getTokenFromSS(secureStoreKey);
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',

@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -18,24 +17,25 @@ part 'login_bloc.freezed.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginRepository loginRepository;
   final OtpRepository otpRepository;
-    final ForgotRepository forgotRepository;
+  final ForgotRepository forgotRepository;
 
-  LoginBloc(this.loginRepository, this.otpRepository,this.forgotRepository)
-      : super(LoginState.initial()) {
+  LoginBloc(
+    this.loginRepository,
+    this.otpRepository,
+    this.forgotRepository,
+  ) : super(LoginState.initial()) {
     on<_Login>(
       (event, emit) async {
         emit(state.copyWith(
           isLoading: true,
           hasValidationData: false,
           isError: false,
-          
         ));
 
         final response = await loginRepository.login(
-          usernameOrMobile: event.usernameOrMobile,
-          password: event.password,
-          islogin: false
-        );
+            usernameOrMobile: event.usernameOrMobile,
+            password: event.password,
+            islogin: false);
 
         response.fold((failure) {
           return emit(state.copyWith(
@@ -67,10 +67,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         ),
       );
       final response = await otpRepository.varifyOtp(
-        number: event.number,
-        otp: event.otp,
-        islogin: true
-      );
+          number: event.number, otp: event.otp, islogin: true);
 
       final result = response.fold(
         (failure) => state.copyWith(
@@ -83,21 +80,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             isLoading: false,
             otpVarified: true,
             otpDetails: success,
-            message: success.result ?? "your Otp has been verified"
-            ),
+            message: success.result ?? "your Otp has been verified"),
       );
       emit(result);
     });
 
-    
- 
     on<_Forgot>(
       (event, emit) async {
         emit(state.copyWith(
           isLoading: true,
           hasValidationData: false,
           isError: false,
-          
         ));
 
         final response = await forgotRepository.forgot(

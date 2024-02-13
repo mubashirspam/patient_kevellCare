@@ -6,6 +6,6 @@ import '../../data/models/create_appoinment_resonse.dart';
 import '../entities/create_appoinments.dart';
 
 abstract class CreateAppoinmentsRepository {
-  Future<Either<MainFailure, CreateResponse>> createAppoinments(
-      {required AppoinmentsPayload appoinmentsPayload});
+  Future<Either<MainFailure, CreateAppointment>> createAppoinments(
+      {required AppointmentsPayload appoinmentsPayload});
 }
