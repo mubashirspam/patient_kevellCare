@@ -14,7 +14,6 @@ import '../bloc/profile_bloc.dart';
 enum EditProfileSection {
   BasicDetails,
   Address,
-  // Add more sections as needed
 }
 class EditMyProfile extends StatefulWidget {
   final String? name;
