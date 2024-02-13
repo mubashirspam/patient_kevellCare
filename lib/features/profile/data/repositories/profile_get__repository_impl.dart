@@ -17,7 +17,8 @@ import '../models/profile_model.dart';
 class GetProfileRepoImpliment implements GetProfileRepository {
   @override
   Future<Either<MainFailure, ProfileModel>> getProfile(
-      {required int id}) async {
+      // {required int id}
+      ) async {
     try {
       final id = await getTokenFromSS(drIdsecureStoreKey);
       final token = await getTokenFromSS(secureStoreKey);
@@ -28,16 +29,15 @@ class GetProfileRepoImpliment implements GetProfileRepository {
 
       log("token $token");
       final response = await Dio(BaseOptions()).get(
-        // V2.fetchprofile,
-        "https://89f4-183-82-33-226.ngrok-free.app/v2/patients/patient-info?id=$id",
+        // V2.fetchProfile,
+        "https://a71b-183-82-33-226.ngrok-free.app/v2/patients/patient-info",
         options: Options(
           headers: headers,
           validateStatus: (_) => true,
         ),
         data: {'id': int.parse("$id")},
       );
-      log("Response   ${response.data}");
-      print("Response : ${response.data}");
+      log("Response${response.data}");
       switch (response.statusCode) {
         case 200:
         case 201:

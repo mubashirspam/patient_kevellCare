@@ -38,7 +38,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         ),
       );
 
-      final response = await getprofileRepository.getProfile(id: event.id
+      final response = await getprofileRepository.getProfile(
+        // id: event.id
        
       );
 
@@ -74,9 +75,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
       final response = await updateProfileRepository.updateProfile(
         dob: event.dob,
-                email: event.email,
+        email: event.email,
         gender: event.gender,
-
         mobileNumber: event.mobileNumber,
         name: event.name, 
         street: event.street, 
@@ -86,7 +86,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         state: event.state, 
         height: event.height, 
         weight: event.weight,
-
       );
 
       final result = response.fold(

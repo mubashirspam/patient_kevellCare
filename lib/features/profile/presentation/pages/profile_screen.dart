@@ -14,7 +14,11 @@ import '../bloc/profile_bloc.dart';
 
 import '../upload_image.dart';
 import 'edit_profile.dart';
-
+enum EditProfileSection {
+  BasicDetails,
+  Address,
+  // Add more sections as needed
+}
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile-screen';
 
@@ -25,7 +29,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ProfileBloc>().add(const ProfileEvent.getProfile(id: 1006));
+      context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
     });  
 
     return BlocConsumer<ProfileBloc, ProfileState>(
@@ -184,13 +188,8 @@ class ProfileBody extends StatelessWidget {
                                 bottom:
                                     MediaQuery.of(context).viewInsets.bottom),
                             child: EditMyProfile(
-                              height: profileData.data.height,
-                              weight: profileData.data.weight,
-                              city: profileData.data.address.city,
-                              state: profileData.data.address.state,
-                              district: profileData.data.address.district,
-                              street: profileData.data.address.street,
-                              zipcode: profileData.data.address.zipCode,
+                             section: EditProfileSection.BasicDetails.toString(),
+
                               name: profileData.data.name,
                               mobile: profileData.data.mobileNo,
                               dob: profileData.data.dob.toString(),
@@ -291,18 +290,14 @@ class ProfileBody extends StatelessWidget {
                                 bottom:
                                     MediaQuery.of(context).viewInsets.bottom),
                             child: EditMyProfile(
-                              height: profileData.data.height,
-                              weight: profileData.data.weight,
+                              section: EditProfileSection.BasicDetails.toString(),
+
                               city: profileData.data.address.city,
                               state: profileData.data.address.state,
-                              // district: profileData.data.address.district,
+                              district: profileData.data.address.district,
                               street: profileData.data.address.street,
                               zipcode: profileData.data.address.zipCode,
-                              name: profileData.data.name,
-                              mobile: profileData.data.mobileNo,
-                              dob: profileData.data.dob.toString(),
-                              gender: profileData.data.gender,
-                              email: profileData.data.emailId,
+                           
                             ),
                           ),
                         );
