@@ -3,6 +3,8 @@ import '../value/constant.dart';
 class V2 {
   // AUTH & USER
   static const register = "$baseUrl/$service/register";
+
+
   static const login = "$baseUrl/$service/login";
   static const fetchProfile = "$baseUrl/$service/users/details";
 

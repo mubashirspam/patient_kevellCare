@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kevell_care/configure/value/constant.dart';
+import 'package:kevell_care/configure/value/secure_storage.dart';
 import '../../data/models/profile_model.dart';
 import '../../domain/repositories/get_profile_repository.dart';
 import '../../domain/repositories/update_profile_repository.dart';
@@ -24,6 +26,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     this.uploadImageRepository,
   ) : super(ProfileState.initial()) {
     on<_GetProfile>((event, emit) async {
+            final token = await getFromSS(secureStoreKey);
+
       if (state.hasData) {
         return;
       }
@@ -35,6 +39,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
 
       final response = await getprofileRepository.getProfile(
+        // id: event.id
        
       );
 
@@ -70,9 +75,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
       final response = await updateProfileRepository.updateProfile(
         dob: event.dob,
-                email: event.email,
+        email: event.email,
         gender: event.gender,
-
         mobileNumber: event.mobileNumber,
         name: event.name, 
         street: event.street, 
@@ -82,7 +86,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         state: event.state, 
         height: event.height, 
         weight: event.weight,
-
       );
 
       final result = response.fold(

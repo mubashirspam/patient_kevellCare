@@ -45,7 +45,7 @@ class Data {
     Address address;
     String profileImagelink;
     String kitId;
-    String bloodGroup;
+    String bloodgroup;
     String deviceId;
     String diseases;
     DateTime createdAt;
@@ -55,6 +55,7 @@ class Data {
     String gender;
     String weight;
     bool termsApproved;
+    int v;
 
     Data({
         required this.id,
@@ -65,7 +66,7 @@ class Data {
         required this.address,
         required this.profileImagelink,
         required this.kitId,
-        required this.bloodGroup,
+        required this.bloodgroup,
         required this.deviceId,
         required this.diseases,
         required this.createdAt,
@@ -75,6 +76,7 @@ class Data {
         required this.gender,
         required this.weight,
         required this.termsApproved,
+        required this.v,
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -86,7 +88,7 @@ class Data {
         address: Address.fromJson(json["address"]),
         profileImagelink: json["profile_imagelink"],
         kitId: json["kit_id"],
-        bloodGroup: json["bloodGroup"],
+        bloodgroup: json["bloodgroup"],
         deviceId: json["device_id"],
         diseases: json["diseases"],
         createdAt: DateTime.parse(json["createdAt"]),
@@ -96,6 +98,7 @@ class Data {
         gender: json["gender"],
         weight: json["weight"],
         termsApproved: json["terms_approved"],
+        v: json["__v"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -105,9 +108,9 @@ class Data {
         "mobile_no": mobileNo,
         "dob": dob.toIso8601String(),
         "address": address.toJson(),
-        "profile_imagelink": profileImagelink,
+        "profile_imagelink":profileImagelink,
         "kit_id": kitId,
-        "bloodGroup": bloodGroup,
+        "bloodgroup": bloodgroup,
         "device_id": deviceId,
         "diseases": diseases,
         "createdAt": createdAt.toIso8601String(),
@@ -116,7 +119,8 @@ class Data {
         "height": height,
         "gender": gender,
         "weight": weight,
-        "terms_approved": termsApproved,
+        "terms_approved": false,
+        "__v": 0,
     };
 }
 

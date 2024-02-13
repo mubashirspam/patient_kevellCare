@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:image_cropper/image_cropper.dart';
@@ -10,6 +11,8 @@ import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../configure/value/constant.dart';
+import '../../../configure/value/secure_storage.dart';
 import '../../../core/helper/toast.dart';
 import '../../widgets/buttons/text_button_widget.dart';
 import 'bloc/profile_bloc.dart';
@@ -81,7 +84,33 @@ class _UploadImagePageState extends State<UploadImagePage> {
   //   }
   // }
 
+  Future<void> uploadImage(String image64) async {
+    Dio dio = Dio();
 
+    final id = await getTokenFromSS(patientId);
+
+    try {
+      setState(() => isLoading = true);
+
+      Response response = await dio.put(
+          'https://a71b-183-82-33-226.ngrok-free.app/v2/patients/profile',
+          data: {'id': 1002, 'ProfileImagelink': image64});
+      log('  upload image');
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        log('suscessssssss to upload image ; ${response.statusCode}');
+        log('suscessssssss ; $response');
+      } else {
+        log('Failed to upload image ; ${response.statusCode}');
+      }
+    } catch (error) {
+      log('Error uploading image: $error');
+    } finally {
+      // context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
+      Navigator.of(context).pop();
+      setState(() => isLoading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
