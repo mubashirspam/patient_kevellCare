@@ -22,7 +22,7 @@ class UploadImageRepoImpliment implements UploadImageRepository {
   }) async {
     try {
          final token = await getTokenFromSS(secureStoreKey);
-      final id = await getTokenFromSS(drIdsecureStoreKey);
+      final id = await getTokenFromSS(patientId);
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',

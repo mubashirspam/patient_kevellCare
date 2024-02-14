@@ -20,7 +20,7 @@ class GetProfileRepoImpliment implements GetProfileRepository {
       // {required int id}
       ) async {
     try {
-      final id = await getTokenFromSS(drIdsecureStoreKey);
+      final id = await getTokenFromSS(patientId);
       final token = await getTokenFromSS(secureStoreKey);
       final headers = {
         'Authorization': 'Bearer $token',

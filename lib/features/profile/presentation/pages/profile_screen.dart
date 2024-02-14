@@ -19,8 +19,8 @@ class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile-screen';
 
   const ProfileScreen({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +61,9 @@ class ProfileBody extends StatelessWidget {
   final ProfileModel profileData;
 
   const ProfileBody({
-    Key? key,
+    super.key,
     required this.profileData,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

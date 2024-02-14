@@ -4,15 +4,15 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_cropper/image_cropper.dart';
+// import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kevell_care/configure/value/constant.dart';
-import 'package:kevell_care/configure/value/secure_storage.dart';
 
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../configure/value/constant.dart';
+import '../../../configure/value/secure_storage.dart';
 import '../../../core/helper/toast.dart';
 import '../../widgets/buttons/text_button_widget.dart';
 import 'bloc/profile_bloc.dart';
@@ -54,40 +54,40 @@ class _UploadImagePageState extends State<UploadImagePage> {
     }
   }
 
-  _cropImage(File imgFile) async {
-    final croppedFile = await ImageCropper().cropImage(
-        sourcePath: imgFile.path,
-        aspectRatioPresets: Platform.isAndroid
-            ? [
-                CropAspectRatioPreset.square,
-              ]
-            : [
-                CropAspectRatioPreset.square,
-              ],
-        uiSettings: [
-          AndroidUiSettings(
-              toolbarTitle: "Image Cropper",
-              toolbarColor: Colors.deepOrange,
-              toolbarWidgetColor: Colors.white,
-              initAspectRatio: CropAspectRatioPreset.original,
-              lockAspectRatio: false),
-          IOSUiSettings(
-            title: "Image Cropper",
-          )
-        ]);
-    if (croppedFile != null) {
-      imageCache.clear();
-      setState(() {
-        _selectedImage = File(croppedFile.path);
-      });
-      // reload();
-    }
-  }
+  // _cropImage(File imgFile) async {
+  //   final croppedFile = await ImageCropper().cropImage(
+  //       sourcePath: imgFile.path,
+  //       aspectRatioPresets: Platform.isAndroid
+  //           ? [
+  //               CropAspectRatioPreset.square,
+  //             ]
+  //           : [
+  //               CropAspectRatioPreset.square,
+  //             ],
+  //       uiSettings: [
+  //         AndroidUiSettings(
+  //             toolbarTitle: "Image Cropper",
+  //             toolbarColor: Colors.deepOrange,
+  //             toolbarWidgetColor: Colors.white,
+  //             initAspectRatio: CropAspectRatioPreset.original,
+  //             lockAspectRatio: false),
+  //         IOSUiSettings(
+  //           title: "Image Cropper",
+  //         )
+  //       ]);
+  //   if (croppedFile != null) {
+  //     imageCache.clear();
+  //     setState(() {
+  //       _selectedImage = File(croppedFile.path);
+  //     });
+  //     // reload();
+  //   }
+  // }
 
   Future<void> uploadImage(String image64) async {
     Dio dio = Dio();
 
-    final id = await getTokenFromSS(drIdsecureStoreKey);
+    final id = await getTokenFromSS(patientId);
 
     try {
       setState(() => isLoading = true);
@@ -168,27 +168,26 @@ class _UploadImagePageState extends State<UploadImagePage> {
               },
               builder: (context, state) {
                 return TextButtonWidget(
-                    onPressed: isButtonDisabled
-                        ? null
-                        : () async {
-                            if (_selectedImage != null) {
-                              // List<int> imageBytes =
-                              //     await _selectedImage!.readAsBytes();
-                              // String base64String = base64Encode(imageBytes);
-                              // log(base64String);
-                              // uploadImage(base64String);
+                  onPressed: isButtonDisabled
+                      ? null
+                      : () async {
+                          if (_selectedImage != null) {
+                            // List<int> imageBytes =
+                            //     await _selectedImage!.readAsBytes();
+                            // String base64String = base64Encode(imageBytes);
+                            // log(base64String);
+                            // uploadImage(base64String);
 
-
-                              context.read<ProfileBloc>().add(
-                                    ProfileEvent.uplaodImage(
-                                        image: _selectedImage!),
-                                  );
-                            }
-                          },
-                    name: "upload",
-                    // isLoading: isLoading
-                    isLoading: state.isUpdateLoading,
-                    );
+                            context.read<ProfileBloc>().add(
+                                  ProfileEvent.uplaodImage(
+                                      image: _selectedImage!),
+                                );
+                          }
+                        },
+                  name: "upload",
+                  // isLoading: isLoading
+                  isLoading: state.isUpdateLoading,
+                );
               },
             ),
           ),

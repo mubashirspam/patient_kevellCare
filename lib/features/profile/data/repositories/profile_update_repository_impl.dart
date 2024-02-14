@@ -27,10 +27,12 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
     required String gender,
     required String zipCode,
     required String state,
+
+    
   }) async {
     try {
       final token = await getTokenFromSS(secureStoreKey);
-      final id = await getTokenFromSS(drIdsecureStoreKey);
+      final id = await getTokenFromSS(patientId);
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
@@ -56,8 +58,8 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
             "zipCode": zipCode,
             "state": state,
           },
-          "height": height,
-          "weight": weight,
+          "height":  height,
+          "weight":  weight,
         },
       );
 
