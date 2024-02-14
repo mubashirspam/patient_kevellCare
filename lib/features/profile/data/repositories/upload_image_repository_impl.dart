@@ -21,14 +21,23 @@ class UploadImageRepoImpliment implements UploadImageRepository {
     required File image,
   }) async {
     try {
+         final token = await getTokenFromSS(secureStoreKey);
       final id = await getTokenFromSS(drIdsecureStoreKey);
+      final headers = {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+      };
       final img = await MultipartFile.fromFile(image.path);
 
       FormData formData =
-          FormData.fromMap({'_id': id, 'ProfileImagelink': img});
+          FormData.fromMap({"_id": int.parse("$id"), 'profile_imagelink': img});
       final response = await Dio(BaseOptions()).put(
         // V2.updateProfile,
-        "https://a71b-183-82-33-226.ngrok-free.app/v2/patients/profile",
+        "https://1529-183-82-33-226.ngrok-free.app/v2/patients/profile",
+         options: Options(
+          headers: headers,
+          validateStatus: (_) => true,
+        ),
         data: formData,
       );
 

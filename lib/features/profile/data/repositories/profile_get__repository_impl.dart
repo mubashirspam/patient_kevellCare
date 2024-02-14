@@ -30,7 +30,7 @@ class GetProfileRepoImpliment implements GetProfileRepository {
       log("token $token");
       final response = await Dio(BaseOptions()).get(
         // V2.fetchProfile,
-        "https://a71b-183-82-33-226.ngrok-free.app/v2/patients/patient-info",
+        "https://1529-183-82-33-226.ngrok-free.app/v2/patients/patient-info",
         options: Options(
           headers: headers,
           validateStatus: (_) => true,
