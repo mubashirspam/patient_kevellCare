@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,13 +11,14 @@ import 'package:kevell_care/core/them/light_theme.dart';
 import 'package:kevell_care/features/chat/data/model/chat_isar_model.dart';
 import 'package:kevell_care/features/chat/data/model/message_isar_model.dart';
 import 'package:kevell_care/features/chat/presentation/bloc/chat_bloc.dart';
-import 'package:kevell_care/features/forgot/presentation/bloc/forgot_bloc.dart';
 import 'package:kevell_care/features/rating/presentation/bloc/rating_bloc.dart';
+import 'package:kevell_care/firebase_options.dart';
 import 'package:kevell_care/pages/initialize/bloc/initialize_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'configure/route/routes.dart';
 import 'configure/value/constant.dart';
 import 'core/di/injectable.dart';
+import 'core/notifications/push_notification.dart';
 import 'features/appoiments/presentation/bloc/appoinmets_bloc.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
 import 'features/login/presentation/bloc/login_bloc.dart';
@@ -29,11 +31,11 @@ import 'pages/initialize/initialize.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // if (Platform.isAndroid) {
-  //   await Firebase.initializeApp(
-  //       options: DefaultFirebaseOptions.currentPlatform);
-  //   await PushNotification().initNoticatin();
-  // }
+  if (Platform.isAndroid) {
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
+    await PushNotification().initNoticatin();
+  }
 
   await configureInjeactable();
   await getTokenFromSS(secureStoreKey).then((value) => log("Token : $value"));
