@@ -14,11 +14,7 @@ import '../bloc/profile_bloc.dart';
 
 import '../upload_image.dart';
 import 'edit_profile.dart';
-enum EditProfileSection {
-  BasicDetails,
-  Address,
-  // Add more sections as needed
-}
+
 class ProfileScreen extends StatelessWidget {
   static const routeName = '/profile-screen';
 
@@ -30,10 +26,10 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
-    });  
+    });
 
     return BlocConsumer<ProfileBloc, ProfileState>(
-      listener: (context, state) async {  
+      listener: (context, state) async {
         if (state.unauthorized) {
           Toast.showToast(
             context: context,
@@ -50,11 +46,9 @@ class ProfileScreen extends StatelessWidget {
               child: const LoadingWIdget(),
             ),
           );
-        } 
-        else if (state.hasData) {
+        } else if (state.hasData) {
           return ProfileBody(profileData: state.result!);
-        } 
-        else if (state.isError) {
+        } else if (state.isError) {
           return const Center(child: AppErrorWidget());
         }
         return const Center(child: Text("NO  data"));
@@ -97,8 +91,7 @@ class ProfileBody extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 60, bottom: 5),
-                            child: 
-                            Text(
+                            child: Text(
                               profileData.data.name,
                               style: Theme.of(context)
                                   .textTheme
@@ -188,10 +181,13 @@ class ProfileBody extends StatelessWidget {
                                 bottom:
                                     MediaQuery.of(context).viewInsets.bottom),
                             child: EditMyProfile(
-                             section: EditProfileSection.BasicDetails.toString(),
-
+                              section: EditProfileSection.BasicDetails,
+                              street: profileData.data.address.street,
+                              state: profileData.data.address.state,
+                              city: profileData.data.address.city,
+                              district: profileData.data.address.district,
                               name: profileData.data.name,
-                              mobile: profileData.data.mobileNo,
+                              mobile_No: profileData.data.mobileNo,
                               dob: profileData.data.dob.toString(),
                               gender: profileData.data.gender,
                               email: profileData.data.emailId,
@@ -290,14 +286,17 @@ class ProfileBody extends StatelessWidget {
                                 bottom:
                                     MediaQuery.of(context).viewInsets.bottom),
                             child: EditMyProfile(
-                              section: EditProfileSection.BasicDetails.toString(),
-
-                              city: profileData.data.address.city,
-                              state: profileData.data.address.state,
-                              district: profileData.data.address.district,
+                              section: EditProfileSection.Address,
                               street: profileData.data.address.street,
-                              zipcode: profileData.data.address.zipCode,
-                           
+                              state: profileData.data.address.state,
+                              city: profileData.data.address.city,
+                              district: profileData.data.address.district,
+                              zipCode: profileData.data.address.zipCode,
+                              name: profileData.data.name,
+                              mobile_No: profileData.data.mobileNo,
+                              dob: profileData.data.dob.toString(),
+                              gender: profileData.data.gender,
+                              email: profileData.data.emailId,
                             ),
                           ),
                         );
@@ -386,18 +385,19 @@ class ProfileBody extends StatelessWidget {
                                 bottom:
                                     MediaQuery.of(context).viewInsets.bottom),
                             child: EditMyProfile(
-                              height: profileData.data.height,
-                              weight: profileData.data.weight,
-                              city: profileData.data.address.city,
-                              state: profileData.data.address.state,
-                              // district: profileData.data.address.district,
-                              street: profileData.data.address.street,
-                              zipcode: profileData.data.address.zipCode,
                               name: profileData.data.name,
-                              mobile: profileData.data.mobileNo,
+                              mobile_No: profileData.data.mobileNo,
                               dob: profileData.data.dob.toString(),
                               gender: profileData.data.gender,
                               email: profileData.data.emailId,
+                              height: profileData.data.height,
+                              weight: profileData.data.weight,
+                              street: profileData.data.address.street,
+                              state: profileData.data.address.state,
+                              city: profileData.data.address.city,
+                              district: profileData.data.address.district,
+                              zipCode: profileData.data.address.zipCode,
+                              section: EditProfileSection.otherdetails,
                             ),
                           ),
                         );
@@ -429,42 +429,42 @@ class ProfileBody extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Height: ${profileData.data.address.street}",
+                          "Height: ${profileData.data.height}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Weight: ${profileData.data.address.city}",
+                          "Weight: ${profileData.data.weight}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Kit_ID: ${profileData.data.address.state}",
+                          "Kit_ID: ${profileData.data.kitId}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Device_id: ${profileData.data.address.state}",
+                          "Device_id: ${profileData.data.deviceId}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Diseases: ${profileData.data.address.zipCode}",
+                          "Diseases: ${profileData.data.diseases}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Blood group: ${profileData.data.address.zipCode}",
+                          "Blood group: ${profileData.data.bloodgroup}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),

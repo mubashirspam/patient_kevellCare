@@ -108,7 +108,7 @@ class Data {
         "mobile_no": mobileNo,
         "dob": dob.toIso8601String(),
         "address": address.toJson(),
-        "profile_imagelink":profileImagelink,
+        "profile_imagelink": profileImagelink,
         "kit_id": kitId,
         "bloodgroup": bloodgroup,
         "device_id": deviceId,
@@ -119,39 +119,39 @@ class Data {
         "height": height,
         "gender": gender,
         "weight": weight,
-        "terms_approved": false,
-        "__v": 0,
+        "terms_approved": termsApproved,
+        "__v": v,
     };
 }
 
 class Address {
     String street;
     String city;
-    String state;
-    String zipCode;
     String district;
+    String zipCode;
+    String state;
 
     Address({
         required this.street,
         required this.city,
-        required this.state,
-        required this.zipCode,
         required this.district,
+        required this.zipCode,
+        required this.state,
     });
 
     factory Address.fromJson(Map<String, dynamic> json) => Address(
         street: json["street"],
         city: json["city"],
-        state: json["state"],
-        zipCode: json["zipCode"],
         district: json["district"],
+        zipCode: json["zipCode"],
+        state: json["state"],
     );
 
     Map<String, dynamic> toJson() => {
         "street": street,
         "city": city,
-        "state": state,
-        "zipCode": zipCode,
         "district": district,
+        "zipCode": zipCode,
+        "state": state,
     };
 }

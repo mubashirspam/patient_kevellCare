@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kevell_care/configure/api/endpoints.dart';
 
 
 import '../../../../configure/value/constant.dart';
@@ -32,8 +33,8 @@ class CreateAppoinmentsRepoImpliment implements CreateAppoinmentsRepository {
 
       print(payload.toJson().toString());
       final response = await Dio(BaseOptions()).post(
-        // V2.bookAppointment,
-        "$baseUrl/$service2/book-appointment",
+        V2.bookAppointment,
+
         data: payload.toJson(),
         options: Options(headers: headers),
       );

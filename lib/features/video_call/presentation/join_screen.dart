@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kevell_care/configure/value/constant.dart';
 
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
@@ -60,9 +59,7 @@ class JoinOrCallWidget extends StatelessWidget {
             )
           : Row(
               children: [
-                const ActiveAvatar(
-                  imageUrl: imageUrlForDummy,
-                ),
+                const ActiveAvatar(),
                 const Spacer(),
                 Container(
                   padding: const EdgeInsets.all(20),

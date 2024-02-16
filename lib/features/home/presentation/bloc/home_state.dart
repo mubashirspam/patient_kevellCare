@@ -9,10 +9,10 @@ class HomeState with _$HomeState {
     required bool hasData,
     required bool isError,
     required DateTime date,
-    required int ? scheduleId,
     required DateTime? startTime,
     required DateTime? endTime,
     required int? token,
+     required int? scheduleId,
     AvailableDoctorModel? availableDoctors,
     required Option<Either<MainFailure, AvailableDoctorModel>>
         failureOrSuccessOption,
@@ -22,6 +22,7 @@ class HomeState with _$HomeState {
       unauthorized: false,
       isError: false,
       hasData: false,
+      scheduleId:null,
       hasAvailableDoctorData: false,
       isAvailableDoctorLoading: false,
       availableDoctors: null,
@@ -29,6 +30,5 @@ class HomeState with _$HomeState {
       startTime: null,
       endTime: null,
       token: null,
-      scheduleId:null,
       date: DateTime.now());
 }

@@ -93,8 +93,8 @@ class _UploadImagePageState extends State<UploadImagePage> {
       setState(() => isLoading = true);
 
       Response response = await dio.put(
-          'https://a71b-183-82-33-226.ngrok-free.app/v2/patients/profile',
-          data: {'id': 1002, 'ProfileImagelink': image64});
+          'https://1529-183-82-33-226.ngrok-free.app/v2/patients/profile',
+          data: {'id': 1002, 'profile_imagelink': image64});
       log('  upload image');
 
       if (response.statusCode == 200 || response.statusCode == 201) {

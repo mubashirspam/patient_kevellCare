@@ -24,13 +24,13 @@ mixin _$ProfileEvent {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
@@ -45,13 +45,13 @@ mixin _$ProfileEvent {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
@@ -66,13 +66,13 @@ mixin _$ProfileEvent {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,
@@ -169,13 +169,13 @@ class _$GetProfileImpl implements _GetProfile {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
@@ -193,13 +193,13 @@ class _$GetProfileImpl implements _GetProfile {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
@@ -217,13 +217,13 @@ class _$GetProfileImpl implements _GetProfile {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,
@@ -289,13 +289,13 @@ abstract class _$$UpdateProfileImplCopyWith<$Res> {
       String dob,
       String email,
       String gender,
-      String mobileNumber,
+      String mobileNo,
       String height,
       String weight,
       String street,
       String city,
       String district,
-      String zipcode,
+      String zipCode,
       String state});
 }
 
@@ -314,13 +314,13 @@ class __$$UpdateProfileImplCopyWithImpl<$Res>
     Object? dob = null,
     Object? email = null,
     Object? gender = null,
-    Object? mobileNumber = null,
+    Object? mobileNo = null,
     Object? height = null,
     Object? weight = null,
     Object? street = null,
     Object? city = null,
     Object? district = null,
-    Object? zipcode = null,
+    Object? zipCode = null,
     Object? state = null,
   }) {
     return _then(_$UpdateProfileImpl(
@@ -340,9 +340,9 @@ class __$$UpdateProfileImplCopyWithImpl<$Res>
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as String,
-      mobileNumber: null == mobileNumber
-          ? _value.mobileNumber
-          : mobileNumber // ignore: cast_nullable_to_non_nullable
+      mobileNo: null == mobileNo
+          ? _value.mobileNo
+          : mobileNo // ignore: cast_nullable_to_non_nullable
               as String,
       height: null == height
           ? _value.height
@@ -364,9 +364,9 @@ class __$$UpdateProfileImplCopyWithImpl<$Res>
           ? _value.district
           : district // ignore: cast_nullable_to_non_nullable
               as String,
-      zipcode: null == zipcode
-          ? _value.zipcode
-          : zipcode // ignore: cast_nullable_to_non_nullable
+      zipCode: null == zipCode
+          ? _value.zipCode
+          : zipCode // ignore: cast_nullable_to_non_nullable
               as String,
       state: null == state
           ? _value.state
@@ -384,13 +384,13 @@ class _$UpdateProfileImpl implements _UpdateProfile {
       required this.dob,
       required this.email,
       required this.gender,
-      required this.mobileNumber,
+      required this.mobileNo,
       required this.height,
       required this.weight,
       required this.street,
       required this.city,
       required this.district,
-      required this.zipcode,
+      required this.zipCode,
       required this.state});
 
   @override
@@ -402,7 +402,7 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   @override
   final String gender;
   @override
-  final String mobileNumber;
+  final String mobileNo;
   @override
   final String height;
   @override
@@ -414,13 +414,13 @@ class _$UpdateProfileImpl implements _UpdateProfile {
   @override
   final String district;
   @override
-  final String zipcode;
+  final String zipCode;
   @override
   final String state;
 
   @override
   String toString() {
-    return 'ProfileEvent.updateProfile(name: $name, dob: $dob, email: $email, gender: $gender, mobileNumber: $mobileNumber, height: $height, weight: $weight, street: $street, city: $city, district: $district, zipcode: $zipcode, state: $state)';
+    return 'ProfileEvent.updateProfile(name: $name, dob: $dob, email: $email, gender: $gender, mobileNo: $mobileNo, height: $height, weight: $weight, street: $street, city: $city, district: $district, zipCode: $zipCode, state: $state)';
   }
 
   @override
@@ -432,21 +432,21 @@ class _$UpdateProfileImpl implements _UpdateProfile {
             (identical(other.dob, dob) || other.dob == dob) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.mobileNumber, mobileNumber) ||
-                other.mobileNumber == mobileNumber) &&
+            (identical(other.mobileNo, mobileNo) ||
+                other.mobileNo == mobileNo) &&
             (identical(other.height, height) || other.height == height) &&
             (identical(other.weight, weight) || other.weight == weight) &&
             (identical(other.street, street) || other.street == street) &&
             (identical(other.city, city) || other.city == city) &&
             (identical(other.district, district) ||
                 other.district == district) &&
-            (identical(other.zipcode, zipcode) || other.zipcode == zipcode) &&
+            (identical(other.zipCode, zipCode) || other.zipCode == zipCode) &&
             (identical(other.state, state) || other.state == state));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, name, dob, email, gender,
-      mobileNumber, height, weight, street, city, district, zipcode, state);
+      mobileNo, height, weight, street, city, district, zipCode, state);
 
   @JsonKey(ignore: true)
   @override
@@ -463,20 +463,20 @@ class _$UpdateProfileImpl implements _UpdateProfile {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
     required TResult Function(File image) uplaodImage,
   }) {
-    return updateProfile(name, dob, email, gender, mobileNumber, height, weight,
-        street, city, district, zipcode, state);
+    return updateProfile(name, dob, email, gender, mobileNo, height, weight,
+        street, city, district, zipCode, state);
   }
 
   @override
@@ -488,20 +488,20 @@ class _$UpdateProfileImpl implements _UpdateProfile {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
     TResult? Function(File image)? uplaodImage,
   }) {
-    return updateProfile?.call(name, dob, email, gender, mobileNumber, height,
-        weight, street, city, district, zipcode, state);
+    return updateProfile?.call(name, dob, email, gender, mobileNo, height,
+        weight, street, city, district, zipCode, state);
   }
 
   @override
@@ -513,13 +513,13 @@ class _$UpdateProfileImpl implements _UpdateProfile {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,
@@ -527,8 +527,8 @@ class _$UpdateProfileImpl implements _UpdateProfile {
     required TResult orElse(),
   }) {
     if (updateProfile != null) {
-      return updateProfile(name, dob, email, gender, mobileNumber, height,
-          weight, street, city, district, zipcode, state);
+      return updateProfile(name, dob, email, gender, mobileNo, height, weight,
+          street, city, district, zipCode, state);
     }
     return orElse();
   }
@@ -577,26 +577,26 @@ abstract class _UpdateProfile implements ProfileEvent {
       required final String dob,
       required final String email,
       required final String gender,
-      required final String mobileNumber,
+      required final String mobileNo,
       required final String height,
       required final String weight,
       required final String street,
       required final String city,
       required final String district,
-      required final String zipcode,
+      required final String zipCode,
       required final String state}) = _$UpdateProfileImpl;
 
   String get name;
   String get dob;
   String get email;
   String get gender;
-  String get mobileNumber;
+  String get mobileNo;
   String get height;
   String get weight;
   String get street;
   String get city;
   String get district;
-  String get zipcode;
+  String get zipCode;
   String get state;
   @JsonKey(ignore: true)
   _$$UpdateProfileImplCopyWith<_$UpdateProfileImpl> get copyWith =>
@@ -673,13 +673,13 @@ class _$PickDateImpl implements _PickDate {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
@@ -697,13 +697,13 @@ class _$PickDateImpl implements _PickDate {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
@@ -721,13 +721,13 @@ class _$PickDateImpl implements _PickDate {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,
@@ -857,13 +857,13 @@ class _$UplaodImageImpl implements _UplaodImage {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)
         updateProfile,
     required TResult Function(DateTime date) pickDate,
@@ -881,13 +881,13 @@ class _$UplaodImageImpl implements _UplaodImage {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)?
         updateProfile,
     TResult? Function(DateTime date)? pickDate,
@@ -905,13 +905,13 @@ class _$UplaodImageImpl implements _UplaodImage {
             String dob,
             String email,
             String gender,
-            String mobileNumber,
+            String mobileNo,
             String height,
             String weight,
             String street,
             String city,
             String district,
-            String zipcode,
+            String zipCode,
             String state)?
         updateProfile,
     TResult Function(DateTime date)? pickDate,

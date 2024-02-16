@@ -17,7 +17,7 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
   Future<Either<MainFailure, ProfileModel>> updateProfile({
     required String name,
     required String dob,
-    required String mobileNumber,
+    required String mobile_No,
     required String height,
     required String weight,
     required String street,
@@ -25,12 +25,10 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
     required String district,
     required String email,
     required String gender,
-    required String zipcode,
+    required String zipCode,
     required String state,
 
     
-    // // required String gender,
-
   }) async {
     try {
       final token = await getTokenFromSS(secureStoreKey);
@@ -41,22 +39,27 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
       };
       final response = await Dio(BaseOptions()).put(
         // V2.updateProfile,
-        "https://a71b-183-82-33-226.ngrok-free.app/v2/patients/profile",
-        options: Options(headers: headers,  validateStatus: (_) => true,),
+        "https://1529-183-82-33-226.ngrok-free.app/v2/patients/profile",
+        options: Options(
+          headers: headers,
+          validateStatus: (_) => true,
+        ),
         data: {
           "_id": int.parse("$id"),
+          // "_id": id,
           "name": name,
-          "mobile": mobileNumber,
+          "mobile_no": mobile_No,
           "dob": dob,
+          "gender": gender,
           "address": {
             "street": street,
             "city": city,
             "district": district,
-            "zipcode": zipcode,
+            "zipCode": zipCode,
             "state": state,
           },
-          "height": height,
-          "weight": weight,
+          "height":  height,
+          "weight":  weight,
         },
       );
 

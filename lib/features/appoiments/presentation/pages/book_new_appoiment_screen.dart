@@ -120,17 +120,14 @@ class BookNewAppointmentScreen extends StatelessWidget {
               ),
               BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
-                  final List<DateTime?>  dateList =
+                  final List<DateTime?> dateList =
                       doctorData.schedule!.map((e) => e.days).toList();
-                       final  List<int?> idList =
-                      doctorData.schedule!.map((e) => e.id).toList();
 
                   int activeIndex =
-                      idList.indexWhere((element) => element == state.scheduleId);
+                      dateList.indexWhere((element) => element == state.date);
 
                   return DateListWidget(
                     dateList: dateList,
-                    idList: idList,
                     activeIndex: activeIndex,
                   );
                 },
@@ -141,7 +138,7 @@ class BookNewAppointmentScreen extends StatelessWidget {
 
                   List<Schedule> filteredObjects =
                       doctorData.schedule!.where((object) {
-                    return object.id == state.scheduleId;
+                    return object.days == state.date;
                   }).toList();
 
                   if (filteredObjects.isNotEmpty) {
@@ -249,18 +246,17 @@ class BookNewAppointmentScreen extends StatelessWidget {
                           return TextButtonWidget(
                             name: "Book an Appointment",
                             onPressed: () {
-                              if (homeState.endTime != null &&
-                                  homeState.scheduleId != null) {
+                              if (homeState.endTime != null) {
                                 context.read<AppoinmetsBloc>().add(
                                       AppoinmetsEvent.createAppoinments(
                                         appoinmentsPayload: AppointmentsPayload(
                                           appointmentDate: homeState.date,
-                                          scheduleId: homeState.scheduleId!,
                                           appointmentStarttime:
                                               homeState.startTime,
                                           appointmentEndtime: homeState.endTime,
                                           doctorId: doctorData.id,
                                           amount: 1000,
+                                          // scheduleId: homeState,
                                           apptToken: homeState.token,
                                           reasonFormeetingDoctor:
                                               remarkController.value.text,

@@ -19,8 +19,8 @@ class FetchChatProfileRepoImpliment implements FetchChatProfileRepository {
   }) async {
     final ids = await getFromSS(patientId);
     try {
-      final response = await Dio().get(V2.chat,
-          queryParameters: {'patient_id': ids});
+      final response = await Dio().get(ApiEndPoints.fetchChatProfile,
+          queryParameters: {'patientId': ids});
 
       if (response.statusCode == 200) {
         final result = ChatProfileModel.fromJson(response.data);

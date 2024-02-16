@@ -11,7 +11,7 @@ part 'initialize_bloc.freezed.dart';
 
 class InitializeBloc extends Bloc<InitializeEvent, InitializeState> {
   InitializeBloc() : super(InitializeState.initial()) {
-    InternetConnection().onStatusChange.listen((status) {
+    InternetConnection.createInstance().onStatusChange.listen((status) {
       add(const _ContectionChanged(
         connectionstatus: true,
       ));

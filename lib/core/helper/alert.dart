@@ -26,7 +26,7 @@ class Alert {
 class ErrorDialog extends StatelessWidget {
   final String message;
 
-  const ErrorDialog({super.key, required this.message});
+  const ErrorDialog({Key? key, required this.message}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +55,11 @@ class DeleteConfirmationDialog extends StatelessWidget {
   final bool isDeleted;
 
   const DeleteConfirmationDialog({
-    super.key,
+    Key? key,
     required this.message,
     required this.onDelete,
     required this.isDeleted,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

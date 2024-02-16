@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -91,7 +92,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<_PickDate>((event, emit) {
       emit(state.copyWith(
         date: event.date,
-        scheduleId: event.scheduleId,
       ));
     });
 

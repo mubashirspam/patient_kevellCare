@@ -1,7 +1,5 @@
 
 
-import 'package:freezed_annotation/freezed_annotation.dart';
-
 class AppointmentsPayload {
     int? patientId;
     String? reasonFormeetingDoctor;
@@ -11,7 +9,7 @@ class AppointmentsPayload {
     DateTime? appointmentDate;
     int? apptToken;
     int? amount;
-    int scheduleId;
+    int? scheduleId;
 
     AppointmentsPayload({
         this.patientId,
@@ -22,7 +20,7 @@ class AppointmentsPayload {
         this.appointmentDate,
         this.apptToken,
         this.amount,
-       required this.scheduleId,
+        this.scheduleId
     });
 
   

@@ -9,13 +9,13 @@ class ProfileEvent with _$ProfileEvent {
     required String dob,
     required String email,
     required String gender,
-    required String mobileNumber,
+    required String mobileNo,
     required String height,
     required String weight,
     required String street,
     required String city,
     required String district,
-    required String zipcode,
+    required String zipCode,
     required String state,
   }) = _UpdateProfile;
 

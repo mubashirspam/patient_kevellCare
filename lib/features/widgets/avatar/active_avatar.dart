@@ -27,16 +27,16 @@ class ActiveAvatar extends StatelessWidget {
                 imageUrl ?? "",
                 errorBuilder: (context, error, stackTrace) =>
                     const Icon(Icons.image_not_supported_outlined),
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               )),
         ),
         isActive ?? true
             ? Positioned(
-                right: 6,
-                top: 6,
+                right: 2,
+                top: 2,
                 child: Container(
-                  width: 20,
-                  height: 20,
+                  width: 15,
+                  height: 15,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       color: MainConfigColorsDarkTheme.success,
