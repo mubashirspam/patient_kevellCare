@@ -33,7 +33,7 @@ class CreateAppoinmentsRepoImpliment implements CreateAppoinmentsRepository {
       print(payload.toJson().toString());
       final response = await Dio(BaseOptions()).post(
         // V2.bookAppointment,
-        "https://9104-183-82-33-226.ngrok-free.app/$service2/book-appointment",
+        "$baseUrl/$service2/book-appointment",
         data: payload.toJson(),
         options: Options(headers: headers),
       );

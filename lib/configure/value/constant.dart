@@ -10,9 +10,9 @@ const fcmStoreKey = 'fcmStoreKey@key';
 
 const nameKey = '@#KL778@username';
 const phoneKey = '@#KL778@phoneKey';
-// const baseUrl = "https://kevelldigital.com"; //production
+const baseUrl = "https://kevelldigital.com"; //production
 
-const baseUrl = "https://a71b-183-82-33-226.ngrok-free.app"; //development
+// const baseUrl = "https://1316-183-82-33-226.ngrok-free.app"; //development
 
 
 const imageUrlForDummy ="https://images.unsplash.com/photo-1634926878768-2a5b3c42f139?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D";

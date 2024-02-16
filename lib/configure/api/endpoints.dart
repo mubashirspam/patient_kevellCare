@@ -13,6 +13,10 @@ class V2 {
   static const availableDoctor = "$baseUrl/$service/doctor-schedule";
   static const bookAppointment = "$baseUrl/$service2/book-appointment";
   static const appointmets = "$baseUrl/$service2/past-appointments";
+
+    static const chat = "$baseUrl/videochat/chat/api/getallusers";
+
+  
 }
 
 class ApiEndPoints {

@@ -120,14 +120,17 @@ class BookNewAppointmentScreen extends StatelessWidget {
               ),
               BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
-                  final List<DateTime?> dateList =
+                  final List<DateTime?>  dateList =
                       doctorData.schedule!.map((e) => e.days).toList();
+                       final  List<int?> idList =
+                      doctorData.schedule!.map((e) => e.id).toList();
 
                   int activeIndex =
-                      dateList.indexWhere((element) => element == state.date);
+                      idList.indexWhere((element) => element == state.scheduleId);
 
                   return DateListWidget(
                     dateList: dateList,
+                    idList: idList,
                     activeIndex: activeIndex,
                   );
                 },
@@ -138,15 +141,13 @@ class BookNewAppointmentScreen extends StatelessWidget {
 
                   List<Schedule> filteredObjects =
                       doctorData.schedule!.where((object) {
-                    return object.days == state.date;
+                    return object.id == state.scheduleId;
                   }).toList();
 
                   if (filteredObjects.isNotEmpty) {
                     List<String> formattedList = [];
                     List<Bookedtime> bookedtimeSlots =
                         filteredObjects.first.bookedtime ?? [];
-
-                   
 
                     if (bookedtimeSlots.isNotEmpty) {
                       for (var slot in bookedtimeSlots) {
@@ -165,10 +166,11 @@ class BookNewAppointmentScreen extends StatelessWidget {
                     DateTime startTimeDt = filteredObjects.first.startTime!;
                     DateTime endTimeDt = filteredObjects.first.endTime!;
 
-                      print("timePerPatient ==== ${filteredObjects.first.timePerPatient!}");
-                        print("startTimeDt ==== ${ filteredObjects.first.startTime!}");
-                          print("endTimeDt ==== ${filteredObjects.first.endTime!}");
-
+                    print(
+                        "timePerPatient ==== ${filteredObjects.first.timePerPatient!}");
+                    print(
+                        "startTimeDt ==== ${filteredObjects.first.startTime!}");
+                    print("endTimeDt ==== ${filteredObjects.first.endTime!}");
 
                     while (startTimeDt
                         .add(Duration(minutes: timePerPatient))
@@ -180,7 +182,7 @@ class BookNewAppointmentScreen extends StatelessWidget {
                       String currentTimeSlot =
                           "${extractTime(startTimeDt)} to ${extractTime(endTimeSlotDt)}";
 
-                          // print("currentTimeSlot ==== $currentTimeSlot");
+                      // print("currentTimeSlot ==== $currentTimeSlot");
 
                       bool foundMatch = formattedList.contains(currentTimeSlot);
                       //  print("foundMatch ==== $foundMatch");
@@ -230,10 +232,10 @@ class BookNewAppointmentScreen extends StatelessWidget {
                               builder: (context) => ChckoutPage(
                                 checkoutDetails: appointmentState
                                     .createAppointmentData!.data!,
-                                    date:homeState.date ,
-                                    doctorName: doctorData.name??"",
-                                    time: "${extractTime(homeState.startTime!)} to ${extractTime(homeState.endTime!)} ",
-
+                                date: homeState.date,
+                                doctorName: doctorData.name ?? "",
+                                time:
+                                    "${extractTime(homeState.startTime!)} to ${extractTime(homeState.endTime!)} ",
                               ),
                             ));
                           }
@@ -247,11 +249,13 @@ class BookNewAppointmentScreen extends StatelessWidget {
                           return TextButtonWidget(
                             name: "Book an Appointment",
                             onPressed: () {
-                              if (homeState.endTime != null) {
+                              if (homeState.endTime != null &&
+                                  homeState.scheduleId != null) {
                                 context.read<AppoinmetsBloc>().add(
                                       AppoinmetsEvent.createAppoinments(
                                         appoinmentsPayload: AppointmentsPayload(
                                           appointmentDate: homeState.date,
+                                          scheduleId: homeState.scheduleId!,
                                           appointmentStarttime:
                                               homeState.startTime,
                                           appointmentEndtime: homeState.endTime,

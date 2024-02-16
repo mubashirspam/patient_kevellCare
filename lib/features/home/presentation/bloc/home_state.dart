@@ -9,6 +9,7 @@ class HomeState with _$HomeState {
     required bool hasData,
     required bool isError,
     required DateTime date,
+    required int ? scheduleId,
     required DateTime? startTime,
     required DateTime? endTime,
     required int? token,
@@ -28,5 +29,6 @@ class HomeState with _$HomeState {
       startTime: null,
       endTime: null,
       token: null,
+      scheduleId:null,
       date: DateTime.now());
 }

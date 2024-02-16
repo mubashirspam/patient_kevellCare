@@ -9,9 +9,11 @@ import '../../../home/presentation/bloc/home_bloc.dart';
 
 class DateListWidget extends StatelessWidget {
   final int activeIndex;
+   
   final List<DateTime?> dateList;
+  final List<int?> idList;
   const DateListWidget(
-      {super.key, required this.dateList, required this.activeIndex});
+      {super.key, required this.dateList, required this.activeIndex, required this.idList});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class DateListWidget extends StatelessWidget {
                       context.read<HomeBloc>().add(
                             HomeEvent.pickDate(
                               date: dateList[i] ?? DateTime.now(),
+                              scheduleId: idList[i]??0
                             ),
                           );
                     },
