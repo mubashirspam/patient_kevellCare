@@ -11,7 +11,6 @@ class ProfileState with _$ProfileState {
     required ProfileModel? result,
     required DateTime date,
   }) = _ProfileState;
-
   factory ProfileState.initial() => ProfileState(
       isLoading: false,
       isUpdateLoading: false,

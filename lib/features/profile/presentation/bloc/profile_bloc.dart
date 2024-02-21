@@ -72,7 +72,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           isError: false,
         ),
       );
-
       final response = await updateProfileRepository.updateProfile(
         dob: event.dob,
         email: event.email,

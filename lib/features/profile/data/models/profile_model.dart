@@ -27,7 +27,6 @@ class ProfileModel {
         message: json["message"],
         data: Data.fromJson(json["data"]),
     );
-
     Map<String, dynamic> toJson() => {
         "status": status,
         "responsecode": responsecode,

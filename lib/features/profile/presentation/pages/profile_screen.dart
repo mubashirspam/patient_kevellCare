@@ -11,7 +11,6 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../core/helper/toast.dart';
 
 import '../bloc/profile_bloc.dart';
-
 import '../upload_image.dart';
 import 'edit_profile.dart';
 

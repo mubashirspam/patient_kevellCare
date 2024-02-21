@@ -46,7 +46,6 @@ class UpdateProfileRepoImpliment implements UpdateProfileRepository {
         ),
         data: {
           "_id": int.parse("$id"),
-          // "_id": id,
           "name": name,
           "mobile_no": mobile_No,
           "dob": dob,
