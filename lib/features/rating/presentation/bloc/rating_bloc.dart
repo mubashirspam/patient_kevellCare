@@ -1,8 +1,15 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kevell_care/features/rating/data/model/rating_model.dart';
 import 'package:kevell_care/features/rating/domain/entites/create-rating_payload.dart';
+import 'package:kevell_care/features/rating/domain/entites/edit_rating_payload.dart';
+import 'package:kevell_care/features/rating/domain/entites/edit_rating_payload.dart';
+import 'package:kevell_care/features/rating/domain/entites/edit_rating_payload.dart';
+import 'package:kevell_care/features/rating/domain/entites/edit_rating_payload.dart';
+
 import 'package:kevell_care/features/rating/domain/repositories/create%20_rating_repository.dart';
 import 'package:kevell_care/features/rating/domain/repositories/edit_rating_repository.dart';
 
@@ -56,11 +63,10 @@ final GetRatingRepository getRatingRepository;
         ),
       );
 
-      final response = await editRatingRepository.editRating(
-        review: event.reveiw,
-        rating: event.rating,
-      
+  final response = await editRatingRepository.editRating(
+      editRatingPayload: event.editRatingPayload
       );
+      
 
       final result = response.fold(
         (failure) => state.copyWith(
@@ -87,18 +93,53 @@ final GetRatingRepository getRatingRepository;
       createRatingPayload: event.createRatingPayload
       );
 
-      final result = response.fold(
-        (failure) => state.copyWith(
-          isUpdateLoading: false,
-          isError: true,
-        ),
-        (success) => state.copyWith(
-            isError: false,
-            ratingDetails: success,
-            isUpdateLoading: false,
-            hasData: true),
-      );
-      emit(result);
+     response.fold(
+            (failure) => {
+                  failure.maybeWhen(
+                    clientFailure: (s) {
+                      log('clientFailure');
+                      return emit(state.copyWith(
+                        isLoading: false,
+                        message: "Client faliure",
+                        isError: true,
+                      ));
+                    },
+                    unauthorized: (String message) {
+                      log('emit unauthorized');
+                      return emit(state.copyWith(
+                        isLoading: false,
+                        message: message,
+                        isError: true,
+                      ));
+                    },
+                    serverFailure: (s) {
+                      log('emit serverFailure');
+                      return emit(state.copyWith(
+                        isLoading: false,
+                        message: "Server faliure",
+                        isError: true,
+                      ));
+                    },
+                    orElse: () {
+                      log('emit orElse');
+                      return emit(state.copyWith(
+                        isLoading: false,
+                        message: "Error",
+                        isError: true,
+                      ));
+                    },
+                  )
+                }, (success) {
+          emit(
+            state.copyWith(
+              isError: false,
+              hasData: true,
+              isLoading: false,
+              ratingDetails: success,
+              message: 'Thank you for ur feedback 🥳',
+            ),
+          );
+    });
     });
   }
 }

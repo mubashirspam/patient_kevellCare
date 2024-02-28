@@ -19,7 +19,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getHomeAvailableDoctor,
-    required TResult Function(DateTime date) pickDate,
+    required TResult Function(DateTime date, int scheduleId) pickDate,
     required TResult Function(DateTime startTime, DateTime endTime, int token)
         pickTime,
     required TResult Function(String location, String specialist) search,
@@ -28,7 +28,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getHomeAvailableDoctor,
-    TResult? Function(DateTime date)? pickDate,
+    TResult? Function(DateTime date, int scheduleId)? pickDate,
     TResult? Function(DateTime startTime, DateTime endTime, int token)?
         pickTime,
     TResult? Function(String location, String specialist)? search,
@@ -37,7 +37,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getHomeAvailableDoctor,
-    TResult Function(DateTime date)? pickDate,
+    TResult Function(DateTime date, int scheduleId)? pickDate,
     TResult Function(DateTime startTime, DateTime endTime, int token)? pickTime,
     TResult Function(String location, String specialist)? search,
     required TResult orElse(),
@@ -130,7 +130,7 @@ class _$GetHomeAvailableDoctorImpl implements _GetHomeAvailableDoctor {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getHomeAvailableDoctor,
-    required TResult Function(DateTime date) pickDate,
+    required TResult Function(DateTime date, int scheduleId) pickDate,
     required TResult Function(DateTime startTime, DateTime endTime, int token)
         pickTime,
     required TResult Function(String location, String specialist) search,
@@ -142,7 +142,7 @@ class _$GetHomeAvailableDoctorImpl implements _GetHomeAvailableDoctor {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getHomeAvailableDoctor,
-    TResult? Function(DateTime date)? pickDate,
+    TResult? Function(DateTime date, int scheduleId)? pickDate,
     TResult? Function(DateTime startTime, DateTime endTime, int token)?
         pickTime,
     TResult? Function(String location, String specialist)? search,
@@ -154,7 +154,7 @@ class _$GetHomeAvailableDoctorImpl implements _GetHomeAvailableDoctor {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getHomeAvailableDoctor,
-    TResult Function(DateTime date)? pickDate,
+    TResult Function(DateTime date, int scheduleId)? pickDate,
     TResult Function(DateTime startTime, DateTime endTime, int token)? pickTime,
     TResult Function(String location, String specialist)? search,
     required TResult orElse(),
@@ -214,7 +214,7 @@ abstract class _$$PickDateImplCopyWith<$Res> {
           _$PickDateImpl value, $Res Function(_$PickDateImpl) then) =
       __$$PickDateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({DateTime date});
+  $Res call({DateTime date, int scheduleId});
 }
 
 /// @nodoc
@@ -229,12 +229,17 @@ class __$$PickDateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? date = null,
+    Object? scheduleId = null,
   }) {
     return _then(_$PickDateImpl(
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      scheduleId: null == scheduleId
+          ? _value.scheduleId
+          : scheduleId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -242,14 +247,16 @@ class __$$PickDateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PickDateImpl implements _PickDate {
-  const _$PickDateImpl({required this.date});
+  const _$PickDateImpl({required this.date, required this.scheduleId});
 
   @override
   final DateTime date;
+  @override
+  final int scheduleId;
 
   @override
   String toString() {
-    return 'HomeEvent.pickDate(date: $date)';
+    return 'HomeEvent.pickDate(date: $date, scheduleId: $scheduleId)';
   }
 
   @override
@@ -257,11 +264,13 @@ class _$PickDateImpl implements _PickDate {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PickDateImpl &&
-            (identical(other.date, date) || other.date == date));
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.scheduleId, scheduleId) ||
+                other.scheduleId == scheduleId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, date);
+  int get hashCode => Object.hash(runtimeType, date, scheduleId);
 
   @JsonKey(ignore: true)
   @override
@@ -273,37 +282,37 @@ class _$PickDateImpl implements _PickDate {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getHomeAvailableDoctor,
-    required TResult Function(DateTime date) pickDate,
+    required TResult Function(DateTime date, int scheduleId) pickDate,
     required TResult Function(DateTime startTime, DateTime endTime, int token)
         pickTime,
     required TResult Function(String location, String specialist) search,
   }) {
-    return pickDate(date);
+    return pickDate(date, scheduleId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getHomeAvailableDoctor,
-    TResult? Function(DateTime date)? pickDate,
+    TResult? Function(DateTime date, int scheduleId)? pickDate,
     TResult? Function(DateTime startTime, DateTime endTime, int token)?
         pickTime,
     TResult? Function(String location, String specialist)? search,
   }) {
-    return pickDate?.call(date);
+    return pickDate?.call(date, scheduleId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getHomeAvailableDoctor,
-    TResult Function(DateTime date)? pickDate,
+    TResult Function(DateTime date, int scheduleId)? pickDate,
     TResult Function(DateTime startTime, DateTime endTime, int token)? pickTime,
     TResult Function(String location, String specialist)? search,
     required TResult orElse(),
   }) {
     if (pickDate != null) {
-      return pickDate(date);
+      return pickDate(date, scheduleId);
     }
     return orElse();
   }
@@ -348,9 +357,12 @@ class _$PickDateImpl implements _PickDate {
 }
 
 abstract class _PickDate implements HomeEvent {
-  const factory _PickDate({required final DateTime date}) = _$PickDateImpl;
+  const factory _PickDate(
+      {required final DateTime date,
+      required final int scheduleId}) = _$PickDateImpl;
 
   DateTime get date;
+  int get scheduleId;
   @JsonKey(ignore: true)
   _$$PickDateImplCopyWith<_$PickDateImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -439,7 +451,7 @@ class _$PickTimeImpl implements _PickTime {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getHomeAvailableDoctor,
-    required TResult Function(DateTime date) pickDate,
+    required TResult Function(DateTime date, int scheduleId) pickDate,
     required TResult Function(DateTime startTime, DateTime endTime, int token)
         pickTime,
     required TResult Function(String location, String specialist) search,
@@ -451,7 +463,7 @@ class _$PickTimeImpl implements _PickTime {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getHomeAvailableDoctor,
-    TResult? Function(DateTime date)? pickDate,
+    TResult? Function(DateTime date, int scheduleId)? pickDate,
     TResult? Function(DateTime startTime, DateTime endTime, int token)?
         pickTime,
     TResult? Function(String location, String specialist)? search,
@@ -463,7 +475,7 @@ class _$PickTimeImpl implements _PickTime {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getHomeAvailableDoctor,
-    TResult Function(DateTime date)? pickDate,
+    TResult Function(DateTime date, int scheduleId)? pickDate,
     TResult Function(DateTime startTime, DateTime endTime, int token)? pickTime,
     TResult Function(String location, String specialist)? search,
     required TResult orElse(),
@@ -602,7 +614,7 @@ class _$SearchImpl implements _Search {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getHomeAvailableDoctor,
-    required TResult Function(DateTime date) pickDate,
+    required TResult Function(DateTime date, int scheduleId) pickDate,
     required TResult Function(DateTime startTime, DateTime endTime, int token)
         pickTime,
     required TResult Function(String location, String specialist) search,
@@ -614,7 +626,7 @@ class _$SearchImpl implements _Search {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getHomeAvailableDoctor,
-    TResult? Function(DateTime date)? pickDate,
+    TResult? Function(DateTime date, int scheduleId)? pickDate,
     TResult? Function(DateTime startTime, DateTime endTime, int token)?
         pickTime,
     TResult? Function(String location, String specialist)? search,
@@ -626,7 +638,7 @@ class _$SearchImpl implements _Search {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getHomeAvailableDoctor,
-    TResult Function(DateTime date)? pickDate,
+    TResult Function(DateTime date, int scheduleId)? pickDate,
     TResult Function(DateTime startTime, DateTime endTime, int token)? pickTime,
     TResult Function(String location, String specialist)? search,
     required TResult orElse(),
@@ -699,6 +711,7 @@ mixin _$HomeState {
   DateTime? get startTime => throw _privateConstructorUsedError;
   DateTime? get endTime => throw _privateConstructorUsedError;
   int? get token => throw _privateConstructorUsedError;
+  int? get scheduleId => throw _privateConstructorUsedError;
   AvailableDoctorModel? get availableDoctors =>
       throw _privateConstructorUsedError;
   Option<Either<MainFailure, AvailableDoctorModel>>
@@ -724,6 +737,7 @@ abstract class $HomeStateCopyWith<$Res> {
       DateTime? startTime,
       DateTime? endTime,
       int? token,
+      int? scheduleId,
       AvailableDoctorModel? availableDoctors,
       Option<Either<MainFailure, AvailableDoctorModel>>
           failureOrSuccessOption});
@@ -751,6 +765,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? startTime = freezed,
     Object? endTime = freezed,
     Object? token = freezed,
+    Object? scheduleId = freezed,
     Object? availableDoctors = freezed,
     Object? failureOrSuccessOption = null,
   }) {
@@ -791,6 +806,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as int?,
+      scheduleId: freezed == scheduleId
+          ? _value.scheduleId
+          : scheduleId // ignore: cast_nullable_to_non_nullable
+              as int?,
       availableDoctors: freezed == availableDoctors
           ? _value.availableDoctors
           : availableDoctors // ignore: cast_nullable_to_non_nullable
@@ -821,6 +840,7 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       DateTime? startTime,
       DateTime? endTime,
       int? token,
+      int? scheduleId,
       AvailableDoctorModel? availableDoctors,
       Option<Either<MainFailure, AvailableDoctorModel>>
           failureOrSuccessOption});
@@ -846,6 +866,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
     Object? startTime = freezed,
     Object? endTime = freezed,
     Object? token = freezed,
+    Object? scheduleId = freezed,
     Object? availableDoctors = freezed,
     Object? failureOrSuccessOption = null,
   }) {
@@ -886,6 +907,10 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as int?,
+      scheduleId: freezed == scheduleId
+          ? _value.scheduleId
+          : scheduleId // ignore: cast_nullable_to_non_nullable
+              as int?,
       availableDoctors: freezed == availableDoctors
           ? _value.availableDoctors
           : availableDoctors // ignore: cast_nullable_to_non_nullable
@@ -911,6 +936,7 @@ class _$HomeStateImpl implements _HomeState {
       required this.startTime,
       required this.endTime,
       required this.token,
+      required this.scheduleId,
       this.availableDoctors,
       required this.failureOrSuccessOption});
 
@@ -933,6 +959,8 @@ class _$HomeStateImpl implements _HomeState {
   @override
   final int? token;
   @override
+  final int? scheduleId;
+  @override
   final AvailableDoctorModel? availableDoctors;
   @override
   final Option<Either<MainFailure, AvailableDoctorModel>>
@@ -940,7 +968,7 @@ class _$HomeStateImpl implements _HomeState {
 
   @override
   String toString() {
-    return 'HomeState(hasAvailableDoctorData: $hasAvailableDoctorData, isAvailableDoctorLoading: $isAvailableDoctorLoading, unauthorized: $unauthorized, hasData: $hasData, isError: $isError, date: $date, startTime: $startTime, endTime: $endTime, token: $token, availableDoctors: $availableDoctors, failureOrSuccessOption: $failureOrSuccessOption)';
+    return 'HomeState(hasAvailableDoctorData: $hasAvailableDoctorData, isAvailableDoctorLoading: $isAvailableDoctorLoading, unauthorized: $unauthorized, hasData: $hasData, isError: $isError, date: $date, startTime: $startTime, endTime: $endTime, token: $token, scheduleId: $scheduleId, availableDoctors: $availableDoctors, failureOrSuccessOption: $failureOrSuccessOption)';
   }
 
   @override
@@ -962,6 +990,8 @@ class _$HomeStateImpl implements _HomeState {
                 other.startTime == startTime) &&
             (identical(other.endTime, endTime) || other.endTime == endTime) &&
             (identical(other.token, token) || other.token == token) &&
+            (identical(other.scheduleId, scheduleId) ||
+                other.scheduleId == scheduleId) &&
             (identical(other.availableDoctors, availableDoctors) ||
                 other.availableDoctors == availableDoctors) &&
             (identical(other.failureOrSuccessOption, failureOrSuccessOption) ||
@@ -980,6 +1010,7 @@ class _$HomeStateImpl implements _HomeState {
       startTime,
       endTime,
       token,
+      scheduleId,
       availableDoctors,
       failureOrSuccessOption);
 
@@ -1001,6 +1032,7 @@ abstract class _HomeState implements HomeState {
       required final DateTime? startTime,
       required final DateTime? endTime,
       required final int? token,
+      required final int? scheduleId,
       final AvailableDoctorModel? availableDoctors,
       required final Option<Either<MainFailure, AvailableDoctorModel>>
           failureOrSuccessOption}) = _$HomeStateImpl;
@@ -1023,6 +1055,8 @@ abstract class _HomeState implements HomeState {
   DateTime? get endTime;
   @override
   int? get token;
+  @override
+  int? get scheduleId;
   @override
   AvailableDoctorModel? get availableDoctors;
   @override

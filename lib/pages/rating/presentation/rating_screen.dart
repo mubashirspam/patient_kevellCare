@@ -4,11 +4,15 @@ import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/rating/presentation/bloc/rating_bloc.dart';
 import 'package:kevell_care/features/rating/presentation/view_doctor_rating.dart';
 
+import '../../../features/rating/data/model/rating_model.dart';
+
 
 
 
 class DoctorRatingScreen extends StatelessWidget {
-  const DoctorRatingScreen({super.key});
+    static const routeName = '/rating';
+  const DoctorRatingScreen({super.key,
+});
 
   @override
   Widget build(BuildContext context) {

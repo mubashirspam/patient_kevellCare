@@ -34,11 +34,11 @@ class DateListWidget extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, i) => InkWell(
                     onTap: () {
-                      context.read<HomeBloc>().add(
-                            HomeEvent.pickDate(
-                              date: dateList[i] ?? DateTime.now(),
-                            ),
-                          );
+                      // context.read<HomeBloc>().add(
+                      //       HomeEvent.pickDate(
+                      //         date: dateList[i] ?? DateTime.now(),
+                      //       ),
+                      //     );
                     },
                     child: Container(
                       padding: const EdgeInsets.all(15),

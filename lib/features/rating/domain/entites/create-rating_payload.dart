@@ -1,3 +1,6 @@
+// To parse this JSON data, do
+//
+//     final createRatingPayload = createRatingPayloadFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -8,27 +11,27 @@ String createRatingPayloadToJson(CreateRatingPayload data) => json.encode(data.t
 class CreateRatingPayload {
     int patientId;
     int appoinmentId;
-    String review;
     int rating;
+    String review;
 
     CreateRatingPayload({
         required this.patientId,
         required this.appoinmentId,
-        required this.review,
         required this.rating,
+        required this.review,
     });
 
     factory CreateRatingPayload.fromJson(Map<String, dynamic> json) => CreateRatingPayload(
         patientId: json["patient_id"],
-        appoinmentId: json["Appoinment_id"],
-        review: json["review"],
+        appoinmentId: json["appoinment_id"],
         rating: json["rating"],
+        review: json["review"],
     );
 
     Map<String, dynamic> toJson() => {
         "patient_id": patientId,
-        "Appoinment_id": appoinmentId,
-        "review": review,
+        "appoinment_id": appoinmentId,
         "rating": rating,
+        "review": review,
     };
 }

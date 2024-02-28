@@ -1,6 +1,16 @@
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kevell_care/configure/value/constant.dart';
+import 'package:kevell_care/configure/value/secure_storage.dart';
+import 'package:kevell_care/core/helper/toast.dart';
+import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/login/presentation/bloc/login_bloc.dart';
+import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
 import 'package:kevell_care/features/widgets/input_field/input_field_widget.dart';
+import 'package:kevell_care/pages/initialize/initialize.dart';
 
 
 
@@ -69,60 +79,60 @@ class _LoginWidgetState extends State<LoginWidget> {
               },
             ),
             const SizedBox(height: 30),
-            // BlocConsumer<LoginBloc, LoginState>(
-            //   listener: (context, state) {
-            //     if (!state.isLoading &&
-            //         state.isError &&
-            //         !state.hasValidationData) {
-            //       Toast.showToast(
-            //         color: Colors.red,
-            //         context: context,
-            //         message: state.message,
-            //       );
-            //     }
+            BlocConsumer<LoginBloc, LoginState>(
+              listener: (context, state) {
+                if (!state.isLoading &&
+                    state.isError &&
+                    !state.hasValidationData) {
+                  Toast.showToast(
+                    color: Colors.red,
+                    context: context,
+                    message: state.message,
+                  );
+                }
 
-            //     if (!state.isLoading && state.hasValidationData) {
-            //       addToSS(mailsecureStoreKey,
-            //           state.loginDetails!.data.first.emailId);
+                if (!state.isLoading && state.hasValidationData) {
+                  addToSS(mailsecureStoreKey,
+                      state.loginDetails!.data.first.emailId);
 
-            //       addToSS(patientId,
-            //           state.loginDetails!.data.first.id.toString());
+                  addToSS(patientId,
+                      state.loginDetails!.data.first.id.toString());
 
-            //       addTokenToSS(
-            //           secureStoreKey, state.loginDetails!.data.first.token);
+                  addTokenToSS(
+                      secureStoreKey, state.loginDetails!.data.first.token);
 
-            //       log("Token : ${state.loginDetails!.data.first.token}");
-            //       Toast.showToast(
-            //         context: context,
-            //         message: 'You are successfully Logined 🥳',
-            //       );
+                  log("Token : ${state.loginDetails!.data.first.token}");
+                  Toast.showToast(
+                    context: context,
+                    message: 'You are successfully Logined 🥳',
+                  );
 
-            //       Navigator.of(context).pushAndRemoveUntil(
-            //         MaterialPageRoute(
-            //           builder: (context) => const Initialize(),
-            //         ),
-            //         (route) => false,
-            //       );
-            //                     }
-            //   },
-            //   builder: (context, state) {
-            //     return TextButtonWidget(
-            //       bgColor: context.theme.backround,
-            //       fgColor: context.theme.textPrimary,
-            //       name: "Login",
-            //       onPressed: () {
-            //         if (_formKey.currentState!.validate()) {
-            //           context.read<LoginBloc>().add(
-            //                 LoginEvent.login(
-            //                     usernameOrMobile: controller.value.text,
-            //                     password: passwordController.value.text),
-            //               );
-            //         }
-            //       },
-            //       isLoading: state.isLoading,
-            //     );
-            //   },
-            // ),
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => const Initialize(),
+                    ),
+                    (route) => false,
+                  );
+                                }
+              },
+              builder: (context, state) {
+                return TextButtonWidget(
+                  bgColor: context.theme.backround,
+                  fgColor: context.theme.textPrimary,
+                  name: "Login",
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      context.read<LoginBloc>().add(
+                            LoginEvent.login(
+                                usernameOrMobile: controller.value.text,
+                                password: passwordController.value.text),
+                          );
+                    }
+                  },
+                  isLoading: state.isLoading,
+                );
+              },
+            ),
           ],
         ),
       ),

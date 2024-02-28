@@ -7,8 +7,8 @@ import 'package:kevell_care/features/rating/presentation/bloc/rating_bloc.dart';
 import 'package:kevell_care/features/rating/presentation/edit_rating.dart';
 
 class DoctorRating extends StatelessWidget {
-  const DoctorRating({
-    super.key,
+    const DoctorRating({
+        super.key,
   });
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class RatingCard extends StatelessWidget {
   final String review;
   final int rating;
   final String doctorname;
-
+  
   const RatingCard({super.key, required this.review, required this.rating, required this. doctorname, });
   
 
