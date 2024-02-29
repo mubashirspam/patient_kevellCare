@@ -2,9 +2,8 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kevell_care/configure/api/endpoints.dart';
 
-
+import '../../../../configure/api/endpoints.dart';
 import '../../../../configure/value/constant.dart';
 import '../../../../configure/value/secure_storage.dart';
 import '../../../../core/failiar/failiur_model.dart';
@@ -27,17 +26,21 @@ class CreateAppoinmentsRepoImpliment implements CreateAppoinmentsRepository {
       payload.patientId = int.parse(id!);
 
       final headers = {
-        'Authorization': 'Bearer $token',
+        'Authorization':
+            'Bearer $token',
         'Content-Type': 'application/json',
       };
 
-      print(payload.toJson().toString());
       final response = await Dio(BaseOptions()).post(
         V2.bookAppointment,
+        // "$baseUrl/$service2/book-appointment",
 
+        // "https://ac3f-2401-4900-6294-b8c8-8896-f6ed-e503-d68c.ngrok-free.app/v2/appointment/patients/book-appointment",
         data: payload.toJson(),
         options: Options(headers: headers),
       );
+
+      print(response.data.toJson().toString());
 
       switch (response.statusCode) {
         case 200:

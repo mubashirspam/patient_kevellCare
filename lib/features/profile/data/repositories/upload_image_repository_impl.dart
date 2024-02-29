@@ -32,8 +32,7 @@ class UploadImageRepoImpliment implements UploadImageRepository {
       FormData formData =
           FormData.fromMap({"_id": int.parse("$id"), 'profile_imagelink': img});
       final response = await Dio(BaseOptions()).put(
-        // V2.updateProfile,
-        "https://1529-183-82-33-226.ngrok-free.app/v2/patients/profile",
+        V2.updateProfile,
          options: Options(
           headers: headers,
           validateStatus: (_) => true,

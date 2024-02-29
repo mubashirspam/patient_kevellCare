@@ -13,7 +13,7 @@ class BookAppointmentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 130,
+      height: 135,
       child: Stack(
         children: [
           Positioned(
@@ -23,9 +23,9 @@ class BookAppointmentCard extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10),
                 color: Colors.white,
-                  ),
+              ),
               height: 80,
               child: Center(
                 child: Text(

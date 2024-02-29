@@ -31,9 +31,8 @@ class ReportScreen extends StatelessWidget {
 
           context.read<ReportBloc>().add(ReportEvent.fetchReport(
               fetchReportPayload: FetchReportPayload(
-                  startingDate:
-                      DateTime.now().subtract(const Duration(days: 10)),
-                  endingDate: DateTime.now(),
+                  fromDate: DateTime.now().subtract(const Duration(days: 20)),
+                  toDate: DateTime.now(),
                   patientId: id)));
           context
               .read<ReportBloc>()
@@ -64,9 +63,9 @@ class ReportScreen extends StatelessWidget {
                 List<ECGData> ecgData = [];
                 List<double> voltageValues;
                 double widthEcg = 1;
-                if (data.ecginfo!.isNotEmpty) {
-                  String? value = data.ecginfo!.first.data?.content;
-                  if (value != null && value.isNotEmpty) {
+                if (data.ecgInfo != null) {
+                  String? value = data.ecgInfo!.data!.content!;
+                  if (value.isNotEmpty) {
                     voltageValues = value
                         .split(',')
                         .map((e) => e.trim()) // Trim whitespace
@@ -87,32 +86,32 @@ class ReportScreen extends StatelessWidget {
                     }
                   }
                 }
-                List<ECGData> grsData = [];
-                List<double> grsvoltageValues;
-                double widthGsr = 1;
-                if (data.gsrinfo!.isNotEmpty) {
-                  String? value = data.gsrinfo!.first.data?.content;
-                  if (value != null && value.isNotEmpty) {
-                    grsvoltageValues = value
-                        .split(',')
-                        .map((e) => e.trim()) // Trim whitespace
-                        .where((element) => element.isNotEmpty)
-                        .map((e) {
-                      try {
-                        return double.parse(e);
-                      } catch (_) {
-                        return 0.0; // Handle non-numeric values or provide a suitable default
-                      }
-                    }).toList();
-                    widthGsr = double.parse(grsvoltageValues.length.toString());
-                    for (int i = 0; i < grsvoltageValues.length; i++) {
-                      grsData.add(ECGData(
-                        time: i,
-                        voltage: grsvoltageValues[i],
-                      ));
-                    }
-                  }
-                }
+                // List<ECGData> grsData = [];
+                // List<double> grsvoltageValues;
+                // double widthGsr = 1;
+                // if (data.gsrinfo!.isNotEmpty) {
+                //   String? value = data.gsrinfo!.first.data?.content;
+                //   if (value != null && value.isNotEmpty) {
+                //     grsvoltageValues = value
+                //         .split(',')
+                //         .map((e) => e.trim()) // Trim whitespace
+                //         .where((element) => element.isNotEmpty)
+                //         .map((e) {
+                //       try {
+                //         return double.parse(e);
+                //       } catch (_) {
+                //         return 0.0; // Handle non-numeric values or provide a suitable default
+                //       }
+                //     }).toList();
+                //     widthGsr = double.parse(grsvoltageValues.length.toString());
+                //     for (int i = 0; i < grsvoltageValues.length; i++) {
+                //       grsData.add(ECGData(
+                //         time: i,
+                //         voltage: grsvoltageValues[i],
+                //       ));
+                //     }
+                //   }
+                // }
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,10 +123,10 @@ class ReportScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ),
-                    if (data.temperatureinfo!.data != null)
+                    if (data.temperatureInfo!.data != null)
                       ResultCard(
                         parameter: "Temprature",
-                        value: data.temperatureinfo!.data!.content!,
+                        value: data.temperatureInfo!.data!.content!,
                       ),
                     if (data.spO2Info!.data != null)
                       ResultCard(
@@ -139,12 +138,12 @@ class ReportScreen extends StatelessWidget {
                         parameter: "Heart rate",
                         value: data.spO2Info!.data!.heartRate!,
                       ),
-                    if (data.bpinfo!.data != null)
+                    if (data.bpInfo!.data != null)
                       BpCard(
                         parameter: "Blood pressure",
-                        value: data.bpinfo!.data!,
+                        value: data.bpInfo!.data!,
                       ),
-                    if (data.ecginfo!.isNotEmpty)
+                    if (data.ecgInfo != null)
                       EcgResultCard(
                         width: 2 * widthEcg,
                         colors: [
@@ -154,16 +153,16 @@ class ReportScreen extends StatelessWidget {
                         ecgData: ecgData,
                         name: "ECG",
                       ),
-                    if (data.gsrinfo!.isNotEmpty)
-                      EcgResultCard(
-                        width: 2 * widthGsr,
-                        colors: [
-                          generateLightColor(),
-                          generateLightColor(),
-                        ],
-                        ecgData: grsData,
-                        name: "GRS ",
-                      ),
+                    // if (data.gsrInfo!.isNotEmpty)
+                    //   EcgResultCard(
+                    //     width: 2 * widthGsr,
+                    //     colors: [
+                    //       generateLightColor(),
+                    //       generateLightColor(),
+                    //     ],
+                    //     ecgData: grsData,
+                    //     name: "GRS ",
+                    //   ),
                     Padding(
                       padding: const EdgeInsets.all(20).copyWith(top: 0),
                       child: Text(
@@ -174,6 +173,10 @@ class ReportScreen extends StatelessWidget {
                     data.prescription != null && data.prescription!.isNotEmpty
                         ? PrescriptionReportsCard(
                             data: data.prescription!,
+                            doctorData: data.doctor!,
+                            apppoinmetDate:
+                                data.appointmentDate ?? DateTime.now(),
+                            patientData: data.patient!,
                           )
                         : const SizedBox()
                   ],
@@ -307,7 +310,7 @@ class EcgResultCard extends StatelessWidget {
 
 class BpCard extends StatelessWidget {
   final String parameter;
-  final BpinfoData value;
+  final BpInfoData value;
   const BpCard({
     required this.parameter,
     required this.value,

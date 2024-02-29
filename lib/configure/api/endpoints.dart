@@ -4,15 +4,23 @@ class V2 {
   // AUTH & USER
   static const register = "$baseUrl/$service/register";
 
-
   static const login = "$baseUrl/$service/login";
-  static const fetchProfile = "$baseUrl/$service/users/details";
+  static const fetchProfile = "$baseUrl/$service/patient-info";
+    static const updateProfile = "$baseUrl/$service/profile";
 
   // appoinment
 
   static const availableDoctor = "$baseUrl/$service/doctor-schedule";
   static const bookAppointment = "$baseUrl/$service2/book-appointment";
+        
   static const appointmets = "$baseUrl/$service2/past-appointments";
+
+  static const chat = "$baseUrl/videochat/chat/api/getallusers";
+
+  static const report = "$baseUrl/$service/view-patient-report";
+  static const generalReport = "$baseUrl/$service/patient-report-general-info";
+
+
 }
 
 class ApiEndPoints {
@@ -33,7 +41,7 @@ class ApiEndPoints {
       // "$baseUrl/v2/patients/patientinfoby";
       "https://768e-183-82-33-226.ngrok-free.app/v2/patients/patientinfoby";
 
-  static const updateProfile = "$baseUrl/v2/patients/profile";
+
 
   static const getHomeAvailableDoctor =
       "https://768e-183-82-33-226.ngrok-free.app/v2/patients/alldoctorSchedule";
@@ -46,10 +54,6 @@ class ApiEndPoints {
 
   static const deleteAppoinments = "$baseUrl/appointment/api/deleteAppoinment";
 
-  static const patientreportgeneralinfo =
-      "$baseUrl/patient/api/patientreportgeneralinfo";
-
-  static const patientreport = "$baseUrl/patient/api/ViewPatientReport_new";
   static const websocketUrl =
       "https://kevelldigital.com/videochat?type=videocall&callerId=";
 

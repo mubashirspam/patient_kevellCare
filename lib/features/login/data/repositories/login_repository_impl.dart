@@ -24,7 +24,7 @@ class LoginRepoImpliment implements LoginRepository {
       final fcm = await getTokenFromSS(fcmStoreKey);
 
       final response = await Dio().post(
-        V2.login,
+        "https://kevelldigital.com/v2/patients/login",
         data: {
           'cred': usernameOrMobile,
           "device_token": fcm,
@@ -32,6 +32,8 @@ class LoginRepoImpliment implements LoginRepository {
           "device_type": "Android"
         },
       );
+
+    
 
       switch (response.statusCode) {
         case 200:

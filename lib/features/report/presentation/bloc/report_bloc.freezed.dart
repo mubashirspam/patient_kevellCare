@@ -12,7 +12,7 @@ part of 'report_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ReportEvent {
@@ -21,7 +21,8 @@ mixin _$ReportEvent {
     required TResult Function(int id) fetchReportGeneralinfo,
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
-    required TResult Function(List<Prescription> data, PdfActions action)
+    required TResult Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)
         genaratePdf,
     required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) =>
@@ -30,7 +31,9 @@ mixin _$ReportEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult? Function(List<Prescription> data, PdfActions action)? genaratePdf,
+    TResult? Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)?
+        genaratePdf,
     TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) =>
       throw _privateConstructorUsedError;
@@ -38,7 +41,9 @@ mixin _$ReportEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult Function(List<Prescription> data, PdfActions action)? genaratePdf,
+    TResult Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)?
+        genaratePdf,
     TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) =>
@@ -159,7 +164,8 @@ class _$FetchReportGeneralinfoImpl implements _FetchReportGeneralinfo {
     required TResult Function(int id) fetchReportGeneralinfo,
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
-    required TResult Function(List<Prescription> data, PdfActions action)
+    required TResult Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)
         genaratePdf,
     required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) {
@@ -171,7 +177,9 @@ class _$FetchReportGeneralinfoImpl implements _FetchReportGeneralinfo {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult? Function(List<Prescription> data, PdfActions action)? genaratePdf,
+    TResult? Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)?
+        genaratePdf,
     TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) {
     return fetchReportGeneralinfo?.call(id);
@@ -182,7 +190,9 @@ class _$FetchReportGeneralinfoImpl implements _FetchReportGeneralinfo {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult Function(List<Prescription> data, PdfActions action)? genaratePdf,
+    TResult Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)?
+        genaratePdf,
     TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) {
@@ -309,7 +319,8 @@ class _$FetchReportImpl implements _FetchReport {
     required TResult Function(int id) fetchReportGeneralinfo,
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
-    required TResult Function(List<Prescription> data, PdfActions action)
+    required TResult Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)
         genaratePdf,
     required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) {
@@ -321,7 +332,9 @@ class _$FetchReportImpl implements _FetchReport {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult? Function(List<Prescription> data, PdfActions action)? genaratePdf,
+    TResult? Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)?
+        genaratePdf,
     TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) {
     return fetchReport?.call(fetchReportPayload);
@@ -332,7 +345,9 @@ class _$FetchReportImpl implements _FetchReport {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult Function(List<Prescription> data, PdfActions action)? genaratePdf,
+    TResult Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)?
+        genaratePdf,
     TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) {
@@ -398,7 +413,12 @@ abstract class _$$GeneratePdfImplCopyWith<$Res> {
           _$GeneratePdfImpl value, $Res Function(_$GeneratePdfImpl) then) =
       __$$GeneratePdfImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Prescription> data, PdfActions action});
+  $Res call(
+      {List<Prescription> data,
+      Doctor doctorData,
+      Patient patientData,
+      DateTime apppoinmetDate,
+      PdfActions action});
 }
 
 /// @nodoc
@@ -413,6 +433,9 @@ class __$$GeneratePdfImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? data = null,
+    Object? doctorData = null,
+    Object? patientData = null,
+    Object? apppoinmetDate = null,
     Object? action = null,
   }) {
     return _then(_$GeneratePdfImpl(
@@ -420,6 +443,18 @@ class __$$GeneratePdfImplCopyWithImpl<$Res>
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
               as List<Prescription>,
+      doctorData: null == doctorData
+          ? _value.doctorData
+          : doctorData // ignore: cast_nullable_to_non_nullable
+              as Doctor,
+      patientData: null == patientData
+          ? _value.patientData
+          : patientData // ignore: cast_nullable_to_non_nullable
+              as Patient,
+      apppoinmetDate: null == apppoinmetDate
+          ? _value.apppoinmetDate
+          : apppoinmetDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       action: null == action
           ? _value.action
           : action // ignore: cast_nullable_to_non_nullable
@@ -432,7 +467,11 @@ class __$$GeneratePdfImplCopyWithImpl<$Res>
 
 class _$GeneratePdfImpl implements _GeneratePdf {
   const _$GeneratePdfImpl(
-      {required final List<Prescription> data, required this.action})
+      {required final List<Prescription> data,
+      required this.doctorData,
+      required this.patientData,
+      required this.apppoinmetDate,
+      required this.action})
       : _data = data;
 
   final List<Prescription> _data;
@@ -444,11 +483,17 @@ class _$GeneratePdfImpl implements _GeneratePdf {
   }
 
   @override
+  final Doctor doctorData;
+  @override
+  final Patient patientData;
+  @override
+  final DateTime apppoinmetDate;
+  @override
   final PdfActions action;
 
   @override
   String toString() {
-    return 'ReportEvent.genaratePdf(data: $data, action: $action)';
+    return 'ReportEvent.genaratePdf(data: $data, doctorData: $doctorData, patientData: $patientData, apppoinmetDate: $apppoinmetDate, action: $action)';
   }
 
   @override
@@ -457,12 +502,23 @@ class _$GeneratePdfImpl implements _GeneratePdf {
         (other.runtimeType == runtimeType &&
             other is _$GeneratePdfImpl &&
             const DeepCollectionEquality().equals(other._data, _data) &&
+            (identical(other.doctorData, doctorData) ||
+                other.doctorData == doctorData) &&
+            (identical(other.patientData, patientData) ||
+                other.patientData == patientData) &&
+            (identical(other.apppoinmetDate, apppoinmetDate) ||
+                other.apppoinmetDate == apppoinmetDate) &&
             (identical(other.action, action) || other.action == action));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_data), action);
+      runtimeType,
+      const DeepCollectionEquality().hash(_data),
+      doctorData,
+      patientData,
+      apppoinmetDate,
+      action);
 
   @JsonKey(ignore: true)
   @override
@@ -476,11 +532,12 @@ class _$GeneratePdfImpl implements _GeneratePdf {
     required TResult Function(int id) fetchReportGeneralinfo,
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
-    required TResult Function(List<Prescription> data, PdfActions action)
+    required TResult Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)
         genaratePdf,
     required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) {
-    return genaratePdf(data, action);
+    return genaratePdf(data, doctorData, patientData, apppoinmetDate, action);
   }
 
   @override
@@ -488,10 +545,13 @@ class _$GeneratePdfImpl implements _GeneratePdf {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult? Function(List<Prescription> data, PdfActions action)? genaratePdf,
+    TResult? Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)?
+        genaratePdf,
     TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) {
-    return genaratePdf?.call(data, action);
+    return genaratePdf?.call(
+        data, doctorData, patientData, apppoinmetDate, action);
   }
 
   @override
@@ -499,12 +559,14 @@ class _$GeneratePdfImpl implements _GeneratePdf {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult Function(List<Prescription> data, PdfActions action)? genaratePdf,
+    TResult Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)?
+        genaratePdf,
     TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) {
     if (genaratePdf != null) {
-      return genaratePdf(data, action);
+      return genaratePdf(data, doctorData, patientData, apppoinmetDate, action);
     }
     return orElse();
   }
@@ -551,9 +613,15 @@ class _$GeneratePdfImpl implements _GeneratePdf {
 abstract class _GeneratePdf implements ReportEvent {
   const factory _GeneratePdf(
       {required final List<Prescription> data,
+      required final Doctor doctorData,
+      required final Patient patientData,
+      required final DateTime apppoinmetDate,
       required final PdfActions action}) = _$GeneratePdfImpl;
 
   List<Prescription> get data;
+  Doctor get doctorData;
+  Patient get patientData;
+  DateTime get apppoinmetDate;
   PdfActions get action;
   @JsonKey(ignore: true)
   _$$GeneratePdfImplCopyWith<_$GeneratePdfImpl> get copyWith =>
@@ -636,7 +704,8 @@ class _$PickDateImpl implements _PickDate {
     required TResult Function(int id) fetchReportGeneralinfo,
     required TResult Function(FetchReportPayload fetchReportPayload)
         fetchReport,
-    required TResult Function(List<Prescription> data, PdfActions action)
+    required TResult Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)
         genaratePdf,
     required TResult Function(DateTime startDate, DateTime endDate) pickDate,
   }) {
@@ -648,7 +717,9 @@ class _$PickDateImpl implements _PickDate {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int id)? fetchReportGeneralinfo,
     TResult? Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult? Function(List<Prescription> data, PdfActions action)? genaratePdf,
+    TResult? Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)?
+        genaratePdf,
     TResult? Function(DateTime startDate, DateTime endDate)? pickDate,
   }) {
     return pickDate?.call(startDate, endDate);
@@ -659,7 +730,9 @@ class _$PickDateImpl implements _PickDate {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int id)? fetchReportGeneralinfo,
     TResult Function(FetchReportPayload fetchReportPayload)? fetchReport,
-    TResult Function(List<Prescription> data, PdfActions action)? genaratePdf,
+    TResult Function(List<Prescription> data, Doctor doctorData,
+            Patient patientData, DateTime apppoinmetDate, PdfActions action)?
+        genaratePdf,
     TResult Function(DateTime startDate, DateTime endDate)? pickDate,
     required TResult orElse(),
   }) {

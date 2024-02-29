@@ -11,14 +11,12 @@ import '../../../../core/failiar/failiur_model.dart';
 import '../../../../core/failiar/main_failures.dart';
 // import '../../../../core/network/netwrok.dart';
 
-
 @LazySingleton(as: EditRatingRepository)
 class EditRatingRepoImpliment implements EditRatingRepository {
   @override
   Future<Either<MainFailure, RatingModel>> editRating({
     required String review,
     required String rating,
-
   }) async {
     try {
       final token = await getTokenFromSS(secureStoreKey);
@@ -36,7 +34,6 @@ class EditRatingRepoImpliment implements EditRatingRepository {
           "_id": int.parse("$id"),
           "review": review,
           "rating": rating,
-        
         },
       );
 

@@ -6,7 +6,7 @@ class HomeEvent with _$HomeEvent {
 
   const factory HomeEvent.pickDate({
     required DateTime date,
-     required int scheduleId,
+    required int scheduleId,
   }) = _PickDate;
 
   const factory HomeEvent.pickTime({

@@ -4,9 +4,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-import 'package:kevell_care/features/forgot/data/model/change_password_model.dart';
-import 'package:kevell_care/features/forgot/presentation/bloc/forgot_bloc.dart';
-import 'package:kevell_care/features/forgot/presentation/pages/otp.dart';
 import 'package:kevell_care/features/login/presentation/bloc/login_bloc.dart';
 import 'package:kevell_care/features/login/presentation/otp_widget.dart';
 import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
@@ -18,16 +15,17 @@ import '../../core/helper/toast.dart';
 import '../initialize/initialize.dart';
 
 class OtpScreen extends StatefulWidget {
-  static const routeName = '/otp-screen';
-    final String email;
   final String password;
-   final String otp;
-  const OtpScreen({super.key, 
-  required this.password,
-  required this.email,
+  final String otp;
+  final String email;
+  const OtpScreen({
+    super.key,
+    required this.password,
+    required this.email,
     required this.otp,
-
   });
+
+  // static const routeName = '/otp-screen';
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -111,6 +109,7 @@ class _OtpScreenState extends State<OtpScreen> {
     }
     otp[currentField] = value;
   }
+
   @override
   void initState() {
     sendOTP();
@@ -142,28 +141,26 @@ class _OtpScreenState extends State<OtpScreen> {
             }
 
             if (!state.isLoading && state.otpVarified) {
-              addToSS(
-                  mailsecureStoreKey, state.forgot!.data.first.name??"");
+              final loginDetails = state.otpDetails?.data?.first;
+              if (loginDetails != null) {
+                addToSS(mailsecureStoreKey, loginDetails.emailId!);
+                addToSS(nameKey, loginDetails.name!);
+                addToSS(patientId, loginDetails.id.toString());
+                addTokenToSS(secureStoreKey, loginDetails.token!);
 
-              addToSS(patientId,
-                  state.forgot!.data.first.id.toString());
+                log("Token : ${loginDetails.token}");
+                Toast.showToast(
+                  context: context,
+                  message: 'You are successfully Logged In 🥳',
+                );
 
-              // addTokenToSS(
-              //     secureStoreKey, state.forgot!.data.first.);
-
-              // log("Token : ${state.forgot!.data.first.token}");
-              
-              Toast.showToast(
-                context: context,
-                message: 'You are successfully Logined 🥳',
-              );
-          
-              Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                  builder: (context) => const Initialize(),
-                ),
-                (route) => false,
-              );
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => const Initialize(),
+                  ),
+                  (route) => false,
+                );
+              }
             }
 
             if (!state.isLoading && state.isError && !state.otpVarified) {
@@ -175,7 +172,7 @@ class _OtpScreenState extends State<OtpScreen> {
             }
           },
           builder: (context, state) {
-       final email = state.forgot?.data?.first.emailId ?? '';
+            final email = state.forgot?.data.first.emailId ?? '';
 // final otp = state.loginDetails?.data?.first.otp ?? '000000';
 
             // log("number : $number");
@@ -221,28 +218,25 @@ class _OtpScreenState extends State<OtpScreen> {
                 const SizedBox(height: 20),
                 TextButtonWidget(
                   name: "Reset password",
-                  onPressed: _timerActive && otps.length == 4
-                      ? () {
-                          context.read<LoginBloc>().add(
-                                LoginEvent.varyfiyOtp(
-                                 otp:widget.otp, number:widget.email, 
-                                //  password: widget.password,/
-                                  islogin: false,
-                                  // otp: otp,
-                                ),
-                              );
-                          if (otps.length == 4) {
-           
-                          } else {
-                            deleteFromSS(secureStoreKey);
-                            Toast.showToast(
-                              color: Colors.red,
-                              context: context,
-                              message: "Incorrect otp",
-                            );
-                          }
-                        }
-                      : null,
+                  onPressed: () {
+                    context.read<LoginBloc>().add(
+                          LoginEvent.varyfiyOtp(
+                            otp: widget.otp, number: widget.email,
+                            //  password: widget.password,/
+                            islogin: false,
+                            // otp: otp,
+                          ),
+                        );
+                    if (otps.length == 4) {
+                    } else {
+                      deleteFromSS(secureStoreKey);
+                      Toast.showToast(
+                        color: Colors.red,
+                        context: context,
+                        message: "Incorrect otp",
+                      );
+                    }
+                  },
                   isLoading: state.isLoading,
                 )
               ],

@@ -15,53 +15,21 @@ import '../models/profile_model.dart';
 class UpdateProfileRepoImpliment implements UpdateProfileRepository {
   @override
   Future<Either<MainFailure, ProfileModel>> updateProfile({
-    required String name,
-    required String dob,
-    required String mobile_No,
-    required String height,
-    required String weight,
-    required String street,
-    required String city,
-    required String district,
-    required String email,
-    required String gender,
-    required String zipCode,
-    required String state,
-
-    
+    required Data profileData,
   }) async {
     try {
       final token = await getTokenFromSS(secureStoreKey);
-      final id = await getTokenFromSS(patientId);
+
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
-      final response = await Dio(BaseOptions()).put(
-        // V2.updateProfile,
-        "https://1529-183-82-33-226.ngrok-free.app/v2/patients/profile",
-        options: Options(
-          headers: headers,
-          validateStatus: (_) => true,
-        ),
-        data: {
-          "_id": int.parse("$id"),
-          // "_id": id,
-          "name": name,
-          "mobile_no": mobile_No,
-          "dob": dob,
-          "gender": gender,
-          "address": {
-            "street": street,
-            "city": city,
-            "district": district,
-            "zipCode": zipCode,
-            "state": state,
-          },
-          "height":  height,
-          "weight":  weight,
-        },
-      );
+      final response = await Dio(BaseOptions()).put(V2.updateProfile,
+          options: Options(
+            headers: headers,
+            validateStatus: (_) => true,
+          ),
+          data: profileData.toJson());
 
       switch (response.statusCode) {
         case 200:

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kevell_care/configure/value/constant.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
 import '../../../../configure/assets_manage/icons.dart';
 import '../../../../configure/value/secure_storage.dart';
+import '../../../../features/profile/presentation/bloc/profile_bloc.dart';
 import '../../../initialize/initialize.dart';
-
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
@@ -20,31 +21,39 @@ class DrawerWidget extends StatelessWidget {
         children: [
           SizedBox(
               height: 150,
-              child: Column(
-                children: [
-                  const CircleAvatar(
-                    radius: 40,
-                    backgroundImage: NetworkImage(
-                        "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXZhdGFyfGVufDB8fDB8fHww"),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 5),
-                    child: Text(
-                      "Mr.Robin",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineMedium!
-                          .copyWith(color: context.theme.backround),
-                    ),
-                  ),
-                  Text(
-                    "robin@gmail.com",
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium!
-                        .copyWith(color: context.theme.backround),
-                  ),
-                ],
+              child: BlocBuilder<ProfileBloc, ProfileState>(
+                builder: (context, state) {
+                  final profile = state.result;
+                  return Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage: NetworkImage(
+                          profile != null
+                              ? "${profile.data!.profileImagelink}"
+                              : "",
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10, bottom: 5),
+                        child: Text(
+                          profile != null ? "${profile.data!.name}" : "",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(color: context.theme.backround),
+                        ),
+                      ),
+                      Text(
+                        profile != null ? "${profile.data!.emailId}" : "",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(color: context.theme.backround),
+                      ),
+                    ],
+                  );
+                },
               )),
           Expanded(
             child: SizedBox(

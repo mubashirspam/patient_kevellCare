@@ -3,24 +3,18 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:math' as m;
-
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/checkup/presentation/ecg_widget.dart';
-import 'package:kevell_care/features/checkup/presentation/temparature_widgtet.dart';
-
 import 'package:flutter/material.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-
+import '../../../../configure/color/text_color.dart';
 import '../../../../core/helper/alert.dart';
 import '../../../../core/helper/toast.dart';
-import '../../../../features/checkup/presentation/blood_pressure_widget.dart';
 import '../../../../features/checkup/presentation/bmi_widget.dart';
-import '../../../../features/checkup/presentation/glucose_widget.dart';
-import '../../../../features/checkup/presentation/spo_widget.dart';
-import '../../../../features/checkup/presentation/stethoscope_widget.dart';
 import '../../../../features/checkup/presentation/unloack.dart';
+import '../../../../features/checkup/presentation/widgets/checkup_card.dart';
 import '../../../../features/checkup/presentation/widgets/ecg_graph.dart';
 import '../../../initialize/initialize.dart';
 
@@ -171,7 +165,7 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
         log("dataMap['number'] === ${dataMap['number']}");
 
         // if (dataMap['state'] != "unlock") {
-        //   if (dataMap["appointmentID"].toString() == "$appointmentID") {
+        //   if (dataMap["appointment_id"].toString() == "$appointmentID") {
         //     log("dataMap['data']['content'] === ${dataMap['data']['content']}");
         //   } else {
         //     log("bad appoinmnet idsdsffvdmdvnfvf");
@@ -189,7 +183,7 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
 // ********************************** Temprature **********************************//
         } else if (dataMap['number'] == "2" &&
             dataMap['state'] == "device" &&
-            dataMap["appointmentID"].toString() == "$appointmentID") {
+            dataMap["appointment_id"].toString() == "$appointmentID") {
           isUnloacked = true;
           tLoading = false;
 
@@ -234,7 +228,7 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
 // ********************************** position **********************************//
         } else if (dataMap['number'] == "4" &&
             dataMap['state'] == "device" &&
-            dataMap["appointmentID"].toString() == "$appointmentID") {
+            dataMap["appointment_id"].toString() == "$appointmentID") {
           isUnloacked = true;
           postionLoading = false;
 
@@ -266,7 +260,7 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
 // ********************************** spo2 **********************************//
         } else if (dataMap['number'] == "3" &&
             dataMap['state'] == "device" &&
-            dataMap["appointmentID"].toString() == "$appointmentID") {
+            dataMap["appointment_id"].toString() == "$appointmentID") {
           isUnloacked = true;
           sp02Loading = false;
 
@@ -288,7 +282,7 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
 // ********************************** stethescope **********************************//
         } else if (dataMap['number'] == "11" &&
             dataMap['state'] == "device" &&
-            dataMap["appointmentID"].toString() == "$appointmentID") {
+            dataMap["appointment_id"].toString() == "$appointmentID") {
           isUnloacked = true;
           stethescopLoding = false;
 
@@ -306,11 +300,9 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
 // ********************************** Glucose **********************************//
 // ********************************** Glucose **********************************//
 //
-        }
-        
-         else if (dataMap['number'].toString() == "10" &&
+        } else if (dataMap['number'].toString() == "10" &&
             dataMap['state'] == "device" &&
-            dataMap["appointmentID"].toString() == "$appointmentID") {
+            dataMap["appointment_id"].toString() == "$appointmentID") {
           isUnloacked = true;
           gLoading = false;
 
@@ -328,11 +320,9 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
 
 // ********************************** BMI **********************************//
 // ********************************** BMI **********************************//
-        } 
-        
-        else if (dataMap['number'].toString() == "9" &&
+        } else if (dataMap['number'].toString() == "9" &&
             dataMap['state'] == "device" &&
-            dataMap["appointmentID"].toString() == "$appointmentID") {
+            dataMap["appointment_id"].toString() == "$appointmentID") {
           isUnloacked = true;
           bmiLoading = false;
 
@@ -354,7 +344,7 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
 // ********************************** bp **********************************//
         else if (dataMap['number'].toString() == "5" &&
             dataMap['state'] == "device" &&
-            dataMap["appointmentID"].toString().toString() ==
+            dataMap["appointment_id"].toString().toString() ==
                 "$appointmentID") {
           isUnloacked = true;
           bpLoading = false;
@@ -379,7 +369,7 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
 // ********************************** ecg **********************************//
         } else if (dataMap['number'] == "6" &&
             dataMap['state'] == "device" &&
-            dataMap["appointmentID"].toString() == "$appointmentID") {
+            dataMap["appointment_id"].toString() == "$appointmentID") {
           isUnloacked = true;
           ecgLoading = false;
 
@@ -418,7 +408,7 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
           }
         } else if (dataMap['number'] == "8" &&
             dataMap['state'] == "device" &&
-            dataMap["appointmentID"].toString() == "$appointmentID") {
+            dataMap["appointment_id"].toString() == "$appointmentID") {
           isUnloacked = true;
           gsrLoading = false;
 
@@ -531,92 +521,272 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
         },
         onChanged: (_) {},
       ),
-      TepamratureWidget(
-        isReading: tReading,
-        onpress: isUnloacked
-            ? () {
-                publishMy({
-                  "id": "KC_EC94CB6F61DC",
-                  "patientID": patientID,
-                  "doctorID": doctorID,
-                  "appointmentID": appointmentID,
-                  "type": "Doctor",
-                  "command": "device",
-                  "number": 2,
-                  "date": DateTime.now().millisecondsSinceEpoch
-                }, "KC_EC94CB6F61DC/device");
-              }
-            : () => Toast.showToast(context: context, message: "Please Unlock"),
-        temparature: temparature,
+      ////  ///// ///// ///// /////  temparture /////////////////////
+////////  ///// ///// ///// /////  temparture /////////////////////
+////////  ///// ///// ///// /////  temparture /////////////////////
+
+      SizedBox(
+        child: Row(
+          children: [
+            const SizedBox(width: 20),
+            Expanded(
+                child: HelathCardWidget(
+              onPress: isUnloacked
+                  ? () {
+                      setState(() => tLoading = true);
+                      publishMy({
+                        "id": "KC_EC94CB6F61DC",
+                        "patient_id": patientID,
+                        "doctor_id": doctorID,
+                        "appointment_id": appointmentID,
+                        "type": "Doctor",
+                        "command": "device",
+                        "number": 2,
+                        "date": DateTime.now().millisecondsSinceEpoch
+                      }, "KC_EC94CB6F61DC/device");
+                    }
+                  : () => Toast.showToast(
+                      context: context, message: "Please Unlock"),
+              isReading: tReading,
+              isLoading: tLoading,
+              data: HelathCard(
+                color: CardColor.color4,
+                data: temparature,
+                name: "Temperature",
+                refe: "98.6°F",
+                unit: "°F",
+                iconData: Icons.thermostat,
+              ),
+            )),
+            const SizedBox(width: 20),
+          ],
+        ),
       ),
-      StethoscopeWidget(
-        isReading: stethescopReading,
-        onpress: isUnloacked
-            ? () {
-                setState(() => stethescopLoding = true);
-                publishMy({
-                  "id": "KC_EC94CB6F61DC",
-                  "patientID": patientID,
-                  "doctorID": doctorID,
-                  "appointmentID": appointmentID,
-                  "type": "Doctor",
-                  "command": "device",
-                  "number": 11,
-                  "date": DateTime.now().millisecondsSinceEpoch
-                }, "KC_EC94CB6F61DC/device");
-              }
-            : () => Toast.showToast(context: context, message: "Please Unlock"),
-        audio: stethescopeAudio,
+      const SizedBox(height: 20),
+
+      /////  ///// ///// ///// /////  glucose /////////////////////
+////////  ///// ///// ///// /////  glucose /////////////////////
+////////  ///// ///// ///// /////  glucose /////////////////////
+
+      SizedBox(
+        child: Row(
+          children: [
+            const SizedBox(width: 20),
+            Expanded(
+                child: HelathCardWidget(
+              onPress: isUnloacked
+                  ? () {
+                      setState(() => gLoading = true);
+                      publishMy({
+                        "id": "KC_EC94CB6F61DC",
+                        "patient_id": patientID,
+                        "doctor_id": doctorID,
+                        "appointment_id": appointmentID,
+                        "type": "Doctor",
+                        "command": "device",
+                        "number": 10,
+                        "date": DateTime.now().millisecondsSinceEpoch
+                      }, "KC_EC94CB6F61DC/device");
+                    }
+                  : () => Toast.showToast(
+                      context: context, message: "Please Unlock"),
+              isReading: gReading,
+              isLoading: gLoading,
+              data: HelathCard(
+                color: CardColor.color3,
+                data: glucose,
+                name: "Glucometer",
+                refe: "Status: ${"OK"}",
+                unit: "",
+                iconData: Icons.favorite,
+              ),
+            )),
+            const SizedBox(width: 20),
+          ],
+        ),
       ),
-      Spo2Widget(
-        isReading: sp02Reading,
-        heartBeat: heartBeat,
-        spo2: sop2,
-        onpress: isUnloacked
-            ? () {
-                publishMy({
-                  "id": "KC_EC94CB6F61DC",
-                  "patientID": patientID,
-                  "doctorID": doctorID,
-                  "appointmentID": appointmentID,
-                  "type": "Doctor",
-                  "command": "device",
-                  "number": 3,
-                  "date": DateTime.now().millisecondsSinceEpoch
-                }, "KC_EC94CB6F61DC/device");
-              }
-            : () => Toast.showToast(context: context, message: "Please Unlock"),
+      const SizedBox(height: 20),
+
+      /////  ///// ///// ///// /////  SpO2 /////////////////////
+////////  ///// ///// ///// /////  SpO2 /////////////////////
+////////  ///// ///// ///// /////  SpO2 /////////////////////
+
+      SizedBox(
+        child: Row(
+          children: [
+            const SizedBox(width: 20),
+            Expanded(
+                child: HelathCardWidget(
+              onPress: isUnloacked
+                  ? () {
+                      setState(() => sp02Loading = true);
+                      publishMy({
+                        "id": "KC_EC94CB6F61DC",
+                        "patient_id": patientID,
+                        "doctor_id": doctorID,
+                        "appointment_id": appointmentID,
+                        "type": "Doctor",
+                        "command": "device",
+                        "number": 3,
+                        "date": DateTime.now().millisecondsSinceEpoch
+                      }, "KC_EC94CB6F61DC/device");
+                    }
+                  : () => Toast.showToast(
+                      context: context, message: "Please Unlock"),
+              isReading: false,
+              isLoading: sp02Loading,
+              isData: false,
+              data: const HelathCard(
+                color: CardColor.color10,
+                data: "",
+                name: "SpO2",
+                refe: "",
+                unit: "",
+                iconData: Icons.favorite,
+              ),
+            )),
+            const SizedBox(width: 20),
+          ],
+        ),
       ),
-      BloodPressureWidget(
-          onpress: isUnloacked
-              ? () {
-                  publishMy({
-                    "id": "KC_EC94CB6F61DC",
-                    "patientID": patientID,
-                    "doctorID": doctorID,
-                    "appointmentID": appointmentID,
-                    "type": "Doctor",
-                    "command": "device",
-                    "number": 5,
-                    "date": DateTime.now().millisecondsSinceEpoch
-                  }, "KC_EC94CB6F61DC/device");
-                }
-              : () =>
-                  Toast.showToast(context: context, message: "Please Unlock"),
-          bp: bp["bpsys"]!,
-          isReading: bpReading,
-          bpdia: bp["bpdia"]!,
-          bpplus: bp["bpplus"]!),
+      const SizedBox(height: 5),
+      SizedBox(
+        child: Row(
+          children: [
+            const SizedBox(width: 20),
+            Expanded(
+                child: HelathCardWidget(
+              onPress: null,
+              isReading: sp02Reading,
+              isLoading: false,
+              isData: true,
+              data: HelathCard(
+                color: CardColor.color10,
+                data: sop2,
+                name: "SpO2",
+                refe: "96% to 99%",
+                unit: "%",
+                iconData: Icons.favorite,
+              ),
+            )),
+            const SizedBox(width: 5),
+            Expanded(
+                child: HelathCardWidget(
+              onPress: null,
+              isReading: sp02Reading,
+              isLoading: false,
+              isData: true,
+              data: HelathCard(
+                color: CardColor.color10,
+                data: heartBeat,
+                name: "Heart Rate",
+                refe: "60 to 100bpm",
+                unit: "bpm",
+                iconData: Icons.favorite,
+              ),
+            )),
+            const SizedBox(width: 20),
+          ],
+        ),
+      ),
+
+      const SizedBox(height: 20),
+
+      /////  ///// ///// ///// /////  pb /////////////////////
+////////  ///// ///// ///// /////  pb /////////////////////
+////////  ///// ///// ///// /////  pb /////////////////////
+
+      SizedBox(
+        child: Row(
+          children: [
+            const SizedBox(width: 20),
+            Expanded(
+                child: HelathCardWidget(
+              onPress: isUnloacked
+                  ? () {
+                      setState(() => bpLoading = true);
+                      publishMy({
+                        "id": "KC_EC94CB6F61DC",
+                        "patient_id": patientID,
+                        "doctor_id": doctorID,
+                        "appointment_id": appointmentID,
+                        "type": "Doctor",
+                        "command": "device",
+                        "number": 5,
+                        "date": DateTime.now().millisecondsSinceEpoch
+                      }, "KC_EC94CB6F61DC/device");
+                    }
+                  : () => Toast.showToast(
+                      context: context, message: "Please Unlock"),
+              isReading: bpReading,
+              isLoading: bpLoading,
+              data: HelathCard(
+                color: CardColor.color3,
+                data: bp["bpsys"]!,
+                name: "BP Systolic",
+                refe: "<12 0mmHg",
+                unit: "mmHg",
+                iconData: Icons.favorite,
+              ),
+            )),
+            const SizedBox(width: 20),
+          ],
+        ),
+      ),
+      const SizedBox(height: 5),
+      SizedBox(
+        child: Row(
+          children: [
+            const SizedBox(width: 20),
+            Expanded(
+                child: HelathCardWidget(
+              onPress: null,
+              isReading: false,
+              isLoading: false,
+              isData: true,
+              data: HelathCard(
+                color: CardColor.color3,
+                data: bp["bpdia"]!,
+                name: "BP Diastolic",
+                refe: "<80 mmHg",
+                unit: "mmHg",
+                iconData: Icons.favorite,
+              ),
+            )),
+            const SizedBox(width: 5),
+            Expanded(
+                child: HelathCardWidget(
+              onPress: null,
+              isReading: false,
+              isLoading: false,
+              isData: true,
+              data: HelathCard(
+                color: CardColor.color3,
+                data: bp["bpplus"]!,
+                name: "BP Pulse",
+                refe: "60 ~ 100",
+                unit: "mmHg",
+                iconData: Icons.favorite,
+              ),
+            )),
+            const SizedBox(width: 20),
+          ],
+        ),
+      ),
+
+      const SizedBox(height: 20),
       EcgWidget(
+        ecgResults: ecgResults,
         data: ecgData,
         isReading: ecgReading,
         onpress: isUnloacked
             ? () {
+                setState(() => ecgLoading = true);
                 publishMy({
                   "id": "KC_EC94CB6F61DC",
-                  "patientID": patientID,
-                  "doctorID": doctorID,
-                  "appointmentID": appointmentID,
+                  "patient_id": patientID,
+                  "doctor_id": doctorID,
+                  "appointment_id": appointmentID,
                   "type": "Doctor",
                   "command": "device",
                   "number": 6,
@@ -624,69 +794,10 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
                 }, "KC_EC94CB6F61DC/device");
               }
             : () => Toast.showToast(context: context, message: "Please Unlock"),
-        ecgResults: ecgResults,
       ),
-      GlucoseWidget(
-        isReading: gReading,
-        
-        onpress: isUnloacked
-            ? () {
-                setState(() => gLoading = true);
-                publishMy({
-                  "id": "KC_EC94CB6F61DC",
-                  "patientID": patientID,
-                  "doctorID": doctorID,
-                  "appointmentID": appointmentID,
-                  "type": "Doctor",
-                  "command": "device",
-                  "number": 10,
-                  "date": DateTime.now().millisecondsSinceEpoch
-                }, "KC_EC94CB6F61DC/device");
-              }
-            : () => Toast.showToast(context: context, message: "Please Unlock"),
-        glucose: glucose,
-      ),
-      // GSRgWidget(
-      //   isReading: gsrReading,
-      //   data: gsrData,
-      //   onpress: isUnloacked
-      //       ? () {
-      //           publishMy({
-      //             "id": "KC_EC94CB6F61DC",
-      //             "patientID": patientID,
-      //             "doctorID": doctorID,
-      //             "appointmentID": appointmentID,
-      //             "type": "Doctor",
-      //             "command": "device",
-      //             "number": 8,
-      //             "date": DateTime.now().millisecondsSinceEpoch
-      //           }, "KC_EC94CB6F61DC/device");
-      //         }
-      //       : () => Toast.showToast(context: context, message: "Please Unlock"),
-      //   gsr: temparature,
-      // ),
-      // PositionWidget(
-      //   isReading: tReading,
-      //   onpress: isUnloacked
-      //       ? () {
-      //           publishMy({
-      //             "id": "KC_EC94CB6F61DC",
-      //             "patientID": patientID,
-      //             "doctorID": doctorID,
-      //             "appointmentID": appointmentID,
-      //             "type": "Doctor",
-      //             "command": "device",
-      //             "number": 4,
-      //             "date": DateTime.now().millisecondsSinceEpoch
-      //           }, "KC_EC94CB6F61DC/device");
-      //         }
-      //       : () => Toast.showToast(context: context, message: "Please Unlock"),
-      //   position: position,
-      // ),
 
       BMIWidget(
         isReading: bmiReading,
-       
         onpress: isUnloacked
             ? () {
                 showCustomDialog(context, (String g, String h) {
@@ -694,9 +805,9 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
                   setState(() => bmiLoading = true);
                   publishMy({
                     "id": "KC_EC94CB6F61DC",
-                    "patientID": patientID,
-                    "doctorID": doctorID,
-                    "appointmentID": appointmentID,
+                    "patient_id": patientID,
+                    "doctor_id": doctorID,
+                    "appointment_id": appointmentID,
                     "type": "Doctor",
                     "command": "device",
                     "number": 9,
@@ -711,9 +822,190 @@ class _PatientCheckupSBodyState extends State<PatientCheckupSBody> {
             : () => Toast.showToast(context: context, message: "Please Unlock"),
         bmiResponse: bmiResponse,
       ),
+      // TepamratureWidget(
+      //   isReading: tReading,
+      //   onpress: isUnloacked
+      //       ? () {
+      //           publishMy({
+      //             "id": "KC_EC94CB6F61DC",
+      //             "patient_id": patientID,
+      //             "doctor_id": doctorID,
+      //             "appointment_id": appointmentID,
+      //             "type": "Doctor",
+      //             "command": "device",
+      //             "number": 2,
+      //             "date": DateTime.now().millisecondsSinceEpoch
+      //           }, "KC_EC94CB6F61DC/device");
+      //         }
+      //       : () => Toast.showToast(context: context, message: "Please Unlock"),
+      //   temparature: temparature,
+      // ),
+      // StethoscopeWidget(
+      //   isReading: stethescopReading,
+      //   onpress: isUnloacked
+      //       ? () {
+      //           setState(() => stethescopLoding = true);
+      //           publishMy({
+      //             "id": "KC_EC94CB6F61DC",
+      //             "patient_id": patientID,
+      //             "doctor_id": doctorID,
+      //             "appointment_id": appointmentID,
+      //             "type": "Doctor",
+      //             "command": "device",
+      //             "number": 11,
+      //             "date": DateTime.now().millisecondsSinceEpoch
+      //           }, "KC_EC94CB6F61DC/device");
+      //         }
+      //       : () => Toast.showToast(context: context, message: "Please Unlock"),
+      //   audio: stethescopeAudio,
+      // ),
+      // Spo2Widget(
+      //   isReading: sp02Reading,
+      //   heartBeat: heartBeat,
+      //   spo2: sop2,
+      //   onpress: isUnloacked
+      //       ? () {
+      //           publishMy({
+      //             "id": "KC_EC94CB6F61DC",
+      //             "patient_id": patientID,
+      //             "doctor_id": doctorID,
+      //             "appointment_id": appointmentID,
+      //             "type": "Doctor",
+      //             "command": "device",
+      //             "number": 3,
+      //             "date": DateTime.now().millisecondsSinceEpoch
+      //           }, "KC_EC94CB6F61DC/device");
+      //         }
+      //       : () => Toast.showToast(context: context, message: "Please Unlock"),
+      // ),
+      // BloodPressureWidget(
+      //     onpress: isUnloacked
+      //         ? () {
+      //             publishMy({
+      //               "id": "KC_EC94CB6F61DC",
+      //               "patient_id": patientID,
+      //               "doctor_id": doctorID,
+      //               "appointment_id": appointmentID,
+      //               "type": "Doctor",
+      //               "command": "device",
+      //               "number": 5,
+      //               "date": DateTime.now().millisecondsSinceEpoch
+      //             }, "KC_EC94CB6F61DC/device");
+      //           }
+      //         : () =>
+      //             Toast.showToast(context: context, message: "Please Unlock"),
+      //     bp: bp["bpsys"]!,
+      //     isReading: bpReading,
+      //     bpdia: bp["bpdia"]!,
+      //     bpplus: bp["bpplus"]!),
+      // EcgWidget(
+      //   data: ecgData,
+      //   isReading: ecgReading,
+      //   onpress: isUnloacked
+      //       ? () {
+      //           publishMy({
+      //             "id": "KC_EC94CB6F61DC",
+      //             "patient_id": patientID,
+      //             "doctor_id": doctorID,
+      //             "appointment_id": appointmentID,
+      //             "type": "Doctor",
+      //             "command": "device",
+      //             "number": 6,
+      //             "date": DateTime.now().millisecondsSinceEpoch
+      //           }, "KC_EC94CB6F61DC/device");
+      //         }
+      //       : () => Toast.showToast(context: context, message: "Please Unlock"),
+      //   ecgResults: ecgResults,
+      // ),
+      // GlucoseWidget(
+      //   isReading: gReading,
+
+      //   onpress: isUnloacked
+      //       ? () {
+      //           setState(() => gLoading = true);
+      //           publishMy({
+      //             "id": "KC_EC94CB6F61DC",
+      //             "patient_id": patientID,
+      //             "doctor_id": doctorID,
+      //             "appointment_id": appointmentID,
+      //             "type": "Doctor",
+      //             "command": "device",
+      //             "number": 10,
+      //             "date": DateTime.now().millisecondsSinceEpoch
+      //           }, "KC_EC94CB6F61DC/device");
+      //         }
+      //       : () => Toast.showToast(context: context, message: "Please Unlock"),
+      //   glucose: glucose,
+      // ),
+      // // GSRgWidget(
+      // //   isReading: gsrReading,
+      // //   data: gsrData,
+      // //   onpress: isUnloacked
+      // //       ? () {
+      // //           publishMy({
+      // //             "id": "KC_EC94CB6F61DC",
+      // //             "patient_id": patientID,
+      // //             "doctor_id": doctorID,
+      // //             "appointment_id": appointmentID,
+      // //             "type": "Doctor",
+      // //             "command": "device",
+      // //             "number": 8,
+      // //             "date": DateTime.now().millisecondsSinceEpoch
+      // //           }, "KC_EC94CB6F61DC/device");
+      // //         }
+      // //       : () => Toast.showToast(context: context, message: "Please Unlock"),
+      // //   gsr: temparature,
+      // // ),
+      // // PositionWidget(
+      // //   isReading: tReading,
+      // //   onpress: isUnloacked
+      // //       ? () {
+      // //           publishMy({
+      // //             "id": "KC_EC94CB6F61DC",
+      // //             "patient_id": patientID,
+      // //             "doctor_id": doctorID,
+      // //             "appointment_id": appointmentID,
+      // //             "type": "Doctor",
+      // //             "command": "device",
+      // //             "number": 4,
+      // //             "date": DateTime.now().millisecondsSinceEpoch
+      // //           }, "KC_EC94CB6F61DC/device");
+      // //         }
+      // //       : () => Toast.showToast(context: context, message: "Please Unlock"),
+      // //   position: position,
+      // // ),
+
+      // BMIWidget(
+      //   isReading: bmiReading,
+
+      //   onpress: isUnloacked
+      //       ? () {
+      //           showCustomDialog(context, (String g, String h) {
+      //             log("$g :: $h");
+      //             setState(() => bmiLoading = true);
+      //             publishMy({
+      //               "id": "KC_EC94CB6F61DC",
+      //               "patient_id": patientID,
+      //               "doctor_id": doctorID,
+      //               "appointment_id": appointmentID,
+      //               "type": "Doctor",
+      //               "command": "device",
+      //               "number": 9,
+      //               "gender": g,
+      //               "height": h,
+      //               "date": DateTime.now().millisecondsSinceEpoch
+      //             }, "KC_EC94CB6F61DC/device");
+
+      //             Navigator.pop(context);
+      //           });
+      //         }
+      //       : () => Toast.showToast(context: context, message: "Please Unlock"),
+      //   bmiResponse: bmiResponse,
+      // ),
     ]);
   }
 }
+
 void showCustomDialog(
     BuildContext context, Function(String sex, String hegiht) onpress) {
   final formKey = GlobalKey<FormState>();

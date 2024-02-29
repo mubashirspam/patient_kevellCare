@@ -72,20 +72,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           isError: false,
         ),
       );
-
       final response = await updateProfileRepository.updateProfile(
-        dob: event.dob,
-        email: event.email,
-        gender: event.gender,
-        mobile_No: event.mobileNo,
-        name: event.name, 
-        street: event.street, 
-        city: event.city, 
-        district: event.district, 
-        zipCode: event.zipCode, 
-        state: event.state, 
-        height: event.height, 
-        weight: event.weight,
+        profileData: event.profileData,
+    
       );
 
       final result = response.fold(

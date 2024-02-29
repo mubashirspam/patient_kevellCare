@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/profile/presentation/bloc/profile_bloc.dart';
 import '../../features/widgets/loading_widget.dart';
 import '../dashborad/presentation/dashborad.dart';
 import '../dashborad/presentation/widgets/bottom_navigation.dart';
@@ -15,6 +16,7 @@ class Initialize extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       BlocProvider.of<InitializeBloc>(context)
           .add(const InitializeEvent.initial());
+           context.read<ProfileBloc>().add(const ProfileEvent.getProfile());
       // context.read<HelpCenterBloc>().add(const HelpCenterEvent.initial());
     });
     return BlocBuilder<InitializeBloc, InitializeState>(

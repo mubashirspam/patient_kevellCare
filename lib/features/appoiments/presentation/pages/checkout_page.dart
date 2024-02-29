@@ -7,7 +7,6 @@ import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
 import 'package:kevell_care/pages/initialize/initialize.dart';
 
 import 'package:razorpay_flutter/razorpay_flutter.dart';
-
 import '../../../../configure/value/constant.dart';
 import '../../../../core/helper/date.dart';
 import '../../data/models/create_appoinment_resonse.dart';
@@ -40,22 +39,26 @@ class _ChckoutPageState extends State<ChckoutPage> {
   void initState() {
     options = {
       'key': keyId,
-      'amount': widget.checkoutDetails.amount! * 100,
-      // 'amount': 100,
-      'name': "${widget.checkoutDetails.patientId}",
-      "order_id": "${widget.checkoutDetails.orderId}",
-      'appoinment_id': "${widget.checkoutDetails.appointmentId}",
-      'retry': {'enabled': true, 'max_count': 1},
-      'send_sms_hash': true,
+      'currency': 'INR',
+      "order_id": '${widget.checkoutDetails.orderId}',
+      'name': '${widget.checkoutDetails.patientId}',
+      'description': 'Fine T-Shirt',
       'prefill': {
-        'contact': "+919562229979",
-        'email': "mubashir@gmail.com",
-        'id': "101222",
+        'contact': '+919562229979',
+        'email': 'mubashirahmed313kc@gmail.com'
       },
-      'external': {
-        'wallets': ['paytm']
-      }
+      'display_options': {
+        'methods': [
+          'cards',
+          'netbanking',
+        ] // or specific methods like ['cards', 'netbanking', 'upi']
+      },
+      'theme': {'color': '#A76FEC'},
+      'send_sms_hash': true,
+      'retry': {'enabled': false, 'max_count': 4},
     };
+
+    print(options.toString());
     super.initState();
   }
 
@@ -173,7 +176,7 @@ class _ChckoutPageState extends State<ChckoutPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20)
                       .copyWith(top: 15),
                   child: Text(
-                    "Appoinment Detials",
+                    "Appointment Detials",
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ),

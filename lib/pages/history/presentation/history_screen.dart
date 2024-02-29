@@ -21,9 +21,9 @@ class HistoryScreen extends StatelessWidget {
 
           context.read<ReportBloc>().add(ReportEvent.fetchReport(
               fetchReportPayload: FetchReportPayload(
-                  startingDate:
-                      DateTime.now().subtract(const Duration(days: 10)),
-                  endingDate: DateTime.now(),
+                  fromDate:
+                      DateTime.now().subtract(const Duration(days: 20)),
+                  toDate: DateTime.now(),
                   patientId: id)));
           context
               .read<ReportBloc>()
@@ -47,8 +47,10 @@ class HistoryScreen extends StatelessWidget {
                 child: SizedBox(
                   child: TabBarView(
                     children: <Widget>[
+                      
                       HealthDataWidget(),
-                      ReportDataWidget(),
+                       ReportDataWidget(),
+                     
                     ],
                   ),
                 ),

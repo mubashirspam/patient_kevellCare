@@ -26,8 +26,9 @@ class FetchReportRepoImpliment implements FetchReportRepository {
       'Content-Type': 'application/json',
     };
     try {
+      print(fetchReportPayload.toJson().toString());
       final response = await Dio(BaseOptions()).post(
-        ApiEndPoints.patientreport,
+        V2.report,
         options: Options(headers: headers),
         data: fetchReportPayload.toJson(),
       );
@@ -36,7 +37,9 @@ class FetchReportRepoImpliment implements FetchReportRepository {
         case 200:
         case 201:
           final result = ReportModel.fromJson(response.data);
-          log(result.toString());
+
+          // print(result.toJson().toString());
+
           return Right(result);
         case 400:
         case 401:

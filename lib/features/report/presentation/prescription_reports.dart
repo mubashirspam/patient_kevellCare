@@ -15,55 +15,62 @@ import '../data/model/report_model.dart';
 
 class PrescriptionReportsCard extends StatelessWidget {
   final List<Prescription> data;
+  final Doctor doctorData;
+    final   Patient patientData;
+   final DateTime apppoinmetDate;
+
   const PrescriptionReportsCard({
     super.key,
     required this.data,
+    required this.doctorData,
+    required this.apppoinmetDate,
+    required this.patientData
   });
+
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ReportBloc, ReportState>(
       listener: (context, pdfState) async {
         if (pdfState.isPdfLoading) {
-          showDialog(
-              barrierDismissible: false,
-              useSafeArea: true,
-              barrierColor: Colors.black.withOpacity(0.1),
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  backgroundColor: context.theme.primary,
-                  elevation: 0,
-                  content: Row(
-                    children: [
-                      const SizedBox(width: 20),
-                      const SizedBox(
-                          height: 15,
-                          width: 15,
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                          )),
-                      const SizedBox(width: 20),
-                      Text(
-                        "Genarating Pdf...",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      )
-                    ],
-                  ),
-                );
-              });
+          // showDialog(
+          //     barrierDismissible: false,
+          //     useSafeArea: true,
+          //     barrierColor: Colors.black.withOpacity(0.1),
+          //     context: context,
+          //     builder: (BuildContext context) {
+          //       return AlertDialog(
+          //         backgroundColor: context.theme.primary,
+          //         elevation: 0,
+          //         content: Row(
+          //           children: [
+          //             const SizedBox(width: 20),
+          //             const SizedBox(
+          //                 height: 15,
+          //                 width: 15,
+          //                 child: CircularProgressIndicator(
+          //                   color: Colors.white,
+          //                 )),
+          //             const SizedBox(width: 20),
+          //             Text(
+          //               "Genarating Pdf...",
+          //               style: Theme.of(context).textTheme.bodyMedium,
+          //             )
+          //           ],
+          //         ),
+          //       );
+          //     });
         }
         if (pdfState.pdfError) {
-          Navigator.of(context, rootNavigator: true).pop(context);
+          // Navigator.of(context, rootNavigator: true).pop(context);
 
           Toast.showToast(context: context, message: pdfState.pdfErrorMessage);
         }
         if (!pdfState.isPdfLoading &&
             pdfState.pdfCreated &&
             pdfState.pdf != null) {
-          log("Prescription pdf created Sucsessfully");
           await getTemporaryDirectory().then((value) async {
-            Navigator.of(context, rootNavigator: true).pop(context);
+            // Navigator.of(context, rootNavigator: true).pop(context);
             if (pdfState.action == PdfActions.share) {
               Share.shareFiles(['${value.path}/prescription.pdf'],
                   text: 'Check out my PDF!');
@@ -71,17 +78,15 @@ class PrescriptionReportsCard extends StatelessWidget {
             if (pdfState.action == PdfActions.download) {
               OpenFile.open('${value.path}/prescription.pdf');
             }
-            if (pdfState.action == PdfActions.view) {
-              // final file = File('${value.path}/prescription.pdf');
-              // await Future.delayed(Duration(seconds: 2))
-              //     .then((value) => Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //             builder: (context) =>
-              //                 PdfViewerPage(pdfPath: file.path),
-              //           ),
-              //         ));
-            }
+            // if (pdfState.action == PdfActions.view) {
+            //   Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //       builder: (context) =>
+            //           const CreatePrescriptionScreen(checkupDetalis: {}),
+            //     ),
+            //   );
+            // }
           });
         }
       },
@@ -145,6 +150,9 @@ class PrescriptionReportsCard extends StatelessWidget {
                             onPressed: () {
                               context.read<ReportBloc>().add(
                                     ReportEvent.genaratePdf(
+                                       doctorData: doctorData,
+                                     apppoinmetDate:apppoinmetDate ,
+                                    patientData: patientData,
                                         data: data,
                                         action: PdfActions.download),
                                   );
@@ -165,7 +173,10 @@ class PrescriptionReportsCard extends StatelessWidget {
                           onPressed: () {
                             context.read<ReportBloc>().add(
                                   ReportEvent.genaratePdf(
-                                      data: data, action: PdfActions.share),
+                                    doctorData: doctorData,
+                                     apppoinmetDate:apppoinmetDate ,
+                                    patientData: patientData,
+                                      action: PdfActions.share, data: data),
                                 );
                           },
                           style: TextButton.styleFrom(

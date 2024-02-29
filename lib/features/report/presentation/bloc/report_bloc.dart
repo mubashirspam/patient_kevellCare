@@ -67,6 +67,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
         state.copyWith(
           isReportDataLoading: true,
           isError: false,
+          pdfCreated: false,
         ),
       );
 
@@ -101,6 +102,7 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
       (event, emit) async {
         emit(
           state.copyWith(
+            action: null,
             isPdfLoading: true,
             pdfCreated: false,
             pdfError: false,
@@ -108,28 +110,22 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
         );
 
         try {
-          final pdf = await generatePDF(event.data);
-          log(pdf.document.toString());
-
+          final pdf = await generatePDF(event.data, event.doctorData,
+              event.patientData, event.apppoinmetDate);
           final bytes = await pdf.save();
           final tempDir = await getTemporaryDirectory();
           final file = File('${tempDir.path}/prescription.pdf');
-
           await file.writeAsBytes(bytes);
-          log(file.toString());
-          log("emmited suscseeeeee");
-
           emit(
             state.copyWith(
+              action: event.action,
               pdfError: false,
               isPdfLoading: false,
               pdfCreated: true,
               pdf: pdf,
-               action: event.action,
               pdfPath: file.path,
             ),
           );
-          log(pdf.toString());
         } catch (e) {
           log("error $e");
           emit(state.copyWith(
@@ -143,18 +139,25 @@ class ReportBloc extends Bloc<ReportEvent, ReportState> {
     );
   }
 
-  Future<pw.Document> generatePDF(List<Prescription> data) async {
+  Future<pw.Document> generatePDF(
+    List<Prescription> data,
+    Doctor doctorData,
+    Patient patientData,
+    DateTime apppoinmetDate,
+  ) async {
     GeneratePrescriptionPdfRepoImpliment pdfClass =
         GeneratePrescriptionPdfRepoImpliment();
-    final pdf = pdfClass.generatePDF(data);
+    final pdf =
+        pdfClass.generatePDF(data, doctorData, patientData, apppoinmetDate);
 
     return pdf;
   }
 }
+
 ReportModel filterDataByDateRange(
     ReportModel reportData, DateTime startDateTime, DateTime endDateTime) {
   List<Datum> filteredData = reportData.data!.where((datum) {
-    DateTime appointmentDate = datum.appointmentdate!;
+    DateTime appointmentDate = datum.appointmentDate!;
     return appointmentDate.isAfterOrEquals(startDateTime) &&
         appointmentDate.isBeforeOrEquals(endDateTime);
   }).toList();

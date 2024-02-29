@@ -1,8 +1,17 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kevell_care/configure/value/secure_storage.dart';
+import 'package:kevell_care/core/them/custom_theme_extension.dart';
+import 'package:kevell_care/features/login/presentation/bloc/login_bloc.dart';
 import 'package:kevell_care/features/widgets/input_field/input_field_widget.dart';
+import 'package:kevell_care/pages/initialize/initialize.dart';
+import 'package:kevell_care/pages/otp/otp_screen.dart';
 
-
+import '../../../configure/value/constant.dart';
+import '../../../core/helper/toast.dart';
+import '../../widgets/buttons/text_button_widget.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key});
@@ -13,7 +22,7 @@ class LoginWidget extends StatefulWidget {
 
 class _LoginWidgetState extends State<LoginWidget> {
   TextEditingController controller =
-      TextEditingController(text: "kevell@gmail.com");
+      TextEditingController(text: "harini@gmail.com");
   TextEditingController passwordController =
       TextEditingController(text: "12345678");
 
@@ -69,60 +78,69 @@ class _LoginWidgetState extends State<LoginWidget> {
               },
             ),
             const SizedBox(height: 30),
-            // BlocConsumer<LoginBloc, LoginState>(
-            //   listener: (context, state) {
-            //     if (!state.isLoading &&
-            //         state.isError &&
-            //         !state.hasValidationData) {
-            //       Toast.showToast(
-            //         color: Colors.red,
-            //         context: context,
-            //         message: state.message,
-            //       );
-            //     }
+            BlocConsumer<LoginBloc, LoginState>(
+              listener: (context, state) {
+                if (!state.isLoading &&
+                    state.isError &&
+                    !state.hasValidationData) {
+                  Toast.showToast(
+                    color: Colors.red,
+                    context: context,
+                    message: state.message,
+                  );
+                }
 
-            //     if (!state.isLoading && state.hasValidationData) {
-            //       addToSS(mailsecureStoreKey,
-            //           state.loginDetails!.data.first.emailId);
+                if (!state.isLoading && state.hasValidationData) {
+                  final loginDetails = state.loginDetails?.data?.first;
+                  if (loginDetails != null) {
+                    if (loginDetails.token == null) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => OtpScreen(
+                          email: loginDetails.mobileNo!,
+                          otp: loginDetails.otp!,
+                          password: "",
+                        ),
+                      ));
+                    } else {
+                      addToSS(mailsecureStoreKey, loginDetails.emailId!);
+                      addToSS(nameKey, loginDetails.name!);
+                      addToSS(patientId, loginDetails.id.toString());
+                      addTokenToSS(secureStoreKey, loginDetails.token!);
 
-            //       addToSS(patientId,
-            //           state.loginDetails!.data.first.id.toString());
+                      log("Token : ${loginDetails.token}");
+                      Toast.showToast(
+                        context: context,
+                        message: 'You are successfully Logged In 🥳',
+                      );
 
-            //       addTokenToSS(
-            //           secureStoreKey, state.loginDetails!.data.first.token);
-
-            //       log("Token : ${state.loginDetails!.data.first.token}");
-            //       Toast.showToast(
-            //         context: context,
-            //         message: 'You are successfully Logined 🥳',
-            //       );
-
-            //       Navigator.of(context).pushAndRemoveUntil(
-            //         MaterialPageRoute(
-            //           builder: (context) => const Initialize(),
-            //         ),
-            //         (route) => false,
-            //       );
-            //                     }
-            //   },
-            //   builder: (context, state) {
-            //     return TextButtonWidget(
-            //       bgColor: context.theme.backround,
-            //       fgColor: context.theme.textPrimary,
-            //       name: "Login",
-            //       onPressed: () {
-            //         if (_formKey.currentState!.validate()) {
-            //           context.read<LoginBloc>().add(
-            //                 LoginEvent.login(
-            //                     usernameOrMobile: controller.value.text,
-            //                     password: passwordController.value.text),
-            //               );
-            //         }
-            //       },
-            //       isLoading: state.isLoading,
-            //     );
-            //   },
-            // ),
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (context) => const Initialize(),
+                        ),
+                        (route) => false,
+                      );
+                    }
+                  }
+                }
+              },
+              builder: (context, state) {
+                return TextButtonWidget(
+                  bgColor: context.theme.backround,
+                  fgColor: context.theme.textPrimary,
+                  name: "Login",
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      context.read<LoginBloc>().add(
+                            LoginEvent.login(
+                                usernameOrMobile: controller.value.text,
+                                password: passwordController.value.text),
+                          );
+                    }
+                  },
+                  isLoading: state.isLoading,
+                );
+              },
+            ),
           ],
         ),
       ),

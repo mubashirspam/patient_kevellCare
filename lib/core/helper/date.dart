@@ -10,9 +10,6 @@ String dateFormatToYYYYMMdd(DateTime date) {
   return DateFormat('yyyy-MM-dd').format(date);
 }
 
-String dateFormatToddmmyyyy(DateTime date) {
-  return DateFormat('dd/MM/yyyy').format(date);
-}
 
 String formatDateForSchedule(DateTime date) {
   return DateFormat('dd\nMMM').format(date);
@@ -28,6 +25,10 @@ String formatTime(DateTime dateTime) {
 
 String dateFormatToYYYYMMddWithDay(DateTime inputDate) {
   return DateFormat("dd/MM/yyyy, EEEE").format(inputDate);
+}
+
+String dateFormatToMMddyyyEEEE(DateTime date) {
+  return DateFormat('MM/dd/yyyy, EEEE').format(date);
 }
 
 extension DateTimeExtension on DateTime {
@@ -54,4 +55,20 @@ String dateFormatToMonthYear(DateTime date) {
 
 String dateFormatToDayMonthYear(DateTime date) {
   return DateFormat('dd MMMM yyyy').format(date);
+}
+
+ int calculateAge(DateTime birthdate) {
+  DateTime currentDate = DateTime.now();
+  int age = currentDate.year - birthdate.year;
+
+  if (currentDate.month < birthdate.month ||
+      (currentDate.month == birthdate.month && currentDate.day < birthdate.day)) {
+    age--;
+  }
+
+  return age;
+}
+
+String dateFormatToddmmyyyy(DateTime date) {
+  return DateFormat('dd/MM/yyyy').format(date);
 }

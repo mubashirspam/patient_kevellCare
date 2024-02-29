@@ -10,48 +10,20 @@ import '../../../../core/helper/validater.dart';
 import '../../../widgets/buttons/text_button_widget.dart';
 import '../../../widgets/calender/calnder.dart';
 import '../../../widgets/input_field/input_field_widget.dart';
+import '../../data/models/profile_model.dart';
 import '../bloc/profile_bloc.dart';
 
-enum EditProfileSection { BasicDetails, Address, otherdetails }
+enum EditProfileSection { basicDetails, address, otherdetails }
 
 class EditMyProfile extends StatefulWidget {
-  final String? name;
-  final String? mobile_No;
-  final String? city;
-  final String? state;
-  final String? street;
-  final String? zipCode;
-  final String? height;
-  final String? weight;
-  final String? email;
-  final String? gender;
-  final String? district;
-  final String? dob;
+  final Data profileData;
+
   final EditProfileSection? section;
-  final String? kit_id;
-  final String? device_id;
-  final String? diseases;
-  final String? bloodgroup;
 
   const EditMyProfile({
     super.key,
-    this.street,
-    this.height,
-    this.weight,
-    this.email,
-    this.gender,
-    this.district,
-    this.zipCode,
-    this.city,
-    this.state,
-    this.dob,
-    this.mobile_No,
-    this.name,
     this.section,
-    this.kit_id,
-    this.bloodgroup,
-    this.device_id,
-    this.diseases,
+    required this.profileData,
   });
 
   @override
@@ -61,34 +33,43 @@ class EditMyProfile extends StatefulWidget {
 class _EditMyProfileState extends State<EditMyProfile> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  late TextEditingController nameController;
-  late TextEditingController mobileController;
-  late TextEditingController dobController;
-  late TextEditingController streetController;
-  late TextEditingController cityController;
-  late TextEditingController zipcodeController;
-  late TextEditingController heightController;
-  late TextEditingController weightController;
-  late TextEditingController emailIdController;
-  late TextEditingController genderController;
-  late TextEditingController stateController;
-  late TextEditingController districtController;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController mobileController = TextEditingController();
+  TextEditingController dobController = TextEditingController();
+  TextEditingController streetController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController zipcodeController = TextEditingController();
+  TextEditingController heightController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
+  TextEditingController emailIdController = TextEditingController();
+  TextEditingController genderController = TextEditingController();
+  TextEditingController stateController = TextEditingController();
+  TextEditingController districtController = TextEditingController();
+  TextEditingController bloodgroupController = TextEditingController();
 
   @override
   void initState() {
-    nameController = TextEditingController(text: widget.name);
+    nameController = TextEditingController(text: widget.profileData.name);
+    bloodgroupController =
+        TextEditingController(text: widget.profileData.bloodgroup);
     dobController = TextEditingController(
-        text: dateFormatToddmmyyyy(DateTime.parse(widget.dob.toString())));
-    mobileController = TextEditingController(text: widget.mobile_No);
-    stateController = TextEditingController(text: widget.state);
-    streetController = TextEditingController(text: widget.street);
-    cityController = TextEditingController(text: widget.city);
-    zipcodeController = TextEditingController(text: widget.zipCode);
-    heightController = TextEditingController(text: widget.height);
-    weightController = TextEditingController(text: widget.weight);
-    emailIdController = TextEditingController(text: widget.email);
-    genderController = TextEditingController(text: widget.gender);
-    districtController = TextEditingController(text: widget.district);
+        text: dateFormatToddmmyyyy(
+            DateTime.parse(widget.profileData.dob.toString())));
+    mobileController = TextEditingController(text: widget.profileData.mobileNo);
+    stateController =
+        TextEditingController(text: widget.profileData.address!.state);
+    streetController =
+        TextEditingController(text: widget.profileData.address!.street);
+    cityController =
+        TextEditingController(text: widget.profileData.address!.city);
+    zipcodeController =
+        TextEditingController(text: widget.profileData.address!.zipCode);
+    heightController = TextEditingController(text: widget.profileData.height);
+    weightController = TextEditingController(text: widget.profileData.weight);
+
+    genderController = TextEditingController(text: widget.profileData.gender);
+    districtController =
+        TextEditingController(text: widget.profileData.address!.district);
 
     super.initState();
   }
@@ -131,7 +112,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
                     const SizedBox(
                       height: 25,
                     ),
-                    if (widget.section == EditProfileSection.BasicDetails)
+                    if (widget.section == EditProfileSection.basicDetails)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -197,10 +178,14 @@ class _EditMyProfileState extends State<EditMyProfile> {
                                     BlocBuilder<ProfileBloc, ProfileState>(
                                   builder: (context, state) {
                                     return CustomDatePickerDialog(
-                                      initialDate: DateTime.parse(widget.dob ??
-                                          DateTime.now().toString()),
+                                      // initialDate: DateTime.parse(widget.dob ??
+                                      //     DateTime.now().subtract(Duration(days: 365*18)).toString()),
+
+                                      initialDate: DateTime.now()
+                                          .subtract(Duration(days: 365 * 18)),
                                       firstDate: DateTime(1920, 9, 7, 17, 30),
-                                      lastDate: DateTime.now(),
+                                      lastDate: DateTime.now()
+                                          .subtract(Duration(days: 365 * 18)),
                                       onDateTimeChanged: (onDateTimeChanged) {
                                         context
                                             .read<ProfileBloc>()
@@ -226,7 +211,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
                         ],
                       ),
                     const SizedBox(height: 20),
-                    if (widget.section == EditProfileSection.Address)
+                    if (widget.section == EditProfileSection.address)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -380,21 +365,26 @@ class _EditMyProfileState extends State<EditMyProfile> {
                                 if (_formKey.currentState!.validate()) {
                                   context.read<ProfileBloc>().add(
                                         ProfileEvent.updateProfile(
-                                          dob: dateFormatToYYYYMMdd(
-                                              state.date ?? DateTime.now()),
-                                          mobileNo:
-                                              mobileController.value.text,
-                                          street: streetController.value.text,
-                                          weight: weightController.value.text,
-                                          name: nameController.value.text,
-                                          city: cityController.value.text,
-                                          height: heightController.value.text,
-                                          state: stateController.value.text,
-                                          email: emailIdController.value.text,
-                                          gender: genderController.value.text,
-                                          district:
-                                              districtController.value.text,
-                                          zipCode: zipcodeController.value.text,
+                                          profileData: Data(
+                                            id: widget.profileData.id,
+                                            name: nameController.value.text,
+                                            mobileNo:
+                                                mobileController.value.text,
+                                            dob: state.date,
+                                            address: Address(
+                                              street:
+                                                  streetController.value.text,
+                                              city: cityController.value.text,
+                                              zipCode:
+                                                  zipcodeController.value.text,
+                                              state: stateController.value.text,
+                                            ),
+                                            bloodgroup:
+                                                bloodgroupController.value.text,
+                                            height: heightController.value.text,
+                                            gender: genderController.value.text,
+                                            weight: weightController.value.text,
+                                          ),
                                         ),
                                       );
                                 }

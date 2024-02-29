@@ -30,9 +30,11 @@ class UpcomingAppoimentList extends StatelessWidget {
                         state.appoimentData!.data!.upcomingdata!.length,
                         (index) => InkWell(
                           onTap: () {
-                            if (state.appoimentData!.data!.upcomingdata![index]
-                                .appointmentStarttime!
-                                .isBefore(DateTime.now())) {
+                            // if (state.appoimentData!.data!.upcomingdata![index]
+                            //     .appointmentStarttime!
+                            //     .isBefore(DateTime.now()))
+                                
+                            //      {
                               Navigator.of(context).pushNamed(
                                 PatientCheckupScreen.routeName,
                                 arguments: {
@@ -44,7 +46,9 @@ class UpcomingAppoimentList extends StatelessWidget {
                                       .upcomingdata![index].id,
                                 },
                               );
-                            }
+
+
+                            // }
                           },
                           child: AppoimentCard(
                             data:

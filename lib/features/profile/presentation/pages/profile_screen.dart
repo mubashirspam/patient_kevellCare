@@ -11,7 +11,6 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../core/helper/toast.dart';
 
 import '../bloc/profile_bloc.dart';
-
 import '../upload_image.dart';
 import 'edit_profile.dart';
 
@@ -92,7 +91,7 @@ class ProfileBody extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(top: 60, bottom: 5),
                             child: Text(
-                              profileData.data.name,
+                              profileData.data!.name??"",
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineMedium!
@@ -100,7 +99,7 @@ class ProfileBody extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            profileData.data.emailId,
+                            profileData.data!.emailId??"",
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
@@ -124,7 +123,7 @@ class ProfileBody extends StatelessWidget {
                             width: 100,
                             child: CachedNetworkImage(
                               fit: BoxFit.cover,
-                              imageUrl: profileData.data.profileImagelink,
+                              imageUrl: profileData.data!.profileImagelink??"",
                               placeholder: (context, url) => Shimmer.fromColors(
                                   baseColor: context.theme.secondary!,
                                   highlightColor: Colors.white,
@@ -181,16 +180,8 @@ class ProfileBody extends StatelessWidget {
                                 bottom:
                                     MediaQuery.of(context).viewInsets.bottom),
                             child: EditMyProfile(
-                              section: EditProfileSection.BasicDetails,
-                              street: profileData.data.address.street,
-                              state: profileData.data.address.state,
-                              city: profileData.data.address.city,
-                              district: profileData.data.address.district,
-                              name: profileData.data.name,
-                              mobile_No: profileData.data.mobileNo,
-                              dob: profileData.data.dob.toString(),
-                              gender: profileData.data.gender,
-                              email: profileData.data.emailId,
+                              section: EditProfileSection.basicDetails,
+                              profileData: profileData.data!!
                             ),
                           ),
                         );
@@ -222,42 +213,42 @@ class ProfileBody extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Username: ${profileData.data.name}",
+                          "Username: ${profileData.data!.name}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Email: ${profileData.data.emailId}",
+                          "Email: ${profileData.data!.emailId}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Mobile: ${profileData.data.mobileNo}",
+                          "Mobile: ${profileData.data!.mobileNo}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "DOB:${profileData.data.dob}",
+                          "DOB:${profileData.data!.dob}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Gender:${profileData.data.gender}",
+                          "Gender:${profileData.data!.gender}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Registered ID: ${profileData.data.id}",
+                          "Registered ID: ${profileData.data!.id}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
@@ -286,17 +277,8 @@ class ProfileBody extends StatelessWidget {
                                 bottom:
                                     MediaQuery.of(context).viewInsets.bottom),
                             child: EditMyProfile(
-                              section: EditProfileSection.Address,
-                              street: profileData.data.address.street,
-                              state: profileData.data.address.state,
-                              city: profileData.data.address.city,
-                              district: profileData.data.address.district,
-                              zipCode: profileData.data.address.zipCode,
-                              name: profileData.data.name,
-                              mobile_No: profileData.data.mobileNo,
-                              dob: profileData.data.dob.toString(),
-                              gender: profileData.data.gender,
-                              email: profileData.data.emailId,
+                              section: EditProfileSection.address,
+                              profileData: profileData.data!,
                             ),
                           ),
                         );
@@ -328,35 +310,35 @@ class ProfileBody extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Street: ${profileData.data.address.street}",
+                          "Street: ${profileData.data!.address!.street}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "City: ${profileData.data.address.city}",
+                          "City: ${profileData.data!.address!.city}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "District: ${profileData.data.address.state}",
+                          "District: ${profileData.data!.address!.state}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "State: ${profileData.data.address.state}",
+                          "State: ${profileData.data!.address!.state}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Zipcode: ${profileData.data.address.zipCode}",
+                          "Zipcode: ${profileData.data!.address!.zipCode}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
@@ -385,18 +367,7 @@ class ProfileBody extends StatelessWidget {
                                 bottom:
                                     MediaQuery.of(context).viewInsets.bottom),
                             child: EditMyProfile(
-                              name: profileData.data.name,
-                              mobile_No: profileData.data.mobileNo,
-                              dob: profileData.data.dob.toString(),
-                              gender: profileData.data.gender,
-                              email: profileData.data.emailId,
-                              height: profileData.data.height,
-                              weight: profileData.data.weight,
-                              street: profileData.data.address.street,
-                              state: profileData.data.address.state,
-                              city: profileData.data.address.city,
-                              district: profileData.data.address.district,
-                              zipCode: profileData.data.address.zipCode,
+                              profileData: profileData.data!!,
                               section: EditProfileSection.otherdetails,
                             ),
                           ),
@@ -429,42 +400,42 @@ class ProfileBody extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Height: ${profileData.data.height}",
+                          "Height: ${profileData.data!.height}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Weight: ${profileData.data.weight}",
+                          "Weight: ${profileData.data!.weight}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Kit_ID: ${profileData.data.kitId}",
+                          "Kit_ID: ${profileData.data!.kitId}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Device_id: ${profileData.data.deviceId}",
+                          "Device_id: ${profileData.data!.deviceId}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Diseases: ${profileData.data.diseases}",
+                          "Diseases: ${profileData.data!.diseases}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15),
                         child: Text(
-                          "Blood group: ${profileData.data.bloodgroup}",
+                          "Blood group: ${profileData.data!.bloodgroup}",
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
@@ -480,55 +451,4 @@ class ProfileBody extends StatelessWidget {
   }
 }
 
-final mm = {
-  "username": "MSD",
-  "email": "MSD@gmail.com",
-  "mobile": "7770007700",
-  "password": "msd@123",
-  "DOB": "07/07/1983",
-  "address": {
-    "street": "123 Main St",
-    "city": "Anytown",
-    "district": "District ABC",
-    "state": "CA",
-    "zip_code": "12345"
-  },
-  "specialist": "Dentist",
-  "location": "Madurai",
-  "registred_Id": "akshfkh1937971329",
-  "professionalInformation": {
-    "licenseNumber": 123456666,
-    "type_specialty": "ENT",
-    "medicalSchool": "GOVT-MEDICAL-CLG THANJORE",
-    "graduationYear": "2018",
-    "boardCertification": "Indian Medical Council"
-  },
-  "practiceInformation": [
-    {
-      "clinic_name": "Sri Vignesh ENT",
-      "street": "66th main road",
-      "city": "TMM",
-      "state": "Tamilnadu",
-      "zip_code": "625019"
-    },
-    {
-      "clinic_name": "Sri Vignesh ENT",
-      "street": "66th main road",
-      "city": "TMM",
-      "state": "Tamilnadu",
-      "zip_code": "625019"
-    }
-  ],
-  "communication_preferences": {
-    "communication_preferences": "Tamil",
-    "languages_spoken": ["tamil", "english", "french", "telugu"]
-  },
-  "biography_and_specializations": {
-    "bio": "Hi all I'm a ENT doctor",
-    "specializations": "Ear Nose Throat "
-  },
-  "consent_and_agreement": {
-    "terms_and_conditions_agreed": "TRUE",
-    "data_processing_consent": "TRUE"
-  }
-};
+

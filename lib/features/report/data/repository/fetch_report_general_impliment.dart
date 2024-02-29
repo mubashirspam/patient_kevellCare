@@ -20,17 +20,16 @@ class FetchReportGeneraInfoRepoImpliment
     required int id,
   }) async {
     try {
-        final token = await getTokenFromSS(secureStoreKey);
-
+      final token = await getTokenFromSS(secureStoreKey);
 
       final headers = {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
       final response = await Dio(BaseOptions()).post(
-        ApiEndPoints.patientreportgeneralinfo,
-           options: Options(headers: headers),
-        data: {'patientId': id},
+        V2.generalReport,
+        options: Options(headers: headers),
+        data: {'patient_id': id},
       );
 
       switch (response.statusCode) {

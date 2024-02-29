@@ -29,9 +29,9 @@
         };
 
         final response = await Dio(BaseOptions()).post(
-          V2.login,
-          // options: Options(headers: headers),
-          data: {"otp": otp, "mobile": number},
+          "https://kevelldigital.com/v2/patients/verify-otp",
+          options: Options(headers: headers),
+          data: {"otp": otp, "cred": number},
         );
 
         switch (response.statusCode) {

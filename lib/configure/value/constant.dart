@@ -8,7 +8,7 @@ const patientId = 'drId@key';
 
 const fcmStoreKey = 'fcmStoreKey@key';
 
-const nameKey = '@#KL778@username';
+const nameKey = '@#KL778@usernameOfPateint';
 const phoneKey = '@#KL778@phoneKey';
 const baseUrl = "https://kevelldigital.com"; //production
 
@@ -24,4 +24,5 @@ const  keySecret = "aYS92pb5d8G3QaDSTeAhSPPB";
 
 const service = "v2/patients";
 const service2 = "v2/appointment/patients";
+const service3 = "v2/doctors";
 

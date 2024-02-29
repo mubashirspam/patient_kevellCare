@@ -125,8 +125,9 @@ class AppoimentCard extends StatelessWidget {
             },
             child: Row(
               children: [
-                const Icon(Icons.delete,
-                    color: MainConfigColorsDarkTheme.danger),
+                if (!isPast)
+                  const Icon(Icons.delete,
+                      color: MainConfigColorsDarkTheme.danger),
                 if (isPast)
                   IconButton(
                     onPressed: () {

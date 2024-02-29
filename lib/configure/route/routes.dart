@@ -6,6 +6,7 @@ import '../../features/appoiments/presentation/pages/book_new_appoiment_screen.d
 import '../../features/chat/presentation/pages/chating_screen.dart';
 import '../../features/home/data/models/available_doctor_model.dart';
 import '../../features/login/presentation/pages/login_screen.dart';
+import '../../features/report/data/model/report_model.dart';
 import '../../features/report/presentation/pages/report_scree.dart';
 import '../../pages/signup_screen/presentation/signup_screen.dart';
 
@@ -23,8 +24,8 @@ final Map<String, Widget Function(BuildContext)> route = {
       checkupDetalis:
           ModalRoute.of(ctx)!.settings.arguments as Map<String, dynamic>),
   ReportScreen.routeName: (ctx) =>
-      ReportScreen(appoimentId: ModalRoute.of(ctx)!.settings.arguments as int),
-  OtpScreen.routeName: (ctx) => const OtpScreen(password: '', email: '', otp: '',),
+      ReportScreen(appoimentId: ModalRoute.of(ctx)!.settings.arguments as  int ),
+  // OtpScreen.routeName: (ctx) => const OtpScreen(password: '', email: '', otp: '',),
 };
 
 
