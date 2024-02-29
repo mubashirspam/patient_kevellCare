@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kevell_care/features/rating/data/model/rating_model.dart';
+import 'package:kevell_care/features/rating/domain/entites/edit_rating_payload.dart';
 import 'package:kevell_care/features/rating/domain/repositories/edit_rating_repository.dart';
 import '../../../../configure/api/endpoints.dart';
 import '../../../../configure/value/constant.dart';
@@ -15,12 +16,13 @@ import '../../../../core/failiar/main_failures.dart';
 class EditRatingRepoImpliment implements EditRatingRepository {
   @override
   Future<Either<MainFailure, RatingModel>> editRating({
-    required String review,
-    required String rating,
+       required EditRatingPayload editRatingPayload
+
   }) async {
     try {
       final token = await getTokenFromSS(secureStoreKey);
       final id = await getTokenFromSS(patientId);
+      Map<String, dynamic> data = editRatingPayload.toJson();
 
       final headers = {
         'Authorization': 'Bearer $token',
@@ -28,13 +30,10 @@ class EditRatingRepoImpliment implements EditRatingRepository {
       };
 
       final response = await Dio(BaseOptions()).put(
-        ApiEndPoints.editRating,
+        // ApiEndPoints.editRating,
+        "https://kevelldigital.com/v2/patients/edit/review",
         options: Options(headers: headers),
-        data: {
-          "_id": int.parse("$id"),
-          "review": review,
-          "rating": rating,
-        },
+        data: data
       );
 
       switch (response.statusCode) {

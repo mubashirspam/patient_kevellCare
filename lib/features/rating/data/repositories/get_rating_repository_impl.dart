@@ -28,7 +28,8 @@ class GetRatingRepoImpliment implements GetRatingRepository {
       log(id.toString());
 
       final response = await Dio(BaseOptions()).get(
-        ApiEndPoints.getrating,
+        // ApiEndPoints.getrating,
+        "https://kevelldigital.com/v2/patients/getrating?patient_id=1002",
         options: Options(headers: headers),
         data: {'id': id},
       );

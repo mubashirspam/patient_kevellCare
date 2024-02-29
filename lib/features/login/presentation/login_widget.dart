@@ -89,39 +89,50 @@ class _LoginWidgetState extends State<LoginWidget> {
                     message: state.message,
                   );
                 }
+                BlocConsumer<LoginBloc, LoginState>(listener: (context, state) {
+                  if (!state.isLoading &&
+                      state.isError &&
+                      !state.hasValidationData) {
+                    Toast.showToast(
+                      color: Colors.red,
+                      context: context,
+                      message: state.message,
+                    );
+                  }
 
-                if (!state.isLoading && state.hasValidationData) {
-                  final loginDetails = state.loginDetails?.data?.first;
-                  if (loginDetails != null) {
-                    if (loginDetails.token == null) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => OtpScreen(
-                          email: loginDetails.mobileNo!,
-                          otp: loginDetails.otp!,
-                          password: "",
-                        ),
-                      ));
-                    } else {
-                      addToSS(mailsecureStoreKey, loginDetails.emailId!);
-                      addToSS(nameKey, loginDetails.name!);
-                      addToSS(patientId, loginDetails.id.toString());
-                      addTokenToSS(secureStoreKey, loginDetails.token!);
+                  if (!state.isLoading && state.hasValidationData) {
+                    final loginDetails = state.loginDetails?.data?.first;
+                    if (loginDetails != null) {
+                      if (loginDetails.token == null) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => OtpScreen(
+                            email: loginDetails.mobileNo!,
+                            otp: loginDetails.otp!,
+                            password: "",
+                          ),
+                        ));
+                      } else {
+                        addToSS(mailsecureStoreKey, loginDetails.emailId!);
+                        addToSS(nameKey, loginDetails.name!);
+                        addToSS(patientId, loginDetails.id.toString());
+                        addTokenToSS(secureStoreKey, loginDetails.token!);
 
-                      log("Token : ${loginDetails.token}");
-                      Toast.showToast(
-                        context: context,
-                        message: 'You are successfully Logged In 🥳',
-                      );
+                        log("Token : ${loginDetails.token}");
+                        Toast.showToast(
+                          context: context,
+                          message: 'You are successfully Logged In 🥳',
+                        );
 
-                      Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                          builder: (context) => const Initialize(),
-                        ),
-                        (route) => false,
-                      );
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (context) => const Initialize(),
+                          ),
+                          (route) => false,
+                        );
+                      }
                     }
                   }
-                }
+                });
               },
               builder: (context, state) {
                 return TextButtonWidget(

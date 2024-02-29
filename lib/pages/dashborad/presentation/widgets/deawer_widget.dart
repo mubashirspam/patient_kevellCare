@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kevell_care/configure/assets_manage/icons.dart';
+import 'package:kevell_care/configure/value/secure_storage.dart';
 import 'package:kevell_care/configure/value/constant.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 
@@ -8,6 +10,7 @@ import '../../../../configure/assets_manage/icons.dart';
 import '../../../../configure/value/secure_storage.dart';
 import '../../../../features/profile/presentation/bloc/profile_bloc.dart';
 import '../../../initialize/initialize.dart';
+import '../../../rating/presentation/rating_screen.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
@@ -17,9 +20,9 @@ class DrawerWidget extends StatelessWidget {
     return Drawer(
       backgroundColor: context.theme.primary,
       child: SafeArea(
-          child: Column(
-        children: [
-          SizedBox(
+        child: Column(
+          children: [
+            SizedBox(
               height: 150,
               child: BlocBuilder<ProfileBloc, ProfileState>(
                 builder: (context, state) {
@@ -65,7 +68,7 @@ class DrawerWidget extends StatelessWidget {
                       context,
                       drawerList[i]['name'],
                       drawerList[i]['icon'],
-                      () {},
+                     drawerList[i]['route'],
                     ),
                   )
                     ..add(
@@ -84,36 +87,44 @@ class DrawerWidget extends StatelessWidget {
                       listTile(
                           context,
                           drawerList[drawerList.length - 1]['name'],
-                          drawerList[drawerList.length - 1]['icon'], () async {
-                        await deleteFromSS(mailsecureStoreKey);
-
-                        await deleteFromSS(secureStoreKey).then(
-                            (value) => Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                  builder: (context) => const Initialize(),
-                                ),
-                                (route) => false));
-                      }),
-                    ),
+                          drawerList[drawerList.length - 1]['icon'],
+                          drawerList[drawerList.length - 1]['route'],
+                        ),
+                      ),
+                  ),
                 ),
               ),
             ),
-          ),
-          Text(
-            "App version 1.0.0",
-            style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                  color: context.theme.backround,
-                ),
-          )
-        ],
-      )),
+            Text(
+              "App version 1.0.0",
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: context.theme.backround,
+                  ),
+            )
+          ],
+        ),
+      ),
     );
   }
 
   Widget listTile(
-          BuildContext context, String name, icon, void Function()? onPress) =>
+    BuildContext context,
+    String name,
+    icon,
+    Widget? route, // Updated to accept Widget as a parameter
+  ) =>
       ListTile(
-        onTap: onPress,
+        onTap: () {
+          if (route != null) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => route,
+              ),
+            );
+          } else {
+            // Handle other onTap actions
+          }
+        },
         contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
         trailing: Icon(
           Icons.chevron_right_rounded,
@@ -150,6 +161,11 @@ List<Map<String, dynamic>> drawerList = [
   {
     "name": "Notification",
     "icon": AppIcons.bell,
+  },
+  {
+    "name": "Rating",
+    "icon": AppIcons.rating,
+    "route": DoctorRatingScreen(), 
   },
   {
     "name": "FAQ",

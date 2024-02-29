@@ -303,9 +303,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
                     if (widget.section == EditProfileSection.otherdetails)
                       Column(
                         children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          const SizedBox( height: 10, ),
                           Row(
                             children: [
                               Expanded(
