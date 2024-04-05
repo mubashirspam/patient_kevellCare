@@ -69,7 +69,7 @@ class TimeSlotWidget extends StatelessWidget {
                                     },
                               child: Container(
                                 width: tokenWidth,
-                                padding: const EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   color: timeList[i]["isBooked"]
                                       ? context.theme.primary!
@@ -81,7 +81,7 @@ class TimeSlotWidget extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Container(
-                                      margin: const EdgeInsets.only(right: 10),
+                                      margin: const EdgeInsets.only(right: 5),
                                       width: 40,
                                       height: 40,
                                       decoration: BoxDecoration(
@@ -94,7 +94,7 @@ class TimeSlotWidget extends StatelessWidget {
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headlineMedium!
-                                                .copyWith(fontSize: 22)),
+                                                .copyWith(fontSize: 18)),
                                       ),
                                     ),
                                     Text(extractTime(timeList[i]['startTime']),

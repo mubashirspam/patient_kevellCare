@@ -30,7 +30,7 @@ class BottomWidget extends StatelessWidget {
                 color: context.theme.backround,
               ),
               width: double.maxFinite,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 0),
               height: 70,
               child: Center(
                 child: Row(
@@ -48,7 +48,7 @@ class BottomWidget extends StatelessWidget {
                         child: item(
                             context,
                             1,
-                            "Appoinment",
+                            "Appointment",
                             selectedIndexNorifier.value == 1
                                 ? AppIcons.appointmentA
                                 : AppIcons.appointment)),

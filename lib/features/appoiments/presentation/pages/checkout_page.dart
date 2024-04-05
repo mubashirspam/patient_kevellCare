@@ -176,7 +176,7 @@ class _ChckoutPageState extends State<ChckoutPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20)
                       .copyWith(top: 15),
                   child: Text(
-                    "Appointment Detials",
+                    "Appointment Details",
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ),
@@ -277,18 +277,18 @@ class _ChckoutPageState extends State<ChckoutPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
-                    "Payment Detials",
+                    "Payment Details",
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                 ),
                 const SizedBox(height: 20),
                 content(
-                    "Appointemnt Fees:", "${widget.checkoutDetails.amount}"),
+                    "Appointment Fees:", "500"),
                 content("Booking Charge:", "10"),
                 content("Discount:", "10"),
                 // content("Appointemnt Fees:", "150"),
                 const SizedBox(height: 10),
-                content("Total:", "${widget.checkoutDetails.amount}"),
+                content("Total:", "500"),
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 20),

@@ -85,9 +85,12 @@ class Data {
         name: json["name"],
         emailId: json["email_id"],
         mobileNo: json["mobile_no"],
-        dob: json["dob"] == null ? null : DateTime.parse(json["dob"]),
-        address:
-            json["address"] == null ? null : Address.fromJson(json["address"]),
+        dob: json["dob"] == null || json["dob"] == ""
+            ? null
+            : DateTime.parse(json["dob"]),
+        address: json["address"] == null || json["address"] == {}
+            ? null
+            : Address.fromJson(json["address"]),
         profileImagelink: json["profile_imagelink"],
         kitId: json["kit_id"],
         bloodgroup: json["bloodgroup"],

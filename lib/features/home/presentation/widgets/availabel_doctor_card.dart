@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/widgets/avatar/active_avatar.dart';
 
@@ -30,32 +32,36 @@ class AvailableDoctorCard extends StatelessWidget {
             isActive: true,
           ),
           const SizedBox(width: 15),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Dr.${data.name}",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineLarge!
-                      .copyWith(fontSize: 18)),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2),
-                child: Text(data.specialist ?? "Cardiologist",
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .copyWith(fontSize: 16)),
+          Expanded(
+            child: SizedBox(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Dr.${data.name}",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineLarge!
+                          .copyWith(fontSize: 16)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 2),
+                    child: Text(data.specialist ?? "Cardiologist",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall!
+                            .copyWith(fontSize: 14)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 2),
+                    child: Text(data.location ?? "Madurai",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall!
+                            .copyWith(fontSize: 14)),
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2),
-                child: Text(data.location ?? "Madurai",
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .copyWith(fontSize: 16)),
-              ),
-            ],
+            ),
           ),
           const Spacer(),
           const Icon(

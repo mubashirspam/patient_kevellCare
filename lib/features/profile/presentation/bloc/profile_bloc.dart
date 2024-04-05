@@ -26,11 +26,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     this.uploadImageRepository,
   ) : super(ProfileState.initial()) {
     on<_GetProfile>((event, emit) async {
-            final token = await getFromSS(secureStoreKey);
-
-      if (state.hasData) {
-        return;
-      }
+    
       emit(
         state.copyWith(
           isLoading: true,
@@ -38,10 +34,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         ),
       );
 
-      final response = await getprofileRepository.getProfile(
-        // id: event.id
-       
-      );
+      final response = await getprofileRepository.getProfile();
 
       final result = response.fold(
         (failure) => state.copyWith(
@@ -74,7 +67,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
       final response = await updateProfileRepository.updateProfile(
         profileData: event.profileData,
-    
       );
 
       final result = response.fold(
@@ -111,9 +103,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             isError: false,
             isUpdateLoading: false,
             result: success,
-            hasData: true
-            
-            ),
+            hasData: true),
       );
       emit(result);
     });

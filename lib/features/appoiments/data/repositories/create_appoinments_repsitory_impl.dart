@@ -26,8 +26,7 @@ class CreateAppoinmentsRepoImpliment implements CreateAppoinmentsRepository {
       payload.patientId = int.parse(id!);
 
       final headers = {
-        'Authorization':
-            'Bearer $token',
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       };
 
@@ -39,7 +38,7 @@ class CreateAppoinmentsRepoImpliment implements CreateAppoinmentsRepository {
         options: Options(headers: headers),
       );
 
-      print(response.data.toJson().toString());
+      print(response.data.toString());
 
       switch (response.statusCode) {
         case 200:

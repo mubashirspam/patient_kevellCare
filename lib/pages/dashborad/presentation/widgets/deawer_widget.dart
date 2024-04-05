@@ -5,9 +5,6 @@ import 'package:kevell_care/configure/assets_manage/icons.dart';
 import 'package:kevell_care/configure/value/secure_storage.dart';
 import 'package:kevell_care/configure/value/constant.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
-
-import '../../../../configure/assets_manage/icons.dart';
-import '../../../../configure/value/secure_storage.dart';
 import '../../../../features/profile/presentation/bloc/profile_bloc.dart';
 import '../../../initialize/initialize.dart';
 import '../../../rating/presentation/rating_screen.dart';
@@ -23,73 +20,85 @@ class DrawerWidget extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 150,
-              child: BlocBuilder<ProfileBloc, ProfileState>(
-                builder: (context, state) {
-                  final profile = state.result;
-                  return Column(
-                    children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage: NetworkImage(
-                          profile != null
-                              ? "${profile.data!.profileImagelink}"
-                              : "",
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 5),
-                        child: Text(
-                          profile != null ? "${profile.data!.name}" : "",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium!
-                              .copyWith(color: context.theme.backround),
-                        ),
-                      ),
-                      Text(
-                        profile != null ? "${profile.data!.emailId}" : "",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(color: context.theme.backround),
-                      ),
-                    ],
-                  );
-                },
-              )),
-          Expanded(
-            child: SizedBox(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: List.generate(
-                    drawerList.length - 1,
-                    (i) => listTile(
-                      context,
-                      drawerList[i]['name'],
-                      drawerList[i]['icon'],
-                     drawerList[i]['route'],
-                    ),
-                  )
-                    ..add(
-                      Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: ColoredBox(
-                          color: context.theme.backround!.withOpacity(0.4),
-                          child: const SizedBox(
-                            height: 1,
-                            width: double.maxFinite,
+                height: 150,
+                child: BlocBuilder<ProfileBloc, ProfileState>(
+                  builder: (context, state) {
+                    final profile = state.result;
+                    return Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 40,
+                          backgroundImage: NetworkImage(
+                            profile != null
+                                ? "${profile.data!.profileImagelink}"
+                                : "",
                           ),
                         ),
-                      ),
-                    )
-                    ..add(
-                      listTile(
-                          context,
-                          drawerList[drawerList.length - 1]['name'],
-                          drawerList[drawerList.length - 1]['icon'],
-                          drawerList[drawerList.length - 1]['route'],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, bottom: 5),
+                          child: Text(
+                            profile != null ? "${profile.data!.name}" : "",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium!
+                                .copyWith(color: context.theme.backround),
+                          ),
                         ),
+                        Text(
+                          profile != null ? "${profile.data!.emailId}" : "",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(color: context.theme.backround),
+                        ),
+                      ],
+                    );
+                  },
+                )),
+            Expanded(
+              child: SizedBox(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: List.generate(
+                      drawerList.length - 1,
+                      (i) => listTile(
+                          context, drawerList[i]['name'], drawerList[i]['icon'],
+                          () {
+                        if (drawerList[i]['route'] != null) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => drawerList[i]['route'],
+                            ),
+                          );
+                        }
+                      }),
+                    )
+                      ..add(
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: ColoredBox(
+                            color: context.theme.backround!.withOpacity(0.4),
+                            child: const SizedBox(
+                              height: 1,
+                              width: double.maxFinite,
+                            ),
+                          ),
+                        ),
+                      )
+                      ..add(
+                        listTile(
+                            context,
+                            drawerList[drawerList.length - 1]['name'],
+                            drawerList[drawerList.length - 1]['icon'],
+                            () async {
+                          await deleteFromSS(mailsecureStoreKey);
+                          await deleteFromSS(secureStoreKey).then((value) =>
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (context) => const Initialize(),
+                                  ),
+                                  (route) => false));
+                        }),
                       ),
                   ),
                 ),
@@ -108,23 +117,9 @@ class DrawerWidget extends StatelessWidget {
   }
 
   Widget listTile(
-    BuildContext context,
-    String name,
-    icon,
-    Widget? route, // Updated to accept Widget as a parameter
-  ) =>
+          BuildContext context, String name, icon, void Function()? onPress) =>
       ListTile(
-        onTap: () {
-          if (route != null) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => route,
-              ),
-            );
-          } else {
-            // Handle other onTap actions
-          }
-        },
+        onTap: onPress,
         contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
         trailing: Icon(
           Icons.chevron_right_rounded,
@@ -165,7 +160,8 @@ List<Map<String, dynamic>> drawerList = [
   {
     "name": "Rating",
     "icon": AppIcons.rating,
-    "route": DoctorRatingScreen(), 
+    // ignore: prefer_const_constructors
+    "route": DoctorRatingScreen(),
   },
   {
     "name": "FAQ",

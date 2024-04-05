@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kevell_care/core/them/custom_theme_extension.dart';
 import 'package:kevell_care/features/widgets/buttons/text_button_widget.dart';
@@ -77,21 +78,19 @@ class BookNewAppointmentScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 30),
+                    Expanded(
                       child: SizedBox(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "Dr.${doctorData.name}",
-                              style: Theme.of(context).textTheme.headlineMedium,
-                            ),
-                            Text(
-                              "${doctorData.specialist}",
-                              style: Theme.of(context).textTheme.titleLarge,
-                            ),
+                            Text("Dr.${doctorData.name}",
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium),
+                            SizedBox(height: 5),
+                            Text("${doctorData.specialist}",
+                                style: Theme.of(context).textTheme.titleLarge),
+                            SizedBox(height: 5),
                             Row(
                               children: [
                                 ...List.generate(
@@ -120,13 +119,13 @@ class BookNewAppointmentScreen extends StatelessWidget {
               ),
               BlocBuilder<HomeBloc, HomeState>(
                 builder: (context, state) {
-                  final List<DateTime?>  dateList =
+                  final List<DateTime?> dateList =
                       doctorData.schedule!.map((e) => e.days).toList();
-                       final  List<int?> idList =
+                  final List<int?> idList =
                       doctorData.schedule!.map((e) => e.id).toList();
 
-                  int activeIndex =
-                      idList.indexWhere((element) => element == state.scheduleId);
+                  int activeIndex = idList
+                      .indexWhere((element) => element == state.scheduleId);
 
                   return DateListWidget(
                     dateList: dateList,

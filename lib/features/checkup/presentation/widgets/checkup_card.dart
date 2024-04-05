@@ -142,10 +142,10 @@ class HelathCardWidget extends StatelessWidget {
                       TextSpan(text: "Ref: ", children: [
                         TextSpan(
                           text: data.refe,
-                          style: Theme.of(context).textTheme.titleLarge,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ]),
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                 ],
               ),
@@ -187,7 +187,7 @@ class HelathCardWidget extends StatelessWidget {
                 ]),
                 style: Theme.of(context)
                     .textTheme
-                    .displayMedium!
+                    .displaySmall!
                     .copyWith(color: Colors.black, fontWeight: FontWeight.w500),
               ),
               if (onPress != null) const SizedBox(width: 20),
